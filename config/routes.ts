@@ -16,6 +16,36 @@
     ],
   },
   {
+    path: '/parameter-monitor',
+    name: 'parameter-monitor',
+    icon: 'smile',
+    component: './ParameterMonitor',
+  },
+  {
+    path: '/statistical-analysis',
+    name: 'statistical-analysis',
+    icon: 'smile',
+    component: './StatisticalAnalysis',
+  },
+  {
+    path: '/performance-evaluation',
+    name: 'performance-evaluation',
+    icon: 'smile',
+    component: './PerformanceEvaluation',
+  },
+  {
+    path: '/early-warning-analysis',
+    name: 'early-warning-analysis',
+    icon: 'smile',
+    component: './EarlyWarningAnalysis',
+  },
+  {
+    path: '/link-analysis',
+    name: 'link-analysis',
+    icon: 'smile',
+    component: './LinkAnalysis',
+  },
+  {
     path: '/welcome',
     name: 'welcome',
     icon: 'smile',

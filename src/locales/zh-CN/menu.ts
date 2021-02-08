@@ -1,5 +1,10 @@
 export default {
   'menu.welcome': '欢迎',
+  'menu.parameter-monitor':'参数监控',
+  'menu.statistical-analysis':'统计分析',
+  'menu.performance-evaluation':'性能评估',
+  'menu.early-warning-analysis':'预警分析',
+  'menu.link-analysis':'链路分析',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',
