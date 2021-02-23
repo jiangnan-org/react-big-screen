@@ -16,18 +16,23 @@ export const initialStateConfig = {
 };
 
 /**
+ * 获取用户名、头像信息
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
+ * 类似案例：https://www.cnblogs.com/chh1995/p/13965159.html
  * */
-export async function getInitialState(): Promise<{
+export async function getInitialState(): Promise<{             //Promise<定义期望返回的数据类型>
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  currentUser?: API.CurrentUser;                              //当前用户类型
+  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>; //函数类型 函数返回一个Promise<>
 }> {
+
   const fetchUserInfo = async () => {
     try {
+      //获取用户信息
       const currentUser = await queryCurrentUser();
       return currentUser;
     } catch (error) {
+      //跳转到登录页面
       history.push('/user/login');
     }
     return undefined;
@@ -47,13 +52,16 @@ export async function getInitialState(): Promise<{
   };
 }
 
-// https://umijs.org/zh-CN/plugins/plugin-layout
+/**
+ * 覆盖默认内置布局 https://beta-pro.ant.design/docs/layout-cn
+ *  https://umijs.org/zh-CN/plugins/plugin-layout
+ */
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
-    rightContentRender: () => <RightContent />,
+    rightContentRender: () => <RightContent />,          //右上角
     disableContentMargin: false,
-    footerRender: () => <Footer />,
-    onPageChange: () => {
+    footerRender: () => <Footer />,                      // 自定义 footer
+    onPageChange: () => {                                // 路由发生变化
       const { location } = history;
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== '/user/login') {

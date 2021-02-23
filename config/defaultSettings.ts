@@ -1,6 +1,7 @@
 import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 
 //pro-layout布局配置重写，更多参数配置参考;https://github.com/ant-design/ant-design-pro-layout
+// @ts-ignore
 const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
@@ -16,7 +17,7 @@ const Settings: LayoutSettings & {
   title: '报警管理平台',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
-  iconfontUrl: '',
+  iconfontUrl: ''
 };
 
 export default Settings;
