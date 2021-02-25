@@ -1,52 +1,44 @@
-import React,{useState,useEffect} from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import { ClockCircleOutlined } from '@ant-design/icons';
-import { Divider } from 'antd';
-import moment from 'moment';
+import React, {useState} from 'react';
+import {PageContainer} from '@ant-design/pro-layout';
+import ProCard from '@ant-design/pro-card';
 import styles from './index.less';
+const { Divider } = ProCard;
+import TableList from './component/TableList';
+import Area from './component/Area';
 
 export default (): React.ReactNode => {
 
-  const [date,setDate] = useState(moment().format('YYYY-MM-DD'));
+  //24小时报警总次数
+  const [alartCount,] = useState<number>(2516);
 
-  const [time,setTime] = useState(moment().format('HH:mm:ss'));
+  //附件header
+  const extraHeader:Array<React.ReactNode> = [
+    <span>过去24小时报警总次数</span>,
+    <span className={styles.extraAlartCount}>{alartCount}</span>
+  ];
 
-  const [week,setWeek] = useState(moment().format('dddd'));
-
-  //1s刷新一次
-  useEffect(()=>{
-    //定时器
-    const t = setInterval(()=>{
-      setDate(moment().format('YYYY-MM-DD'));
-      setTime(moment().format('HH:mm:ss'));
-      setWeek(moment().format('dddd'));
-    },1000);
-
-    //卸载
-    return () => {
-      clearInterval(t);
-    }
-  },[]);
-
-  //定义日期信息
-  const dateExtra =  ()=>{
-    return [
-      <ClockCircleOutlined />,
-      <Divider type='vertical' />,
-      time,
-      <Divider type='vertical' />,
-      <div className={styles.date}>
-        <div>{week}</div>
-        <div>{date}</div>
-      </div>
-    ]
-  };
+  //内容 采用栅格式响应布局 xs 超小屏幕如手机 sm 小屏幕如平板  md中等屏幕  lg大屏幕  xl超大屏
+  const content:React.ReactNode = (
+    <ProCard.Group className={styles.card} gutter={8} >
+      <ProCard colSpan={{ xs: 24, sm: 10, md: 10, lg: 10, xl: 10 }}  >
+        <TableList />
+      </ProCard>
+      <Divider />
+      <ProCard colSpan={{ xs: 0, sm: 14, md: 14, lg: 14, xl: 14 }} layout='center'  >
+        <Area />
+      </ProCard>
+    </ProCard.Group>
+  );
 
   return (
     <PageContainer
-      extra={dateExtra()}
+      header={
+        {
+          onBack:():void => window.history.back(),
+        }}
+      extra = {extraHeader}
     >
-      <div>参数监控</div>
+      {content}
     </PageContainer>
   )
 }

@@ -52,7 +52,8 @@ export default defineConfig({
     requestLibPath: "import { request } from 'umi'",
     // 或者使用在线的版本
     // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
+    // schemaPath:"http://81.68.217.175:30001/v2/api-docs",
     schemaPath: join(__dirname, 'oneapi.json'),
-    mock: false,
+    mock: true,
   },
 });

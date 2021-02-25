@@ -16,7 +16,7 @@ export const initialStateConfig = {
 };
 
 /**
- * 获取用户名、头像信息
+ * 获取全局初始化信息
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * 类似案例：https://www.cnblogs.com/chh1995/p/13965159.html
  * */
@@ -142,5 +142,32 @@ const errorHandler = (error: ResponseError) => {
 
 // https://umijs.org/zh-CN/plugins/plugin-request
 export const request: RequestConfig = {
+  // errorConfig:{
+  //   adaptor:(resData) => {
+  //     console.log('结果',resData);
+  //     //将我们后端接口数据规范转换为官方指定数据格式
+  //     return {
+  //       success: resData.code === 200,
+  //       errorMessage:resData.msg,
+  //       errorCode:resData.code,
+  //       data:resData.data
+  //     }
+  //   }
+  // },
+  middlewares:[
+    //增强处理，比如在header中加入token
+    async function logger(ctx: object, next: Function) {
+      //输出请求信息
+      const { req } = ctx;
+      const { url, options } = req;
+      console.log('url',url,'requestConfig',options);
+
+      await next();
+
+      //输出响应信息
+      const { res } = ctx;
+      console.log('res',res);
+    }
+  ],
   errorHandler,
 };

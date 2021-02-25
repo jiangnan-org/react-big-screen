@@ -34,6 +34,22 @@ declare namespace API {
     pageSize?: number;
   };
 
+  /*  参数监控行数据 */
+  type ParameterMonitorItem = {
+     key?: string;                        //位号
+     desc?: string;                       //描述
+     level?: number;                      //等级
+     status?: number;                     //状态
+  };
+
+  /*  参数监控列表 */
+  type ParameterMonitorList = {
+    data?: ParameterMonitorItem[];
+    /** 列表的内容总数 */
+    total?: number;
+    success?: boolean;
+  };
+
   type RuleListItem = {
     key?: number;
     disabled?: boolean;
