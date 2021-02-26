@@ -21,3 +21,10 @@ export async function parameterMonitor(
     ...(options || {}),
   });
 }
+
+/* 获取指定点位的时许数据   GET /api/parameter-monitor/time-series */
+export async function timeSeries(key?: string) {
+  return request('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json', {
+    method: 'GET',
+  });
+}

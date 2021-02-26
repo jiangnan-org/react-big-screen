@@ -1,14 +1,15 @@
 import React from 'react';
-import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
-import { PageLoading } from '@ant-design/pro-layout';
-import { notification } from 'antd';
-import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
-import { history } from 'umi';
+import {PageLoading} from '@ant-design/pro-layout';
+import {notification} from 'antd';
+import {history} from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
+import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
+import {BookOutlined, LinkOutlined} from '@ant-design/icons';
+import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import type { Context,RequestOptionsInit } from 'umi';
+import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
 import type { ResponseError } from 'umi-request';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -140,34 +141,49 @@ const errorHandler = (error: ResponseError) => {
   throw error;
 };
 
+
+//将接口的返回映射为统一的接口规范  该配置只是用于错误处理，不会影响最终传递给页面的数据格式 https://umijs.org/plugins/plugin-request
+const errorConfig = {
+  adaptor: (resData: API.ResponseMessage<any> ) => {
+    console.log('修改后响应',resData);
+    return {
+      ...resData,
+    };
+  },
+};
+
+//日志输出
+const loggerMiddleware = async (ctx: Context, next: () => void) => {
+  //输出请求信息
+  const { req } = ctx;
+  console.log('requestConfig：',req.url,' ',req.options);
+
+  await next();
+
+  //将接口的返回映射为统一的接口规范  最终传递给页面的数据格式
+  ctx.res = {
+    errorMessage: ctx.res.errorMessage || ctx.res.msg,
+    success: (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code === 200 : true),
+    ...ctx.res
+  };
+
+  //输出响应信息
+  console.log('response：',ctx.res);
+};
+
+// 新增自动添加AccessToken的请求前拦截器
+const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
+  const authHeader = { Authorization: 'Bearer xxxxxx' };
+  return {
+    url: `${url}`,
+    options: { ...options, interceptors: true, headers: authHeader },
+  };
+};
+
 // https://umijs.org/zh-CN/plugins/plugin-request
 export const request: RequestConfig = {
-  // errorConfig:{
-  //   adaptor:(resData) => {
-  //     console.log('结果',resData);
-  //     //将我们后端接口数据规范转换为官方指定数据格式
-  //     return {
-  //       success: resData.code === 200,
-  //       errorMessage:resData.msg,
-  //       errorCode:resData.code,
-  //       data:resData.data
-  //     }
-  //   }
-  // },
-  middlewares:[
-    //增强处理，比如在header中加入token
-    async function logger(ctx: object, next: Function) {
-      //输出请求信息
-      const { req } = ctx;
-      const { url, options } = req;
-      console.log('url',url,'requestConfig',options);
-
-      await next();
-
-      //输出响应信息
-      const { res } = ctx;
-      console.log('res',res);
-    }
-  ],
   errorHandler,
+  errorConfig,
+  middlewares:[loggerMiddleware],
+  requestInterceptors: [authHeaderInterceptor],
 };
