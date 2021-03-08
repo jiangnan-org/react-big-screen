@@ -3,7 +3,7 @@
 import { request } from 'umi';
 
 /** 获取参数监控列表 GET /api/parameter-monitor */
-export async function parameterMonitor(
+export async function getParameterMonitorList(
   params: {
     // query
     /** 当前的页码 */
@@ -13,7 +13,7 @@ export async function parameterMonitor(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.ParameterMonitorList>('/api/parameter-monitor', {
+  return request<API.ParameterMonitorList>('/api/parameter-monitor/list', {
     method: 'GET',
     params: {
       ...params,
@@ -22,9 +22,9 @@ export async function parameterMonitor(
   });
 }
 
-/* 获取指定点位的时许数据   GET /api/parameter-monitor/time-series */
-export async function timeSeries(key?: string) {
-  return request('https://gw.alipayobjects.com/os/bmw-prod/1d565782-dde4-4bb6-8946-ea6a38ccf184.json', {
-    method: 'GET',
+/* 获取指定点位的时许数据   GET /api/parameter-monitor/area */
+export async function getParameterMonitorArea() {
+  return request<API.ResponseMessage<Object[]>>('/api/parameter-monitor/area', {
+    method: 'GET'
   });
 }

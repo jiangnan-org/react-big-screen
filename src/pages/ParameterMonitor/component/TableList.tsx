@@ -6,7 +6,7 @@
 import React from 'react';
 import type {ProColumns} from '@ant-design/pro-table';
 import {FormattedMessage} from '@@/plugin-locale/localeExports';
-import {parameterMonitor} from '@/services/ant-design-pro/parameter-monitor';
+import {getParameterMonitorList} from '@/services/ant-design-pro/parameter-monitor';
 import ProTable from '@ant-design/pro-table';
 import styles from '../index.less';
 
@@ -59,19 +59,18 @@ const Component: React.FC = () => {
       rowKey='key'
       request={async (params:API.PageParams) => {
         // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-        const res:API.ParameterMonitorList = await parameterMonitor(params);
-        console.log('啦啦啦啦啦',res);
+        const res:API.ParameterMonitorList = await getParameterMonitorList(params);
         return {
           data: res.data.list,
           // success 请返回 true，不然 table 会停止解析数据，即使有数据
-          success: res.code === 200,
+          success: res.code == 200,
           // 不传会使用 data 的长度，如果是分页一定要传
           total: res.data.total,
         };
       }}
       columns={columns}
       search={false}
-      // pagination={false}
+      pagination={false}
     />
   )
 };

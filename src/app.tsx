@@ -61,7 +61,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
     rightContentRender: () => <RightContent />,          //右上角
     disableContentMargin: false,
-    footerRender: () => <Footer />,                      // 自定义 footer
+    //footerRender: () => <Footer />,                      // 自定义 footer
     onPageChange: () => {                                // 路由发生变化
       const { location } = history;
       // 如果没有登录，重定向到 login
@@ -144,8 +144,7 @@ const errorHandler = (error: ResponseError) => {
 
 //将接口的返回映射为统一的接口规范  该配置只是用于错误处理，不会影响最终传递给页面的数据格式 https://umijs.org/plugins/plugin-request
 const errorConfig = {
-  adaptor: (resData: API.ResponseMessage<any> ) => {
-    console.log('修改后响应',resData);
+  adaptor: (resData:API.ResponseMessage<any>)  => {
     return {
       ...resData,
     };
@@ -160,10 +159,10 @@ const loggerMiddleware = async (ctx: Context, next: () => void) => {
 
   await next();
 
-  //将接口的返回映射为统一的接口规范  最终传递给页面的数据格式
+  //映射
   ctx.res = {
-    errorMessage: ctx.res.errorMessage || ctx.res.msg,
     success: (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code === 200 : true),
+    errorMessage: ctx.res.errorMessage || ctx.res.msg,
     ...ctx.res
   };
 
