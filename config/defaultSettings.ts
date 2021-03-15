@@ -1,6 +1,7 @@
 import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 
-//pro-layout布局配置重写，更多参数配置参考;https://github.com/ant-design/ant-design-pro-layout
+//pro-layoutb插件被内置，antd pro项目默认使用了ProLayout布局组件，该组件参数配置参考;https://github.com/ant-design/ant-design-pro-layout
+//ProLayout组件使用：https://procomponents.ant.design/components/layout#settings
 // @ts-ignore
 const Settings: LayoutSettings & {
   pwa?: boolean;

@@ -20,6 +20,7 @@ export const initialStateConfig = {
  * 获取全局初始化信息
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * 类似案例：https://www.cnblogs.com/chh1995/p/13965159.html
+ * 该方法返回的数据最后会被默认注入到一个 namespace 为 @@initialState  的 model 中。可以通过 useModel  这个 hook 来消费它
  * */
 export async function getInitialState(): Promise<{             //Promise<定义期望返回的数据类型>
   settings?: Partial<LayoutSettings>;
@@ -44,12 +45,12 @@ export async function getInitialState(): Promise<{             //Promise<定义�
     return {
       fetchUserInfo,
       currentUser,
-      settings: {},
+      settings: {},                                        //ProLayout高阶布局组件参数配置 {}：采用config/defaultSettings.ts中设置
     };
   }
   return {
     fetchUserInfo,
-    settings: {},
+    settings: {},                                          //ProLayout高阶布局组件参数配置
   };
 }
 
@@ -61,7 +62,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
     rightContentRender: () => <RightContent />,          //右上角
     disableContentMargin: false,
-    //footerRender: () => <Footer />,                      // 自定义 footer
+    footerRender: () => <Footer />,                      // 自定义 footer
     onPageChange: () => {                                // 路由发生变化
       const { location } = history;
       // 如果没有登录，重定向到 login
