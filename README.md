@@ -1,57 +1,12 @@
-# Ant Design Pro
+###参考文章
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+#### 1.ProComponents组件
+ProComponents 基于 antd 之上来开发的高级组件：https://procomponents.ant.design/docs/intro
+该组件更新比较频繁，文档中一些新的特性可能是最新组件添加的，因此在coding中需要特别留意
 
-## Environment Prepare
+#### 2.ant degign pro v5版本
+Ant Design Pro 基于 umi 来构架脚手架，我们可以通过简单的操作来初始化和启动脚手架。 
+https://beta-pro.ant.design/index-cn
 
-Install `node_modules`:
-
-```bash
-npm install
-```
-
-or
-
-```bash
-yarn
-```
-
-## Provided Scripts
-
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
-
-Scripts provided in `package.json`. It's safe to modify or add additional script:
-
-### Start project
-
-```bash
-npm start
-```
-
-### Build project
-
-```bash
-npm run build
-```
-
-### Check code style
-
-```bash
-npm run lint
-```
-
-You can also use script to auto fix some lint error:
-
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+### 3.umi插件库使用
+https://umijs.org/zh-CN/plugins/plugin-initial-state

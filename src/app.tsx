@@ -45,7 +45,7 @@ export async function getInitialState(): Promise<{             //Promise<定义�
     return {
       fetchUserInfo,
       currentUser,
-      settings: {},                                        //ProLayout高阶布局组件参数配置 {}：采用config/defaultSettings.ts中设置
+      settings: {},                                        //ProLayout高阶布局组件参数配置 默认采用config/defaultSettings.ts中设置
     };
   }
   return {
