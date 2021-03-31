@@ -20,6 +20,17 @@ export default [
       },
     ],
   },
+  // 首页
+  {
+    path: '/',
+    redirect: '/welcome',
+  },
+  {
+    path: '/welcome',
+    name: 'welcome',
+    icon: 'smile',
+    component: './Welcome',
+  },
   // 用户与权限
   {
     path: '/auth',
@@ -29,14 +40,17 @@ export default [
       {
         path: '/auth/user',
         name: 'user',
-        icon: 'lock',
         component: './Auth/User',
       },
       {
         path: '/auth/role',
         name: 'role',
-        icon: 'role',
         component: './Auth/Role',
+      },
+      {
+        path: '/auth/privilege',
+        name: 'role',
+        component: './Auth/Privilege',
       },
     ],
   },
@@ -44,45 +58,34 @@ export default [
   {
     path: '/monitor',
     name: 'monitor',
-    icon: 'lock',
+    icon: 'monitor',
     routes: [
       {
         path: '/monitor/parameter-monitor',
         name: 'parameter-monitor',
-        icon: 'smile',
-        component: './ParameterMonitor',
+        component: './Monitor/ParameterMonitor',
       },
       {
         path: '/monitor/statistical-analysis',
         name: 'statistical-analysis',
-        icon: 'smile',
-        component: './StatisticalAnalysis',
+        component: './Monitor/StatisticalAnalysis',
       },
       {
         path: '/monitor/performance-evaluation',
         name: 'performance-evaluation',
-        icon: 'smile',
-        component: './PerformanceEvaluation',
+        component: './Monitor/PerformanceEvaluation',
       },
       {
         path: '/monitor/early-warning-analysis',
         name: 'early-warning-analysis',
-        icon: 'smile',
-        component: './EarlyWarningAnalysis',
+        component: './Monitor/EarlyWarningAnalysis',
       },
       {
         path: '/monitor/link-analysis',
         name: 'link-analysis',
-        icon: 'smile',
-        component: './LinkAnalysis',
+        component: './Monitor/LinkAnalysis',
       }
     ],
-  },
-  {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
   },
   {
     path: '/admin',
@@ -104,10 +107,6 @@ export default [
     icon: 'table',
     path: '/list',
     component: './TableList',
-  },
-  {
-    path: '/',
-    redirect: '/welcome',
   },
   {
     component: './404',
