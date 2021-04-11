@@ -7,7 +7,8 @@ import Footer from '@/components/Footer';
 import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
 import {BookOutlined, LinkOutlined} from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
-import type { Context,RequestOptionsInit } from 'umi';
+// @ts-ignore
+import type { Context, RequestOptionsInit } from 'umi';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
 import type { ResponseError } from 'umi-request';
 
@@ -22,19 +23,19 @@ export const initialStateConfig = {
  * 类似案例：https://www.cnblogs.com/chh1995/p/13965159.html
  * 该方法返回的数据最后会被默认注入到一个 namespace 为 @@initialState  的 model 中。可以通过 useModel  这个 hook 来消费它
  * */
-export async function getInitialState(): Promise<{             //Promise<定义期望返回的数据类型>
+export async function getInitialState(): Promise<{             // Promise<定义期望返回的数据类型>
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;                              //当前用户类型
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>; //函数类型 函数返回一个Promise<>
+  currentUser?: API.CurrentUser;                              // 当前用户类型
+  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>; // 函数类型 函数返回一个Promise<>
 }> {
 
   const fetchUserInfo = async () => {
     try {
-      //获取用户信息
+      // 获取用户信息
       const currentUser = await queryCurrentUser();
       return currentUser;
     } catch (error) {
-      //跳转到登录页面
+      // 跳转到登录页面
       history.push('/user/login');
     }
     return undefined;
@@ -45,12 +46,12 @@ export async function getInitialState(): Promise<{             //Promise<定义�
     return {
       fetchUserInfo,
       currentUser,
-      settings: {},                                        //ProLayout高阶布局组件参数配置 默认采用config/defaultSettings.ts中设置
+      settings: {},                                        // ProLayout高阶布局组件参数配置 默认采用config/defaultSettings.ts中设置
     };
   }
   return {
     fetchUserInfo,
-    settings: {},                                          //ProLayout高阶布局组件参数配置
+    settings: {},                                          // ProLayout高阶布局组件参数配置
   };
 }
 
@@ -60,7 +61,7 @@ export async function getInitialState(): Promise<{             //Promise<定义�
  */
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
-    rightContentRender: () => <RightContent />,          //右上角
+    rightContentRender: () => <RightContent />,          // 右上角
     disableContentMargin: false,
     footerRender: () => <Footer />,                      // 自定义 footer
     onPageChange: () => {                                // 路由发生变化
@@ -143,31 +144,31 @@ const errorHandler = (error: ResponseError) => {
 };
 
 
-//将接口的返回映射为统一的接口规范  该配置只是用于错误处理，不会影响最终传递给页面的数据格式 https://umijs.org/plugins/plugin-request
+// 将接口的返回映射为统一的接口规范  该配置只是用于错误处理，不会影响最终传递给页面的数据格式 https://umijs.org/plugins/plugin-request
 const errorConfig = {
-  adaptor: (resData:API.ResponseMessage<any>)  => {
+  adaptor: (resData: any)  => {
     return {
       ...resData,
     };
   },
 };
 
-//日志输出
+// 日志输出
 const loggerMiddleware = async (ctx: Context, next: () => void) => {
-  //输出请求信息
+  // 输出请求信息
   const { req } = ctx;
   console.log('requestConfig：',req.url,' ',req.options);
 
   await next();
 
-  //映射
+  // 映射
   ctx.res = {
     success: (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code === 200 : true),
     errorMessage: ctx.res.errorMessage || ctx.res.msg,
     ...ctx.res
   };
 
-  //输出响应信息
+  // 输出响应信息
   console.log('response：',ctx.res);
 };
 

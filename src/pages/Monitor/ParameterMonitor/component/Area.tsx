@@ -5,17 +5,17 @@
  */
 import React, {useState, useEffect} from 'react';
 import {Area} from '@ant-design/charts';
-import styles from '../index.less';
+import styles from './index.less';
 import { Form } from 'antd';
 import {getParameterMonitorArea} from '@/services/ant-design-pro/parameter-monitor';
 
 const Component: React.FC = () => {
-  //显示数据
-  const [data, setData] = useState<Array<object>>([]);
+  // 显示数据
+  const [data, setData] = useState<object[]>([]);
 
-  //异步请求数据  useRequest使用：https://beta-pro.ant.design/docs/request-cn
+  // 异步请求数据  useRequest使用：https://beta-pro.ant.design/docs/request-cn
   const asyncFetch = () => {
-    //data 是后端实际返回 JSON 数据中的 data 字段
+    // data 是后端实际返回 JSON 数据中的 data 字段
     getParameterMonitorArea()
       .then((res) => {
         setData(res.data)
@@ -32,7 +32,7 @@ const Component: React.FC = () => {
   }, []);
 
   const config = {
-    data: data,
+    data,
     xField: 'Date',
     yField: 'scales',
     height:600,
@@ -56,7 +56,6 @@ const Component: React.FC = () => {
     ],
   };
 
-  // @ts-ignore
   return (
     <div className={styles.area}>
       <Form className={styles.form}>
@@ -68,6 +67,7 @@ const Component: React.FC = () => {
         </Form.Item>
       </Form>
 
+      {/* @ts-ignore */}
       <Area className={styles.area} {...config} />
     </div>
   )

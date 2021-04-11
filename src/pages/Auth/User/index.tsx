@@ -3,34 +3,30 @@
  * @Description：ProTable - 高级表格  https://procomponents.ant.design/components/table
  * @Data: 2021/4/9 17:34
  */
-import React, { useRef } from 'react';
-import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Button, Tag, Space, Menu, Dropdown } from 'antd';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable, { TableDropdown } from '@ant-design/pro-table';
-import request from 'umi-request';
+import React, {useRef} from 'react';
+import {PlusOutlined} from '@ant-design/icons';
+import {Button, Tag, Space } from 'antd';
+import type {ProColumns, ActionType} from '@ant-design/pro-table';
+import ProTable, {TableDropdown} from '@ant-design/pro-table';
+import {getUserList} from '@/services/auth/user';
+import {FormattedMessage, useIntl} from "_umi@3.4.7@umi";
 
-type GithubIssueItem = {
-  url: string;
-  id: number;
-  number: number;
-  title: string;
-  labels: {
-    name: string;
-    color: string;
-  }[];
-  state: string;
-  comments: number;
-  created_at: string;
-  updated_at: string;
-  closed_at?: string;
-};
-
-const columns: ProColumns<GithubIssueItem>[] = [
+// table列定义
+const columns: ProColumns<UserAPI.UserItem>[] = [
   {
     dataIndex: 'index',
-    valueType: 'indexBorder',
+    valueType: 'indexBorder',  // 带border的序号列
     width: 48,
+  },
+  {
+    dataIndex: 'username',
+    title: '账号',
+    width: 120,
+  },
+  {
+    dataIndex: 'real_name',
+    title: '姓名',
+    width: 100,
   },
   {
     title: '标题',
@@ -49,37 +45,26 @@ const columns: ProColumns<GithubIssueItem>[] = [
   },
   {
     title: '状态',
-    dataIndex: 'state',
+    dataIndex: 'status',
+    align:'center',
     filters: true,
     onFilter: true,
     valueType: 'select',
     valueEnum: {
-      all: { text: '全部', status: 'Default' },
-      open: {
-        text: '未解决',
-        status: 'Error',
-      },
-      closed: {
-        text: '已解决',
-        status: 'Success',
-        disabled: true,
-      },
-      processing: {
-        text: '解决中',
-        status: 'Processing',
-      },
+      0: {text: '禁用', status: 'Error'},
+      1: {text: '使能', status: 'Success'}
     },
   },
   {
     title: '标签',
     dataIndex: 'labels',
     search: false,
-    renderFormItem: (_, { defaultRender }) => {
+    renderFormItem: (_, {defaultRender}) => {
       return defaultRender(_);
     },
     render: (_, record) => (
       <Space>
-        {record.labels.map(({ name, color }) => (
+        {record.labels.map(({name, color}) => (
           <Tag color={color} key={name}>
             {name}
           </Tag>
@@ -89,106 +74,90 @@ const columns: ProColumns<GithubIssueItem>[] = [
   },
   {
     title: '创建时间',
-    key: 'showTime',
     dataIndex: 'created_at',
     valueType: 'date',
     hideInSearch: true,
   },
   {
-    title: '创建时间',
-    dataIndex: 'created_at',
-    valueType: 'dateRange',
-    hideInTable: true,
-    search: {
-      transform: (value) => {
-        return {
-          startTime: value[0],
-          endTime: value[1],
-        };
-      },
-    },
+    title: '更新时间',
+    dataIndex: 'updated_at',
+    valueType: 'date',
+    hideInTable: false,
+    hideInSearch: true,
   },
   {
     title: '操作',
     valueType: 'option',
     render: (text, record, _, action) => [
       <a
-        key="editable"
+        key='editable'
         onClick={() => {
           action.startEditable?.(record.id);
         }}
       >
         编辑
       </a>,
-      <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
+      <a href={record.avatar} target='_blank' rel='noopener noreferrer' key='view'>
         查看
       </a>,
+      <a
+        key='editable'
+        onClick={() => {
+          action.startEditable?.(record.id);
+        }}>
+        删除
+      </a>,
       <TableDropdown
-        key="actionGroup"
+        key='actionGroup'
         onSelect={() => action.reload()}
         menus={[
-          { key: 'copy', name: '复制' },
-          { key: 'delete', name: '删除' },
+          {key: 'role', name: '关联角色'},
         ]}
       />,
     ],
   },
 ];
 
-const menu = (
-  <Menu>
-    <Menu.Item key="1">1st item</Menu.Item>
-    <Menu.Item key="2">2nd item</Menu.Item>
-    <Menu.Item key="3">3rd item</Menu.Item>
-  </Menu>
-);
-
 export default () => {
+  /** 国际化配置 */
+  const intl = useIntl();
+
+  /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
+
   return (
-    <ProTable<GithubIssueItem>
+    <ProTable<UserAPI.UserItem>
       columns={columns}
       actionRef={actionRef}
-      request={async (params = {}) =>
-        request<{
-          data: GithubIssueItem[];
-        }>('https://proapi.azurewebsites.net/github/issues', {
-          params,
-        })
-      }
+      request={async (params: API.PageParams = {}) => {
+        // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
+        // @ts-ignore
+        const res: UserAPI.UserList = await getUserList(params);
+        return {
+          data: res.data.list,
+          // success 请返回 true，不然 table 会停止解析数据，即使有数据
+          success: res.success,
+          // 不传会使用 data 的长度，如果是分页一定要传
+          total: res.data.total,
+        }
+      }}
       editable={{
         type: 'multiple',
       }}
-      rowKey="id"
-      search={{
+      rowKey='id'
+      search={{                // 配置列的搜索相关，false 为隐藏
         labelWidth: 'auto',
       }}
-      form={{
-        // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
-        syncToUrl: (values, type) => {
-          if (type === 'get') {
-            return {
-              ...values,
-              created_at: [values.startTime, values.endTime],
-            };
-          }
-          return values;
-        },
-      }}
-      pagination={{
-        pageSize: 5,
-      }}
-      dateFormatter="string"
-      headerTitle="高级表格"
+      dateFormatter='string'
+      headerTitle={intl.formatMessage({
+        id: 'pages.searchTable.title',
+        defaultMessage: '用户信息',
+      })}
+      // 工具栏
       toolBarRender={() => [
-        <Button key="button" icon={<PlusOutlined />} type="primary">
-          新建
-        </Button>,
-        <Dropdown key="menu" overlay={menu}>
-          <Button>
-            <EllipsisOutlined />
-          </Button>
-        </Dropdown>,
+        <Button key='button' icon={<PlusOutlined/>} type='primary'>
+          <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+        </Button>
       ]}
     />
   );

@@ -8,10 +8,9 @@ import type {ProColumns} from '@ant-design/pro-table';
 import {FormattedMessage} from '@@/plugin-locale/localeExports';
 import {getParameterMonitorList} from '@/services/ant-design-pro/parameter-monitor';
 import ProTable from '@ant-design/pro-table';
-import styles from '../index.less';
+import styles from './index.less';
 
 const Component: React.FC = () => {
-
   //定义数据列
   const columns: ProColumns<API.ParameterMonitorItem>[] = [
     {
@@ -57,13 +56,13 @@ const Component: React.FC = () => {
     <ProTable<API.ParameterMonitorItem, API.PageParams>
       className={styles.table}
       rowKey='key'
-      request={async (params:API.PageParams) => {
+      request={async (params: API.PageParams) => {
         // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-        const res:API.ParameterMonitorList = await getParameterMonitorList(params);
+        const res: API.ParameterMonitorList = await getParameterMonitorList(params);
         return {
           data: res.data.list,
           // success 请返回 true，不然 table 会停止解析数据，即使有数据
-          success: res.code == 200,
+          success: res.success,
           // 不传会使用 data 的长度，如果是分页一定要传
           total: res.data.total,
         };

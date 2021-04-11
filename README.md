@@ -44,3 +44,18 @@ window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量�
 源码地址  https://github.com/ant-design/pro-components/blob/master/packages/layout/src/components/SettingDrawer/index.tsx
 参考链接：https://pro.ant.design/docs/dynamic-theme-cn
 
+### 四、数据表明明规范
+
+1. 采用26个英文字母(区分大小写)和0-9的自然数(经常不需要)加上下划线'_'组成，命名简洁明确，多个单词用下划线'_'分隔
+
+2. 全部小写命名，禁止出现大写
+
+3. 禁止使用数据库关键字，如：name，time ，datetime，password等
+
+4. 表名称不应该取得太长（一般不超过三个英文单词）
+
+5. 表的名称一般使用名词或者动宾短语
+
+6. 用单数形式表示名称，例如，使用 employee，而不是 employees
+
+7. 表必须填写描述信息（使用SQL语句建表时）

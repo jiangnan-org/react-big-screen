@@ -3,6 +3,18 @@
 
 declare namespace API {
   /************************************** 接口返回数据通用格式  **********************************************************/
+  type PageParams = {
+    // query
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+    /** 查询全部 */
+    all?: boolean;
+    /** 查询条件 */
+    condition?: object;
+  };
+
   //页数据格式
   type PageData<T> = {
     /* 列表 */
@@ -19,11 +31,14 @@ declare namespace API {
   type ResponseMessage<T> = {
     /** 业务约定的状态码 */
     code: number;
+    /** 查询成功或者失败 */
+    success?: boolean;
     /** 业务上的信息 */
     msg?: string;
     /** 业务上返回数据 */
     data: T;
   }
+
   //页查询返回数据格式
   type PageResponseMessage<T> = ResponseMessage<PageData<T>>;
 
@@ -52,11 +67,6 @@ declare namespace API {
     status?: string;
     type?: string;
     currentAuthority?: string;
-  };
-
-  type PageParams = {
-    current?: number;
-    pageSize?: number;
   };
 
   /*  参数监控行数据 */
