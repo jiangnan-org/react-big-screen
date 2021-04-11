@@ -15,6 +15,7 @@ import {FormattedMessage, useIntl} from "_umi@3.4.7@umi";
 const columns: ProColumns<UserAPI.UserItem>[] = [
   {
     dataIndex: 'index',
+    title: '序号',
     valueType: 'indexBorder',  // 带border的序号列
     width: 48,
   },
