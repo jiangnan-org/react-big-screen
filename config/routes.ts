@@ -23,36 +23,13 @@ export default [
   // 首页
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/home',
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  // 用户与权限
-  {
-    path: '/auth',
-    name: 'auth',
-    icon: 'lock',
-    routes: [
-      {
-        path: '/auth/user',
-        name: 'user',
-        component: './Auth/User',
-      },
-      {
-        path: '/auth/role',
-        name: 'role',
-        component: './Auth/Role',
-      },
-      {
-        path: '/auth/privilege',
-        name: 'role',
-        component: './Auth/Privilege',
-      },
-    ],
+    path: '/home',
+    name: 'home',
+    icon: 'home',
+    component: './Home',
   },
   // 系统监测
   {
@@ -87,6 +64,97 @@ export default [
       }
     ],
   },
+  // 运维
+  {
+    path: '/maintenance',
+    name: 'maintenance',
+    icon: 'tool',
+    routes: [
+      {
+        path: '/maintenance/alarm',
+        name: 'alarm',
+        component: './Maintenance/Alarm',
+      },
+      {
+        path: '/maintenance/inspect',
+        name: 'inspect',
+        routes: [
+          {
+            path: '/maintenance/inspect/type',
+            name: 'type',
+            component: './Maintenance/Inspect/Type',
+          },
+          {
+            path: '/maintenance/inspect/plan',
+            name: 'plan',
+            component: './Maintenance/Inspect/Plan',
+          },
+          {
+            path: '/maintenance/inspect/record',
+            name: 'record',
+            component: './Maintenance/Inspect/Record',
+          }
+        ]
+      },
+    ]
+  },
+  // 报表
+  {
+    path: '/report',
+    name: 'report',
+    icon: 'table',
+    routes: [
+      {
+        name: 'electric-energy-meter',
+        path: '/report/electric-energy-meter',
+        component: './Report/ElectricEnergyMeter',
+      },
+    ]
+  },
+  // 基础配置
+  {
+    path: '/config',
+    name: 'config',
+    icon: 'setting',
+    routes: [
+      {
+        name: 'cloud-register',
+        icon: 'cloud-register',
+        path: '/config/cloud-register',
+        component: './Config/CloudRegister',
+      },
+      {
+        name: 'alarm',
+        icon: 'alarm',
+        path: '/config/alarm',
+        component: './Config/Alarm',
+      },
+    ]
+  },
+  // 用户与权限
+  {
+    path: '/auth',
+    name: 'auth',
+    icon: 'lock',
+    routes: [
+      {
+        path: '/auth/user',
+        name: 'user',
+        component: './Auth/User',
+      },
+      {
+        path: '/auth/role',
+        name: 'role',
+        component: './Auth/Role',
+      },
+      {
+        path: '/auth/privilege',
+        name: 'privilege',
+        component: './Auth/Privilege',
+      },
+    ],
+  },
+  // 管理
   {
     path: '/admin',
     name: 'admin',
@@ -98,15 +166,9 @@ export default [
         path: '/admin/sub-page',
         name: 'sub-page',
         icon: 'smile',
-        component: './Welcome',
+        component: './Home',
       },
     ],
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
   },
   {
     component: './404',

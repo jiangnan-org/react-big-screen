@@ -10,12 +10,12 @@ const Settings: LayoutSettings & {
   navTheme: 'realDark',             //整体风格设置 light、dark、realDark
   // 拂晓蓝
   primaryColor: '#1890ff',       //主题色
-  layout: 'side',                //导航模式 side、top、mix
+  layout: 'top',                //导航模式 side、top、mix
   contentWidth: 'Fluid',        //内容区域宽度：流式Fluid、定宽Fixed
   fixedHeader: false,           //固定header
   fixSiderbar: true,            //固定侧边测但
   colorWeak: false,             //色弱模式
-  title: '用户权限管理',
+  title: '智慧云仓管理系统',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: ''
