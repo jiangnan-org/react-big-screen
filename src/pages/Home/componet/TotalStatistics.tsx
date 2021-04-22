@@ -66,7 +66,6 @@ export default () => {
             <StatisticCard
               statistic={{
                 title: '数量',
-                precision: 2,
                 valueStyle: {color: '#0BF5A3'},
                 groupSeparator: ',',
                 value: 98,
