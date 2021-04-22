@@ -1,63 +1,31 @@
 import React from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Alert, Typography } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import ProCard from "@ant-design/pro-card";
 import styles from './index.less';
-
-const CodePreview: React.FC = ({ children }) => (
-  <pre className={styles.pre}>
-    <code>
-      <Typography.Text copyable>{children}</Typography.Text>
-    </code>
-  </pre>
-);
+import TotalStatistics from './componet/TotalStatistics';
 
 export default (): React.ReactNode => {
-  const intl = useIntl();
   return (
-    <PageContainer>
-      <Card>
-        <Alert
-          message={intl.formatMessage({
-            id: 'pages.welcome.alertMessage',
-            defaultMessage: '更快更强的重型组件，已经发布。',
-          })}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 24,
-          }}
-        />
-        <Typography.Text strong>
-          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="高级表格" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/table"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-table</CodePreview>
-        <Typography.Text
-          strong
-          style={{
-            marginBottom: 12,
-          }}
-        >
-          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="高级布局" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/layout"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
-      </Card>
-    </PageContainer>
+    <React.Fragment>
+      {/* 数字或使用数组形式同时设置 [水平间距, 垂直间距], 支持响应式的对象写法 { xs: 8, sm: 16, md: 24} 单位像素 */}
+      <ProCard split="horizontal" bordered className={styles.container}>
+        {/* 上半部分 */}
+        <ProCard gutter={[{xs: 8, sm: 8, md: 16, lg: 24, xl: 32}, 12]} className={styles.top}>
+          <ProCard colSpan={{xs: 12, sm: 12, md: 12, lg: 8, xl: 8}} layout="center" bordered>
+            <TotalStatistics />
+          </ProCard>
+          <ProCard colSpan={{xs: 0, sm: 0, md: 0, lg: 8, xl: 8}} layout="center" bordered>Responsive</ProCard>
+          <ProCard colSpan={{xs: 12, sm: 12, md: 12, lg: 8, xl: 8}} layout="center" bordered>Responsive</ProCard>
+        </ProCard>
+
+        {/*  下半部分 */}
+        <ProCard gutter={[{xs: 8, sm: 8, md: 16, lg: 24, xl: 32}, 12]} className={styles.bottom}>
+          <ProCard colSpan={{xs: 12, sm: 12, md: 12, lg: 8, xl: 8}}  layout="center" bordered>
+
+          </ProCard>
+          <ProCard colSpan={{xs: 0, sm: 0, md: 0, lg: 8, xl: 8}} layout="center" bordered>Responsive</ProCard>
+          <ProCard colSpan={{xs: 12, sm: 12, md: 12, lg: 8, xl: 8}}  layout="center" bordered>Responsive</ProCard>
+        </ProCard>
+      </ProCard>
+    </React.Fragment>
   );
 };
