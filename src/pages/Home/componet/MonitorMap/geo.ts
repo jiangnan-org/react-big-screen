@@ -7,11 +7,15 @@ import china from './json/china.json';
 // @ts-ignore
 import anhui from './json/province/anhui.json';
 
-//注册中国地图
+
+china.features = china.features.concat(anhui.features);
+console.log('数据',china);
+console.log('数据',anhui);
+/* 注册中国地图 */
 echarts.registerMap('china', china);
 echarts.registerMap('anhui', anhui);
 
-//定义
+/* 定义  */
 export interface ProvinceItem {
   name: string;
   area: string;
@@ -254,7 +258,7 @@ const provinceList: ProvinceItem[] = [
 
 /* 按照地域分区上色 */
 const deal = (provinceList: ProvinceItem[]): ProvinceItem[] => {
-  //变量
+  // 变量
   for (const item of provinceList) {
     switch (item.area) {
       case '东北大区':

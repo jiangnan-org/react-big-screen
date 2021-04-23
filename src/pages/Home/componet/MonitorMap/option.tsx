@@ -3,12 +3,13 @@
  * @Description：生成地图所需要的配置
  * @Data: 2021/4/23 14:37
  */
-import {getCoordinateMap, ProvinceItem} from "./geo";
+import type { ProvinceItem} from "./geo";
+import {getCoordinateMap} from "./geo";
 
 /* 数据转换 */
 const convertData = (data: ProvinceItem[]) => {
   const res: ProvinceItem[] = [];
-  //遍历每一个坐标
+  // 遍历每一个坐标
   for (let i: number = 0; i < data.length; i++) {
     const coordinate = getCoordinateMap[data[i].name];
     if (coordinate) {
@@ -34,17 +35,6 @@ export const genOption = (data: ProvinceItem[]) => {
     tooltip: {                             // 提示框组件
       show: true,                          // 是否显示提示框组件 ，包括提示框浮层和 axisPointer
       trigger: 'item',                     // 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使
-      triggerOn: 'click',                  // 提示框触发的条件
-      // 提示框浮层内容格式器，支持字符串模板和回调函数两种形式
-      formatter: (params: {
-        seriesName: string;
-        data: ProvinceItem
-      }) => {
-        console.log('zhixinglee');
-        return `'光伏电站'<br />${params.seriesName}：${params.data.area}`
-      },
-      backgroundColor: '#ff7f50',           // 提示标签背景颜色
-      textStyle: {color: '#fff'}            // 提示标签字体颜色
     },
     grid: {                                 // 直角坐标系内绘图网格
       left: '5%',                           // grid 组件离容器左侧的距离
@@ -88,73 +78,8 @@ export const genOption = (data: ProvinceItem[]) => {
           position: 'top',           //  标签的位置
           show: true,                // 是否显示标签
           ellipsis: true,            // 在overflow配置为'truncate'的时候，可以通过该属性配置末尾显示的文本
-        },
-        tooltip: {                    //  悬浮提示框 series.tooltip 仅在 tooltip.trigger 为 'item' 时有效
-          trigger:'item',
-          formatter:(name: string) => {
-            return `Legend ${name}`;
-          },
         }
       },
-      // {
-      //   name: 'Top 5',
-      //   type: 'effectScatter',
-      //   coordinateSystem: 'bmap',
-      //   data: convertData(data.sort( (a, b) => {
-      //     return b.value - a.value;
-      //   }).slice(0, 6)),
-      //   symbolSize: (value: number[]) =>  {return value[2] / 10},
-      //   encode: {
-      //     value: 2
-      //   },
-      //   showEffectOn: 'render',
-      //   rippleEffect: {
-      //     brushType: 'stroke'
-      //   },
-      //   hoverAnimation: true,
-      //   label: {
-      //     formatter: '{b}',
-      //     position: 'right',
-      //     show: true
-      //   },
-      //   itemStyle: {
-      //     shadowBlur: 10,
-      //     shadowColor: '#333'
-      //   },
-      //   zlevel: 1
-      // },
-      // {
-      //   type:'map',
-      //   mapType:'anhui'
-      // },
-      // {
-      //   type: 'map',
-      //   mapType: 'china',
-      //   roam: false,
-      //   zoom: 1.2,
-      //   tooltip: {
-      //     show: true,    // 显示提示标签
-      //   },
-      //   label: {
-      //     normal: {
-      //       show: false  // 显示省份标签
-      //     },
-      //     emphasis: {
-      //       show: false,
-      //     }
-      //   },
-      //   itemStyle: {
-      //     normal: {
-      //       borderWidth: 0.5,    // 区域边框宽度
-      //       borderColor: '#fff',  // 区域边框颜色
-      //       label: {show: false}
-      //     },
-      //     emphasis: {
-      //       show: false,
-      //     }
-      //   },
-      //   data: data
-      // }
     ],
   }
 };

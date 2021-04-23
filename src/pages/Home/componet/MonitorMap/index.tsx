@@ -2,7 +2,8 @@
  * @Author：zy
  * @Description：监控地图
  * echart官网： https://echarts.apache.org/examples/zh/editor.html?c=effectScatter-bmap
- * 地图json文件下载地址  https://github.com/FuHang-LM/echarts
+ * 地图json文件下载地址  https://github.com/FuHang-LM/echarts  https://github.com/search?q=echart+geo
+ * https://github.com/maxiaoqu/echarts-map-geoJson
  * @Data: 2021/4/23 18:40
  */
 import React from 'react';

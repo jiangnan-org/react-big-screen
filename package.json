@@ -57,6 +57,8 @@
     "@umijs/route-utils": "^1.0.33",
     "antd": "^4.9.4",
     "classnames": "^2.2.6",
+    "echarts": "^5.1.0",
+    "echarts-for-react": "^3.0.1",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
     "omit.js": "^2.0.2",
@@ -70,7 +72,7 @@
     "umi-request": "^1.0.8"
   },
   "devDependencies": {
-    "@ant-design/pro-card": "^1.11.4",
+    "@ant-design/pro-card": "^1.11.11",
     "@ant-design/pro-cli": "^2.0.2",
     "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
@@ -92,6 +94,8 @@
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
     "detect-installer": "^1.0.1",
+    "echarts": "^5.1.0",
+    "echarts-for-react": "^3.0.1",
     "enzyme": "^3.11.0",
     "eslint": "^7.1.0",
     "express": "^4.17.1",

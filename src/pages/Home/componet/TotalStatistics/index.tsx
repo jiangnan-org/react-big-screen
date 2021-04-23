@@ -4,7 +4,7 @@
  * @Data: 2021/4/22 19:40
  */
 import React from 'react';
-import ProCard, {StatisticCard} from '_@ant-design_pro-card@1.11.7@@ant-design/pro-card';
+import ProCard, {StatisticCard} from '@ant-design/pro-card';
 import styles from './index.less';
 
 
