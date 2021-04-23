@@ -55,7 +55,24 @@ ol {
 
 
 // 重載antd样式
-.ant-pro-card-statistic .ant-statistic-title{
-  color: rgba(255, 255, 255, 0.45) !important; ;
+.ant-pro-basicLayout-content{
+  margin: 5px !important;
 }
+
+//设置pro-card组件
+.ant-pro-card{
+  // 内容body外边距
+  .ant-pro-card-body{
+    padding: 5px !important;
+  }
+
+  // 设置如果是pro-card中的统计卡片
+  .ant-pro-card-statistic{
+    .ant-statistic-title {
+      color: rgba(255, 255, 255, 0.45) !important ;
+    }
+  }
+}
+
+
 

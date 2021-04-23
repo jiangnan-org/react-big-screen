@@ -9,7 +9,7 @@ import {Button, Tag, Space } from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable, {TableDropdown} from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
-import {FormattedMessage, useIntl} from "_umi@3.4.7@umi";
+import {FormattedMessage, useIntl} from "umi";
 
 // table列定义
 const columns: ProColumns<UserAPI.UserItem>[] = [

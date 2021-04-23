@@ -4,7 +4,7 @@
  * @Data: 2021/4/22 19:40
  */
 import React from 'react';
-import ProCard, {StatisticCard} from '@ant-design/pro-card';
+import ProCard, {StatisticCard} from '_@ant-design_pro-card@1.11.7@@ant-design/pro-card';
 import styles from './index.less';
 
 
@@ -13,8 +13,9 @@ export default () => {
   return (
     <React.Fragment>
       <ProCard split='horizontal' className={styles.totalStatistics}>
-        <ProCard gutter={[{xs: 8, sm: 8, md: 8, lg: 12, xl: 24}, 20]} split="vertical">
+        <ProCard gutter={[0, 24]}  split="vertical">
           <StatisticCard
+            colSpan={10}
             className={styles.realTimePower}
             statistic={{
               title: (
@@ -33,6 +34,7 @@ export default () => {
             }}
           />
           <StatisticCard
+            colSpan={14}
             className={styles.realTimePower}
             statistic={{
               title: (
@@ -52,8 +54,8 @@ export default () => {
           />
         </ProCard>
 
-        <ProCard split="vertical">
-          <ProCard gutter={[{xs: 8, sm: 8, md: 8, lg: 12, xl: 24}, 8]}
+        <ProCard split="vertical" >
+          <ProCard colSpan={10}
                    title={
                      <div>
                        <span className={styles.chinese}>云仓建设</span>
@@ -101,7 +103,9 @@ export default () => {
               }}
             />
           </ProCard>
-          <ProCard gutter={[{xs: 8, sm: 8, md: 8, lg: 12, xl: 24}, 8]}
+
+          <ProCard gutter={[{xs: 8, sm: 8, md: 8, lg: 12, xl: 12}, 0]}
+                   colSpan={14}
                    title={
                      <div>
                        <span className={styles.chinese}>发电量</span>
