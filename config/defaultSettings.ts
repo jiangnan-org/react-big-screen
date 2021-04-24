@@ -15,7 +15,7 @@ const Settings: LayoutSettings & {
   fixedHeader: false,           //固定header
   fixSiderbar: true,            //固定侧边测但
   colorWeak: false,             //色弱模式
-  title: '智慧云仓管理系统',
+  title: '智慧云仓监控系统',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: ''

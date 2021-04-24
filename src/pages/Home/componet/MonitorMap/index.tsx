@@ -8,16 +8,19 @@
  */
 import React from 'react';
 
-import { genOption } from './option';
-import { provinceData } from './geo';
-import ReactEcharts from 'echarts-for-react';
+// import ReactEcharts from 'echarts-for-react';
+import loadScript from '@/utils/import-script';
+
+// eslint-disable-next-line new-cap
+const ChinaMap = loadScript([
+    'http://api.map.baidu.com/api?v=2.0&ak=53oVIOgmSIejwV7EfphPgTynOZbIiVYu'
+  ],
+  () => import('./ChinaMap'));
 
 export default () => {
   return (
     <React.Fragment>
-      <div style={{ height: '200px', width: '300px' }}>
-        <ReactEcharts style={{ height: '100%', width: '100%' }} option={genOption(provinceData)} />
-      </div>
+      <ChinaMap />
     </React.Fragment>
   );
 };
