@@ -13,7 +13,7 @@ export default () => {
   return (
     <React.Fragment>
       <ProCard split='horizontal' className={styles.totalStatistics}>
-        <ProCard gutter={[0, 24]}  split="vertical">
+        <ProCard gutter={[0, 48]}  split="vertical">
           <StatisticCard
             colSpan={10}
             className={styles.realTimePower}

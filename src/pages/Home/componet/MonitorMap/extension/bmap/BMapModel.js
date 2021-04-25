@@ -42,7 +42,7 @@
 * under the License.
 */
 // @ts-nocheck
-import * as echarts from '_echarts@5.1.0@echarts/index';
+import * as echarts from 'echarts';
 
 function v2Equal(a, b) {
   return a && b && a[0] === b[0] && a[1] === b[1];

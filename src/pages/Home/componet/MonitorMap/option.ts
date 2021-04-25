@@ -6,7 +6,9 @@
  */
 import mapStyle from './style/darkBlue';
 
-let BMap = window.BMap;
+// @ts-ignore
+const {BMap} = window;
+
 /**
  只显示中国地图 画遮蔽层的相关方法
  思路: 首先在中国地图最外画一圈，圈住理论上所有的中国领土，然后再将每个闭合区域合并进来，并全部连到西北角。
@@ -14,7 +16,7 @@ let BMap = window.BMap;
   定义中国东南西北端点，作为第一层
  向数组中添加一次闭合多边形，并将西北角再加一次作为之后画闭合区域的起点
  */
-export const  drawBoundary = (bmap:object) => {
+export const  drawBoundary = (bmap: any) => {
   let pStart = new BMap.Point(180,90);
   let pEnd = new BMap.Point(0,-90);
   let pArray = [
@@ -23,7 +25,7 @@ export const  drawBoundary = (bmap:object) => {
     new BMap.Point(pEnd.lng,pEnd.lat),
     new BMap.Point(pStart.lng,pEnd.lat)
   ];
-  //循环添加各闭合区域
+  // 循环添加各闭合区域
   pArray.push(new BMap.Point(135.077218,48.544352));
   pArray.push(new BMap.Point(134.92218,48.584352));
   pArray.push(new BMap.Point(134.827218,48.534352));
@@ -263,8 +265,8 @@ export const  drawBoundary = (bmap:object) => {
   pArray.push(new BMap.Point(135.13241,48.454352));
   pArray.push(new BMap.Point(135.077218,48.474352));
 
-  //添加遮蔽层
-  let polygon1 = new BMap.Polygon(pArray,
+  // 添加遮蔽层
+  const polygon1 = new BMap.Polygon(pArray,
     {
       strokeOpacity: 1,
       strokeColor: "#091934",
@@ -282,7 +284,7 @@ export const  drawBoundary = (bmap:object) => {
     new BMap.Point(pStart.lng,pEnd.lat),
     new BMap.Point(135.077218,48.454352)
   ];
-  let polygon2 = new BMap.Polygon(pArray,
+  const polygon2 = new BMap.Polygon(pArray,
     {
       strokeOpacity: 1,
       strokeColor: "#091934",
@@ -317,8 +319,8 @@ export const genOption = () => {
     tooltip : {
       show: false,
       trigger: 'item',
-      formatter: function (params: { value: string[]; }) {   //  params是数组array里每个项
-        return "所属区域：" + params.value[2] + "<br>经度：" + params.value[1] + "<br/>纬度：" + params.value[0] + "<br/>"
+      formatter (params: { value: string[]; }) {   //  params是数组array里每个项
+        return `所属区域：${  params.value[2]  }<br>经度：${  params.value[1]  }<br/>纬度：${  params.value[0]  }<br/>`
       },
     },
     series: [{

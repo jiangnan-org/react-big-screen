@@ -14,7 +14,7 @@ import loadScript from '@/utils/import-script';
 import './index.less';
 
 // @ts-ignore  使用百度API  加载js文件
-new loadScript([
+loadScript([
   'http://api.map.baidu.com/api?v=2.0&ak=Gdgx1WXQnc8r3B7tAlGZt6AmWWegt0zx',
 ]);
 
@@ -41,7 +41,7 @@ export default () => {
 
   return (
     <React.Fragment>
-      <div style={{height: '270px', width: '100%'}}>
+      <div style={{height: '300px', width: '100%'}}>
         <ReactEcharts
           echarts={echarts}
           // @ts-ignore

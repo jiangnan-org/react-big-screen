@@ -3,6 +3,8 @@ import ProCard from "@ant-design/pro-card";
 import styles from './index.less';
 import TotalStatistics from './componet/TotalStatistics/index';
 import MonitorMap from './componet/MonitorMap/index';
+import EquivalentHour from './componet/EquivalentHour';
+import PowerCurve from './componet/PowerCurve';
 
 export default (): React.ReactNode => {
   return (
@@ -14,16 +16,18 @@ export default (): React.ReactNode => {
           <ProCard colSpan={{xs: 24, sm: 24, md: 12, lg: 8, xl: 8}} layout="center" bordered>
             <TotalStatistics />
           </ProCard>
-          <ProCard colSpan={{xs: 0, sm: 0, md: 0, lg: 8, xl: 8}} layout="center" bordered>
+          <ProCard colSpan={{xs: 0, sm: 0, md: 0, lg: 10, xl: 10}} layout="center" bordered>
             <MonitorMap />
           </ProCard>
-          <ProCard colSpan={{xs: 0, sm: 0, md: 12, lg: 8, xl: 8}} layout="center" bordered>Responsive</ProCard>
+          <ProCard colSpan={{xs: 0, sm: 0, md: 12, lg: 6, xl: 6}} layout="center" bordered>
+            <EquivalentHour />
+          </ProCard>
         </ProCard>
 
         {/*  下半部分 */}
         <ProCard gutter={[8, 0]} className={styles.bottom}>
           <ProCard colSpan={{xs: 12, sm: 12, md: 12, lg: 8, xl: 8}}  layout="center" bordered>
-
+            <PowerCurve />
           </ProCard>
           <ProCard colSpan={{xs: 0, sm: 0, md: 0, lg: 8, xl: 8}} layout="center" bordered>Responsive</ProCard>
           <ProCard colSpan={{xs: 12, sm: 12, md: 12, lg: 8, xl: 8}}  layout="center" bordered>Responsive</ProCard>
