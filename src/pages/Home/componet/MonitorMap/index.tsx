@@ -6,7 +6,7 @@
  * @Data: 2021/4/23 18:40
  */
 import React, {useEffect} from 'react';
-import {genOption} from './option';
+import {drawBoundary, genOption} from './option';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts';
 import './extension/bmap/bmap.js';                                                 // echart百度地图扩展
@@ -30,14 +30,18 @@ export default () => {
 
       // 获取百度地图实例，使用百度地图自带的控件
       const bmap = echartInstance.getModel().getComponent('bmap').getBMap();
-      bmap.addControl(new BMap.MapTypeControl());
+
+      // 使用定时器绘制边界
+      setTimeout(function () {
+        drawBoundary(bmap);
+      }, 600);
     }
   }, [echartRef.current]);
 
 
   return (
     <React.Fragment>
-      <div id='allmap' style={{height: '300px', width: '500px'}}>
+      <div style={{height: '270px', width: '100%'}}>
         <ReactEcharts
           echarts={echarts}
           // @ts-ignore
