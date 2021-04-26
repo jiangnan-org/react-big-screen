@@ -24,13 +24,12 @@ export default () => {
     if (echartRef.current != null) {
       // @ts-ignore  get the echarts instance object, then you can use any API of echarts.
       const echartInstance = echartRef.current.getEchartsInstance();
-      echartInstance.setOption(genOption());
 
       // 获取百度地图实例，使用百度地图自带的控件
       const bmap = echartInstance.getModel().getComponent('bmap').getBMap();
 
       // 使用定时器绘制边界
-      setTimeout(function () {
+      setTimeout( ()=> {
         drawBoundary(bmap);
       }, 150);
     }
@@ -38,7 +37,7 @@ export default () => {
 
   return (
     <React.Fragment>
-      <div style={{ height: '360px', width: '100%' }}>
+      <div style={{ height: '100%', width: '100%' }}>
         <ReactEcharts
           echarts={echarts}
           // @ts-ignore

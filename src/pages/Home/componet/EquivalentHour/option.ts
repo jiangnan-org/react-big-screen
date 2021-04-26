@@ -9,7 +9,7 @@ export const genOption = (data: {
   name: string,
   value: number
 } []) => {
-  const colors: string[] = ['#f00','#00f','#ff0','#0ff','#f0f'];
+  const colors: string[] = ['#ee9999','#00f','#ff0','#0ff','#f0f'];
   return {
     tooltip: {
       show:false,

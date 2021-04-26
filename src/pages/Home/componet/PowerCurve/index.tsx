@@ -36,11 +36,11 @@ export default () => {
     { date: '2000-06-29', value: 2.2 },
     { date: '2000-06-28', value: 1.8 },
     { date: '2000-06-29', value: 1.6 },
-    { date: '2000-06-29', value: 1.3 },
-    { date: '2000-06-29', value: 1.3 },
-    { date: '2000-06-29', value: 1.3 },
-    { date: '2000-06-29', value: 1.3 },
-    { date: '2000-06-29', value: 1.3 },
+    { date: '2000-06-30', value: 1.3 },
+    { date: '2000-07-01', value: 1.3 },
+    { date: '2000-07-02', value: 1.3 },
+    { date: '2000-07-03', value: 1.3 },
+    { date: '2000-07-04', value: 1.3 },
   ];
 
   return (
@@ -49,12 +49,12 @@ export default () => {
         className={styles.powerCurve}
         title={
           <div>
-            <span className={styles.chinese}>月日均等效时TOP5</span>
-            <span className={styles.english}>Equivalent Utilzation Hours</span>
+            <span className={styles.chinese}>实时功率曲线</span>
+            <span className={styles.english}>Real time Power</span>
           </div>
         }
       >
-        <ReactEcharts option={genOption(data)} style={{ width: '100%', height: '360px' }} />
+        <ReactEcharts option={genOption(data)} style={{ width: '100%', height: '100%' }} />
       </ProCard>
     </React.Fragment>
   );

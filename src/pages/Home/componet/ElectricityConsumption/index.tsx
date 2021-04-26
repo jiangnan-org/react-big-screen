@@ -15,7 +15,7 @@ export default () => {
       <ProCard split='horizontal' className={styles.totalStatistics}>
         <ProCard gutter={[0, 48]}  split="vertical">
           <StatisticCard
-            colSpan={10}
+            colSpan={11}
             className={styles.realTimePower}
             statistic={{
               title: (
@@ -27,26 +27,26 @@ export default () => {
               precision: 2,
               valueStyle: {color: '#EFB41F'},
               groupSeparator: ',',
-              value: 1000.16,
+              value: 2.16,
               suffix: (
                 <span className={styles.suffix}>MW</span>
               )
             }}
           />
           <StatisticCard
-            colSpan={14}
+            colSpan={13}
             className={styles.realTimePower}
             statistic={{
               title: (
                 <div>
-                  <span className={styles.chinese}>当日发电量</span>
-                  <span className={styles.english}>Daily Power Generation</span>
+                  <span className={styles.chinese}>当日用电量</span>
+                  <span className={styles.english}>Daily Electricity Consumption</span>
                 </div>
               ),
               precision: 2,
               valueStyle: {color: '#EC3D11'},
               groupSeparator: ',',
-              value: 4.17,
+              value: 0.017,
               suffix: (
                 <span className={styles.suffix}>万kWh</span>
               )
@@ -55,7 +55,7 @@ export default () => {
         </ProCard>
 
         <ProCard split="vertical" >
-          <ProCard colSpan={10}
+          <ProCard colSpan={11}
                    title={
                      <div>
                        <span className={styles.chinese}>云仓建设</span>
@@ -105,23 +105,23 @@ export default () => {
           </ProCard>
 
           <ProCard gutter={[{xs: 8, sm: 8, md: 8, lg: 12, xl: 12}, 0]}
-                   colSpan={14}
+                   colSpan={13}
                    title={
                      <div>
-                       <span className={styles.chinese}>发电量</span>
-                       <span className={styles.english}>Power Generation</span>
+                       <span className={styles.chinese}>用电量</span>
+                       <span className={styles.english}>Electricity Consumption</span>
                      </div>
                    }
                    split='horizontal'
-                   className={styles.powerGeneration}
+                   className={styles.electricityConsumption}
           >
             <StatisticCard
               statistic={{
-                title: '当月发电量',
+                title: '当月用电量',
                 precision: 2,
                 valueStyle: {color: '#E0BC0C'},
                 groupSeparator: ',',
-                value: 922912,
+                value: 9212,
                 suffix: (
                   <span className={styles.suffix}>万kWh</span>
                 ),
@@ -136,11 +136,11 @@ export default () => {
             />
             <StatisticCard
               statistic={{
-                title: '当年发电量',
+                title: '当年用电量',
                 precision: 2,
                 valueStyle: {color: '#E0BC0C'},
                 groupSeparator: ',',
-                value: 4062184,
+                value: 40684,
                 suffix: (
                   <span className={styles.suffix}>万kWh</span>
                 ),

@@ -1,10 +1,15 @@
 import React from 'react';
 import ProCard from '@ant-design/pro-card';
 import styles from './index.less';
-import TotalStatistics from './componet/TotalStatistics/index';
-import MonitorMap from './componet/MonitorMap/index';
-import EquivalentHour from './componet/EquivalentHour';
+import PowerGeneration from './componet/PowerGeneration';
+import MonitorMap from './componet/MonitorMap';
+import ElectricityConsumption from './componet/ElectricityConsumption';
 import PowerCurve from './componet/PowerCurve';
+import MonthPowerGeneration from './componet/MonthPowerGeneration';
+import YearPowerGeneration from './componet/YearPowerGeneration';
+import EquivalentHour from './componet/EquivalentHour';
+import MonthElectricityConsumption from './componet/MonthElectricityConsumption';
+import YearElectricityConsumption from './componet/YearElectricityConsumption';
 
 export default (): React.ReactNode => {
   return (
@@ -13,27 +18,40 @@ export default (): React.ReactNode => {
       <ProCard split="horizontal" bordered className={styles.container}>
         {/* 上半部分 */}
         <ProCard gutter={[8, 0]} className={styles.top}>
-          <ProCard colSpan={{ xs: 24, sm: 24, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
-            <TotalStatistics />
+          <ProCard colSpan={{ xs: 24, sm: 24, md: 12, lg: 8, xl: 8, xxl:8 }} layout="center" bordered>
+            <PowerGeneration />
           </ProCard>
-          <ProCard colSpan={{ xs: 0, sm: 0, md: 0, lg: 10, xl: 9 }} layout="center" bordered>
+          <ProCard colSpan={{ xs: 0, sm: 0, md: 0, lg: 8, xl: 8, xxl:8 }} layout="center" bordered>
             <MonitorMap />
           </ProCard>
-          <ProCard colSpan={{ xs: 0, sm: 0, md: 12, lg: 6, xl: 7 }} layout="center" bordered>
-            <EquivalentHour />
+          <ProCard colSpan={{ xs: 0, sm: 0, md: 12, lg: 8, xl: 8, xxl:8 }} layout="center" bordered>
+            <ElectricityConsumption />
+          </ProCard>
+        </ProCard>
+
+        {/*  中間部分 */}
+        <ProCard gutter={[8, 0]} className={styles.middle}>
+          <ProCard colSpan={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
+            <PowerCurve />
+          </ProCard>
+          <ProCard colSpan={{ xs: 0, sm: 0, md: 0, lg: 8, xl: 8 }} layout="center" bordered>
+            <MonthPowerGeneration />
+          </ProCard>
+          <ProCard colSpan={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
+            <YearPowerGeneration />
           </ProCard>
         </ProCard>
 
         {/*  下半部分 */}
         <ProCard gutter={[8, 0]} className={styles.bottom}>
           <ProCard colSpan={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
-            <PowerCurve />
+            <EquivalentHour />
           </ProCard>
           <ProCard colSpan={{ xs: 0, sm: 0, md: 0, lg: 8, xl: 8 }} layout="center" bordered>
-            Responsive
+            <MonthElectricityConsumption />
           </ProCard>
           <ProCard colSpan={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
-            Responsive
+            <YearElectricityConsumption />
           </ProCard>
         </ProCard>
       </ProCard>

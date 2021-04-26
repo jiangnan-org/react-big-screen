@@ -1,0 +1,76 @@
+@import '~antd/lib/style/themes/default.less';
+
+.totalStatistics {
+
+  // 标题中的中文
+  .chinese {
+    margin-right: 8px;
+    color: @primary-color;
+  }
+
+  // 标题中的英文
+  .english{
+    color: @text-color-secondary;
+    letter-spacing: -1px;
+  }
+
+  // 值中的后缀（单位）
+  .suffix{
+    color: @text-color-secondary;
+    font-size: 1em;
+    letter-spacing: -1px;
+  }
+
+   // 去除分割线
+  :global{
+    .ant-pro-card-split-horizontal,.ant-pro-card-split-vertical{
+      border: 0;
+    }
+  }
+
+
+  // 实时功率 当日用电量
+  .realTimePower {
+    :global{
+        .ant-statistic-content-value {
+          font-size: 1.2em;
+          font-family: '楷体', '楷体_GB2312', serif;
+          letter-spacing: 3px;
+          text-shadow: 3px 3px 0 rgba(200,40,0,0.5);
+      }
+    }
+  }
+
+  // 云仓建设、用电量
+  .construction,.electricityConsumption{
+
+    .img {
+      display: block;
+        width: 1em;
+        height: 1em;
+      };
+
+    :global {
+      .ant-pro-card-body{
+        // card图标
+        .ant-pro-card-statistic-icon{
+          display: flex;
+          align-items: center;
+          margin-right: 5px;
+        }
+
+        // card下面Statistic元素
+        .ant-pro-card-statistic-content .ant-statistic{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          // Statistic元素 字体大小
+          .ant-statistic-content {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+}

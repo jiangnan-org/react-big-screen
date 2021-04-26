@@ -1,6 +1,6 @@
 /**
  * @Author：zy
- * @Description：生成折线所需要的配置
+ * @Description：生成bar所需要的配置
  * @Data: 2021/4/225 22:26
  */
 import _ from 'lodash';
@@ -20,7 +20,7 @@ export const genOption = (data: {
     legend: {
       itemHeight: '8',
       icon: 'circle',
-      data: ['功率'],
+      data: ['发电量'],
       // 图例的图形样式
       itemStyle: {
         color: '#17dea6'
@@ -50,7 +50,6 @@ export const genOption = (data: {
     xAxis: [
       {
         show: true,
-        boundaryGap: false,
         axisLine: {
           show: true,
           lineStyle: {
@@ -64,7 +63,6 @@ export const genOption = (data: {
     yAxis: [
       {
         show: true,
-        boundaryGap: false,
         // y轴坐标
         axisLine: {
           show: true,
@@ -80,53 +78,16 @@ export const genOption = (data: {
             color: '#b3aaaa'
           }
         },
-        name: 'MW',
+        name: '万kWh',
         type: 'value',
       }
     ],
     series: [
       {
-        name: '功率',
-        type: 'line',
+        name: '发电量',
+        type: 'bar',
+        barWidth: '60%',
         smooth: true,
-        // 区域填充样式。设置后显示成区域面积图。
-        areaStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              {
-                offset: 0,
-                color: '#69d8e7' // 0% 处的颜色
-              },
-              {
-                offset: 0.5,
-                color: '#89eff8'  // 50% 处的颜色
-              },
-              {
-                offset: 1,
-                color: '#dcf4f5'     // 100% 处的颜色
-              }]
-          },
-          // 背景渐变色
-          lineStyle: {         // 系列级个性化折线样式
-            width: 3,
-            type: 'solid',
-            color: '#4fd6d2'
-          }
-        },
-        emphasis: {
-          color: '#4fd6d2',
-          lineStyle: {        // 系列级个性化折线样式
-            width: 2,
-            type: 'dotted',
-            color: '4fd6d2'
-          }
-        },
-        symbolSize: 2,
         data: _.map(data, item => item.value)
       }]
   };

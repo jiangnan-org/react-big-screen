@@ -4,16 +4,16 @@
  * https://github.com/xiaofan9/echarts-china-map/blob/master/index_v1.html
  * @Data: 2021/4/23 14:37
  */
-import mapStyle from './style/darkBlue';
+import mapStyle from './style/blue';
 
 // @ts-ignore
-const { BMap } = window;
+const {BMap} = window;
 
 /**
  只显示中国地图 画遮蔽层的相关方法
  思路: 首先在中国地图最外画一圈，圈住理论上所有的中国领土，然后再将每个闭合区域合并进来，并全部连到西北角。
-    这样就做出了一个经过多次西北角的闭合多边形
-  定义中国东南西北端点，作为第一层
+ 这样就做出了一个经过多次西北角的闭合多边形
+ 定义中国东南西北端点，作为第一层
  向数组中添加一次闭合多边形，并将西北角再加一次作为之后画闭合区域的起点
  */
 export const drawBoundary = (bmap: any) => {
@@ -268,9 +268,9 @@ export const drawBoundary = (bmap: any) => {
   // 添加遮蔽层
   const polygon1 = new BMap.Polygon(pArray, {
     strokeOpacity: 1,
-    strokeColor: '#091934',
+    strokeColor: 'rgb(20, 20, 20)',
     strokeWeight: 1,
-    fillColor: '#091934',
+    fillColor: 'rgb(20, 20, 20)', // 遮蔽层颜色
     fillOpacity: 1,
   });
   bmap.addOverlay(polygon1);
@@ -285,9 +285,9 @@ export const drawBoundary = (bmap: any) => {
   ];
   const polygon2 = new BMap.Polygon(pArray, {
     strokeOpacity: 1,
-    strokeColor: '#091934',
+    strokeColor: 'rgb(20, 20, 20)',
     strokeWeight: 1,
-    fillColor: '#091934',
+    fillColor: 'rgb(20, 20, 20)',
     fillOpacity: 1,
   });
   bmap.addOverlay(polygon2);
@@ -296,16 +296,6 @@ export const drawBoundary = (bmap: any) => {
 /* 生成地图所需要的配置 */
 export const genOption = () => {
   return {
-    title: {
-      text: '中国地图',
-      subtext: '',
-      x: 'center',
-      top: 20,
-      textStyle: {
-        color: '#fff',
-        fontSize: 16,
-      },
-    },
     // 加载 bmap 组件,使用bmap 必须引入百度地图扩展，扩展主要提供了跟 geo 一样的坐标系和底图的绘制 https://github.com/apache/echarts/tree/master/extension-src/bmap
     bmap: {
       center: [105.65, 34.76], // 当前视角中心位置的坐标
@@ -317,23 +307,56 @@ export const genOption = () => {
       },
     },
     tooltip: {
-      show: false,
+      show: true,
       trigger: 'item',
       formatter(params: { value: string[] }) {
         //  params是数组array里每个项
-        return `所属区域：${params.value[2]}<br>经度：${params.value[1]}<br/>纬度：${params.value[0]}<br/>`;
+        return `运行情况：${params.value[2]}<br>经度：${params.value[1]}<br/>纬度：${params.value[0]}<br/>`;
       },
+    },
+    visualMap: {
+      type: 'piecewise',
+      // 用于表示离散型数据（或可以称为类别型数据、枚举型数据）的全集
+      categories: ['正常运行','告警运行','未运行'],
+      left: 20,
+      bottom:20,
+      splitNumber: 3,
+      dimension: 2,
+      // 图形的宽度、高度 左下角、图例
+      itemWidth:8,
+      itemHeight:12,
+      // 自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，以及每一段的文字，以及每一段的特别的样式
+      pieces: [{
+        value: '正常运行',
+        label: '正常运行',
+        color: 'green',
+        symbol: 'path://M512 490.666667A106.666667 106.666667 0 0 1 405.333333 384 106.666667 106.666667 0 0 1 512 277.333333 106.666667 106.666667 0 0 1 618.666667 384a106.666667 106.666667 0 0 1-106.666667 106.666667M512 85.333333a298.666667 298.666667 0 0 0-298.666667 298.666667c0 224 298.666667 554.666667 298.666667 554.666667s298.666667-330.666667 298.666667-554.666667a298.666667 298.666667 0 0 0-298.666667-298.666667z',
+        symbolSize: [8,12],
+      }, {
+        value: '告警运行',
+        label: '告警运行',
+        color: 'red',
+        symbol: 'path://M512 490.666667A106.666667 106.666667 0 0 1 405.333333 384 106.666667 106.666667 0 0 1 512 277.333333 106.666667 106.666667 0 0 1 618.666667 384a106.666667 106.666667 0 0 1-106.666667 106.666667M512 85.333333a298.666667 298.666667 0 0 0-298.666667 298.666667c0 224 298.666667 554.666667 298.666667 554.666667s298.666667-330.666667 298.666667-554.666667a298.666667 298.666667 0 0 0-298.666667-298.666667z',
+        symbolSize: [8,12],
+      },
+        {
+          value: '未运行',
+          label: '未运行',
+          color: 'grey',
+          symbol: 'path://M512 490.666667A106.666667 106.666667 0 0 1 405.333333 384 106.666667 106.666667 0 0 1 512 277.333333 106.666667 106.666667 0 0 1 618.666667 384a106.666667 106.666667 0 0 1-106.666667 106.666667M512 85.333333a298.666667 298.666667 0 0 0-298.666667 298.666667c0 224 298.666667 554.666667 298.666667 554.666667s298.666667-330.666667 298.666667-554.666667a298.666667 298.666667 0 0 0-298.666667-298.666667z',
+          symbolSize: [8,12],
+        },
+      ]
     },
     series: [
       {
         type: 'scatter',
         coordinateSystem: 'bmap', // 使用百度地图坐标系
-        symbol: 'circle', // 标识点的样式
-        symbolSize: '12', // 标识点的大小
-        color: '#c43523', // 标识点的颜色
         data: [
           // 数据格式跟在 geo 坐标系上一样，每一项都是 [经度，纬度，数值大小，其它维度...]
-          [120, 30, 100],
+          [120, 30, '正常运行'],
+          [119, 32.295, '告警运行'],
+          [119.5, 28.54, '未运行'],
         ],
       },
     ],
