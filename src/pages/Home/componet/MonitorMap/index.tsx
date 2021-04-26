@@ -5,18 +5,16 @@
  * echart官网： https://echarts.apache.org/examples/zh/editor.html?c=effectScatter-bmap
  * @Data: 2021/4/23 18:40
  */
-import React, {useEffect} from 'react';
-import {drawBoundary, genOption} from './option';
+import React, { useEffect } from 'react';
+import { drawBoundary, genOption } from './option';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts';
-import './extension/bmap/bmap.js';                                                 // echart百度地图扩展
+import './extension/bmap/bmap.js'; // echart百度地图扩展
 import loadScript from '@/utils/import-script';
 import './index.less';
 
 // @ts-ignore  使用百度API  加载js文件
-loadScript([
-  'http://api.map.baidu.com/api?v=2.0&ak=Gdgx1WXQnc8r3B7tAlGZt6AmWWegt0zx',
-]);
+loadScript(['http://api.map.baidu.com/api?v=2.0&ak=Gdgx1WXQnc8r3B7tAlGZt6AmWWegt0zx']);
 
 export default () => {
   // 组件真正实例的引用
@@ -34,20 +32,20 @@ export default () => {
       // 使用定时器绘制边界
       setTimeout(function () {
         drawBoundary(bmap);
-      }, 600);
+      }, 150);
     }
   }, [echartRef.current]);
 
-
   return (
     <React.Fragment>
-      <div style={{height: '300px', width: '100%'}}>
+      <div style={{ height: '360px', width: '100%' }}>
         <ReactEcharts
           echarts={echarts}
           // @ts-ignore
           ref={echartRef}
-          style={{width: '100%', height: '100%'}}
-          option={genOption()}/>
+          style={{ width: '100%', height: '100%' }}
+          option={genOption()}
+        />
       </div>
     </React.Fragment>
   );
