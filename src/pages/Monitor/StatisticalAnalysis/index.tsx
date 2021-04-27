@@ -4,7 +4,6 @@
  * @Data: 2021/3/19 17:17
  */
 import React, {useState} from 'react';
-import {PageContainer} from '@ant-design/pro-layout';
 import {DatePicker, Button} from 'antd';
 import ProCard, {StatisticCard} from '@ant-design/pro-card';
 import RcResizeObserver from 'rc-resize-observer';
@@ -16,18 +15,18 @@ const {RangePicker} = DatePicker;
 const {Statistic} = StatisticCard;
 export default (): React.ReactNode => {
 
-  //用于设定ProCard分割方向
+  // 用于设定ProCard分割方向
   const [responsive, setResponsive] = useState(false);
 
-  //附件header
-  const extraHeader: Array<React.ReactNode> = [
+  // 附件header
+  const extraHeader: React.ReactNode[] = [
     <RangePicker key='sa_range_picker'/>,
     <Button key='sa_button_query' type='primary'>查询</Button>,
     <Button key='sa_button_reset' type='primary'>重置</Button>
   ];
 
   return (
-    //响应式调整
+    // 响应式调整
     <RcResizeObserver
       key='resize-observer'
       onResize={(offset) => {
@@ -78,7 +77,7 @@ export default (): React.ReactNode => {
           </ProCard>
           <StatisticCard title='流量走势' chart={<Line height={250}/>}/>
         </ProCard>
-        
+
         <StatisticCard
           title='流量占用情况'
           chart={

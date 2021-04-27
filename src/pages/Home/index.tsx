@@ -4,12 +4,13 @@ import styles from './index.less';
 import PowerGeneration from './componet/PowerGeneration';
 import MonitorMap from './componet/MonitorMap';
 import ElectricityConsumption from './componet/ElectricityConsumption';
-import PowerCurve from './componet/PowerCurve';
+import PowerGenerationCurve from './componet/PowerGenerationCurve';
 import MonthPowerGeneration from './componet/MonthPowerGeneration';
 import YearPowerGeneration from './componet/YearPowerGeneration';
-import EquivalentHour from './componet/EquivalentHour';
+import ElectricityConsumptionCurve from './componet/ElectricityConsumptionCurve';
 import MonthElectricityConsumption from './componet/MonthElectricityConsumption';
 import YearElectricityConsumption from './componet/YearElectricityConsumption';
+import AlertStatistics from './componet/AlertStatistics';
 
 export default (): React.ReactNode => {
   return (
@@ -32,7 +33,7 @@ export default (): React.ReactNode => {
         {/*  中間部分 */}
         <ProCard gutter={[8, 0]} className={styles.middle}>
           <ProCard colSpan={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
-            <PowerCurve />
+            <PowerGenerationCurve />
           </ProCard>
           <ProCard colSpan={{ xs: 0, sm: 0, md: 0, lg: 8, xl: 8 }} layout="center" bordered>
             <MonthPowerGeneration />
@@ -45,13 +46,20 @@ export default (): React.ReactNode => {
         {/*  下半部分 */}
         <ProCard gutter={[8, 0]} className={styles.bottom}>
           <ProCard colSpan={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
-            <EquivalentHour />
+            <ElectricityConsumptionCurve />
           </ProCard>
           <ProCard colSpan={{ xs: 0, sm: 0, md: 0, lg: 8, xl: 8 }} layout="center" bordered>
             <MonthElectricityConsumption />
           </ProCard>
           <ProCard colSpan={{ xs: 12, sm: 12, md: 12, lg: 8, xl: 8 }} layout="center" bordered>
             <YearElectricityConsumption />
+          </ProCard>
+        </ProCard>
+
+        {/* 告警信息 */}
+        <ProCard gutter={[8, 0]}  className={styles.alert}>
+          <ProCard colSpan={24} layout="center" bordered>
+            <AlertStatistics />
           </ProCard>
         </ProCard>
       </ProCard>

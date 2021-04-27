@@ -29,7 +29,7 @@ export default () => {
         className={styles.yearElectricityStatistics}
         title={
           <div>
-            <span className={styles.chinese}>年电量统计</span>
+            <span className={styles.chinese}>年发电量统计</span>
             <span className={styles.english}>Year Electricity Statistics</span>
           </div>
         }

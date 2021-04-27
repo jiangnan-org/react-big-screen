@@ -1,0 +1,3638 @@
+const cities = [{
+  "areacode": "0483",
+  "areaid": "114",
+  "city": "阿拉善盟",
+  "cityid": "152900",
+  "code": "152900",
+  "id": "13",
+  "idNumber": "1529",
+  "initial": "A",
+  "provincecode": "114"
+}, {
+  "areacode": "0412",
+  "areaid": "912",
+  "city": "鞍山市",
+  "cityid": "210300",
+  "code": "210300",
+  "id": "326",
+  "idNumber": "2103",
+  "initial": "A",
+  "provincecode": "912"
+}, {
+  "areacode": "0556",
+  "areaid": "302",
+  "city": "安庆市",
+  "cityid": "340800",
+  "code": "340800",
+  "id": "57",
+  "idNumber": "3408",
+  "initial": "A",
+  "provincecode": "302"
+}, {
+  "areacode": "0372",
+  "areaid": "767",
+  "city": "安阳市",
+  "cityid": "410500",
+  "code": "410500",
+  "id": "201",
+  "idNumber": "4105",
+  "initial": "A",
+  "provincecode": "767"
+}, {
+  "areacode": "0837",
+  "areaid": "829",
+  "city": "阿坝州",
+  "cityid": "513200",
+  "code": "513200",
+  "id": "238",
+  "idNumber": "5132",
+  "initial": "A",
+  "provincecode": "829"
+}, {
+  "areacode": "0853",
+  "areaid": "789",
+  "city": "安顺市",
+  "cityid": "520400",
+  "code": "520400",
+  "id": "258",
+  "idNumber": "5225",
+  "initial": "A",
+  "provincecode": "789"
+}, {
+  "areacode": "0897",
+  "areaid": "802",
+  "city": "阿里地区",
+  "cityid": "542500",
+  "code": "542500",
+  "id": "218",
+  "idNumber": "5425",
+  "initial": "A",
+  "provincecode": "802"
+}, {
+  "areacode": "0915",
+  "areaid": "848",
+  "city": "安康市",
+  "cityid": "610900",
+  "code": "610900",
+  "id": "252",
+  "idNumber": "6124",
+  "initial": "A",
+  "provincecode": "848"
+}, {
+  "areacode": "0997",
+  "areaid": "896",
+  "city": "阿克苏",
+  "code": "652900",
+  "id": "305",
+  "idNumber": "6529",
+  "initial": "A",
+  "provincecode": "896"
+}, {
+  "areacode": "0906",
+  "areaid": "953",
+  "city": "阿勒泰",
+  "code": "654300",
+  "id": "312",
+  "idNumber": "6543",
+  "initial": "A",
+  "provincecode": "953"
+}, {
+  "areacode": "010",
+  "areaid": "110",
+  "city": "北京市",
+  "cityid": "110000",
+  "code": "110000",
+  "id": "14",
+  "idNumber": "110",
+  "initial": "B",
+  "provincecode": "110"
+}, {
+  "areacode": "0312",
+  "areaid": "187",
+  "city": "保定市",
+  "cityid": "130600",
+  "code": "130600",
+  "id": "40",
+  "idNumber": "1306",
+  "initial": "B",
+  "provincecode": "187"
+}, {
+  "areacode": "0472",
+  "areaid": "102",
+  "city": "包头市",
+  "cityid": "150200",
+  "code": "150200",
+  "id": "2",
+  "idNumber": "1502",
+  "initial": "B",
+  "provincecode": "102"
+}, {
+  "city": "北海市",
+  "cityid": "450500",
+  "code": "450500",
+  "id": "141",
+  "initial": "B",
+  "provincecode": "599"
+}, {
+  "areacode": "0478",
+  "areaid": "105",
+  "city": "巴彦淖尔市",
+  "cityid": "150800",
+  "code": "150800",
+  "id": "5",
+  "idNumber": "1528",
+  "initial": "B",
+  "provincecode": "105"
+}, {
+  "areacode": "024",
+  "areaid": "914",
+  "city": "本溪市",
+  "cityid": "210500",
+  "code": "210500",
+  "id": "328",
+  "idNumber": "2105",
+  "initial": "B",
+  "provincecode": "914"
+}, {
+  "areacode": "0439",
+  "areaid": "908",
+  "city": "白山市",
+  "cityid": "220600",
+  "code": "220600",
+  "id": "322",
+  "idNumber": "2206",
+  "initial": "B",
+  "provincecode": "908"
+}, {
+  "areacode": "0436",
+  "areaid": "907",
+  "city": "白城市",
+  "cityid": "220800",
+  "code": "220800",
+  "id": "321",
+  "idNumber": "2208",
+  "initial": "B",
+  "provincecode": "907"
+}, {
+  "areacode": "0552",
+  "areaid": "301",
+  "city": "蚌埠市",
+  "cityid": "340300",
+  "code": "340300",
+  "id": "56",
+  "idNumber": "3403",
+  "initial": "B",
+  "provincecode": "301"
+}, {
+  "areacode": "0543",
+  "areaid": "151",
+  "city": "滨州市",
+  "cityid": "371600",
+  "code": "371600",
+  "id": "17",
+  "idNumber": "3723",
+  "initial": "B",
+  "provincecode": "151"
+}, {
+  "areacode": "0779",
+  "areaid": "599",
+  "city": "北海市",
+  "cityid": "450500",
+  "code": "450500",
+  "id": "141",
+  "idNumber": "4505",
+  "initial": "B",
+  "provincecode": "599"
+}, {
+  "areacode": "0776",
+  "areaid": "596",
+  "city": "百色市",
+  "cityid": "451000",
+  "code": "451000",
+  "id": "138",
+  "idNumber": "4526",
+  "initial": "B",
+  "provincecode": "596"
+}, {
+  "areacode": "0827",
+  "areaid": "827",
+  "city": "巴中市",
+  "cityid": "511900",
+  "code": "511900",
+  "id": "236",
+  "idNumber": "5137",
+  "initial": "B",
+  "provincecode": "827"
+}, {
+  "areacode": "0857",
+  "areaid": "851",
+  "city": "毕节市",
+  "code": "520500",
+  "id": "260",
+  "idNumber": "5224",
+  "initial": "B",
+  "provincecode": "851"
+}, {
+  "areacode": "0875",
+  "areaid": "731",
+  "city": "保山市",
+  "cityid": "530500",
+  "code": "530500",
+  "id": "264",
+  "idNumber": "5330",
+  "initial": "B",
+  "provincecode": "731"
+}, {
+  "areacode": "0909",
+  "areaid": "951",
+  "city": "博乐市",
+  "code": "530500",
+  "id": "310",
+  "idNumber": "652701",
+  "initial": "B",
+  "provincecode": "951"
+}, {
+  "areacode": "0917",
+  "areaid": "840",
+  "city": "宝鸡市",
+  "cityid": "610300",
+  "code": "610300",
+  "id": "244",
+  "idNumber": "6103",
+  "initial": "B",
+  "provincecode": "840"
+}, {
+  "areacode": "0943",
+  "areaid": "879",
+  "city": "白银市",
+  "cityid": "620400",
+  "code": "620400",
+  "id": "289",
+  "idNumber": "6204",
+  "initial": "B",
+  "provincecode": "879"
+}, {
+  "city": "博尔塔拉州",
+  "code": "652700",
+  "id": "333",
+  "initial": "B",
+  "provincecode": "650000"
+}, {
+  "city": "巴音郭楞州",
+  "code": "652800",
+  "id": "334",
+  "initial": "B",
+  "provincecode": "650000"
+}, {
+  "areacode": "0314",
+  "areaid": "189",
+  "city": "承德市",
+  "cityid": "130800",
+  "code": "130800",
+  "id": "42",
+  "idNumber": "1308",
+  "initial": "C",
+  "provincecode": "189"
+}, {
+  "areacode": "0317",
+  "areaid": "180",
+  "city": "沧州市",
+  "cityid": "130900",
+  "code": "130900",
+  "id": "33",
+  "idNumber": "1309",
+  "initial": "C",
+  "provincecode": "180"
+}, {
+  "areacode": "0355",
+  "areaid": "195",
+  "city": "长治市",
+  "cityid": "140400",
+  "code": "140400",
+  "id": "49",
+  "idNumber": "1404",
+  "initial": "C",
+  "provincecode": "195"
+}, {
+  "areacode": "0476",
+  "areaid": "107",
+  "city": "赤峰市",
+  "cityid": "150400",
+  "code": "150400",
+  "id": "7",
+  "idNumber": "1504",
+  "initial": "C",
+  "provincecode": "107"
+}, {
+  "areacode": "0421",
+  "areaid": "920",
+  "city": "朝阳市",
+  "cityid": "211300",
+  "code": "211300",
+  "id": "334",
+  "idNumber": "2113",
+  "initial": "C",
+  "provincecode": "920"
+}, {
+  "areacode": "0431",
+  "areaid": "901",
+  "city": "长春市",
+  "cityid": "220100",
+  "code": "220100",
+  "id": "315",
+  "idNumber": "2201",
+  "initial": "C",
+  "provincecode": "901"
+}, {
+  "areacode": "0519",
+  "areaid": "440",
+  "city": "常州市",
+  "cityid": "320400",
+  "code": "320400",
+  "id": "83",
+  "idNumber": "3204",
+  "initial": "C",
+  "provincecode": "440"
+}, {
+  "areacode": "0550",
+  "areaid": "312",
+  "city": "滁州市",
+  "cityid": "341100",
+  "code": "341100",
+  "id": "66",
+  "idNumber": "3411",
+  "initial": "C",
+  "provincecode": "312"
+}, {
+  "areacode": "0565",
+  "areaid": "309",
+  "city": "巢湖市",
+  "cityid": "340181",
+  "code": "340181",
+  "id": "64",
+  "idNumber": "3426",
+  "initial": "C",
+  "provincecode": "309"
+}, {
+  "areacode": "0566",
+  "areaid": "317",
+  "city": "池州市",
+  "cityid": "341700",
+  "code": "341700",
+  "id": "70",
+  "idNumber": "3429",
+  "initial": "C",
+  "provincecode": "317"
+}, {
+  "areacode": "0731",
+  "areaid": "741",
+  "city": "长沙市",
+  "cityid": "430100",
+  "code": "430100",
+  "id": "168",
+  "idNumber": "4301",
+  "initial": "C",
+  "provincecode": "741"
+}, {
+  "areacode": "0736",
+  "areaid": "749",
+  "city": "常德市",
+  "cityid": "430700",
+  "code": "430700",
+  "id": "176",
+  "idNumber": "4307",
+  "initial": "C",
+  "provincecode": "749"
+}, {
+  "areacode": "0735",
+  "areaid": "748",
+  "city": "郴州市",
+  "cityid": "431000",
+  "code": "431000",
+  "id": "175",
+  "idNumber": "4328",
+  "initial": "C",
+  "provincecode": "748"
+}, {
+  "areacode": "0768",
+  "areaid": "531",
+  "city": "潮州市",
+  "cityid": "445100",
+  "code": "445100",
+  "id": "113",
+  "idNumber": "4451",
+  "initial": "C",
+  "provincecode": "531"
+}, {
+  "areacode": "0754",
+  "areaid": "533",
+  "city": "潮阳",
+  "code": "440513",
+  "id": "114",
+  "idNumber": "440582",
+  "initial": "C",
+  "provincecode": "533"
+}, {
+  "areacode": "023",
+  "areaid": "831",
+  "city": "重庆市",
+  "cityid": "500000",
+  "code": "500000",
+  "id": "240",
+  "idNumber": "5102",
+  "initial": "C",
+  "provincecode": "831"
+}, {
+  "areacode": "0771",
+  "areaid": "600",
+  "city": "崇左市",
+  "cityid": "451400",
+  "code": "451400",
+  "id": "142",
+  "idNumber": "452129",
+  "initial": "C",
+  "provincecode": "600"
+}, {
+  "areacode": "028",
+  "areaid": "810",
+  "city": "成都市",
+  "cityid": "510100",
+  "code": "510100",
+  "id": "219",
+  "idNumber": "5101",
+  "initial": "C",
+  "provincecode": "810"
+}, {
+  "areacode": "0878",
+  "areaid": "864",
+  "city": "楚雄彝族自治州",
+  "cityid": "532300",
+  "code": "532300",
+  "id": "274",
+  "idNumber": "5323",
+  "initial": "C",
+  "provincecode": "864"
+}, {
+  "areacode": "0895",
+  "areaid": "800",
+  "city": "昌都",
+  "code": "540300",
+  "id": "216",
+  "idNumber": "5421",
+  "initial": "C",
+  "provincecode": "800"
+}, {
+  "areacode": "0994",
+  "areaid": "891",
+  "city": "昌吉回族自治州",
+  "cityid": "652300",
+  "code": "652300",
+  "id": "300",
+  "idNumber": "6523",
+  "initial": "C",
+  "provincecode": "891"
+}, {
+  "areacode": "0352",
+  "areaid": "193",
+  "city": "大同市",
+  "cityid": "140200",
+  "code": "140200",
+  "id": "47",
+  "idNumber": "1402",
+  "initial": "D",
+  "provincecode": "193"
+}, {
+  "areacode": "0411",
+  "areaid": "940",
+  "city": "大连市",
+  "cityid": "210200",
+  "code": "210200",
+  "id": "337",
+  "idNumber": "2102",
+  "initial": "D",
+  "provincecode": "940"
+}, {
+  "areacode": "0415",
+  "areaid": "915",
+  "city": "丹东市",
+  "cityid": "210600",
+  "code": "210600",
+  "id": "329",
+  "idNumber": "2106",
+  "initial": "D",
+  "provincecode": "915"
+}, {
+  "areacode": "0459",
+  "areaid": "981",
+  "city": "大庆市",
+  "cityid": "230600",
+  "code": "230600",
+  "id": "341",
+  "idNumber": "2306",
+  "initial": "D",
+  "provincecode": "981"
+}, {
+  "areacode": "0457",
+  "areaid": "995",
+  "city": "大兴安岭",
+  "code": "232700",
+  "id": "349",
+  "idNumber": "2327",
+  "initial": "D",
+  "provincecode": "995"
+}, {
+  "areacode": "0546",
+  "areaid": "156",
+  "city": "东营市",
+  "cityid": "370500",
+  "code": "370500",
+  "id": "22",
+  "idNumber": "3705",
+  "initial": "D",
+  "provincecode": "156"
+}, {
+  "areacode": "0977",
+  "areaid": "703",
+  "city": "德令哈",
+  "code": "632802",
+  "id": "147",
+  "idNumber": "632802",
+  "initial": "D",
+  "provincecode": "703"
+}, {
+  "areacode": "0534",
+  "areaid": "173",
+  "city": "德州市",
+  "cityid": "371400",
+  "code": "371400",
+  "id": "31",
+  "idNumber": "3724",
+  "initial": "D",
+  "provincecode": "173"
+}, {
+  "areacode": "0769",
+  "areaid": "580",
+  "city": "东莞市",
+  "cityid": "441900",
+  "code": "441900",
+  "id": "126",
+  "idNumber": "4419",
+  "initial": "D",
+  "provincecode": "580"
+}, {
+  "areacode": "0838",
+  "areaid": "825",
+  "city": "德阳市",
+  "cityid": "510600",
+  "code": "510600",
+  "id": "234",
+  "idNumber": "5106",
+  "initial": "D",
+  "provincecode": "825"
+}, {
+  "areacode": "0818",
+  "areaid": "820",
+  "city": "达州市",
+  "cityid": "511700",
+  "code": "511700",
+  "id": "229",
+  "idNumber": "5117",
+  "initial": "D",
+  "provincecode": "820"
+}, {
+  "areacode": "0872",
+  "areaid": "862",
+  "city": "大理白族自治州",
+  "cityid": "532900",
+  "code": "532900",
+  "id": "272",
+  "idNumber": "5329",
+  "initial": "D",
+  "provincecode": "862"
+}, {
+  "areacode": "0692",
+  "areaid": "730",
+  "city": "德宏傣族景颇族自治州",
+  "cityid": "533100",
+  "code": "533100",
+  "id": "263",
+  "idNumber": "5331",
+  "initial": "D",
+  "provincecode": "730"
+}, {
+  "areacode": "0887",
+  "areaid": "735",
+  "city": "迪庆藏族",
+  "code": "533400",
+  "id": "268",
+  "idNumber": "5334",
+  "initial": "D",
+  "provincecode": "735"
+}, {
+  "areacode": "0932",
+  "areaid": "871",
+  "city": "定西市",
+  "cityid": "621100",
+  "code": "621100",
+  "id": "281",
+  "idNumber": "6224",
+  "initial": "D",
+  "provincecode": "871"
+}, {
+  "areacode": "0477",
+  "areaid": "104",
+  "city": "鄂尔多斯市",
+  "cityid": "150600",
+  "code": "150600",
+  "id": "4",
+  "idNumber": "1506",
+  "initial": "E",
+  "provincecode": "104"
+}, {
+  "areacode": "0711",
+  "areaid": "718",
+  "city": "鄂州市",
+  "cityid": "420700",
+  "code": "420700",
+  "id": "162",
+  "idNumber": "4207",
+  "initial": "E",
+  "provincecode": "718"
+}, {
+  "areacode": "0718",
+  "areaid": "727",
+  "city": "恩施土家族苗族",
+  "code": "422800",
+  "id": "167",
+  "idNumber": "4228",
+  "initial": "E",
+  "provincecode": "727"
+}, {
+  "areacode": "024",
+  "areaid": "913",
+  "city": "抚顺市",
+  "cityid": "210400",
+  "code": "210400",
+  "id": "327",
+  "idNumber": "2104",
+  "initial": "F",
+  "provincecode": "913"
+}, {
+  "areacode": "0418",
+  "areaid": "918",
+  "city": "阜新市",
+  "cityid": "210900",
+  "code": "210900",
+  "id": "332",
+  "idNumber": "2109",
+  "initial": "F",
+  "provincecode": "918"
+}, {
+  "city": "涪陵区",
+  "code": "500102",
+  "id": "241",
+  "initial": "F",
+  "provincecode": "832"
+}, {
+  "areacode": "0558",
+  "areaid": "306",
+  "city": "阜阳市",
+  "cityid": "341200",
+  "code": "341200",
+  "id": "61",
+  "idNumber": "3421",
+  "initial": "F",
+  "provincecode": "306"
+}, {
+  "areacode": "0591",
+  "areaid": "380",
+  "city": "福州市",
+  "cityid": "350100",
+  "code": "350100",
+  "id": "97",
+  "idNumber": "3501",
+  "initial": "F",
+  "provincecode": "380"
+}, {
+  "areacode": "0794",
+  "areaid": "759",
+  "city": "抚州市",
+  "cityid": "361000",
+  "code": "361000",
+  "id": "193",
+  "idNumber": "3625",
+  "initial": "F",
+  "provincecode": "759"
+}, {
+  "areacode": "0757",
+  "areaid": "530",
+  "city": "佛山市",
+  "cityid": "440600",
+  "code": "440600",
+  "id": "112",
+  "idNumber": "4406",
+  "initial": "F",
+  "provincecode": "530"
+}, {
+  "areacode": "0770",
+  "areaid": "590",
+  "city": "防城港市",
+  "cityid": "450600",
+  "code": "450600",
+  "id": "132",
+  "idNumber": "4506",
+  "initial": "F",
+  "provincecode": "590"
+}, {
+  "areacode": "0797",
+  "areaid": "752",
+  "city": "赣州市",
+  "cityid": "360700",
+  "code": "360700",
+  "id": "186",
+  "idNumber": "3621",
+  "initial": "G",
+  "provincecode": "752"
+}, {
+  "areacode": "020",
+  "areaid": "510",
+  "city": "广州市",
+  "cityid": "440100",
+  "code": "440100",
+  "id": "107",
+  "idNumber": "4401",
+  "initial": "G",
+  "provincecode": "510"
+}, {
+  "areacode": "0773",
+  "areaid": "592",
+  "city": "桂林市",
+  "cityid": "450300",
+  "code": "450300",
+  "id": "134",
+  "idNumber": "4523",
+  "initial": "G",
+  "provincecode": "592"
+}, {
+  "areacode": "0775",
+  "areaid": "589",
+  "city": "贵港市",
+  "cityid": "450800",
+  "code": "450800",
+  "id": "131",
+  "idNumber": "452502",
+  "initial": "G",
+  "provincecode": "589"
+}, {
+  "areacode": "0839",
+  "areaid": "826",
+  "city": "广元市",
+  "cityid": "510800",
+  "code": "510800",
+  "id": "235",
+  "idNumber": "5108",
+  "initial": "G",
+  "provincecode": "826"
+}, {
+  "areacode": "0826",
+  "areaid": "823",
+  "city": "广安市",
+  "cityid": "511600",
+  "code": "511600",
+  "id": "232",
+  "idNumber": "5136",
+  "initial": "G",
+  "provincecode": "823"
+}, {
+  "areacode": "0836",
+  "areaid": "828",
+  "city": "甘孜藏族",
+  "code": "513300",
+  "id": "237",
+  "idNumber": "5133",
+  "initial": "G",
+  "provincecode": "828"
+}, {
+  "areacode": "0851",
+  "areaid": "850",
+  "city": "贵阳市",
+  "cityid": "520100",
+  "code": "520100",
+  "id": "259",
+  "idNumber": "5201",
+  "initial": "G",
+  "provincecode": "850"
+}, {
+  "areacode": "0941",
+  "areaid": "961",
+  "city": "甘南藏族",
+  "code": "623000",
+  "id": "293",
+  "idNumber": "6230",
+  "initial": "G",
+  "provincecode": "961"
+}, {
+  "areacode": "0975",
+  "areaid": "708",
+  "city": "果洛藏族",
+  "code": "632600",
+  "id": "152",
+  "idNumber": "6326",
+  "initial": "G",
+  "provincecode": "708"
+}, {
+  "areacode": "0979",
+  "areaid": "702",
+  "city": "格尔木市",
+  "code": "632801",
+  "id": "146",
+  "idNumber": "632801",
+  "initial": "G",
+  "provincecode": "702"
+}, {
+  "areacode": "0954",
+  "areaid": "885",
+  "city": "固原市",
+  "cityid": "640400",
+  "code": "640400",
+  "id": "297",
+  "idNumber": "6422",
+  "initial": "G",
+  "provincecode": "885"
+}, {
+  "areacode": "0310",
+  "areaid": "186",
+  "city": "邯郸市",
+  "cityid": "130400",
+  "code": "130400",
+  "id": "39",
+  "idNumber": "1304",
+  "initial": "H",
+  "provincecode": "186"
+}, {
+  "areacode": "0318",
+  "areaid": "720",
+  "city": "衡水市",
+  "cityid": "131100",
+  "code": "131100",
+  "id": "43",
+  "idNumber": "1330",
+  "initial": "H",
+  "provincecode": "720"
+}, {
+  "areacode": "0471",
+  "areaid": "101",
+  "city": "呼和浩特市",
+  "cityid": "150100",
+  "code": "150100",
+  "id": "1",
+  "idNumber": "1501",
+  "initial": "H",
+  "provincecode": "101"
+}, {
+  "areacode": "0530",
+  "areaid": "159",
+  "city": "菏泽市",
+  "cityid": "371700",
+  "code": "371700",
+  "id": "25",
+  "idNumber": "3729",
+  "initial": "H",
+  "provincecode": "159"
+}, {
+  "areacode": "0470",
+  "areaid": "108",
+  "city": "呼伦贝尔市",
+  "cityid": "150700",
+  "code": "150700",
+  "id": "8",
+  "idNumber": "1521",
+  "initial": "H",
+  "provincecode": "108"
+}, {
+  "areacode": "0429",
+  "areaid": "922",
+  "city": "葫芦岛市",
+  "cityid": "211400",
+  "code": "211400",
+  "id": "336",
+  "idNumber": "211403",
+  "initial": "H",
+  "provincecode": "922"
+}, {
+  "areacode": "0451",
+  "areaid": "971",
+  "city": "哈尔滨市",
+  "cityid": "230100",
+  "code": "230100",
+  "id": "338",
+  "idNumber": "2301",
+  "initial": "H",
+  "provincecode": "971"
+}, {
+  "areacode": "0468",
+  "areaid": "993",
+  "city": "鹤岗市",
+  "cityid": "230400",
+  "code": "230400",
+  "id": "347",
+  "idNumber": "2304",
+  "initial": "H",
+  "provincecode": "993"
+}, {
+  "areacode": "0456",
+  "areaid": "990",
+  "city": "黑河市",
+  "cityid": "231100",
+  "code": "231100",
+  "id": "344",
+  "idNumber": "2311",
+  "initial": "H",
+  "provincecode": "990"
+}, {
+  "areacode": "0517",
+  "areaid": "354",
+  "city": "淮安市",
+  "cityid": "320800",
+  "code": "320800",
+  "id": "80",
+  "idNumber": "320882",
+  "initial": "H",
+  "provincecode": "354"
+}, {
+  "areacode": "0571",
+  "areaid": "360",
+  "city": "杭州市",
+  "cityid": "330100",
+  "code": "330100",
+  "id": "86",
+  "idNumber": "3301",
+  "initial": "H",
+  "provincecode": "360"
+}, {
+  "areacode": "0572",
+  "areaid": "362",
+  "city": "湖州市",
+  "cityid": "330500",
+  "code": "330500",
+  "id": "87",
+  "idNumber": "3305",
+  "initial": "H",
+  "provincecode": "362"
+}, {
+  "areacode": "0551",
+  "areaid": "305",
+  "city": "合肥市",
+  "cityid": "340100",
+  "code": "340100",
+  "id": "60",
+  "idNumber": "3401",
+  "initial": "H",
+  "provincecode": "305"
+}, {
+  "areacode": "0554",
+  "areaid": "307",
+  "city": "淮南市",
+  "cityid": "340400",
+  "code": "340400",
+  "id": "62",
+  "idNumber": "3404",
+  "initial": "H",
+  "provincecode": "307"
+}, {
+  "areacode": "0561",
+  "areaid": "314",
+  "city": "淮北市",
+  "cityid": "340600",
+  "code": "340600",
+  "id": "68",
+  "idNumber": "3406",
+  "initial": "H",
+  "provincecode": "314"
+}, {
+  "areacode": "0559",
+  "areaid": "316",
+  "city": "黄山市",
+  "cityid": "341000",
+  "code": "341000",
+  "id": "69",
+  "idNumber": "3410",
+  "initial": "H",
+  "provincecode": "316"
+}, {
+  "areacode": "0558",
+  "areaid": "318",
+  "city": "亳州市",
+  "cityid": "341600",
+  "code": "341600",
+  "id": "71",
+  "idNumber": "3416",
+  "initial": "H",
+  "provincecode": "318"
+}, {
+  "city": "荷泽市",
+  "code": "371700",
+  "id": "151",
+  "initial": "H",
+  "provincecode": "370000"
+}, {
+  "areacode": "0392",
+  "areaid": "774",
+  "city": "鹤壁市",
+  "cityid": "410600",
+  "code": "410600",
+  "id": "208",
+  "idNumber": "4106",
+  "initial": "H",
+  "provincecode": "774"
+}, {
+  "areacode": "0714",
+  "areaid": "715",
+  "city": "黄石市",
+  "cityid": "420200",
+  "code": "420200",
+  "id": "159",
+  "idNumber": "4202",
+  "initial": "H",
+  "provincecode": "715"
+}, {
+  "areacode": "0713",
+  "areaid": "714",
+  "city": "黄冈市",
+  "cityid": "421100",
+  "code": "421100",
+  "id": "158",
+  "idNumber": "4221",
+  "initial": "H",
+  "provincecode": "714"
+}, {
+  "areacode": "0734",
+  "areaid": "744",
+  "city": "衡阳市",
+  "cityid": "430400",
+  "code": "430400",
+  "id": "171",
+  "idNumber": "4304",
+  "initial": "H",
+  "provincecode": "744"
+}, {
+  "areacode": "0745",
+  "areaid": "795",
+  "city": "怀化市",
+  "cityid": "431200",
+  "code": "431200",
+  "id": "181",
+  "idNumber": "4330",
+  "initial": "H",
+  "provincecode": "795"
+}, {
+  "areacode": "0752",
+  "areaid": "570",
+  "city": "惠州市",
+  "cityid": "441300",
+  "code": "441300",
+  "id": "125",
+  "idNumber": "4413",
+  "initial": "H",
+  "provincecode": "570"
+}, {
+  "areacode": "0762",
+  "areaid": "670",
+  "city": "河源市",
+  "cityid": "441600",
+  "code": "441600",
+  "id": "128",
+  "idNumber": "4416",
+  "initial": "H",
+  "provincecode": "670"
+}, {
+  "areacode": "0774",
+  "areaid": "588",
+  "city": "贺州市",
+  "cityid": "451100",
+  "code": "451100",
+  "id": "130",
+  "idNumber": "4511",
+  "initial": "H",
+  "provincecode": "588"
+}, {
+  "areacode": "0778",
+  "areaid": "598",
+  "city": "河池市",
+  "cityid": "451200",
+  "code": "451200",
+  "id": "140",
+  "idNumber": "4527",
+  "initial": "H",
+  "provincecode": "598"
+}, {
+  "areacode": "0898",
+  "areaid": "501",
+  "city": "海口市",
+  "cityid": "460100",
+  "code": "460100",
+  "id": "106",
+  "idNumber": "4601",
+  "initial": "H",
+  "provincecode": "501"
+},{
+  "areacode": "0898",
+  "areaid": "502",
+  "city": "三亚市",
+  "cityid": "460200",
+  "code": "460200",
+  "id": "351",
+  "idNumber": "4602",
+  "initial": "S",
+  "provincecode": "502"
+},{
+  "areacode": "0898",
+  "areaid": "503",
+  "city": "儋州市",
+  "cityid": "460003",
+  "code": "460003",
+  "id": "352",
+  "idNumber": "460003",
+  "initial": "D",
+  "provincecode": "503"
+},{
+  "areacode": "0898",
+  "areaid": "A04",
+  "city": "琼海市",
+  "cityid": "460002",
+  "code": "460002",
+  "id": "353",
+  "idNumber": "460002",
+  "initial": "Q",
+  "provincecode": "504"
+},{
+  "areacode": "0898",
+  "areaid": "A06",
+  "city": "文昌市",
+  "cityid": "460022",
+  "code": "460022",
+  "id": "354",
+  "idNumber": "460022",
+  "initial": "W",
+  "provincecode": "505"
+},{
+  "areacode": "0898",
+  "areaid": "A16",
+  "city": "东方市",
+  "cityid": "460032",
+  "code": "460032",
+  "id": "355",
+  "idNumber": "460032",
+  "initial": "D",
+  "provincecode": "506"
+},{
+  "areacode": "0898",
+  "areaid": "A13",
+  "city": "五指山市",
+  "cityid": "469001",
+  "code": "469001",
+  "id": "356",
+  "idNumber": "469001",
+  "initial": "W",
+  "provincecode": "507"
+},{
+  "areacode": "0898",
+  "areaid": "A07",
+  "city": "万宁市",
+  "cityid": "460025",
+  "code": "460025",
+  "id": "357",
+  "idNumber": "460025",
+  "initial": "W",
+  "provincecode": "508"
+},{
+  "areacode": "0898",
+  "areaid": "A02",
+  "city": "澄迈县",
+  "cityid": "460027",
+  "code": "460027",
+  "id": "358",
+  "idNumber": "460027",
+  "initial": "C",
+  "provincecode": "511"
+},{
+  "areacode": "0898",
+  "areaid": "A18",
+  "city": "临高县",
+  "cityid": "460028",
+  "code": "460028",
+  "id": "359",
+  "idNumber": "460028",
+  "initial": "L",
+  "provincecode": "512"
+},{
+  "areacode": "0898",
+  "areaid": "A11",
+  "city": "陵水县",
+  "cityid": "460034",
+  "code": "460034",
+  "id": "360",
+  "idNumber": "460034",
+  "initial": "L",
+  "provincecode": "513"
+},{
+  "areacode": "0898",
+  "areaid": "A08",
+  "city": "琼中县",
+  "cityid": "460036",
+  "code": "460036",
+  "id": "361",
+  "idNumber": "460036",
+  "initial": "Q",
+  "provincecode": "514"
+},{
+  "areacode": "0898",
+  "areaid": "A09",
+  "city": "保亭县",
+  "cityid": "460035",
+  "code": "460035",
+  "id": "362",
+  "idNumber": "460035",
+  "initial": "B",
+  "provincecode": "515"
+},{
+  "areacode": "0898",
+  "areaid": "A10",
+  "city": "乐东县",
+  "cityid": "460033",
+  "code": "460033",
+  "id": "363",
+  "idNumber": "460033",
+  "initial": "L",
+  "provincecode": "516"
+},{
+  "areacode": "0898",
+  "areaid": "A15",
+  "city": "昌江县",
+  "cityid": "460031",
+  "code": "460031",
+  "id": "364",
+  "idNumber": "460031",
+  "initial": "C",
+  "provincecode": "517"
+},{
+  "areacode": "0898",
+  "areaid": "A14",
+  "city": "白沙县",
+  "cityid": "460030",
+  "code": "460030",
+  "id": "365",
+  "idNumber": "460030",
+  "initial": "B",
+  "provincecode": "518"
+},{
+  "areacode": "0898",
+  "areaid": "A05",
+  "city": "屯昌县",
+  "cityid": "460026",
+  "code": "460026",
+  "id": "366",
+  "idNumber": "460026",
+  "initial": "T",
+  "provincecode": "519"
+},{
+  "areacode": "0898",
+  "areaid": "A01",
+  "city": "定安县",
+  "cityid": "460025",
+  "code": "460025",
+  "id": "367",
+  "idNumber": "460025",
+  "initial": "D",
+  "provincecode": "509"
+}, {
+  "areacode": "0873",
+  "areaid": "861",
+  "city": "红河哈尼族彝族自治州",
+  "cityid": "532500",
+  "code": "532500",
+  "id": "271",
+  "idNumber": "5325",
+  "initial": "H",
+  "provincecode": "861"
+}, {
+  "areacode": "0916",
+  "areaid": "849",
+  "city": "汉中市",
+  "cityid": "610700",
+  "code": "610700",
+  "id": "253",
+  "idNumber": "6123",
+  "initial": "H",
+  "provincecode": "849"
+}, {
+  "areacode": "0972",
+  "areaid": "701",
+  "city": "海东地区",
+  "cityid": "632100",
+  "code": "630200",
+  "id": "145",
+  "idNumber": "6321",
+  "initial": "H",
+  "provincecode": "701"
+}, {
+  "areacode": "0970",
+  "areaid": "706",
+  "city": "海北藏族自治州",
+  "cityid": "632200",
+  "code": "632200",
+  "id": "150",
+  "idNumber": "6322",
+  "initial": "H",
+  "provincecode": "706"
+}, {
+  "areacode": "0973",
+  "areaid": "707",
+  "city": "黄南藏族自治州",
+  "cityid": "632300",
+  "code": "632300",
+  "id": "151",
+  "idNumber": "6323",
+  "initial": "H",
+  "provincecode": "707"
+}, {
+  "areacode": "0974",
+  "areaid": "705",
+  "city": "海南藏族自治州",
+  "cityid": "632500",
+  "code": "632500",
+  "id": "149",
+  "idNumber": "6325",
+  "initial": "H",
+  "provincecode": "705"
+}, {
+  "areacode": "0977",
+  "areaid": "704",
+  "city": "海西蒙古族藏族自治州",
+  "cityid": "632800",
+  "code": "632800",
+  "id": "148",
+  "idNumber": "6328",
+  "initial": "H",
+  "provincecode": "704"
+}, {
+  "areacode": "0902",
+  "areaid": "900",
+  "city": "哈密市",
+  "code": "650500",
+  "id": "309",
+  "idNumber": "6522",
+  "initial": "H",
+  "provincecode": "900"
+}, {
+  "areacode": "0903",
+  "areaid": "955",
+  "city": "和田地区",
+  "cityid": "653200",
+  "code": "653200",
+  "id": "314",
+  "idNumber": "6532",
+  "initial": "H",
+  "provincecode": "955"
+}, {
+  "areacode": "0356",
+  "areaid": "194",
+  "city": "晋城市",
+  "cityid": "140500",
+  "code": "140500",
+  "id": "48",
+  "idNumber": "1405",
+  "initial": "J",
+  "provincecode": "194"
+}, {
+  "areacode": "0354",
+  "areaid": "191",
+  "city": "晋中市",
+  "cityid": "140700",
+  "code": "140700",
+  "id": "45",
+  "idNumber": "1424",
+  "initial": "J",
+  "provincecode": "191"
+}, {
+  "areacode": "0416",
+  "areaid": "916",
+  "city": "锦州市",
+  "cityid": "210700",
+  "code": "210700",
+  "id": "330",
+  "idNumber": "2107",
+  "initial": "J",
+  "provincecode": "916"
+}, {
+  "areacode": "0432",
+  "areaid": "902",
+  "city": "吉林市",
+  "cityid": "220200",
+  "code": "220200",
+  "id": "316",
+  "idNumber": "2202",
+  "initial": "J",
+  "provincecode": "902"
+}, {
+  "areacode": "0467",
+  "areaid": "991",
+  "city": "鸡西市",
+  "cityid": "230300",
+  "code": "230300",
+  "id": "345",
+  "idNumber": "2303",
+  "initial": "J",
+  "provincecode": "991"
+}, {
+  "areacode": "0454",
+  "areaid": "976",
+  "city": "佳木斯市",
+  "cityid": "230800",
+  "code": "230800",
+  "id": "340",
+  "idNumber": "2308",
+  "initial": "J",
+  "provincecode": "976"
+}, {
+  "areacode": "0573",
+  "areaid": "363",
+  "city": "嘉兴市",
+  "cityid": "330400",
+  "code": "330400",
+  "id": "88",
+  "idNumber": "3304",
+  "initial": "J",
+  "provincecode": "363"
+}, {
+  "areacode": "0579",
+  "areaid": "367",
+  "city": "金华市",
+  "cityid": "330700",
+  "code": "330700",
+  "id": "91",
+  "idNumber": "3307",
+  "initial": "J",
+  "provincecode": "367"
+}, {
+  "areacode": "0798",
+  "areaid": "740",
+  "city": "景德镇市",
+  "cityid": "360200",
+  "code": "360200",
+  "id": "183",
+  "idNumber": "3602",
+  "initial": "J",
+  "provincecode": "740"
+}, {
+  "areacode": "0728",
+  "areaid": "713",
+  "city": "江汉区",
+  "code": "420103",
+  "id": "157",
+  "idNumber": "420103",
+  "initial": "J",
+  "provincecode": "713"
+}, {
+  "areacode": "0792",
+  "areaid": "755",
+  "city": "九江市",
+  "cityid": "360400",
+  "code": "360400",
+  "id": "189",
+  "idNumber": "3604",
+  "initial": "J",
+  "provincecode": "755"
+}, {
+  "areacode": "0796",
+  "areaid": "751",
+  "city": "吉安市",
+  "cityid": "360800",
+  "code": "360800",
+  "id": "185",
+  "idNumber": "3624",
+  "initial": "J",
+  "provincecode": "751"
+}, {
+  "areacode": "0531",
+  "areaid": "170",
+  "city": "济南市",
+  "cityid": "370100",
+  "code": "370100",
+  "id": "29",
+  "idNumber": "3701",
+  "initial": "J",
+  "provincecode": "170"
+}, {
+  "areacode": "0537",
+  "areaid": "158",
+  "city": "济宁市",
+  "cityid": "370800",
+  "code": "370800",
+  "id": "24",
+  "idNumber": "3708",
+  "initial": "J",
+  "provincecode": "158"
+}, {
+  "areacode": "0391",
+  "areaid": "763",
+  "city": "焦作市",
+  "cityid": "410800",
+  "code": "410800",
+  "id": "197",
+  "idNumber": "4108",
+  "initial": "J",
+  "provincecode": "763"
+}, {
+  "areacode": "0724",
+  "areaid": "724",
+  "city": "荆门市",
+  "cityid": "420800",
+  "code": "420800",
+  "id": "166",
+  "idNumber": "4208",
+  "initial": "J",
+  "provincecode": "724"
+}, {
+  "areacode": "0716",
+  "areaid": "712",
+  "city": "荆州市",
+  "cityid": "421000",
+  "code": "421000",
+  "id": "156",
+  "idNumber": "4224",
+  "initial": "J",
+  "provincecode": "712"
+}, {
+  "areacode" : "0743",
+  "areaid": "793",
+  "city": "吉首市",
+  "cityid": "433101",
+  "code": "433101",
+  "id": "179",
+  "initial": "J",
+  "provincecode": "793"
+}, {
+  "areacode": "0391",
+  "areaid": "775",
+  "city": "济源市",
+  "cityid": "419001",
+  "code": "419001",
+  "id": "209",
+  "idNumber": "410881",
+  "initial": "J",
+  "provincecode": "775"
+}, {
+  "areacode": "0750",
+  "areaid": "550",
+  "city": "江门市",
+  "cityid": "440700",
+  "code": "440700",
+  "id": "119",
+  "idNumber": "4407",
+  "initial": "J",
+  "provincecode": "550"
+}, {
+  "areacode": "0663",
+  "areaid": "526",
+  "city": "揭阳市",
+  "cityid": "445200",
+  "code": "445200",
+  "id": "110",
+  "idNumber": "4452",
+  "initial": "J",
+  "provincecode": "526"
+}, {
+  "areacode": "0937",
+  "areaid": "876",
+  "city": "嘉峪关市",
+  "cityid": "620200",
+  "code": "620200",
+  "id": "286",
+  "idNumber": "6202",
+  "initial": "J",
+  "provincecode": "876"
+}, {
+  "areacode": "0691",
+  "areaid": "868",
+  "city": "景洪市",
+  "code": "532801",
+  "id": "278",
+  "idNumber": "532801",
+  "initial": "J",
+  "provincecode": "868"
+}, {
+  "areacode": "0935",
+  "areaid": "930",
+  "city": "金昌市",
+  "cityid": "620300",
+  "code": "620300",
+  "id": "290",
+  "idNumber": "6203",
+  "initial": "J",
+  "provincecode": "930"
+}, {
+  "areacode": "0937",
+  "areaid": "931",
+  "city": "酒泉市",
+  "cityid": "620900",
+  "code": "620900",
+  "id": "291",
+  "idNumber": "6221",
+  "initial": "J",
+  "provincecode": "931"
+}, {
+  "areacode": "0371",
+  "areaid": "762",
+  "city": "开封市",
+  "cityid": "410200",
+  "code": "410200",
+  "id": "196",
+  "idNumber": "4102",
+  "initial": "K",
+  "provincecode": "762"
+}, {
+  "areacode": "0871",
+  "areaid": "860",
+  "city": "昆明市",
+  "cityid": "530100",
+  "code": "530100",
+  "id": "270",
+  "idNumber": "5301",
+  "initial": "K",
+  "provincecode": "860"
+}, {
+  "areacode": "0990",
+  "areaid": "899",
+  "city": "克拉玛依市",
+  "cityid": "650200",
+  "code": "650200",
+  "id": "308",
+  "idNumber": "6502",
+  "initial": "K",
+  "provincecode": "899"
+}, {
+  "areacode": "0908",
+  "areaid": "954",
+  "city": "克孜勒苏柯州",
+  "code": "653000",
+  "id": "313",
+  "idNumber": "6530",
+  "initial": "K",
+  "provincecode": "954"
+}, {
+  "areacode": "0998",
+  "areaid": "897",
+  "city": "喀什地区",
+  "cityid": "653100",
+  "code": "653100",
+  "id": "306",
+  "idNumber": "6531",
+  "initial": "K",
+  "provincecode": "897"
+}, {
+  "areacode": "0992",
+  "areaid": "892",
+  "city": "奎屯",
+  "code": "654003",
+  "id": "301",
+  "idNumber": "654001",
+  "initial": "K",
+  "provincecode": "892"
+}, {
+  "city": "库尔勒",
+  "code": "652801",
+  "id": "304",
+  "initial": "K",
+  "provincecode": "895"
+}, {
+  "areacode": "0316",
+  "areaid": "183",
+  "city": "廊坊市",
+  "code": "131000",
+  "id": "36",
+  "idNumber": "1310",
+  "initial": "L",
+  "provincecode": "183"
+}, {
+  "areacode": "0357",
+  "areaid": "197",
+  "city": "临汾市",
+  "cityid": "141000",
+  "code": "141000",
+  "id": "51",
+  "idNumber": "1426",
+  "initial": "L",
+  "provincecode": "197"
+}, {
+  "areacode": "0358",
+  "areaid": "200",
+  "city": "吕梁市",
+  "cityid": "141100",
+  "code": "141100",
+  "id": "54",
+  "idNumber": "1423",
+  "initial": "L",
+  "provincecode": "200"
+}, {
+  "areacode": "0419",
+  "areaid": "919",
+  "city": "辽阳市",
+  "cityid": "211000",
+  "code": "211000",
+  "id": "333",
+  "idNumber": "2110",
+  "initial": "L",
+  "provincecode": "919"
+}, {
+  "areacode": "0437",
+  "areaid": "906",
+  "city": "辽源市",
+  "cityid": "220400",
+  "code": "220400",
+  "id": "320",
+  "idNumber": "2204",
+  "initial": "L",
+  "provincecode": "906"
+}, {
+  "areacode": "0518",
+  "areaid": "346",
+  "city": "连云港市",
+  "cityid": "320700",
+  "code": "320700",
+  "id": "76",
+  "idNumber": "3207",
+  "initial": "L",
+  "provincecode": "346"
+}, {
+  "areacode": "0578",
+  "areaid": "469",
+  "city": "丽水市",
+  "cityid": "331100",
+  "code": "331100",
+  "id": "94",
+  "idNumber": "3325",
+  "initial": "L",
+  "provincecode": "469"
+}, {
+  "areacode": "0564",
+  "areaid": "304",
+  "city": "六安市",
+  "cityid": "341500",
+  "code": "341500",
+  "id": "59",
+  "idNumber": "3424",
+  "initial": "L",
+  "provincecode": "304"
+}, {
+  "areacode": "0597",
+  "areaid": "384",
+  "city": "龙岩市",
+  "cityid": "350800",
+  "code": "350800",
+  "id": "98",
+  "idNumber": "3526",
+  "initial": "L",
+  "provincecode": "384"
+}, {
+  "areacode": "0731",
+  "areaid": "746",
+  "city": "浏阳市",
+  "code": "430181",
+  "id": "173",
+  "idNumber": "430181",
+  "initial": "L",
+  "provincecode": "746"
+}, {
+  "areacode": "0634",
+  "areaid": "160",
+  "city": "莱芜市",
+  "cityid": "371200",
+  "code": "371200",
+  "id": "26",
+  "idNumber": "3712",
+  "initial": "L",
+  "provincecode": "160"
+}, {
+  "areacode": "0539",
+  "areaid": "153",
+  "city": "临沂市",
+  "cityid": "371300",
+  "code": "371300",
+  "id": "19",
+  "idNumber": "3728",
+  "initial": "L",
+  "provincecode": "153"
+}, {
+  "areacode": "0635",
+  "areaid": "174",
+  "city": "聊城市",
+  "cityid": "371500",
+  "code": "371500",
+  "id": "32",
+  "idNumber": "3725",
+  "initial": "L",
+  "provincecode": "174"
+}, {
+  "areacode": "0379",
+  "areaid": "761",
+  "city": "洛阳市",
+  "cityid": "410300",
+  "code": "410300",
+  "id": "195",
+  "idNumber": "4103",
+  "initial": "L",
+  "provincecode": "761"
+}, {
+  "areacode": "0395",
+  "areaid": "766",
+  "city": "漯河市",
+  "cityid": "411100",
+  "code": "411100",
+  "id": "200",
+  "idNumber": "4111",
+  "initial": "L",
+  "provincecode": "766"
+}, {
+  "areacode": "0738",
+  "areaid": "791",
+  "city": "娄底市",
+  "cityid": "431300",
+  "code": "431300",
+  "id": "177",
+  "idNumber": "4325",
+  "initial": "L",
+  "provincecode": "791"
+}, {
+  "areacode": "0772",
+  "areaid": "593",
+  "city": "柳州市",
+  "cityid": "450200",
+  "code": "450200",
+  "id": "135",
+  "idNumber": "4522",
+  "initial": "L",
+  "provincecode": "593"
+}, {
+  "areacode": "0772",
+  "areaid": "601",
+  "city": "来宾市",
+  "cityid": "451300",
+  "code": "451300",
+  "id": "143",
+  "idNumber": "452226",
+  "initial": "L",
+  "provincecode": "601"
+}, {
+  "areacode": "0830",
+  "areaid": "815",
+  "city": "泸州市",
+  "cityid": "510500",
+  "code": "510500",
+  "id": "224",
+  "idNumber": "5105",
+  "initial": "L",
+  "provincecode": "815"
+}, {
+  "areacode": "0833",
+  "areaid": "814",
+  "city": "乐山市",
+  "cityid": "511100",
+  "code": "511100",
+  "id": "223",
+  "idNumber": "5111",
+  "initial": "L",
+  "provincecode": "814"
+}, {
+  "areacode": "0834",
+  "areaid": "812",
+  "city": "凉山彝族",
+  "code": "513400",
+  "id": "221",
+  "idNumber": "5134",
+  "initial": "L",
+  "provincecode": "912"
+}, {
+  "areacode": "0858",
+  "areaid": "853",
+  "city": "六盘水市",
+  "cityid": "520200",
+  "code": "520200",
+  "id": "262",
+  "idNumber": "5202",
+  "initial": "L",
+  "provincecode": "853"
+}, {
+  "areacode": "0888",
+  "areaid": "863",
+  "city": "丽江市",
+  "cityid": "530700",
+  "code": "530700",
+  "id": "273",
+  "idNumber": "5332",
+  "initial": "L",
+  "provincecode": "863"
+}, {
+  "areacode": "0883",
+  "areaid": "733",
+  "city": "临沧市",
+  "cityid": "530900",
+  "code": "530900",
+  "id": "266",
+  "idNumber": "5335",
+  "initial": "L",
+  "provincecode": "733"
+}, {
+  "areacode": "0891",
+  "areaid": "790",
+  "city": "拉萨市",
+  "cityid": "540100",
+  "code": "540100",
+  "id": "212",
+  "idNumber": "5401",
+  "initial": "L",
+  "provincecode": "790"
+}, {
+  "areacode": "0894",
+  "areaid": "799",
+  "city": "林芝市",
+  "code": "540400",
+  "id": "215",
+  "idNumber": "5426",
+  "initial": "L",
+  "provincecode": "799"
+}, {
+  "areacode": "0931",
+  "areaid": "870",
+  "city": "兰州市",
+  "cityid": "620100",
+  "code": "620100",
+  "id": "280",
+  "idNumber": "6201",
+  "initial": "L",
+  "provincecode": "870"
+}, {
+  "areacode": "0939",
+  "areaid": "960",
+  "city": "陇南市",
+  "cityid": "621200",
+  "code": "621200",
+  "id": "292",
+  "idNumber": "6226",
+  "initial": "L",
+  "provincecode": "960"
+}, {
+  "areacode": "0930",
+  "areaid": "878",
+  "city": "临夏回族",
+  "code": "622900",
+  "id": "288",
+  "idNumber": "6229",
+  "initial": "L",
+  "provincecode": "878"
+}, {
+  "areacode": "0453",
+  "areaid": "988",
+  "city": "牡丹江市",
+  "cityid": "231000",
+  "code": "231000",
+  "id": "342",
+  "idNumber": "2310",
+  "initial": "M",
+  "provincecode": "989"
+}, {
+  "areacode": "0555",
+  "areaid": "300",
+  "city": "马鞍山市",
+  "cityid": "340500",
+  "code": "340500",
+  "id": "55",
+  "idNumber": "3405",
+  "initial": "M",
+  "provincecode": "912"
+}, {
+  "areacode": "0668",
+  "areaid": "568",
+  "city": "茂名市",
+  "cityid": "440900",
+  "code": "440900",
+  "id": "124",
+  "idNumber": "4409",
+  "initial": "M",
+  "provincecode": "568"
+}, {
+  "areacode": "0753",
+  "areaid": "528",
+  "city": "梅州市",
+  "cityid": "441400",
+  "code": "441400",
+  "id": "111",
+  "idNumber": "4414",
+  "initial": "M",
+  "provincecode": "528"
+}, {
+  "areacode": "0816",
+  "areaid": "824",
+  "city": "绵阳市",
+  "cityid": "510700",
+  "code": "510700",
+  "id": "233",
+  "idNumber": "5107",
+  "initial": "M",
+  "provincecode": "824"
+}, {
+  "areacode": "028",
+  "areaid": "819",
+  "city": "眉山市",
+  "cityid": "511400",
+  "code": "511400",
+  "id": "228",
+  "idNumber": "511122",
+  "initial": "M",
+  "provincecode": "819"
+}, {
+  "areacode": "025",
+  "areaid": "340",
+  "city": "南京市",
+  "cityid": "320100",
+  "code": "320100",
+  "id": "74",
+  "idNumber": "3201",
+  "initial": "N",
+  "provincecode": "340"
+}, {
+  "areacode": "0513",
+  "areaid": "358",
+  "city": "南通市",
+  "cityid": "320600",
+  "code": "320600",
+  "id": "81",
+  "idNumber": "3206",
+  "initial": "N",
+  "provincecode": "358"
+}, {
+  "areacode": "0574",
+  "areaid": "370",
+  "city": "宁波市",
+  "cityid": "330200",
+  "code": "330200",
+  "id": "92",
+  "idNumber": "3302",
+  "initial": "N",
+  "provincecode": "370"
+}, {
+  "areacode": "0599",
+  "areaid": "387",
+  "city": "南平市",
+  "cityid": "350700",
+  "code": "350700",
+  "id": "101",
+  "idNumber": "3521",
+  "initial": "N",
+  "provincecode": "387"
+}, {
+  "areacode": "0593",
+  "areaid": "386",
+  "city": "宁德市",
+  "cityid": "350900",
+  "code": "350900",
+  "id": "100",
+  "idNumber": "3522",
+  "initial": "N",
+  "provincecode": "386"
+}, {
+  "areacode": "0791",
+  "areaid": "750",
+  "city": "南昌市",
+  "cityid": "360100",
+  "code": "360100",
+  "id": "184",
+  "idNumber": "3601",
+  "initial": "N",
+  "provincecode": "750"
+}, {
+  "areacode": "0377",
+  "areaid": "777",
+  "city": "南阳市",
+  "cityid": "411300",
+  "code": "411300",
+  "id": "211",
+  "idNumber": "4129",
+  "initial": "N",
+  "provincecode": "777"
+}, {
+  "areacode": "0771",
+  "areaid": "591",
+  "city": "南宁市",
+  "cityid": "450100",
+  "code": "450100",
+  "id": "133",
+  "idNumber": "4521",
+  "initial": "N",
+  "provincecode": "591"
+}, {
+  "areacode": "0832",
+  "areaid": "816",
+  "city": "内江市",
+  "cityid": "511000",
+  "code": "511000",
+  "id": "225",
+  "idNumber": "5110",
+  "initial": "N",
+  "provincecode": "816"
+}, {
+  "areacode": "0817",
+  "areaid": "822",
+  "city": "南充市",
+  "cityid": "511300",
+  "code": "511300",
+  "id": "231",
+  "idNumber": "5113",
+  "initial": "N",
+  "provincecode": "822"
+}, {
+  "areacode": "0886",
+  "areaid": "734",
+  "city": "怒江傈僳族",
+  "code": "533300",
+  "id": "267",
+  "idNumber": "5333",
+  "initial": "N",
+  "provincecode": "734"
+}, {
+  "areacode": "0896",
+  "areaid": "801",
+  "city": "那曲市",
+  "code": "540600",
+  "id": "217",
+  "idNumber": "5424",
+  "initial": "N",
+  "provincecode": "801"
+}, {
+  "areacode": "0427",
+  "areaid": "921",
+  "city": "盘锦市",
+  "cityid": "211100",
+  "code": "211100",
+  "id": "335",
+  "idNumber": "2111",
+  "initial": "P",
+  "provincecode": "921"
+}, {
+  "areacode": "0879",
+  "areaid": "869",
+  "city": "普洱市",
+  "cityid": "530800",
+  "code": "530800",
+  "id": "279",
+  "idNumber": "532722",
+  "initial": "P",
+  "provincecode": "869"
+}, {
+  "areacode": "0594",
+  "areaid": "385",
+  "city": "莆田市",
+  "cityid": "350300",
+  "code": "350300",
+  "id": "99",
+  "idNumber": "3503",
+  "initial": "P",
+  "provincecode": "385"
+}, {
+  "areacode": "0799",
+  "areaid": "758",
+  "city": "萍乡市",
+  "cityid": "360300",
+  "code": "360300",
+  "id": "192",
+  "idNumber": "3603",
+  "initial": "P",
+  "provincecode": "758"
+}, {
+  "areacode": "0375",
+  "areaid": "769",
+  "city": "平顶山市",
+  "cityid": "410400",
+  "code": "410400",
+  "id": "203",
+  "idNumber": "4104",
+  "initial": "P",
+  "provincecode": "769"
+}, {
+  "areacode": "0393",
+  "areaid": "773",
+  "city": "濮阳市",
+  "cityid": "410900",
+  "code": "410900",
+  "id": "207",
+  "idNumber": "4109",
+  "initial": "P",
+  "provincecode": "773"
+}, {
+  "areacode": "0812",
+  "areaid": "813",
+  "city": "攀枝花市",
+  "cityid": "510400",
+  "code": "510400",
+  "id": "222",
+  "idNumber": "5104",
+  "initial": "P",
+  "provincecode": "813"
+}, {
+  "areacode": "0933",
+  "areaid": "872",
+  "city": "平凉市",
+  "cityid": "620800",
+  "code": "620800",
+  "id": "282",
+  "idNumber": "6227",
+  "initial": "P",
+  "provincecode": "872"
+}, {
+  "areacode": "0335",
+  "areaid": "182",
+  "city": "秦皇岛市",
+  "cityid": "130300",
+  "code": "130300",
+  "id": "35",
+  "idNumber": "1303",
+  "initial": "Q",
+  "provincecode": "182"
+}, {
+  "areacode": "0452",
+  "areaid": "973",
+  "city": "齐齐哈尔市",
+  "cityid": "230200",
+  "code": "230200",
+  "id": "339",
+  "idNumber": "2302",
+  "initial": "Q",
+  "provincecode": "973"
+}, {
+  "areacode": "0464",
+  "areaid": "992",
+  "city": "七台河市",
+  "cityid": "230900",
+  "code": "230900",
+  "id": "346",
+  "idNumber": "2309",
+  "initial": "Q",
+  "provincecode": "992"
+}, {
+  "areacode": "0570",
+  "areaid": "468",
+  "city": "衢州市",
+  "cityid": "330800",
+  "code": "330800",
+  "id": "93",
+  "idNumber": "3308",
+  "initial": "Q",
+  "provincecode": "468"
+}, {
+  "city": "黔江区",
+  "code": "500114",
+  "id": "243",
+  "initial": "Q",
+  "provincecode": "834"
+}, {
+  "areacode": "0595",
+  "areaid": "480",
+  "city": "泉州市",
+  "cityid": "350500",
+  "code": "350500",
+  "id": "105",
+  "idNumber": "3505",
+  "initial": "Q",
+  "provincecode": "480"
+}, {
+  "areacode": "0532",
+  "areaid": "166",
+  "city": "青岛市",
+  "cityid": "370200",
+  "code": "370200",
+  "id": "28",
+  "idNumber": "3702",
+  "initial": "Q",
+  "provincecode": "166"
+}, {
+  "areacode": "0763",
+  "areaid": "535",
+  "city": "清远市",
+  "cityid": "441800",
+  "code": "441800",
+  "id": "115",
+  "idNumber": "4418",
+  "initial": "Q",
+  "provincecode": "535"
+}, {
+  "areacode": "0777",
+  "areaid": "597",
+  "city": "钦州市",
+  "cityid": "450700",
+  "code": "450700",
+  "id": "139",
+  "idNumber": "4528",
+  "initial": "Q",
+  "provincecode": "597"
+}, {
+  "areacode": "0859",
+  "areaid": "852",
+  "city": "黔西南布依族苗族",
+  "code": "522300",
+  "id": "261",
+  "idNumber": "5223",
+  "initial": "Q",
+  "provincecode": "852"
+}, {
+  "areacode": "0855",
+  "areaid": "786",
+  "city": "黔东南苗族侗族",
+  "code": "522600",
+  "id": "255",
+  "idNumber": "5226",
+  "initial": "Q",
+  "provincecode": "786"
+}, {
+  "areacode": "0854",
+  "areaid": "788",
+  "city": "黔南布依族苗族",
+  "code": "522700",
+  "id": "257",
+  "idNumber": "5227",
+  "initial": "Q",
+  "provincecode": "788"
+}, {
+  "areacode": "0874",
+  "areaid": "866",
+  "city": "曲靖市",
+  "cityid": "530300",
+  "code": "530300",
+  "id": "276",
+  "idNumber": "5322",
+  "initial": "Q",
+  "provincecode": "866"
+}, {
+  "areacode": "0934",
+  "areaid": "873",
+  "city": "庆阳市",
+  "cityid": "621000",
+  "code": "621000",
+  "id": "283",
+  "idNumber": "6228",
+  "initial": "Q",
+  "provincecode": "873"
+}, {
+  "areacode": "0633",
+  "areaid": "154",
+  "city": "日照市",
+  "cityid": "371100",
+  "code": "371100",
+  "id": "20",
+  "idNumber": "3711",
+  "initial": "R",
+  "provincecode": "154"
+}, {
+  "areacode": "0892",
+  "areaid": "797",
+  "city": "日喀则市",
+  "code": "540200",
+  "id": "213",
+  "idNumber": "5423",
+  "initial": "R",
+  "provincecode": "797"
+}, {
+  "areacode": "0311",
+  "areaid": "188",
+  "city": "石家庄市",
+  "cityid": "130100",
+  "code": "130100",
+  "id": "41",
+  "idNumber": "1301",
+  "initial": "S",
+  "provincecode": "188"
+}, {
+  "areacode": "0349",
+  "areaid": "199",
+  "city": "朔州市",
+  "cityid": "140600",
+  "code": "140600",
+  "id": "53",
+  "idNumber": "1406",
+  "initial": "S",
+  "provincecode": "199"
+}, {
+  "areacode": "024",
+  "areaid": "910",
+  "city": "沈阳市",
+  "cityid": "210100",
+  "code": "210100",
+  "id": "324",
+  "idNumber": "2101",
+  "initial": "S",
+  "provincecode": "910"
+}, {
+  "areacode": "0434",
+  "areaid": "903",
+  "city": "四平市",
+  "cityid": "220300",
+  "code": "220300",
+  "id": "317",
+  "idNumber": "2203",
+  "initial": "S",
+  "provincecode": "903"
+}, {
+  "areacode": "0438",
+  "areaid": "904",
+  "city": "松原市",
+  "cityid": "220700",
+  "code": "220700",
+  "id": "318",
+  "idNumber": "2207",
+  "initial": "S",
+  "provincecode": "904"
+}, {
+  "areacode": "0469",
+  "areaid": "994",
+  "city": "双鸭山市",
+  "cityid": "230500",
+  "code": "230500",
+  "id": "348",
+  "idNumber": "2305",
+  "initial": "S",
+  "provincecode": "994"
+}, {
+  "areacode": "0455",
+  "areaid": "989",
+  "city": "绥化市",
+  "cityid": "231200",
+  "code": "231200",
+  "id": "343",
+  "idNumber": "2323",
+  "initial": "S",
+  "provincecode": "989"
+}, {
+  "areacode": "0512",
+  "areaid": "450",
+  "city": "苏州市",
+  "cityid": "320500",
+  "code": "320500",
+  "id": "85",
+  "idNumber": "3205",
+  "initial": "S",
+  "provincecode": "450"
+}, {
+  "areacode": "0527",
+  "areaid": "349",
+  "city": "宿迁市",
+  "cityid": "321300",
+  "code": "321300",
+  "id": "129",
+  "idNumber": "320881",
+  "initial": "S",
+  "provincecode": "349"
+}, {
+  "areacode": "0757",
+  "areaid": "678",
+  "city": "顺德区",
+  "code": "440606",
+  "id": "78",
+  "idNumber": "440681",
+  "initial": "S",
+  "provincecode": "678"
+}, {
+  "areacode": "0575",
+  "areaid": "365",
+  "city": "绍兴市",
+  "cityid": "330600",
+  "code": "330600",
+  "id": "90",
+  "idNumber": "3306",
+  "initial": "S",
+  "provincecode": "365"
+}, {
+  "areacode": "0557",
+  "areaid": "313",
+  "city": "宿州市",
+  "cityid": "341300",
+  "code": "341300",
+  "id": "67",
+  "idNumber": "3422",
+  "initial": "S",
+  "provincecode": "313"
+}, {
+  "areacode": "0598",
+  "areaid": "389",
+  "city": "三明市",
+  "cityid": "350400",
+  "code": "350400",
+  "id": "102",
+  "idNumber": "3504",
+  "initial": "S",
+  "provincecode": "389"
+}, {
+  "areacode": "0793",
+  "areaid": "757",
+  "city": "上饶市",
+  "cityid": "361100",
+  "code": "361100",
+  "id": "191",
+  "idNumber": "3623",
+  "initial": "S",
+  "provincecode": "757"
+}, {
+  "areacode": "0398",
+  "areaid": "772",
+  "city": "三门峡市",
+  "cityid": "411200",
+  "code": "411200",
+  "id": "206",
+  "idNumber": "4112",
+  "initial": "S",
+  "provincecode": "772"
+}, {
+  "areacode": "0370",
+  "areaid": "768",
+  "city": "商丘市",
+  "cityid": "411400",
+  "code": "411400",
+  "id": "202",
+  "idNumber": "4123",
+  "initial": "S",
+  "provincecode": "768"
+}, {
+  "areacode": "0719",
+  "areaid": "721",
+  "city": "十堰市",
+  "cityid": "420300",
+  "code": "420300",
+  "id": "164",
+  "idNumber": "4203",
+  "initial": "S",
+  "provincecode": "721"
+}, {
+  "areacode": "0722",
+  "areaid": "723",
+  "city": "随州市",
+  "cityid": "421300",
+  "code": "421300",
+  "id": "165",
+  "idNumber": "420681",
+  "initial": "S",
+  "provincecode": "723"
+}, {
+  "areacode": "0739",
+  "areaid": "792",
+  "city": "邵阳市",
+  "cityid": "430500",
+  "code": "430500",
+  "id": "178",
+  "idNumber": "4305",
+  "initial": "S",
+  "provincecode": "792"
+}, {
+  "areacode": "0751",
+  "areaid": "558",
+  "city": "韶关市",
+  "cityid": "440200",
+  "code": "440200",
+  "id": "121",
+  "idNumber": "4402",
+  "initial": "S",
+  "provincecode": "558"
+}, {
+  "areacode": "0755",
+  "areaid": "540",
+  "city": "深圳市",
+  "cityid": "440300",
+  "code": "440300",
+  "id": "118",
+  "idNumber": "4403",
+  "initial": "S",
+  "provincecode": "540"
+}, {
+  "areacode": "0754",
+  "areaid": "560",
+  "city": "汕头市",
+  "cityid": "440500",
+  "code": "440500",
+  "id": "122",
+  "idNumber": "440407",
+  "initial": "S",
+  "provincecode": "560"
+}, {
+  "areacode": "0993",
+  "areaid": "893",
+  "city": "石河子市",
+  "cityid": "659001",
+  "code": "659001",
+  "id": "302",
+  "idNumber": "6590",
+  "initial": "S",
+  "provincecode": "893"
+}, {
+  "areacode": "0660",
+  "areaid": "525",
+  "city": "汕尾市",
+  "cityid": "441500",
+  "code": "441500",
+  "id": "109",
+  "idNumber": "4415",
+  "initial": "S",
+  "provincecode": "525"
+}, {
+  "areacode": "0825",
+  "areaid": "821",
+  "city": "遂宁市",
+  "cityid": "510900",
+  "code": "510900",
+  "id": "230",
+  "idNumber": "5109",
+  "initial": "S",
+  "provincecode": "821"
+}, {
+  "areacode": "021",
+  "areaid": "310",
+  "city": "上海市",
+  "cityid": "310000",
+  "code": "310000",
+  "id": "72",
+  "idNumber": "310",
+  "initial": "S",
+  "provincecode": "310"
+}, {
+  "areacode": "0893",
+  "areaid": "798",
+  "city": "山南市",
+  "code": "540500",
+  "id": "214",
+  "idNumber": "5422",
+  "initial": "S",
+  "provincecode": "798"
+}, {
+  "areacode": "0914",
+  "areaid": "847",
+  "city": "商洛市",
+  "cityid": "611000",
+  "code": "611000",
+  "id": "251",
+  "idNumber": "6125",
+  "initial": "S",
+  "provincecode": "847"
+}, {
+  "areacode": "0952",
+  "areaid": "884",
+  "city": "石嘴山市",
+  "cityid": "640200",
+  "code": "640200",
+  "id": "296",
+  "idNumber": "6402",
+  "initial": "S",
+  "provincecode": "884"
+}, {
+  "areacode": "0315",
+  "areaid": "181",
+  "city": "唐山市",
+  "cityid": "130200",
+  "code": "130200",
+  "id": "34",
+  "idNumber": "1302",
+  "initial": "T",
+  "provincecode": "181"
+}, {
+  "areacode": "0351",
+  "areaid": "190",
+  "city": "太原市",
+  "cityid": "140100",
+  "code": "140100",
+  "id": "44",
+  "idNumber": "1401",
+  "initial": "T",
+  "provincecode": "190"
+}, {
+  "areacode": "0475",
+  "areaid": "109",
+  "city": "通辽市",
+  "cityid": "150500",
+  "code": "150500",
+  "id": "9",
+  "idNumber": "152301",
+  "initial": "T",
+  "provincecode": "109"
+}, {
+  "areacode": "024",
+  "areaid": "911",
+  "city": "铁岭市",
+  "cityid": "211200",
+  "code": "211200",
+  "id": "325",
+  "idNumber": "2112",
+  "initial": "T",
+  "provincecode": "911"
+}, {
+  "areacode": "0435",
+  "areaid": "905",
+  "city": "通化市",
+  "cityid": "220500",
+  "code": "220500",
+  "id": "319",
+  "idNumber": "2205",
+  "initial": "T",
+  "provincecode": "905"
+}, {
+  "areacode": "0523",
+  "areaid": "445",
+  "city": "泰州市",
+  "cityid": "321200",
+  "code": "321200",
+  "id": "84",
+  "idNumber": "321082",
+  "initial": "T",
+  "provincecode": "445"
+}, {
+  "areacode": "0576",
+  "areaid": "476",
+  "city": "台州市",
+  "cityid": "331000",
+  "code": "331000",
+  "id": "96",
+  "idNumber": "3326",
+  "initial": "T",
+  "provincecode": "476"
+}, {
+  "areacode": "0562",
+  "areaid": "308",
+  "city": "铜陵市",
+  "cityid": "340700",
+  "code": "340700",
+  "id": "63",
+  "idNumber": "3407",
+  "initial": "T",
+  "provincecode": "308"
+}, {
+  "areacode": "0538",
+  "areaid": "172",
+  "city": "泰安市",
+  "cityid": "370900",
+  "code": "370900",
+  "id": "30",
+  "idNumber": "3709",
+  "initial": "T",
+  "provincecode": "172"
+}, {
+  "areacode": "0856",
+  "areaid": "785",
+  "city": "铜仁市",
+  "cityid": "520600",
+  "code": "520600",
+  "id": "254",
+  "idNumber": "5222",
+  "initial": "T",
+  "provincecode": "785"
+}, {
+  "areacode": "0919",
+  "areaid": "846",
+  "city": "铜川市",
+  "cityid": "610200",
+  "code": "610200",
+  "id": "250",
+  "idNumber": "6102",
+  "initial": "T",
+  "provincecode": "846"
+}, {
+  "areacode": "0938",
+  "areaid": "877",
+  "city": "天水市",
+  "cityid": "620500",
+  "code": "620500",
+  "id": "287",
+  "idNumber": "6205",
+  "initial": "T",
+  "provincecode": "877"
+}, {
+  "areacode": "0995",
+  "areaid": "894",
+  "city": "吐鲁番市",
+  "code": "650400",
+  "id": "303",
+  "idNumber": "6521",
+  "initial": "T",
+  "provincecode": "894"
+}, {
+  "areacode": "0901",
+  "areaid": "952",
+  "city": "塔城地区",
+  "cityid": "654200",
+  "code": "654200",
+  "id": "311",
+  "idNumber": "6542",
+  "initial": "T",
+  "provincecode": "952"
+}, {
+  "areacode": "022",
+  "areaid": "130",
+  "city": "天津市",
+  "cityid": "120000",
+  "code": "120000",
+  "id": "15",
+  "idNumber": "120",
+  "initial": "T",
+  "provincecode": "120"
+}, {
+  "areacode": "0473",
+  "areaid": "106",
+  "city": "乌海市",
+  "cityid": "150300",
+  "code": "150300",
+  "id": "6",
+  "idNumber": "1503",
+  "initial": "W",
+  "provincecode": "106"
+}, {
+  "areacode": "0474",
+  "areaid": "103",
+  "city": "乌兰察布",
+  "code": "150900",
+  "id": "3",
+  "idNumber": "1526",
+  "initial": "W",
+  "provincecode": "103"
+}, {
+  "areacode": "0510",
+  "areaid": "330",
+  "city": "无锡市",
+  "cityid": "320200",
+  "code": "320200",
+  "id": "73",
+  "idNumber": "3202",
+  "initial": "W",
+  "provincecode": "330"
+}, {
+  "areacode": "0577",
+  "areaid": "470",
+  "city": "温州市",
+  "cityid": "330300",
+  "code": "330300",
+  "id": "95",
+  "idNumber": "3303",
+  "initial": "W",
+  "provincecode": "470"
+}, {
+  "areacode": "0553",
+  "areaid": "303",
+  "city": "芜湖市",
+  "cityid": "340200",
+  "code": "340200",
+  "id": "58",
+  "idNumber": "3402",
+  "initial": "W",
+  "provincecode": "303"
+}, {
+  "areacode": "0536",
+  "areaid": "155",
+  "city": "潍坊市",
+  "cityid": "370700",
+  "code": "370700",
+  "id": "21",
+  "idNumber": "3707",
+  "initial": "W",
+  "provincecode": "155"
+}, {
+  "areacode": "0631",
+  "areaid": "152",
+  "city": "威海市",
+  "cityid": "371000",
+  "code": "371000",
+  "id": "18",
+  "idNumber": "3710",
+  "initial": "W",
+  "provincecode": "152"
+}, {
+  "areacode": "027",
+  "areaid": "710",
+  "city": "武汉市",
+  "cityid": "420100",
+  "code": "420100",
+  "id": "154",
+  "idNumber": "4201",
+  "initial": "W",
+  "provincecode": "710"
+}, {
+  "areacode": "0774",
+  "areaid": "594",
+  "city": "梧州市",
+  "cityid": "450400",
+  "code": "450400",
+  "id": "136",
+  "idNumber": "4524",
+  "initial": "W",
+  "provincecode": "594"
+}, {
+  "areacode": "0876",
+  "areaid": "732",
+  "city": "文山州",
+  "code": "532600",
+  "id": "265",
+  "idNumber": "5326",
+  "initial": "W",
+  "provincecode": "732"
+}, {
+  "areacode": "0913",
+  "areaid": "843",
+  "city": "渭南市",
+  "cityid": "610500",
+  "code": "610500",
+  "id": "247",
+  "idNumber": "6121",
+  "initial": "W",
+  "provincecode": "843"
+}, {
+  "areacode": "0935",
+  "areaid": "874",
+  "city": "武威市",
+  "cityid": "620600",
+  "code": "620600",
+  "id": "284",
+  "idNumber": "6223",
+  "initial": "W",
+  "provincecode": "874"
+}, {
+  "city": "万州区",
+  "code": "500101",
+  "id": "242",
+  "initial": "W",
+  "provincecode": "833"
+}, {
+  "areacode": "0953",
+  "areaid": "883",
+  "city": "吴忠市",
+  "cityid": "640300",
+  "code": "640300",
+  "id": "295",
+  "idNumber": "642101",
+  "initial": "W",
+  "provincecode": "883"
+}, {
+  "areacode": "0991",
+  "areaid": "890",
+  "city": "乌鲁木齐市",
+  "cityid": "650100",
+  "code": "650100",
+  "id": "299",
+  "idNumber": "6501",
+  "initial": "W",
+  "provincecode": "890"
+}, {
+  "areacode": "0319",
+  "areaid": "185",
+  "city": "邢台市",
+  "cityid": "130500",
+  "code": "130500",
+  "id": "38",
+  "idNumber": "1305",
+  "initial": "X",
+  "provincecode": "185"
+}, {
+  "areacode": "0350",
+  "areaid": "198",
+  "city": "忻州市",
+  "cityid": "140900",
+  "code": "140900",
+  "id": "52",
+  "idNumber": "1422",
+  "initial": "X",
+  "provincecode": "198"
+}, {
+  "areacode": "0482",
+  "areaid": "113",
+  "city": "兴安盟",
+  "cityid": "152200",
+  "code": "152200",
+  "id": "12",
+  "idNumber": "1522",
+  "initial": "X",
+  "provincecode": "113"
+}, {
+  "areacode": "0479",
+  "areaid": "111",
+  "city": "锡林郭勒盟",
+  "cityid": "152500",
+  "code": "152500",
+  "id": "10",
+  "idNumber": "1525",
+  "initial": "X",
+  "provincecode": "111"
+}, {
+  "areacode": "0516",
+  "areaid": "350",
+  "city": "徐州市",
+  "cityid": "320300",
+  "code": "320300",
+  "id": "79",
+  "idNumber": "3203",
+  "initial": "X",
+  "provincecode": "350"
+}, {
+  "areacode": "0563",
+  "areaid": "311",
+  "city": "宣城市",
+  "cityid": "341800",
+  "code": "341800",
+  "id": "65",
+  "idNumber": "3425",
+  "initial": "X",
+  "provincecode": "311"
+}, {
+  "areacode": "0592",
+  "areaid": "390",
+  "city": "厦门市",
+  "cityid": "350200",
+  "code": "350200",
+  "id": "103",
+  "idNumber": "3502",
+  "initial": "X",
+  "provincecode": "390"
+}, {
+  "areacode": "0790",
+  "areaid": "753",
+  "city": "新余市",
+  "cityid": "360500",
+  "code": "360500",
+  "id": "187",
+  "idNumber": "3605",
+  "initial": "X",
+  "provincecode": "753"
+}, {
+  "areacode": "0373",
+  "areaid": "764",
+  "city": "新乡市",
+  "cityid": "410700",
+  "code": "410700",
+  "id": "198",
+  "idNumber": "4107",
+  "initial": "X",
+  "provincecode": "764"
+}, {
+  "areacode": "0374",
+  "areaid": "765",
+  "city": "许昌市",
+  "cityid": "411000",
+  "code": "411000",
+  "id": "199",
+  "idNumber": "4110",
+  "initial": "X",
+  "provincecode": "765"
+}, {
+  "areacode": "0376",
+  "areaid": "776",
+  "city": "信阳市",
+  "cityid": "411500",
+  "code": "411500",
+  "id": "210",
+  "idNumber": "4130",
+  "initial": "X",
+  "provincecode": "776"
+}, {
+  "areacode": "0710",
+  "areaid": "716",
+  "city": "襄阳市",
+  "cityid": "420600",
+  "code": "420600",
+  "id": "160",
+  "idNumber": "420621",
+  "initial": "X",
+  "provincecode": "716"
+}, {
+  "areacode": "0712",
+  "areaid": "717",
+  "city": "孝感市",
+  "cityid": "420900",
+  "code": "420900",
+  "id": "161",
+  "idNumber": "4209",
+  "initial": "X",
+  "provincecode": "717"
+}, {
+  "areacode": "0715",
+  "areaid": "719",
+  "city": "咸宁市",
+  "cityid": "421200",
+  "code": "421200",
+  "id": "163",
+  "idNumber": "4223",
+  "initial": "X",
+  "provincecode": "719"
+}, {
+  "areacode": "0731",
+  "areaid": "743",
+  "city": "湘潭市",
+  "cityid": "430300",
+  "code": "430300",
+  "id": "170",
+  "idNumber": "4303",
+  "initial": "X",
+  "provincecode": "743"
+}, {
+  "areacode": "0691",
+  "areaid": "736",
+  "city": "西双版纳傣族",
+  "code": "532800",
+  "id": "269",
+  "idNumber": "5328",
+  "initial": "X",
+  "provincecode": "736"
+}, {
+  "areacode": "029",
+  "areaid": "841",
+  "city": "西安市",
+  "cityid": "610100",
+  "code": "610100",
+  "id": "245",
+  "idNumber": "6101",
+  "initial": "X",
+  "provincecode": "841"
+}, {
+  "areacode": "029",
+  "areaid": "844",
+  "city": "咸阳市",
+  "cityid": "610400",
+  "code": "610400",
+  "id": "248",
+  "idNumber": "6104",
+  "initial": "X",
+  "provincecode": "844"
+}, {
+  "areacode": "0971",
+  "areaid": "700",
+  "city": "西宁市",
+  "cityid": "630100",
+  "code": "630100",
+  "id": "144",
+  "idNumber": "6301",
+  "initial": "X",
+  "provincecode": "700"
+}, {
+  "areacode": "0353",
+  "areaid": "192",
+  "city": "阳泉市",
+  "cityid": "140300",
+  "code": "140300",
+  "id": "46",
+  "idNumber": "1403",
+  "initial": "Y",
+  "provincecode": "192"
+}, {
+  "areacode": "0359",
+  "areaid": "196",
+  "city": "运城市",
+  "cityid": "140800",
+  "code": "140800",
+  "id": "50",
+  "idNumber": "1427",
+  "initial": "Y",
+  "provincecode": "196"
+}, {
+  "areacode": "0417",
+  "areaid": "917",
+  "city": "营口市",
+  "cityid": "210800",
+  "code": "210800",
+  "id": "331",
+  "idNumber": "2108",
+  "initial": "Y",
+  "provincecode": "917"
+}, {
+  "areacode": "0433",
+  "areaid": "909",
+  "city": "延边朝鲜族",
+  "code": "222400",
+  "id": "323",
+  "idNumber": "2224",
+  "initial": "Y",
+  "provincecode": "909"
+}, {
+  "areacode": "0458",
+  "areaid": "996",
+  "city": "伊春市",
+  "cityid": "230700",
+  "code": "230700",
+  "id": "350",
+  "idNumber": "2307",
+  "initial": "Y",
+  "provincecode": "996"
+}, {
+  "areacode": "0515",
+  "areaid": "348",
+  "city": "盐城市",
+  "cityid": "320900",
+  "code": "320900",
+  "id": "77",
+  "idNumber": "3209",
+  "initial": "Y",
+  "provincecode": "348"
+}, {
+  "areacode": "0514",
+  "areaid": "430",
+  "city": "扬州市",
+  "cityid": "321000",
+  "code": "321000",
+  "id": "82",
+  "idNumber": "3210",
+  "initial": "Y",
+  "provincecode": "430"
+}, {
+  "areacode": "0701",
+  "areaid": "754",
+  "city": "鹰潭市",
+  "cityid": "360600",
+  "code": "360600",
+  "id": "188",
+  "idNumber": "3606",
+  "initial": "Y",
+  "provincecode": "754"
+}, {
+  "areacode": "0795",
+  "areaid": "756",
+  "city": "宜春市",
+  "cityid": "360900",
+  "code": "360900",
+  "id": "190",
+  "idNumber": "3622",
+  "initial": "Y",
+  "provincecode": "756"
+}, {
+  "areacode": "0535",
+  "areaid": "161",
+  "city": "烟台市",
+  "cityid": "370600",
+  "code": "370600",
+  "id": "27",
+  "idNumber": "3706",
+  "initial": "Y",
+  "provincecode": "161"
+}, {
+  "areacode": "0717",
+  "areaid": "711",
+  "city": "宜昌市",
+  "cityid": "420500",
+  "code": "420500",
+  "id": "155",
+  "idNumber": "4205",
+  "initial": "Y",
+  "provincecode": "711"
+}, {
+  "areacode": "0730",
+  "areaid": "745",
+  "city": "岳阳市",
+  "cityid": "430600",
+  "code": "430600",
+  "id": "172",
+  "idNumber": "4306",
+  "initial": "Y",
+  "provincecode": "745"
+}, {
+  "areacode": "0737",
+  "areaid": "747",
+  "city": "益阳市",
+  "cityid": "430900",
+  "code": "430900",
+  "id": "174",
+  "idNumber": "4323",
+  "initial": "Y",
+  "provincecode": "747"
+}, {
+  "areacode": "0746",
+  "areaid": "796",
+  "city": "永州市",
+  "cityid": "431100",
+  "code": "431100",
+  "id": "182",
+  "idNumber": "432901",
+  "initial": "Y",
+  "provincecode": "796"
+}, {
+  "areacode": "0662",
+  "areaid": "565",
+  "city": "阳江市",
+  "cityid": "441700",
+  "code": "441700",
+  "id": "123",
+  "idNumber": "4417",
+  "initial": "Y",
+  "provincecode": "565"
+}, {
+  "areacode": "0766",
+  "areaid": "538",
+  "city": "云浮市",
+  "cityid": "445300",
+  "code": "445300",
+  "id": "117",
+  "idNumber": "441281",
+  "initial": "Y",
+  "provincecode": "538"
+}, {
+  "areacode": "0775",
+  "areaid": "595",
+  "city": "玉林市",
+  "cityid": "450900",
+  "code": "450900",
+  "id": "137",
+  "idNumber": "4525",
+  "initial": "Y",
+  "provincecode": "595"
+}, {
+  "areacode": "0831",
+  "areaid": "817",
+  "city": "宜宾市",
+  "cityid": "511500",
+  "code": "511500",
+  "id": "226",
+  "idNumber": "5125",
+  "initial": "Y",
+  "provincecode": "817"
+}, {
+  "areacode": "0835",
+  "areaid": "811",
+  "city": "雅安市",
+  "cityid": "511800",
+  "code": "511800",
+  "id": "220",
+  "idNumber": "5131",
+  "initial": "Y",
+  "provincecode": "811"
+}, {
+  "areacode": "0877",
+  "areaid": "865",
+  "city": "玉溪市",
+  "cityid": "530400",
+  "code": "530400",
+  "id": "275",
+  "idNumber": "5324",
+  "initial": "Y",
+  "provincecode": "865"
+}, {
+  "areacode": "0911",
+  "areaid": "842",
+  "city": "延安市",
+  "cityid": "610600",
+  "code": "610600",
+  "id": "246",
+  "idNumber": "6126",
+  "initial": "Y",
+  "provincecode": "842"
+}, {
+  "areacode": "0912",
+  "areaid": "845",
+  "city": "榆林市",
+  "cityid": "610800",
+  "code": "610800",
+  "id": "249",
+  "idNumber": "6127",
+  "initial": "Y",
+  "provincecode": "845"
+}, {
+  "areacode": "0976",
+  "areaid": "709",
+  "city": "玉树藏族",
+  "code": "632700",
+  "id": "153",
+  "idNumber": "6327",
+  "initial": "Y",
+  "provincecode": "709"
+}, {
+  "areacode": "0951",
+  "areaid": "880",
+  "city": "银川市",
+  "cityid": "640100",
+  "code": "640100",
+  "id": "294",
+  "idNumber": "6401",
+  "initial": "Y",
+  "provincecode": "880"
+}, {
+  "areacode": "0999",
+  "areaid": "898",
+  "city": "伊犁州",
+  "code": "654000",
+  "id": "307",
+  "idNumber": "6540",
+  "initial": "Y",
+  "provincecode": "898"
+}, {
+  "areacode": "0313",
+  "areaid": "184",
+  "city": "张家口市",
+  "cityid": "130700",
+  "code": "130700",
+  "id": "37",
+  "idNumber": "1307",
+  "initial": "Z",
+  "provincecode": "184"
+}, {
+  "areacode": "0511",
+  "areaid": "343",
+  "city": "镇江市",
+  "cityid": "321100",
+  "code": "321100",
+  "id": "75",
+  "idNumber": "3211",
+  "initial": "Z",
+  "provincecode": "343"
+}, {
+  "areacode": "0580",
+  "areaid": "364",
+  "city": "舟山市",
+  "cityid": "330900",
+  "code": "330900",
+  "id": "89",
+  "idNumber": "3309",
+  "initial": "Z",
+  "provincecode": "364"
+}, {
+  "areacode": "0596",
+  "areaid": "395",
+  "city": "漳州市",
+  "cityid": "350600",
+  "code": "350600",
+  "id": "104",
+  "idNumber": "3506",
+  "initial": "Z",
+  "provincecode": "395"
+}, {
+  "city": "哲里木盟",
+  "code": "152300",
+  "id": "11",
+  "initial": "Z",
+  "provincecode": "112"
+}, {
+  "areacode": "0533",
+  "areaid": "150",
+  "city": "淄博市",
+  "cityid": "370300",
+  "code": "370300",
+  "id": "16",
+  "idNumber": "3703",
+  "initial": "Z",
+  "provincecode": "150"
+}, {
+  "areacode": "0632",
+  "areaid": "157",
+  "city": "枣庄市",
+  "cityid": "370400",
+  "code": "370400",
+  "id": "23",
+  "idNumber": "3704",
+  "initial": "Z",
+  "provincecode": "157"
+}, {
+  "areacode": "0371",
+  "areaid": "760",
+  "city": "郑州市",
+  "cityid": "410100",
+  "code": "410100",
+  "id": "194",
+  "idNumber": "4101",
+  "initial": "Z",
+  "provincecode": "760"
+}, {
+  "areacode": "0394",
+  "areaid": "770",
+  "city": "周口市",
+  "cityid": "411600",
+  "code": "411600",
+  "id": "204",
+  "idNumber": "4127",
+  "initial": "Z",
+  "provincecode": "770"
+}, {
+  "areacode": "0396",
+  "areaid": "771",
+  "city": "驻马店市",
+  "cityid": "411700",
+  "code": "411700",
+  "id": "205",
+  "idNumber": "4128",
+  "initial": "Z",
+  "provincecode": "771"
+}, {
+  "areacode": "0731",
+  "areaid": "742",
+  "city": "株洲市",
+  "cityid": "430200",
+  "code": "430200",
+  "id": "169",
+  "idNumber": "4302",
+  "initial": "Z",
+  "provincecode": "742"
+}, {
+  "areacode": "0744",
+  "areaid": "794",
+  "city": "张家界市",
+  "cityid": "430800",
+  "code": "430800",
+  "id": "180",
+  "idNumber": "4308",
+  "initial": "Z",
+  "provincecode": "794"
+}, {
+  "areacode": "0756",
+  "areaid": "620",
+  "city": "珠海市",
+  "cityid": "440400",
+  "code": "440400",
+  "id": "127",
+  "idNumber": "4404",
+  "initial": "Z",
+  "provincecode": "620"
+}, {
+  "areacode": "0759",
+  "areaid": "520",
+  "city": "湛江市",
+  "cityid": "440800",
+  "code": "440800",
+  "id": "108",
+  "idNumber": "4408",
+  "initial": "Z",
+  "provincecode": "520"
+}, {
+  "areacode": "0758",
+  "areaid": "536",
+  "city": "肇庆市",
+  "cityid": "441200",
+  "code": "441200",
+  "id": "116",
+  "idNumber": "4412",
+  "initial": "Z",
+  "provincecode": "536"
+}, {
+  "areacode": "0760",
+  "areaid": "556",
+  "city": "中山市",
+  "cityid": "442000",
+  "code": "442000",
+  "id": "120",
+  "idNumber": "4420",
+  "initial": "Z",
+  "provincecode": "556"
+}, {
+  "areacode": "0813",
+  "areaid": "818",
+  "city": "自贡市",
+  "cityid": "510300",
+  "code": "510300",
+  "id": "227",
+  "idNumber": "5103",
+  "initial": "Z",
+  "provincecode": "818"
+}, {
+  "areacode": "028",
+  "areaid": "830",
+  "city": "资阳市",
+  "cityid": "512000",
+  "code": "512000",
+  "id": "239",
+  "idNumber": "511081",
+  "initial": "Z",
+  "provincecode": "830"
+}, {
+  "areacode": "0851",
+  "areaid": "787",
+  "city": "遵义市",
+  "cityid": "520300",
+  "code": "520300",
+  "id": "256",
+  "idNumber": "5221",
+  "initial": "Z",
+  "provincecode": "787"
+}, {
+  "areacode": "0870",
+  "areaid": "867",
+  "city": "昭通市",
+  "cityid": "530600",
+  "code": "530600",
+  "id": "277",
+  "idNumber": "5321",
+  "initial": "Z",
+  "provincecode": "867"
+}, {
+  "areacode": "0936",
+  "areaid": "875",
+  "city": "张掖市",
+  "cityid": "620700",
+  "code": "620700",
+  "id": "285",
+  "idNumber": "6222",
+  "initial": "Z",
+  "provincecode": "875"
+}, {
+  "areacode": "0955",
+  "areaid": "886",
+  "city": "中卫市",
+  "cityid": "640500",
+  "code": "640500",
+  "id": "298",
+  "idNumber": "642123",
+  "initial": "Z",
+  "provincecode": "886"
+}]
+
+export default cities;

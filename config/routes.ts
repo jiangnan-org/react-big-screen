@@ -48,19 +48,9 @@ export default [
         component: './Monitor/StatisticalAnalysis',
       },
       {
-        path: '/monitor/performance-evaluation',
-        name: 'performance-evaluation',
-        component: './Monitor/PerformanceEvaluation',
-      },
-      {
-        path: '/monitor/early-warning-analysis',
-        name: 'early-warning-analysis',
-        component: './Monitor/EarlyWarningAnalysis',
-      },
-      {
-        path: '/monitor/link-analysis',
-        name: 'link-analysis',
-        component: './Monitor/LinkAnalysis',
+        path: '/monitor/device-monitor',
+        name: 'device-monitor',
+        component: './Monitor/DeviceMonitor',
       }
     ],
   },
@@ -97,6 +87,13 @@ export default [
         ]
       },
     ]
+  },
+  // 运营
+  {
+    path: '/operation',
+    name: 'operation',
+    icon: 'appstore',
+    component: './Operation',
   },
   // 报表
   {
