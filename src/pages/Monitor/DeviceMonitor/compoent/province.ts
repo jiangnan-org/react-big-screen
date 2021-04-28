@@ -1,11 +1,14 @@
-// 地址文件
-const provinces: {
-  name: string,
+// 类型定义
+export interface ProvinceItem {
+  name: string
   city: {
     name: string,
     districtAndCounty: string[]
   }[]
-}[] = [
+};
+
+// 地址文件
+const provinces: ProvinceItem[] = [
   {
     name: "北京市",
     city: [

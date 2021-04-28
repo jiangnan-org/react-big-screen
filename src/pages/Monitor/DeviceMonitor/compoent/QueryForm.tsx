@@ -3,26 +3,40 @@
  * @Author: zy
  * @Description: 查询表单 https://procomponents.ant.design/components/field-set
  */
-import ProForm, {ProFormSelect, ProFormRadio} from "@ant-design/pro-form";
-import {message,Button} from 'antd'
-import provinces from './province';
+import ProForm, {ProFormSelect, ProFormRadio,ProFormDependency} from "@ant-design/pro-form";
+import {message,Button,Form,Select} from 'antd'
+import provinces,{ProvinceItem} from './province';
 import _ from 'lodash';
 import styles from './index.less';
 import {SearchOutlined} from '@ant-design/icons';
 
+const { Option } = Select;
 export default () => {
 
-  console.log(_.map(provinces,province=> {
-    return {
-      name:province.name,
-      value: province.name
-    }
-  }));
+  // https://ant.design/components/form-cn/#header
+  const [form] = Form.useForm();
+
+  // 省份改变
+  const onProvinceChange = () => {
+    // 清空城市
+    form.setFieldsValue({ city: undefined });
+  };
+
   // @ts-ignore
   return (
-    <ProForm
-      onFinish={async () => {
+    <ProForm<{
+      sort: string,
+      order: string,
+      province: string,
+      city: string
+    }>
+      form={form}
+      onFinish={async (values: any) => {
         message.success('提交成功');
+        console.log('提交内容',values);
+      }}
+      initialValues={{
+        order: 'descend',
       }}
       className={styles.query}
       submitter={{
@@ -69,30 +83,53 @@ export default () => {
           ]}
         />
 
-      <ProFormSelect
+      <Form.Item
         name="province"
         label="区域："
-        placeholder='请选择省份'
-        width={100}
-        options={_.map(provinces,province=> {
-          return {
-            label:province.name,
-            value: province.name
+      >
+        <Select
+          placeholder='请选择省份'
+          onChange={onProvinceChange}
+          allowClear
+          style={{width:'100px'}}
+        >
+          {
+            _.map(provinces,province=>(<Option key={province.name} value={province.name}>{province.name}</Option>))
           }
-        })}
-      />
+        </Select>
+      </Form.Item>
 
-      <ProFormSelect
-        name="city"
-        placeholder='请选择城市'
-        width={120}
-        options={_.map(provinces,province=> {
-          return {
-            label:province.name,
-            value: province.name
+      <ProFormDependency name={['province']}>
+        {({province})=>{
+          // 获取省份
+          let cities: string[] = [];
+          if(province) {
+            // 获取当前选中的省份或者直辖市
+            const list: ProvinceItem[] = _.filter(provinces, item => {return item.name === province});
+            // 直辖市
+            if(list[0].city.length === 1){
+              // 这里实际是区
+              cities = list[0].city[0].districtAndCounty;
+            }else {
+              cities = _.map(list[0].city, city => city.name);
+            }
           }
-        })}
-      />
+          return (
+            <ProFormSelect
+              name="city"
+              placeholder='请选择城市'
+              width={120}
+              resetAfterSelect
+              options={_.map(cities,city=> {
+                return {
+                  label:city,
+                  value: city
+                }
+              })}
+            />
+          )
+          }}
+      </ProFormDependency>
     </ProForm>
   )
 };
