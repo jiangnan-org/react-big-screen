@@ -3,12 +3,13 @@
  * @Author: zy
  * @Description: 查询表单 https://procomponents.ant.design/components/field-set
  */
-import ProForm, {ProFormSelect, ProFormRadio,ProFormDependency} from "@ant-design/pro-form";
+import ProForm, {ProFormSelect, ProFormRadio,ProFormDependency} from '@ant-design/pro-form';
 import {message,Button,Form,Select} from 'antd'
-import provinces,{ProvinceItem} from './province';
+import provinces, {ProvinceItem} from './province';
 import _ from 'lodash';
 import styles from './index.less';
 import {SearchOutlined} from '@ant-design/icons';
+import React from 'react';
 
 const { Option } = Select;
 export default () => {
@@ -25,7 +26,7 @@ export default () => {
   // @ts-ignore
   return (
     <ProForm<{
-      sort: string,
+      sortBy: string,
       order: string,
       province: string,
       city: string
@@ -35,6 +36,7 @@ export default () => {
         message.success('提交成功');
         console.log('提交内容',values);
       }}
+      // 默认值
       initialValues={{
         order: 'descend',
       }}
@@ -45,17 +47,17 @@ export default () => {
           <Button
             type='primary'
             icon={<SearchOutlined/>}
-            key="submit"
+            key='submit'
             onClick={() => props.form?.submit?.()}
           >
-            搜索设备号
+            搜索设备
           </Button>
         ),
       }}
     >
         <ProFormSelect
-          name="sort"
-          label="排序："
+          name='sortBy'
+          label='排序：'
           placeholder='请选择排序字段'
           width={160}
           options={[
@@ -68,8 +70,8 @@ export default () => {
         />
 
         <ProFormRadio.Group
-          name="order"
-          radioType="button"
+          name='order'
+          radioType='button'
           width={80}
           options={[
             {
@@ -84,8 +86,8 @@ export default () => {
         />
 
       <Form.Item
-        name="province"
-        label="区域："
+        name='province'
+        label='区域：'
       >
         <Select
           placeholder='请选择省份'
@@ -116,10 +118,9 @@ export default () => {
           }
           return (
             <ProFormSelect
-              name="city"
+              name='city'
               placeholder='请选择城市'
               width={120}
-              resetAfterSelect
               options={_.map(cities,city=> {
                 return {
                   label:city,

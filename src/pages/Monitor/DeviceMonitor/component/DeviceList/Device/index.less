@@ -1,0 +1,22 @@
+@import '~antd/lib/style/themes/default.less';
+
+.device{
+  .info{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.2em;
+
+    :global {
+      .ant-descriptions-item-label,.ant-descriptions-item-content {
+        color: @text-color-secondary;
+      }
+    }
+  }
+
+  .curve{
+    min-height: 270px;
+    height: 42%;
+  }
+}

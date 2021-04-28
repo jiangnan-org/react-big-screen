@@ -1,5 +1,6 @@
 import React from 'react';
-import QueryForm from './compoent/QueryForm';
+import QueryForm from './component/QueryForm';
+import DeviceList from './component/DeviceList';
 import ProCard from "@ant-design/pro-card";
 import styles from './index.less';
 
@@ -15,7 +16,7 @@ export default (): React.ReactNode => {
         </ProCard>
         <Divider />
         <ProCard>
-          。。。。。
+          <DeviceList />
         </ProCard>
       </ProCard>
     </React.Fragment>
