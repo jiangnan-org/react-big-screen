@@ -4,6 +4,7 @@ export default {
   'menu.monitor.parameter-monitor':'参数监控',
   'menu.monitor.statistical-analysis':'统计分析',
   'menu.monitor.device-monitor':'设备监控',
+  'menu.monitor.device-detail':'设备详情',
   'menu.maintenance': '智能运维',
   'menu.maintenance.alarm': '告警',
   'menu.maintenance.inspect': '巡检管理',

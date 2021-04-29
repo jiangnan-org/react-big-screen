@@ -51,6 +51,13 @@ export default [
         path: '/monitor/device-monitor',
         name: 'device-monitor',
         component: './Monitor/DeviceMonitor',
+      },
+      // 设备详情页面、由设备监控页面进入 不在菜单显示 https://beta-pro.ant.design/docs/router-and-nav-cn
+      {
+        path: '/monitor/device-detail/:sn',
+        name: 'device-detail',
+        hideInMenu: true,
+        component: './Monitor/DeviceDetail',
       }
     ],
   },

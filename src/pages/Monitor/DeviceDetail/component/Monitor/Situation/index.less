@@ -1,0 +1,43 @@
+@import '~antd/lib/style/themes/default.less';
+
+.container{
+  :global{
+    .ant-pro-card-border{
+      border-radius: 10px !important;
+      font-weight: bolder;
+      border: 2px solid;
+      box-shadow: @text-color-secondary 0 0 0 5px 5px inset;
+    }
+
+    .ant-pro-card-header{
+      text-shadow: 1px 1px 0 @text-color-secondary;
+      .ant-pro-card-title{
+        font-size: 1.2em ;
+        font-weight: bolder;
+      }
+    }
+
+    .ant-pro-card-body-center{
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-left: 20px;
+    }
+  }
+
+  .left{
+    background-color: #0898bd;
+  }
+
+  .leftMiddle{
+    background-color: #c750f1;
+  }
+
+  .rightMiddle{
+    background-color: #d34af8;
+  }
+
+  .right{
+    background-color: #11bce7;
+  }
+}

@@ -5,9 +5,10 @@
  */
 import React from 'react';
 import ProList from '@ant-design/pro-list';
-import Device from './Device';
+import BaseInfo from './BaseInfo';
 import styles from './index.less';
 import {DesktopOutlined} from '@ant-design/icons';
+import {Link} from 'umi';
 
 export default () => {
   // 数据
@@ -21,10 +22,10 @@ export default () => {
     subTitle: item,
     actions: [
       <a>表单打印</a>,
-      <a>查看详情</a>
+      <Link to={`/monitor/device-detail/${item.substring(5)}`}>查看详情</Link>
     ],
     content: (
-      <Device />
+      <BaseInfo />
     ),
   }));
 
