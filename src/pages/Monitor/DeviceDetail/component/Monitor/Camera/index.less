@@ -3,7 +3,7 @@
 .camera {
   width: 100%;
   height: calc(100vh - 280px);
-  min-height: 240px;
+  min-height: 450px;
   border: 1px solid @text-color;
   border-radius: 10px !important;
   box-shadow: @text-color 0 0 0 1px inset;
@@ -14,5 +14,27 @@
       font-size: 1.2em !important;
       background-color: @text-color-secondary;
     }
+
+    .ant-pro-card-body{
+      display: flex;
+      flex-direction: row;
+    }
+
+    #video-container{
+      width:600px;
+      height:400px
+    }
+  }
+
+  .action{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    button{
+      margin-bottom: 13px;
+      margin-left: 16px;
+    }
+
   }
 }
