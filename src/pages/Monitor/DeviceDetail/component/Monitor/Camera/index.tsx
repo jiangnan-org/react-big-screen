@@ -1,9 +1,11 @@
+/**
+ * 萤石摄像头指南   http://open.ys7.com/doc/zh/uikit/uikit_javascript.html
+ */
 import React,{useState,useEffect} from 'react';
 import ProCard from '@ant-design/pro-card';
 import styles from './index.less';
 import  EZUIKit from 'ezuikit-js';
 import {Button} from 'antd';
-
 
 export default () => {
   // 播放器
