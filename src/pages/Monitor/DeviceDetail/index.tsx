@@ -12,7 +12,7 @@ export default () => {
 
   const callback = (key: any) => {
     console.log(key,params);
-  }
+  };
 
   return (
     <React.Fragment>

@@ -1,7 +1,7 @@
 import React from 'react';
-import ProCard from '@ant-design/pro-card';
+import ProCard from '_@ant-design_pro-card@1.11.7@@ant-design/pro-card';
 import styles from './index.less';
-import ReactEcharts from 'echarts-for-react';
+import ReactEcharts from '_echarts-for-react@3.0.1@echarts-for-react';
 import { genOption } from './option';
 
 export default () => {

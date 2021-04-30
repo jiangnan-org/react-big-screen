@@ -1,6 +1,6 @@
 import React from 'react';
-import PowerGenerationCurve from '../PowerGenerationCurve';
-import ElectricityConsumptionCurve from '../ElectricityConsumptionCurve';
+import PowerGenerationCurve from './PowerGenerationCurve';
+import ElectricityConsumptionCurve from './ElectricityConsumptionCurve';
 import styles from './index.less';
 import {Row, Col} from 'antd';
 import {Descriptions} from 'antd';

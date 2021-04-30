@@ -323,7 +323,7 @@ export const genOption = () => {
       splitNumber: 3,
       dimension: 2,
       textStyle: {
-        color: 'rgba(255, 255, 255, 0.45)',
+        color: 'rgba(255, 255, 255, 85)',
       },
       // 图形的宽度、高度 左下角、图例
       itemWidth: 8,

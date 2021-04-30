@@ -26,7 +26,7 @@ export const genOption = (data: {
         color: '#17dea6'
       },
       textStyle: {
-        color: 'rgba(255, 255, 255, 0.45)'
+        color: 'rgba(255, 255, 255, 85)'
       },
       left: 'center',
       top: 10,
@@ -54,7 +54,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(255, 255, 255, 0.45)'
+            color: 'rgba(255, 255, 255, 85)'
           }
         },
         type: 'category',
@@ -69,7 +69,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(255, 255, 255, 0.45)'
+            color: 'rgba(255, 255, 255, 85)'
           }
         },
         // 水平分割线
