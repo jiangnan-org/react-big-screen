@@ -1,0 +1,18 @@
+@import '~antd/lib/style/themes/default.less';
+
+.camera {
+  width: 100%;
+  height: calc(100vh - 280px);
+  min-height: 240px;
+  border: 1px solid @text-color;
+  border-radius: 10px !important;
+  box-shadow: @text-color 0 0 0 1px inset;
+
+  :global {
+    .ant-pro-card-header {
+      padding-bottom: 8px;
+      font-size: 1.2em !important;
+      background-color: @text-color-secondary;
+    }
+  }
+}
