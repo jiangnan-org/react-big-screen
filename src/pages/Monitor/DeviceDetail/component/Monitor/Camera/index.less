@@ -2,39 +2,40 @@
 
 .camera {
   width: 100%;
-  height: calc(100vh - 280px);
-  min-height: 450px;
-  border: 1px solid @text-color;
   border-radius: 10px !important;
-  box-shadow: @text-color 0 0 0 1px inset;
 
-  :global {
-    .ant-pro-card-header {
-      padding-bottom: 8px;
-      font-size: 1.2em !important;
-      background-color: @text-color-secondary;
+  .left {
+    width: 600px;
+    margin-top: 20px;
+    min-height: 420px;
+    border: none;
+    :global {
+      .ant-pro-card-header {
+        padding-bottom: 8px;
+        font-size: 1.2em !important;
+        background-color: @text-color-secondary;
+      }
+
+      .ant-pro-card-body{
+        padding: 0 !important;
+      }
     }
 
-    .ant-pro-card-body{
-      display: flex;
-      flex-direction: row;
-    }
-
-    #video-container{
-      width:600px;
-      height:400px
+    #video-container {
+      width: 100%;
+      height: 100%;
     }
   }
 
-  .action{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+  .right{
+    flex: 1;
+    width: calc(100vh - 620px);
 
-    button{
-      margin-bottom: 13px;
-      margin-left: 16px;
+    .curve{
+      min-height: 240px;
+      margin-bottom: 36px;
+      height: 42%;
+      width: 100%;
     }
-
   }
 }
