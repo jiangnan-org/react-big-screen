@@ -1,33 +1,25 @@
-import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined } from '@ant-design/icons';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Above from './components/Above';
-import Unread from './components/Unread';
+import { Tabs } from 'antd';
+import Unread from './Unread';
+import { Layout } from 'antd';
 
-const handleClick = () => {
-  console.log('click ');
-};
-export default () => {
-  return (
-    <Router>
-      <Menu
-        onClick={handleClick}
-        style={{ width: 256 }}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        mode="inline"
-      >
-        <Menu.Item key="1">
-          <Link to="/unread">{<MailOutlined />}未读报警</Link>
-        </Menu.Item>
-        <Menu.Item key="2">
-          <Link to="/above">{<AppstoreOutlined />}全部报警</Link>
-        </Menu.Item>
-      </Menu>
-      <div>
-        <Route path="/unread" component={Unread} />
-        <Route path="/above" component={Above} />
-      </div>
-    </Router>
-  );
-};
+const { Content } = Layout;
+const { TabPane } = Tabs;
+
+function callback() {
+  console.log();
+}
+
+export default () => (
+  <Layout>
+    <Content>
+      <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="未读报警" key="one">
+          <Unread />
+        </TabPane>
+        <TabPane tab="全部报警" key="two">
+          全部的
+        </TabPane>
+      </Tabs>
+    </Content>
+  </Layout>
+);
