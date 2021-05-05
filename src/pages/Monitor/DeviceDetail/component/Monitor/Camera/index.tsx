@@ -1,6 +1,6 @@
 /**
  * 萤石摄像头指南   http://open.ys7.com/doc/zh/uikit/uikit_javascript.html
- * 账号 18151521911@163.com 123456aa@
+ * 账号 xxxxxx@163.com xxxxxxaa@
  */
 import React, {useState, useEffect} from 'react';
 import ProCard from '@ant-design/pro-card';
