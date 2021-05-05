@@ -49,7 +49,7 @@ export default () => {
         className={styles.powerCurve}
         title={
           <div>
-            <span className={styles.chinese}>实时发电功率曲线</span>
+            <span className={styles.chinese}>电池充电功率曲线</span>
             <span className={styles.english}>Real time Power Curve</span>
           </div>
         }
