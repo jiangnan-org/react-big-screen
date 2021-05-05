@@ -48,7 +48,20 @@ export default defineConfig({
   esbuild: {},
   title: false,
   ignoreMomentLocale: true,
-  proxy: proxy[REACT_APP_ENV || 'dev'],
+  // proxy: proxy[REACT_APP_ENV || 'dev'],
+  // https://beta-pro.ant.design/docs/proxy-cn
+  proxy: {
+    '/yuncang/api/': {
+      target: 'https://preview.pro.ant.design/',
+      changeOrigin: true,
+      pathRewrite: { '^/server': '' },
+    },
+    '/ys/api': {
+      target: 'https://open.ys7.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/ys/api': '/api' },
+    },
+  },
   manifest: {
     basePath: '/',
   },

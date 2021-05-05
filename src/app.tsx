@@ -163,7 +163,7 @@ const loggerMiddleware = async (ctx: Context, next: () => void) => {
 
   // 映射
   ctx.res = {
-    success: (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code === 200 : true),
+    success: (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code == 200 : true),
     errorMessage: ctx.res.errorMessage || ctx.res.msg,
     ...ctx.res
   };
