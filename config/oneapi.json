@@ -1,593 +1,784 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
-    "title": "Ant Design Pro",
-    "version": "1.0.0"
+    "description": "智能云仓接口",
+    "version": "1.0",
+    "title": "Yuncang"
   },
-  "servers": [
-    {
-      "url": "http://localhost:8000/"
-    },
-    {
-      "url": "https://localhost:8000/"
-    }
-  ],
+  "host": "81.68.217.175:9001",
+  "basePath": "/",
+  "tags": [{
+    "name": "data-controller",
+    "description": "Data Controller"
+  }, {
+    "name": "用户控制器",
+    "description": "Sys User Controller"
+  }, {
+    "name": "登录",
+    "description": "Login Controller"
+  }, {
+    "name": "联系人控制器",
+    "description": "Operator Controller"
+  }],
   "paths": {
-    "/api/currentUser": {
-      "get": {
-        "tags": ["api"],
-        "description": "获取当前的用户",
-        "operationId": "currentUser",
+    "/data/add": {
+      "post": {
+        "tags": ["data-controller"],
+        "summary": "add",
+        "operationId": "addUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "in": "body",
+          "name": "data",
+          "description": "data",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Data对象"
+          }
+        }],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CurrentUser"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-swagger-router-controller": "api"
-    },
-    "/api/login/captcha": {
-      "post": {
-        "description": "发送验证码",
-        "operationId": "getFakeCaptcha",
-        "tags": ["login"],
-        "parameters": [
-          {
-            "name": "phone",
-            "in": "query",
-            "description": "手机号",
+            "description": "OK",
             "schema": {
               "type": "string"
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FakeCaptcha"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/login/outLogin": {
-      "post": {
-        "description": "登录接口",
-        "operationId": "outLogin",
-        "tags": ["login"],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+          },
+          "201": {
+            "description": "Created"
           },
           "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-swagger-router-controller": "api"
-    },
-    "/api/login/account": {
-      "post": {
-        "tags": ["login"],
-        "description": "登录接口",
-        "operationId": "login",
-        "requestBody": {
-          "description": "登录系统",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginParams"
-              }
-            }
+            "description": "Unauthorized"
           },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginResult"
-                }
-              }
-            }
+          "403": {
+            "description": "Forbidden"
           },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
+          "404": {
+            "description": "Not Found"
           }
         },
-        "x-codegen-request-body-name": "body"
-      },
-      "x-swagger-router-controller": "api"
-    },
-    "/api/notices": {
-      "summary": "getNotices",
-      "description": "NoticeIconItem",
-      "get": {
-        "tags": ["api"],
-        "operationId": "getNotices",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NoticeIconList"
-                }
-              }
-            }
-          }
-        }
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
       }
     },
-    "/api/rule": {
-      "get": {
-        "tags": ["rule"],
-        "description": "获取规则列表",
-        "operationId": "rule",
-        "parameters": [
-          {
-            "name": "current",
-            "in": "query",
-            "description": "当前的页码",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "页面的容量",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RuleList"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/login": {
       "post": {
-        "tags": ["rule"],
-        "description": "新建规则",
-        "operationId": "addRule",
+        "tags": ["登录"],
+        "summary": "login",
+        "operationId": "loginUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "in": "body",
+          "name": "loginParam",
+          "description": "loginParam",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/登录对象"
+          }
+        }],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RuleListItem"
-                }
-              }
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«string»"
             }
           },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["rule"],
-        "description": "新建规则",
-        "operationId": "updateRule",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RuleListItem"
-                }
-              }
-            }
+          "201": {
+            "description": "Created"
           },
           "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["rule"],
-        "description": "删除规则",
-        "operationId": "removeRule",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
+            "description": "Unauthorized"
           },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
-        }
-      },
-      "x-swagger-router-controller": "api"
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
     },
-    "/swagger": {
-      "x-swagger-pipe": "swagger_raw"
+    "/operator/add": {
+      "post": {
+        "tags": ["联系人控制器"],
+        "summary": "增加联系人信息",
+        "operationId": "addUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "in": "body",
+          "name": "operator",
+          "description": "operator",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Operator对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«string»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/operator/del": {
+      "post": {
+        "tags": ["联系人控制器"],
+        "summary": "删除联系人",
+        "operationId": "deleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«string»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/operator/get": {
+      "get": {
+        "tags": ["联系人控制器"],
+        "summary": "由id查询联系人信息",
+        "operationId": "getByIdUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«Operator对象»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/operator/getall": {
+      "get": {
+        "tags": ["联系人控制器"],
+        "summary": "获取所有联系人信息",
+        "operationId": "getAllUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«List«Operator对象»»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/operator/update": {
+      "post": {
+        "tags": ["联系人控制器"],
+        "summary": "修改联系人信息",
+        "operationId": "updateUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "in": "body",
+          "name": "operator",
+          "description": "operator",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Operator对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«Operator对象»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/user/add": {
+      "post": {
+        "tags": ["用户控制器"],
+        "summary": "增加用户",
+        "operationId": "addUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "in": "body",
+          "name": "user",
+          "description": "user",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SysUser对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«string»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/user/checkusername": {
+      "get": {
+        "tags": ["用户控制器"],
+        "summary": "检测登录名是否已存在",
+        "operationId": "checkUsernameUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "name": "username",
+          "in": "query",
+          "description": "username",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«string»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/user/get": {
+      "get": {
+        "tags": ["用户控制器"],
+        "summary": "根据用户名获取用户信息",
+        "operationId": "getUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }, {
+          "name": "username",
+          "in": "query",
+          "description": "username",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«SysUser对象»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/user/getme": {
+      "get": {
+        "tags": ["用户控制器"],
+        "summary": "获取当前用户信息",
+        "operationId": "getMeUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "Authorization",
+          "in": "header",
+          "description": "token",
+          "required": false,
+          "type": "string",
+          "default": "Bearer "
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserResponseEntity«SysUser对象»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }],
+        "deprecated": false
+      }
     }
   },
-  "components": {
-    "schemas": {
-      "CurrentUser": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "userid": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "signature": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "group": {
-            "type": "string"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "key": {
-                  "type": "string"
-                },
-                "label": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "notifyCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "unreadCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "country": {
-            "type": "string"
-          },
-          "access": {
-            "type": "string"
-          },
-          "geographic": {
-            "type": "object",
-            "properties": {
-              "province": {
-                "type": "object",
-                "properties": {
-                  "label": {
-                    "type": "string"
-                  },
-                  "key": {
-                    "type": "string"
-                  }
-                }
-              },
-              "city": {
-                "type": "object",
-                "properties": {
-                  "label": {
-                    "type": "string"
-                  },
-                  "key": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "address": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          }
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Data对象": {
+      "type": "object",
+      "properties": {
+        "batteryCurrent": {
+          "type": "number",
+          "format": "double"
+        },
+        "batteryPower": {
+          "type": "number",
+          "format": "double"
+        },
+        "batterySoc": {
+          "type": "number",
+          "format": "double"
+        },
+        "batteryTemp": {
+          "type": "number",
+          "format": "double",
+          "description": "电池温度"
+        },
+        "batteryVoltage": {
+          "type": "number",
+          "format": "double"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "current": {
+          "type": "number",
+          "format": "double",
+          "description": "电流"
+        },
+        "doorState": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "humidity": {
+          "type": "number",
+          "format": "double",
+          "description": "湿度"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "纬度"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "经度"
+        },
+        "note": {
+          "type": "string",
+          "description": "备注"
+        },
+        "pvPower": {
+          "type": "number",
+          "format": "double"
+        },
+        "systemState": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double"
+        },
+        "usedPower": {
+          "type": "number",
+          "format": "double"
+        },
+        "voltage": {
+          "type": "number",
+          "format": "double",
+          "description": "电压"
+        },
+        "yuncangId": {
+          "type": "integer",
+          "format": "int32"
         }
       },
-      "LoginResult": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "currentAuthority": {
-            "type": "string"
-          }
+      "title": "Data对象"
+    },
+    "Operator对象": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "wechat": {
+          "type": "string"
         }
       },
-      "PageParams": {
-        "type": "object",
-        "properties": {
-          "current": {
-            "type": "number"
-          },
-          "pageSize": {
-            "type": "number"
-          }
+      "title": "Operator对象"
+    },
+    "SysUser对象": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "loginName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "realName": {
+          "type": "string"
+        },
+        "state": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "description": "用户类型：0超级管理；1普通用户"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "wechat": {
+          "type": "string"
         }
       },
-      "RuleListItem": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "disabled": {
-            "type": "boolean"
-          },
-          "href": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "owner": {
-            "type": "string"
-          },
-          "desc": {
-            "type": "string"
-          },
-          "callNo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "datetime"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "datetime"
-          },
-          "progress": {
-            "type": "integer",
-            "format": "int32"
+      "title": "SysUser对象"
+    },
+    "UserResponseEntity«List«Operator对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operator对象"
           }
+        },
+        "msg": {
+          "type": "string"
         }
       },
-      "RuleList": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RuleListItem"
-            }
-          },
-          "total": {
-            "type": "integer",
-            "description": "列表的内容总数",
-            "format": "int32"
-          },
-          "success": {
-            "type": "boolean"
-          }
+      "title": "UserResponseEntity«List«Operator对象»»"
+    },
+    "UserResponseEntity«Operator对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "$ref": "#/definitions/Operator对象"
+        },
+        "msg": {
+          "type": "string"
         }
       },
-      "FakeCaptcha": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "string"
-          }
+      "title": "UserResponseEntity«Operator对象»"
+    },
+    "UserResponseEntity«SysUser对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "$ref": "#/definitions/SysUser对象"
+        },
+        "msg": {
+          "type": "string"
         }
       },
-      "LoginParams": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "autoLogin": {
-            "type": "boolean"
-          },
-          "type": {
-            "type": "string"
-          }
+      "title": "UserResponseEntity«SysUser对象»"
+    },
+    "UserResponseEntity«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
         }
       },
-      "ErrorResponse": {
-        "required": ["errorCode"],
-        "type": "object",
-        "properties": {
-          "errorCode": {
-            "type": "string",
-            "description": "业务约定的错误码"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "业务上的错误信息"
-          },
-          "success": {
-            "type": "boolean",
-            "description": "业务上的请求是否成功"
-          }
+      "title": "UserResponseEntity«string»"
+    },
+    "登录对象": {
+      "type": "object",
+      "required": ["password", "username"],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "密码"
+        },
+        "username": {
+          "type": "string",
+          "description": "用户名"
         }
       },
-      "NoticeIconList": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NoticeIconItem"
-            }
-          },
-          "total": {
-            "type": "integer",
-            "description": "列表的内容总数",
-            "format": "int32"
-          },
-          "success": {
-            "type": "boolean"
-          }
-        }
-      },
-      "NoticeIconItemType": {
-        "title": "NoticeIconItemType",
-        "description": "已读未读列表的枚举",
-        "type": "string",
-        "properties": {},
-        "enum": ["notification", "message", "event"]
-      },
-      "NoticeIconItem": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "extra": {
-            "type": "string",
-            "format": "any"
-          },
-          "key": { "type": "string" },
-          "read": {
-            "type": "boolean"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "datetime": {
-            "type": "string",
-            "format": "date"
-          },
-          "description": {
-            "type": "string"
-          },
-          "type": {
-            "extensions": {
-              "x-is-enum": true
-            },
-            "$ref": "#/components/schemas/NoticeIconItemType"
-          }
-        }
-      }
+      "title": "登录对象"
     }
   }
 }

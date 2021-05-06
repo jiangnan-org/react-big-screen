@@ -2,11 +2,13 @@
 /* eslint-disable */
 // API 更新时间：
 // API 唯一标识：
-import * as api from './api';
-import * as login from './login';
-import * as rule from './rule';
+import * as dataController from './dataController';
+import * as 登录 from './登录';
+import * as 联系人控制器 from './联系人控制器';
+import * as 用户控制器 from './用户控制器';
 export default {
-  api,
-  login,
-  rule,
+  dataController,
+  登录,
+  联系人控制器,
+  用户控制器,
 };

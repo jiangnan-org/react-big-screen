@@ -4,7 +4,7 @@ import {notification} from 'antd';
 import {history} from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
+import {getToken,currentUser as queryCurrentUser} from './services/auth/login';
 import {BookOutlined, LinkOutlined} from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 // @ts-ignore
@@ -32,8 +32,8 @@ export async function getInitialState(): Promise<{             // Promise<定义
   const fetchUserInfo = async () => {
     try {
       // 获取用户信息
-      const currentUser = await queryCurrentUser();
-      return currentUser;
+      const res = await queryCurrentUser();
+      return res.data;
     } catch (error) {
       // 跳转到登录页面
       history.push('/user/login');
@@ -123,6 +123,7 @@ const codeMessage = {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
+  console.log("请求失败",error);
   const { response } = error;
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
@@ -161,10 +162,12 @@ const loggerMiddleware = async (ctx: Context, next: () => void) => {
 
   await next();
 
+  let success = (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code == 200 : true);
+
   // 映射
   ctx.res = {
-    success: (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code == 200 : true),
-    errorMessage: ctx.res.errorMessage || ctx.res.msg,
+    success: success,
+    errorMessage: success? '' : ctx.res.errorMessage || ctx.res.msg,
     ...ctx.res
   };
 
@@ -174,7 +177,7 @@ const loggerMiddleware = async (ctx: Context, next: () => void) => {
 
 // 新增自动添加AccessToken的请求前拦截器
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
-  const authHeader = { Authorization: 'Bearer xxxxxx' };
+  const authHeader = { Authorization: getToken() };
   return {
     url: `${url}`,
     options: { ...options, interceptors: true, headers: authHeader },

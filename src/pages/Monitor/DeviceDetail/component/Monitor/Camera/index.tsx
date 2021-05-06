@@ -9,8 +9,7 @@ import styles from './index.less';
 import EZUIKit from 'ezuikit-js';
 import PowerGenerationCurve from "./PowerGenerationCurve";
 import ElectricityConsumptionCurve from "./ElectricityConsumptionCurve";
-import {getToken} from '@/services/monitor/ys';
-
+import {getToken} from '@/services/ys';
 export default () => {
   // 播放器
   const [player, setPlayer] = useState({});

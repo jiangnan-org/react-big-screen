@@ -5,7 +5,7 @@ import { history, useModel } from 'umi';
 import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
-import { outLogin } from '@/services/ant-design-pro/login';
+import {removeToken} from '@/services/auth/login';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -15,7 +15,9 @@ export type GlobalHeaderRightProps = {
  * 退出登录，并且将当前的 url 保存
  */
 const loginOut = async () => {
-  await outLogin();
+  // 退出登录 清理token
+  removeToken();
+
   const { query = {}, pathname } = history.location;
   const { redirect } = query;
   // Note: There may be security issues, please note
@@ -40,8 +42,11 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       domEvent: React.MouseEvent<HTMLElement>;
     }) => {
       const { key } = event;
+      // 退出登录
       if (key === 'logout' && initialState) {
+        // 移除用户信息
         setInitialState({ ...initialState, currentUser: undefined });
+        // 移除token，并返回登录页面
         loginOut();
         return;
       }
@@ -50,6 +55,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     [initialState, setInitialState],
   );
 
+  // 加载缓冲...
   const loading = (
     <span className={`${styles.action} ${styles.account}`}>
       <Spin
@@ -68,7 +74,8 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
 
   const { currentUser } = initialState;
 
-  if (!currentUser || !currentUser.name) {
+  // 没有登录 一直在加载
+  if (!currentUser || !currentUser.realName) {
     return loading;
   }
 
@@ -98,8 +105,8 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-        <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+        <Avatar size="small" className={styles.avatar} src={currentUser.photo} alt="avatar" />
+        <span className={`${styles.name} anticon`}>{currentUser.realName}</span>
       </span>
     </HeaderDropdown>
   );

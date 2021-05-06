@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
-import { login, getFakeCaptcha } from '@/services/ant-design-pro/login';
+import { login, getFakeCaptcha,saveToken } from '@/services/auth/login';
 
 import styles from './index.less';
 
@@ -40,12 +40,13 @@ const goto = () => {
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
-  const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
+  const [userLoginState, setUserLoginState] = useState<boolean>(true);
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const intl = useIntl();
 
+  // 获取登录用户信息
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
@@ -56,25 +57,23 @@ const Login: React.FC = () => {
     }
   };
 
+  // 提交登录
   const handleSubmit = async (values: API.LoginParams) => {
     setSubmitting(true);
     try {
       // 登录
-      const msg = await login({ ...values, type });
-      if (msg.status === 'ok') {
-        message.success('登录成功！');
-        await fetchUserInfo();
-        goto();
-        return;
-      }
-      // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
+      const res = await login({ ...values, type });
+      message.success('登录成功！');
+      let token = saveToken(res.data);
+      await fetchUserInfo();
+      goto();
     } catch (error) {
+      // 如果失败去设置用户错误信息
+      setUserLoginState(false);
       message.error('登录失败，请重试！');
     }
     setSubmitting(false);
   };
-  const { status, type: loginType } = userLoginState;
 
   return (
     <div className={styles.container}>
@@ -132,11 +131,11 @@ const Login: React.FC = () => {
               />
             </Tabs>
 
-            {status === 'error' && loginType === 'account' && (
+            {userLoginState === false && type === 'account' && (
               <LoginMessage
                 content={intl.formatMessage({
                   id: 'pages.login.accountLogin.errorMessage',
-                  defaultMessage: '账户或密码错误（admin/ant.design)',
+                  defaultMessage: '账户或密码错误',
                 })}
               />
             )}
@@ -144,7 +143,7 @@ const Login: React.FC = () => {
               <>
                 <ProFormText
                   name="username"
-                  initialValue="user"
+                  initialValue="1"
                   fieldProps={{
                     size: 'large',
                     prefix: <UserOutlined className={styles.prefixIcon} />,
@@ -167,7 +166,7 @@ const Login: React.FC = () => {
                 />
                 <ProFormText.Password
                   name="password"
-                  initialValue="ant.design"
+                  initialValue="1"
                   fieldProps={{
                     size: 'large',
                     prefix: <LockOutlined className={styles.prefixIcon} />,
@@ -191,7 +190,7 @@ const Login: React.FC = () => {
               </>
             )}
 
-            {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
+            {userLoginState === false && type === 'mobile' && <LoginMessage content="验证码错误" />}
             {type === 'mobile' && (
               <>
                 <ProFormText
@@ -290,12 +289,6 @@ const Login: React.FC = () => {
               </a>
             </div>
           </ProForm>
-          <Space className={styles.other}>
-            <FormattedMessage id="pages.login.loginWith" defaultMessage="其他登录方式" />
-            <AlipayCircleOutlined className={styles.icon} />
-            <TaobaoCircleOutlined className={styles.icon} />
-            <WeiboCircleOutlined className={styles.icon} />
-          </Space>
         </div>
       </div>
       <Footer />

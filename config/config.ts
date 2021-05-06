@@ -41,7 +41,7 @@ export default defineConfig({
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': defaultSettings.primaryColor,
-    // 'font-size-base':'16px',
+    'font-size-base':'14px',
   },
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild
@@ -51,10 +51,10 @@ export default defineConfig({
   // proxy: proxy[REACT_APP_ENV || 'dev'],
   // https://beta-pro.ant.design/docs/proxy-cn
   proxy: {
-    '/yuncang/api/': {
-      target: 'https://preview.pro.ant.design/',
+    '/yuncang/api': {
+      target: 'http://81.68.217.175:9001/',
       changeOrigin: true,
-      pathRewrite: { '^/server': '' },
+      pathRewrite: { '^/yuncang/api': '/api' },
     },
     '/ys/api': {
       target: 'https://open.ys7.com/',
@@ -68,8 +68,8 @@ export default defineConfig({
   openAPI: {
     requestLibPath: "import { request } from 'umi'",
     // 或者使用在线的版本
-    // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
-    // schemaPath:"http://81.68.217.175:30001/v2/api-docs",
+    // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json",
+    // schemaPath:"http://81.68.217.175:9001/v2/api-docs",
     schemaPath: join(__dirname, 'oneapi.json'),
     mock: true,
   },
