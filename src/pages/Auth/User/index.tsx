@@ -124,8 +124,7 @@ export default () => {
       actionRef={actionRef}
       request={async (params: API.PageParams = {}) => {
         // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-        // @ts-ignore
-        const res: UserAPI.UserList = await getUserList(params);
+        const res: API.PageResponseMessage<API.UserItem> = await getUserList(params);
         return {
           data: res.data.list,
           // success 请返回 true，不然 table 会停止解析数据，即使有数据
