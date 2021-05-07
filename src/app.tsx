@@ -123,8 +123,15 @@ const codeMessage = {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
-  console.log("请求失败",error);
-  const { response } = error;
+  const { response, data } = error;
+  console.log('请求错误',error);
+
+  // 如果有data，表示状态码是200 业务错误
+  if(data){
+    throw data.msg;
+  }
+
+  // 其他
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -141,6 +148,7 @@ const errorHandler = (error: ResponseError) => {
       message: '网络异常',
     });
   }
+
   throw error;
 };
 

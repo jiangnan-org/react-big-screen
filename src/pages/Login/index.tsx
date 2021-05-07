@@ -3,10 +3,10 @@ import {
   MobileOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Alert, message, Tabs } from '_antd@4.15.0@antd';
+import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
-import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '_@ant-design_pro-form@1.20.0@@ant-design/pro-form';
-import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from '_umi@3.4.8@umi';
+import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
+import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
 import { login, getFakeCaptcha,saveToken } from '@/services/auth/login';
 

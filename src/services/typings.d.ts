@@ -3,6 +3,13 @@
 
 declare namespace API {
   /************************************** 接口返回数据通用格式  **********************************************************/
+  type QueryCondition = {
+    condition: 'EQ' | 'NE' | 'IN' | 'NOT_IN' | 'GT' | 'GE' | 'LE' | 'LIKE' | 'NOT_LIKE' | 'LIKE_LEFT' | 'LIKE_RIGHT' | 'IS_NULL'
+      | 'IS_NOT_NULL' | 'ORDER_BY_ASC' | 'ORDER_BY_DESC';
+    field?: string,
+    value?: string
+  };
+
   type PageParams = {
     // query
     /** 当前的页码 */
@@ -12,13 +19,14 @@ declare namespace API {
     /** 查询全部 */
     all?: boolean;
     /** 查询条件 */
-    condition?: object;
+    conditions?: QueryCondition[] ;
   };
 
   //页数据格式
   type PageData<T> = {
     /* 列表 */
-    list: Array<any>,
+    list?: Array<any>,
+    records?: Array<any>,
     /* 当前页码 */
     current?: number,
     /*  页大小 */
