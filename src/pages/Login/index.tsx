@@ -1,15 +1,12 @@
 import {
-  AlipayCircleOutlined,
   LockOutlined,
   MobileOutlined,
-  TaobaoCircleOutlined,
   UserOutlined,
-  WeiboCircleOutlined,
 } from '@ant-design/icons';
-import { Alert, Space, message, Tabs } from 'antd';
+import { Alert, message, Tabs } from '_antd@4.15.0@antd';
 import React, { useState } from 'react';
-import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
+import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '_@ant-design_pro-form@1.20.0@@ant-design/pro-form';
+import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from '_umi@3.4.8@umi';
 import Footer from '@/components/Footer';
 import { login, getFakeCaptcha,saveToken } from '@/services/auth/login';
 
@@ -64,7 +61,7 @@ const Login: React.FC = () => {
       // 登录
       const res = await login({ ...values, type });
       message.success('登录成功！');
-      let token = saveToken(res.data);
+      saveToken(res.data);
       await fetchUserInfo();
       goto();
     } catch (error) {
@@ -86,7 +83,6 @@ const Login: React.FC = () => {
               <span className={styles.title}>Ant Design</span>
             </Link>
           </div>
-          <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
         </div>
 
         <div className={styles.main}>

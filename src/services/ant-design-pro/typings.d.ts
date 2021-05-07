@@ -31,40 +31,4 @@ declare namespace API {
     yuncangId?: number;
   };
 
-  type Operator_ = {
-    age?: number;
-    email?: string;
-    gender?: string;
-    id?: number;
-    name?: string;
-    phone?: string;
-    wechat?: string;
-  };
-
-
-  type UserResponseEntityListOperator_ = {
-    code?: number;
-    data?: Operator_[];
-    msg?: string;
-  };
-
-  type UserResponseEntityOperator_ = {
-    code?: number;
-    data?: Operator_;
-    msg?: string;
-  };
-
-  type UserResponseEntitySysUser_ = {
-    code?: number;
-    data?: SysUser_;
-    msg?: string;
-  };
-
-  type UserResponseEntityString_ = {
-    code?: number;
-    data?: string;
-    msg?: string;
-  };
-
-
 }

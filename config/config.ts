@@ -2,10 +2,17 @@
 import { defineConfig } from 'umi';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
-import proxy from './proxy';
 import routes from './routes';
 
-const { REACT_APP_ENV } = process.env;
+const serveUrlMap = {
+  dev: 'http://81.68.217.175:9001/',
+  pre: 'https://pre.pro.ant.design/',
+  test: 'https://test.pro.ant.design/',
+  idc: 'https://idc.pro.ant.design/',
+};
+
+// 运行环境设置 https://beta-pro.ant.design/docs/proxy-cn
+const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
   hash: true,
@@ -48,11 +55,10 @@ export default defineConfig({
   esbuild: {},
   title: false,
   ignoreMomentLocale: true,
-  // proxy: proxy[REACT_APP_ENV || 'dev'],
   // https://beta-pro.ant.design/docs/proxy-cn
   proxy: {
     '/yuncang/api': {
-      target: 'http://81.68.217.175:9001/',
+      target: serveUrlMap[REACT_APP_ENV],
       changeOrigin: true,
       pathRewrite: { '^/yuncang/api': '/api' },
     },

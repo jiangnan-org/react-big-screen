@@ -5,14 +5,14 @@
  */
 import React, {useRef} from 'react';
 import {PlusOutlined} from '@ant-design/icons';
-import {Button, Tag, Space } from 'antd';
+import {Button} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable, {TableDropdown} from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
 import {FormattedMessage, useIntl} from "umi";
 
 // table列定义
-const columns: ProColumns<UserAPI.UserItem>[] = [
+const columns: ProColumns<API.UserItem>[] = [
   {
     dataIndex: 'index',
     title: '序号',
@@ -20,33 +20,55 @@ const columns: ProColumns<UserAPI.UserItem>[] = [
     width: 48,
   },
   {
-    dataIndex: 'username',
+    dataIndex: 'loginName',
     title: '账号',
     width: 120,
   },
   {
-    dataIndex: 'real_name',
+    dataIndex: 'realName',
     title: '姓名',
     width: 100,
   },
   {
-    title: '标题',
-    dataIndex: 'title',
-    copyable: true,
-    ellipsis: true,
-    tip: '标题过长会自动收缩',
-    formItemProps: {
-      rules: [
-        {
-          required: true,
-          message: '此项为必填项',
-        },
-      ],
+    dataIndex: 'wechat',
+    title: '微信号',
+    width: 100,
+    ellipsis: true
+  },
+  {
+    dataIndex: 'phone',
+    title: '手机号码',
+    width: 100,
+  },
+  {
+    title: '性别',
+    dataIndex: 'gender',
+    align:'center',
+    valueType: 'select',
+    valueEnum: {
+      0: {text: '男'},
+      1: {text: '女'}
     },
   },
   {
+    title: '创建时间',
+    dataIndex: 'createTime',
+    valueType: 'date',
+    hideInSearch: true,
+    ellipsis: true,
+    width: 150,
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'updateTime',
+    valueType: 'date',
+    hideInTable: false,
+    hideInSearch: true,
+    width: 150,
+  },
+  {
     title: '状态',
-    dataIndex: 'status',
+    dataIndex: 'state',
     align:'center',
     filters: true,
     onFilter: true,
@@ -57,54 +79,24 @@ const columns: ProColumns<UserAPI.UserItem>[] = [
     },
   },
   {
-    title: '标签',
-    dataIndex: 'labels',
-    search: false,
-    renderFormItem: (_, {defaultRender}) => {
-      return defaultRender(_);
-    },
-    render: (_, record) => (
-      <Space>
-        {record.labels.map(({name, color}) => (
-          <Tag color={color} key={name}>
-            {name}
-          </Tag>
-        ))}
-      </Space>
-    ),
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'created_at',
-    valueType: 'date',
-    hideInSearch: true,
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'updated_at',
-    valueType: 'date',
-    hideInTable: false,
-    hideInSearch: true,
-  },
-  {
     title: '操作',
     valueType: 'option',
     render: (text, record, _, action) => [
       <a
         key='editable'
         onClick={() => {
-          action.startEditable?.(record.id);
+          action.startEditable?.(record.id as React.Key);
         }}
       >
         编辑
       </a>,
-      <a href={record.avatar} target='_blank' rel='noopener noreferrer' key='view'>
+      <a href={record.photo} target='_blank' rel='noopener noreferrer' key='view'>
         查看
       </a>,
       <a
         key='editable'
         onClick={() => {
-          action.startEditable?.(record.id);
+          action.startEditable?.(record.id as React.Key);
         }}>
         删除
       </a>,
@@ -127,7 +119,7 @@ export default () => {
   const actionRef = useRef<ActionType>();
 
   return (
-    <ProTable<UserAPI.UserItem>
+    <ProTable<API.UserItem>
       columns={columns}
       actionRef={actionRef}
       request={async (params: API.PageParams = {}) => {

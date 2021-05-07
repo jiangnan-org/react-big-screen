@@ -1,15 +1,17 @@
 /**
  * @Author：zy
- * @Description：用户接口使用类型定义
+ * @Description：用户与权限接口使用类型定义
  * @Data: 2021/4/9 17:37
  */
 declare namespace API {
 
+  /* 手机登录参数 */
   type FakeCaptcha = {
     code?: number;
     status?: string;
   };
 
+  /*  账号密码登录参数 */
   type LoginParams = {
     username?: string;
     password?: string;
@@ -17,14 +19,13 @@ declare namespace API {
     type?: string;
   };
 
-
   /*  用户信息 */
   type UserItem = {
     age?: number;
     createTime?: string;
     email?: string;
     gender?: number;
-    id?: number;
+    id?: number | string;
     loginName?: string;
     password?: string;
     phone?: string;
@@ -37,7 +38,4 @@ declare namespace API {
     wechat?: string;
   };
 
-
-  /*  用户信息列表 */
-  type UserList = API.PageResponseMessage<UserItem>;
 }

@@ -42,12 +42,6 @@ declare namespace API {
   //页查询返回数据格式
   type PageResponseMessage<T> = ResponseMessage<PageData<T>>;
 
-  type LoginResult = {
-    status?: string;
-    type?: string;
-    currentAuthority?: string;
-  };
-
   /*  参数监控行数据 */
   type ParameterMonitorItem = {
     key?: string;                        //位号
@@ -81,26 +75,4 @@ declare namespace API {
     success?: boolean;
   };
 
-
-  type NoticeIconList = {
-    data?: NoticeIconItem[];
-    /** 列表的内容总数 */
-    total?: number;
-    success?: boolean;
-  };
-
-  type NoticeIconItemType = 'notification' | 'message' | 'event';
-
-  type NoticeIconItem = {
-    id?: string;
-    extra?: string;
-    key?: string;
-    read?: boolean;
-    avatar?: string;
-    title?: string;
-    status?: string;
-    datetime?: string;
-    description?: string;
-    type?: NoticeIconItemType;
-  };
 }

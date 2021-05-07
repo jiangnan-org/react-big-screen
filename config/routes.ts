@@ -5,20 +5,10 @@
  */
 export default [
   {
-    path: '/user',
+    path: '/login',
+    name: 'login',
     layout: false,
-    routes: [
-      {
-        path: '/user',
-        routes: [
-          {
-            name: 'login',
-            path: '/user/login',
-            component: './User/login',
-          },
-        ],
-      },
-    ],
+    component: './Login',
   },
   // 首页
   {

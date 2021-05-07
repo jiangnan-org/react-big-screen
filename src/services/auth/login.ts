@@ -21,31 +21,19 @@ export async function getFakeCaptcha(
   });
 }
 
-
-/** login POST /login */
+/** 用户名密码登录 POST /api/login */
 export async function login(body: API.LoginParams, options?: { [key: string]: any }) {
   return request<API.ResponseMessage<string>>('/yuncang/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    data: {
-      username: body.username,
-      password: body.password
-    },
+    data: body,
     ...(options || {}),
   });
 }
 
-/** 登录接口 POST /api/login/outLogin */
-export async function outLogin(options?: { [key: string]: any }) {
-  return request<Record<string, any>>('/yuncang/api/outLogin', {
-    method: 'POST',
-    ...(options || {}),
-  });
-}
-
-/** 获取当前的用户 GET /api/currentUser */
+/** 获取当前的用户 GET /api/user/getme */
 export async function currentUser(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/user/getme', {
     method: 'GET',
@@ -54,17 +42,17 @@ export async function currentUser(options?: { [key: string]: any }) {
 }
 
 /** 保存token */
-export const saveToken = function (token) {
+export const saveToken = (token : string) => {
   sessionStorage.setItem('Authorization', 'Bearer ' + token);
 };
 
 /** 获取token */
-export const getToken = function () {
+export const getToken =  () => {
   let token = sessionStorage.getItem('Authorization');
   return token ? token : 'Bearer ';
 };
 
 /** 删除token */
-export const removeToken = function () {
+export const removeToken =  () => {
   sessionStorage.removeItem('Authorization');
 };

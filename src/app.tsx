@@ -25,8 +25,8 @@ export const initialStateConfig = {
  * */
 export async function getInitialState(): Promise<{             // Promise<定义期望返回的数据类型>
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;                              // 当前用户类型
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>; // 函数类型 函数返回一个Promise<>
+  currentUser?: API.UserItem;                              // 当前用户类型
+  fetchUserInfo?: () => Promise<API.UserItem | undefined>; // 函数类型 函数返回一个Promise<>
 }> {
 
   const fetchUserInfo = async () => {
@@ -36,12 +36,12 @@ export async function getInitialState(): Promise<{             // Promise<定义
       return res.data;
     } catch (error) {
       // 跳转到登录页面
-      history.push('/user/login');
+      history.push('/login');
     }
     return undefined;
   };
   // 如果是登录页面，不执行
-  if (history.location.pathname !== '/user/login') {
+  if (history.location.pathname !== '/login') {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -67,8 +67,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     onPageChange: () => {                                // 路由发生变化
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== '/user/login') {
-        history.push('/user/login');
+      if (!initialState?.currentUser && location.pathname !== '/login') {
+        history.push('/login');
       }
     },
     links: [
