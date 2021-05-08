@@ -8,7 +8,7 @@ import styles from './index.less';
 
 // 属性类型
 type PropField = {
-  editable?: boolean ;
+  editable?: boolean ;    // 可编辑
 };
 
 const UserForm: React.FC<PropField> = ({editable=true}) => {
@@ -19,12 +19,15 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
           name='loginName'
           label='账号'
           width='sm'
-          disabled={!editable}
           rules={[
             {
               required: true,
-              message: '请输入账号！',
             },
+            {
+              type: 'string',
+              min: 6,
+              max: 18,
+            }
           ]}
         />
         <ProFormSelect
@@ -32,6 +35,7 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
           label='类型'
           placeholder='请选择用户类型'
           width='sm'
+          disabled={!editable}
           options={[
             {label: '普通用户', value: 0},
             {label: '超级管理员', value: 1},
@@ -39,7 +43,6 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
           rules={[
             {
               required: true,
-              message: '请选择用户类型！',
             },
           ]}
         />
@@ -53,8 +56,12 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
           rules={[
             {
               required: true,
-              message: '请输入姓名！',
             },
+            {
+              type: 'string',
+              min: 2,
+              max: 6,
+            }
           ]}
         />
         <ProFormSelect
@@ -69,7 +76,6 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
           rules={[
             {
               required: true,
-              message: '请选择性别！',
             },
           ]}
         />
@@ -82,9 +88,8 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
           width='sm'
           rules={[
             {
-              required: true,
-              message: '请输入邮箱！',
-            },
+              type: 'email',
+            }
           ]}
         />
         <ProFormSelect
@@ -93,13 +98,12 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
           width='sm'
           placeholder='请选择状态'
           options={[
-            {label: '使能', value: 0},
+            {label: '激活', value: 0},
             {label: '禁用', value: 1},
           ]}
           rules={[
             {
               required: true,
-              message: '请选择状态！',
             },
           ]}
         />
@@ -110,12 +114,24 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
         name='wechat'
         label='微信号'
         width='sm'
+        rules={[
+          {
+            type: 'string',
+            max: 18,
+            min:2,
+          }
+        ]}
       />
 
       <ProFormText
         name='phone'
         label='手机号码'
         width='sm'
+        rules={[
+          {
+            pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/
+          }
+        ]}
       />
       </ProForm.Group>
 
@@ -123,11 +139,16 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
         label='密码'
         name='password'
         width='sm'
+        hidden={!editable}
         rules={[
           {
             required: true,
-            message: '密码不能为空！',
           },
+          {
+            type: 'string',
+            min: 6,
+            max: 128,
+          }
         ]}
       />
     </div>

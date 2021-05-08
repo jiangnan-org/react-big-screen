@@ -14,6 +14,7 @@ import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
 import actions from './redux';
+import styles from './index.less';
 
 // 角色类型
 type RoleMapType = Record<number,
@@ -69,12 +70,14 @@ export default () => {
     {
       dataIndex: 'loginName',
       title: '账号',
-      width: 80,
+      width: 120,
+      ellipsis: true,
     },
     {
       dataIndex: 'realName',
       title: '姓名',
       width: 100,
+      ellipsis: true,
     },
     {
       dataIndex: 'email',
@@ -142,7 +145,7 @@ export default () => {
       onFilter: true,
       valueType: 'select',
       valueEnum: {
-        0: {text: '使能', status: 'Success'},
+        0: {text: '激活', status: 'Success'},
         1: {text: '禁用', status: 'Error'}
       },
     },
@@ -161,15 +164,15 @@ export default () => {
             }}
             title='编辑'
           >
-            <EditOutlined/>
+            <EditOutlined style={{'fontSize':'1.2em'}}/>
           </a>
           <Divider type='vertical'/>
           <a
             key='authorization'
-            onClick={() => action.reload()}
+            onClick={()=>{}}
             title='项目授权'
           >
-            <ToolOutlined/>
+            <ToolOutlined style={{'fontSize':'1.2em'}}/>
           </a>
         </>
       ),
@@ -205,7 +208,10 @@ export default () => {
       visible={updateModalVisible}
       onVisibleChange={setUpdateModalVisible}
       onFinish={async (value) => {
+        // 指定更新的用户
         _.assign(value, {id});
+        // 移除密码 不进行密码更新
+        delete value.password;
         const success = await actions.handleUpdateUser(value);
         if (success) {
           setUpdateModalVisible(false);
@@ -220,6 +226,7 @@ export default () => {
   return (
     <React.Fragment>
       <ProTable<API.UserItem>
+        className={styles.table}
         columns={columns}
         actionRef={actionRef}
         request={async (params: API.PageParams = {}) => {
