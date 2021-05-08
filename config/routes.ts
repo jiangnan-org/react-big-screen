@@ -4,10 +4,12 @@
  * @Data: 2021/3/24 8:49
  */
 export default [
+  // 登录
   {
     path: '/login',
     name: 'login',
     layout: false,
+    hideInMenu: true,
     component: './Login',
   },
   // 首页
@@ -27,16 +29,6 @@ export default [
     name: 'monitor',
     icon: 'monitor',
     routes: [
-      {
-        path: '/monitor/parameter-monitor',
-        name: 'parameter-monitor',
-        component: './Monitor/ParameterMonitor',
-      },
-      {
-        path: '/monitor/statistical-analysis',
-        name: 'statistical-analysis',
-        component: './Monitor/StatisticalAnalysis',
-      },
       {
         path: '/monitor/device-monitor',
         name: 'device-monitor',
@@ -123,46 +115,13 @@ export default [
         path: '/config/alarm',
         component: './Config/Alarm',
       },
-    ]
-  },
-  // 用户与权限
-  {
-    path: '/auth',
-    name: 'auth',
-    icon: 'lock',
-    routes: [
       {
-        path: '/auth/user',
+        path: '/config/user',
         name: 'user',
-        component: './Auth/User',
-      },
-      {
-        path: '/auth/role',
-        name: 'role',
-        component: './Auth/Role',
-      },
-      {
-        path: '/auth/privilege',
-        name: 'privilege',
-        component: './Auth/Privilege',
-      },
-    ],
-  },
-  // 管理
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    component: './Admin',
-    routes: [
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        icon: 'smile',
-        component: './Home',
-      },
-    ],
+        component: './Config/User',
+        access: 'adminRouteFilter', // 会调用 src/access.ts 中返回的 adminRouteFilter 进行鉴权
+      }
+    ]
   },
   {
     component: './404',

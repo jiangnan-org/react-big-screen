@@ -3,7 +3,7 @@ import {
   MobileOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Alert, message, Tabs } from 'antd';
+import { message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, Link, history, FormattedMessage, SelectLang, useModel } from 'umi';
@@ -12,18 +12,6 @@ import { login, getFakeCaptcha,saveToken } from '@/services/auth/login';
 
 import styles from './index.less';
 
-const LoginMessage: React.FC<{
-  content: string;
-}> = ({ content }) => (
-  <Alert
-    style={{
-      marginBottom: 24,
-    }}
-    message={content}
-    type="error"
-    showIcon
-  />
-);
 
 /** 此方法会跳转到 redirect 参数所在的位置 */
 const goto = () => {
@@ -37,7 +25,6 @@ const goto = () => {
 
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
-  const [userLoginState, setUserLoginState] = useState<boolean>(true);
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
 
@@ -60,14 +47,11 @@ const Login: React.FC = () => {
     try {
       // 登录
       const res = await login({ ...values, type });
-      message.success('登录成功！');
       saveToken(res.data);
       await fetchUserInfo();
       goto();
     } catch (error) {
-      // 如果失败去设置用户错误信息
-      setUserLoginState(false);
-      message.error('登录失败，请重试！');
+      message.error(error,2);
     }
     setSubmitting(false);
   };
@@ -127,14 +111,6 @@ const Login: React.FC = () => {
               />
             </Tabs>
 
-            {userLoginState === false && type === 'account' && (
-              <LoginMessage
-                content={intl.formatMessage({
-                  id: 'pages.login.accountLogin.errorMessage',
-                  defaultMessage: '账户或密码错误',
-                })}
-              />
-            )}
             {type === 'account' && (
               <>
                 <ProFormText
@@ -186,7 +162,6 @@ const Login: React.FC = () => {
               </>
             )}
 
-            {userLoginState === false && type === 'mobile' && <LoginMessage content="验证码错误" />}
             {type === 'mobile' && (
               <>
                 <ProFormText
