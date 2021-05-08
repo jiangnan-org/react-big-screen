@@ -15,7 +15,8 @@ const Settings: LayoutSettings & {
   fixedHeader: false,           //固定header
   fixSiderbar: true,            //固定侧边测但
   colorWeak: false,             //色弱模式
-  title: '隆玛智慧云仓',
+  // title: '隆玛智慧云仓',
+  title:'用户管理组件',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: ''

@@ -5,15 +5,15 @@
  */
 import React, {useRef, useState} from 'react';
 import {PlusOutlined, EditOutlined, ToolOutlined} from '@ant-design/icons';
-import {Form, Button, message, Space, Tag, Divider} from 'antd';
+import {Form, Button, Space, Tag, Divider} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
-import {addUser, updateUser, deleteUser} from '@/services/auth/user';
 import UserForm from './component/UserForm';
 import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
+import actions from './redux';
 
 // 角色类型
 type RoleMapType = Record<number,
@@ -37,18 +37,20 @@ const RoleMap: RoleMapType = {
   },
 };
 
+
 export default () => {
   /** 表单引用 */
-  const [form] = Form.useForm();
+  const [createForm] = Form.useForm();
+  const [updateForm] = Form.useForm();
 
   /** 如果是更新、保存当前选中的用户id */
   const [id, setId] = useState<any>(-1);
 
   /** 新建窗口的弹窗 */
-  const [createModalVisible, handleModalVisible] = useState<boolean>(false);
+  const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
 
   /** 分布更新窗口的弹窗 */
-  const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
+  const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
   const [selectedRows, setSelectedRows] = useState<API.UserItem[]>([]);
@@ -153,9 +155,9 @@ export default () => {
             key='edit'
             onClick={() => {
               // 初始化表单显示内容
-              form.setFieldsValue(record);
+              updateForm.setFieldsValue(record);
               setId(record.id);
-              handleUpdateModalVisible(true);
+              setUpdateModalVisible(true);
             }}
             title='编辑'
           >
@@ -174,74 +176,18 @@ export default () => {
     },
   ];
 
-  /**
-   * 添加用户
-   *
-   * @param fields
-   */
-  const handleAddUser = async (fields: API.UserItem) => {
-    try {
-      await addUser({...fields});
-      message.success('添加成功');
-      return true;
-    } catch (error) {
-      message.error(error, 2);
-      return false;
-    }
-  };
-
-
-  /**
-   * 批量删除用户
-   *
-   * @param selectedRows
-   */
-  const handleDeleteUser = async (selectedRows: API.UserItem[]) => {
-    try {
-      let ids: any[] = selectedRows.map((row) => row.id);
-      await deleteUser(ids);
-      message.success('删除成功');
-      return true;
-    } catch (error) {
-      message.error(error, 2);
-      return false;
-    }
-  };
-
-
-  /**
-   * 更新用户
-   *
-   * @param fields
-   */
-  const handleUpdateUser = async (fields: API.UserItem) => {
-    try {
-      _.assign(fields, {id});
-      await updateUser(fields);
-      message.success('更新成功');
-      return true;
-    } catch (error) {
-      message.error(error, 2);
-      return false;
-    }
-  };
-
   /** 新增用户表单 */
   const createUserModal = (
     <ModalForm<API.UserItem>
       title='新建用户'
       width="680px"
-      initialValues={{
-        gender: 0,
-        state: 0,
-        type: 0
-      }}
+      form={createForm}
       visible={createModalVisible}
-      onVisibleChange={handleModalVisible}
+      onVisibleChange={setCreateModalVisible}
       onFinish={async (value) => {
-        const success = await handleAddUser(value);
+        const success = await actions.handleAddUser(value);
         if (success) {
-          handleModalVisible(false);
+          setCreateModalVisible(false);
           actionRef.current?.reload();
         }
       }}
@@ -255,13 +201,14 @@ export default () => {
     <ModalForm<API.UserItem>
       title='更新用户'
       width="680px"
-      form={form}
+      form={updateForm}
       visible={updateModalVisible}
-      onVisibleChange={handleUpdateModalVisible}
+      onVisibleChange={setUpdateModalVisible}
       onFinish={async (value) => {
-        const success = await handleUpdateUser(value);
+        _.assign(value, {id});
+        const success = await actions.handleUpdateUser(value);
         if (success) {
-          handleUpdateModalVisible(false);
+          setUpdateModalVisible(false);
           actionRef.current?.reload();
         }
       }}
@@ -294,7 +241,7 @@ export default () => {
           labelWidth: 'auto',
         }}
         dateFormatter='string'
-        headerTitle='用户信息'
+        // headerTitle='用户信息'
         rowSelection={{
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
@@ -302,25 +249,36 @@ export default () => {
         }}
         // 工具栏
         toolBarRender={() => [
-          <Button key='button' icon={<PlusOutlined/>} type='primary' onClick={() => handleModalVisible(true)}>
+          <Button key='button' icon={<PlusOutlined/>} type='primary' onClick={() => {
+            // 清空表单
+            createForm.setFieldsValue({
+              loginName: undefined,
+              realName:  undefined,
+              email: undefined,
+              wechat: undefined,
+              phone: undefined,
+              password: undefined,
+              gender: 0,
+              state: 0,
+              type: 0
+            });
+            setCreateModalVisible(true)
+          }
+          }>
             新建
           </Button>
         ]}
       />
       {selectedRows?.length > 0 && (
-        <FooterToolbar
-          extra={
-            <div>
-              已选择
-              <a style={{fontWeight: 600}}>{selectedRows.length}</a>{' '}项&nbsp;&nbsp;
-            </div>
-          }
-        >
+        <FooterToolbar>
           <Button
             onClick={async () => {
-              await handleDeleteUser(selectedRows);
-              setSelectedRows([]);
-              actionRef.current?.reloadAndRest?.();
+              let success = await actions.handleDeleteUser(selectedRows);
+              if(success) {
+                setSelectedRows([]);
+                // 刷新并清空,页码也会重置，不包括表单
+                actionRef.current?.reloadAndRest?.();
+              }
             }}
           >
             批量删除
