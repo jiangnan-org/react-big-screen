@@ -72,7 +72,7 @@ export default () => {
         <ProFormRadio.Group
           name='order'
           radioType='button'
-          width={80}
+          width={120}
           options={[
             {
               label: '降序',

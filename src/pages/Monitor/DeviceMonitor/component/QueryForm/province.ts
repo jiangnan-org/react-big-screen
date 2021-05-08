@@ -5,7 +5,7 @@ export interface ProvinceItem {
     name: string,
     districtAndCounty: string[]
   }[]
-};
+}
 
 // 地址文件
 const provinces: ProvinceItem[] = [
