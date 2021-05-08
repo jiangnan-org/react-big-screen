@@ -25,7 +25,7 @@ declare namespace API {
     createTime?: string;
     email?: string;
     gender?: number;
-    id?: number | string;
+    id?: number ;
     loginName?: string;
     password?: string;
     phone?: string;

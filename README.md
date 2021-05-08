@@ -48,7 +48,7 @@ window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量�
 源码地址  https://github.com/ant-design/pro-components/blob/master/packages/layout/src/components/SettingDrawer/index.tsx
 参考链接：https://pro.ant.design/docs/dynamic-theme-cn
 
-### 四、数据表明明规范
+### 四、数据表名命名规范
 
 1. 采用26个英文字母(区分大小写)和0-9的自然数(经常不需要)加上下划线'_'组成，命名简洁明确，多个单词用下划线'_'分隔
 
@@ -63,3 +63,13 @@ window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量�
 6. 用单数形式表示名称，例如，使用 employee，而不是 employees
 
 7. 表必须填写描述信息（使用SQL语句建表时）
+
+### 五、React命名规范
+1、组件名称全部大写字母开头
+
+2、其他
+文件夹以 xxx-xxx 命名
+内部文件以驼峰命名，如
+eslint-utils:
+   applyDefault.ts
+   

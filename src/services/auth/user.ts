@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { request } from 'umi';
 import _ from 'lodash';
+import buildQueryParam from '@/utils/buildQueryParam';
 
 /** 增加用户 POST /api/user/add */
 export async function addUser(body: API.UserItem, options?: { [key: string]: any }) {
@@ -11,6 +12,20 @@ export async function addUser(body: API.UserItem, options?: { [key: string]: any
       'Content-Type': 'application/json',
     },
     data: body,
+    ...(options || {}),
+  });
+}
+
+/** 批量删除用户 POST /api/user/dellist */
+export async function deleteUser(ids: number[], options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/user/dellist', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params:{
+      ids
+    },
     ...(options || {}),
   });
 }
@@ -51,27 +66,9 @@ export async function getUserByUsername(username: string, options?: { [key: stri
 
 /** 获取用户列表 GET /api/user/list */
 export async function getUserList(params: API.PageParams, options?: { [key: string]: any }) {
-  let conditions: API.QueryCondition[] = [{
-    condition: "ORDER_BY_DESC",
-    field: "id"
-  }];
-  _.forEach(params,(value,key) =>{
-    if(key !=='current' && key !== 'pageSize' && key !== 'all'){
-      conditions.push({
-        condition: "EQ",
-        field: key,
-        // @ts-ignore
-        value: value
-      });
-    }
-  });
-
-  params.conditions = conditions;
   return request<API.PageResponseMessage<API.UserItem>>('/yuncang/api/user/list', {
     method: 'POST',
-    data: {
-      ...params,
-    },
+    data: buildQueryParam(params),
     ...(options || {}),
   });
 }

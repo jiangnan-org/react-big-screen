@@ -11,15 +11,10 @@ declare namespace API {
   };
 
   type PageParams = {
-    // query
     /** 当前的页码 */
     current?: number;
     /** 页面的容量 */
     pageSize?: number;
-    /** 查询全部 */
-    all?: boolean;
-    /** 查询条件 */
-    conditions?: QueryCondition[] ;
   };
 
   //页数据格式
