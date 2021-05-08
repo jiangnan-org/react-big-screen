@@ -24,11 +24,12 @@ xs 超小屏幕如手机 sm 小屏幕如平板  md中等屏幕  lg大屏幕  xl�
 
 ### 三、包安装
 ### 1、npm install xxx@latest 最新包
-### 2、运行之后如果发现主题色很少，需要安装umi-plugin-antd-theme插件
-npm install   umi-plugin-setting-drawer --save-dev
-npm install   umi-plugin-antd-theme  --save-dev
+### 2、运行之后如果发现主题色很少，需要安装umi-plugin-antd-theme插件进行配置
+cnpm install   umi-plugin-setting-drawer --save-dev
+cnpm install   umi-plugin-antd-theme  --save-dev
 "umi-plugin-antd-theme": "^2.1.2",
-"umi-plugin-setting-drawer": "^1.0.3",
+"umi-plugin-setting-drawer": "^1.0.3"
+如果不想进行样式配置，需要把package.json devDependencies中的这两个包排除
 ThemeColor 用于展示当前可选的主色，这个色彩列表由 umi-plugin-antd-theme 插件提供，该插件会将一个色彩列表放到 
 window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量并给到 ThemeColor。
 ```javascript
@@ -45,7 +46,7 @@ window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量�
   }
 />
 ````
-源码地址  https://github.com/ant-design/pro-components/blob/master/packages/layout/src/components/SettingDrawer/index.tsx
+源码地址  https://github.com/ant-design/pro-components/packages/layout/src/components/SettingDrawer/index.tsx
 参考链接：https://pro.ant.design/docs/dynamic-theme-cn
 
 ### 四、数据表名命名规范
