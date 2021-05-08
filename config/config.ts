@@ -16,10 +16,10 @@ const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
   hash: true,
-  antd: {
-    dark: true, // 开启暗色主题
-    compact: true, // 开启紧凑主题
-  },
+  // antd: {
+  //   dark: true, // 开启暗色主题
+  //   compact: true, // 开启紧凑主题
+  // },
   dva: {
     hmr: true,
   },
@@ -37,8 +37,10 @@ export default defineConfig({
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
   },
+  // 如果我们在项目中打开了按需加载的话，在每次路由切换的时候都会进入一个加载页面 https://beta-pro.ant.design/docs/title-landing-cn  https://umijs.org/zh-CN/config#dynamicimport
   dynamicImport: {
-    loading: '@ant-design/pro-layout/es/PageLoading',
+    // loading: '@ant-design/pro-layout/es/PageLoading',
+    loading: '@/Loading'
   },
   targets: {
     ie: 11,

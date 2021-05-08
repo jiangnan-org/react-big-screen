@@ -14,7 +14,7 @@ import type { ResponseError } from 'umi-request';
 
 /* 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
-  loading: <PageLoading />,
+  loading:<PageLoading />
 };
 
 /**
@@ -97,6 +97,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     ...initialState?.settings,
+    // 修改logo
+    logo: '/logo.svg'
   };
 };
 
