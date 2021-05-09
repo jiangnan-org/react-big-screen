@@ -30,7 +30,7 @@ cnpm install   umi-plugin-antd-theme  --save-dev
 "umi-plugin-antd-theme": "^2.1.2",
 "umi-plugin-setting-drawer": "^1.0.3"
 同时需要配置主题相关信息config/theme.config.json，umi-plugin-antd-theme会根据遍历挣个配置动态的在node_modules\.plugin-theme\theme下生成的对应的样式文件
-最终在点击<SettingDrawer>组件进行样式调整的时候，实际就是给动态body加入样式文件的过程
+最终在点击SettingDrawer组件进行样式调整的时候，实际就是给动态body加入样式文件的过程
 <link type="text/css" rel="stylesheet" id="theme-style" href="/theme/volcano.css">
 我们可以将样式文件复制到/public/theme/下
 
@@ -50,7 +50,7 @@ window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量�
     changeSetting('primaryColor', color, hideLoading)
   }
 />
-````
+```
 源码地址  https://github.com/ant-design/pro-components/packages/layout/src/components/SettingDrawer/index.tsx
 参考链接：https://pro.ant.design/docs/dynamic-theme-cn
 使用React+Umi+Ant Design Pro实现生产环境动态切换主题,支持暗黑主题 https://www.cnblogs.com/dygood/p/12072096.html
