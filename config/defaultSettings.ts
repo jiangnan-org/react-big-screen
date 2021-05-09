@@ -7,14 +7,14 @@ const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
 } = {
-  navTheme: 'realDark',             //整体风格设置 light、dark、realDark
+  navTheme: 'light',             //整体风格设置 light、dark、realDark
   // 拂晓蓝
   primaryColor: '#1890ff',       //主题色
-  layout: 'top',                //导航模式 side、top、mix
-  contentWidth: 'Fluid',        //内容区域宽度：流式Fluid、定宽Fixed
-  fixedHeader: false,           //固定header
-  fixSiderbar: true,            //固定侧边测但
-  colorWeak: false,             //色弱模式
+  layout: 'top',                 //导航模式 side、top、mix
+  contentWidth: 'Fluid',         //内容区域宽度：流式Fluid、定宽Fixed
+  fixedHeader: false,            //固定header
+  fixSiderbar: true,             //固定侧边测但
+  colorWeak: false,              //色弱模式
   // title: '隆玛智慧云仓',
   title:'用户管理组件',
   pwa: false,

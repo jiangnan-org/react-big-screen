@@ -1,7 +1,7 @@
 /**
  * @Author：zy
  * @Description：生成折线所需要的配置
- * @Data: 2021/4/225 22:26
+ * @Data: 2021/4/25 22:26
  */
 import _ from 'lodash';
 

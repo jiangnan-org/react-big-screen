@@ -58,33 +58,34 @@ window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量�
 antd-pro 主题色实现原理 https://juejin.cn/post/6926442970388365319
 
 ### 3、动态加载主题测原理
-1、umi-plugin-antd-theme 插件流程分析
+#### 3.1、umi-plugin-antd-theme 插件流程分析
 更改 cssLoader 配置，修改 src 目录下 less 文件 CSS Modules 选择器名称
-加载工程固定路径下主题配置文件 config/theme.config.json 覆盖默认配置
-设置 dev 环境临时主题色文件路径为 node_modules/.plugin-theme/theme
-设置 serve-static 中间件，允许访问临时主题色文件
+加载工程固定路径下主题配置文件 config/theme.config.json覆盖默认配置(配置配置为空，也就是使用组件原始配置样式)
+设置dev环境临时主题色文件路径为 node_modules/.plugin-theme/theme
+设置serve-static中间件，允许访问临时主题色文件
 将主题色配置信息挂载在 window.umi_plugin_ant_themeVar
-dev 环境 onDevCompileDone
+dev环境 onDevCompileDone
   如果存在临时文件，则删除
   创建 .plugin-theme/theme
   遍历config/theme.config.json下每个主题色，使用 antd-pro-merge-less包 buildCss 至 .plugin-theme/theme 每一个主题色，生成一个 css 文件
   prod 环境与 dev 环境的差异体现在生产的文件生成在 dist/theme 目录下
-2、antd-pro-merge-less 流程分析
+#### 3.2、antd-pro-merge-less 流程分析
 设置临时文件目录
 使用 glob 找到 antd-pro-merge-less 项目下所有的 less 文件路径
 将所有less文件内容写入antd-pro-merge-less/.temp/temp.less以及antd-pro-merge-less/.temp/pro.less
-如果config/theme.config.json配置"ignoreAntd": false 则还会导入antd模块下的所有less文件，到 ./antd.less
+如果config/theme.config.json配置"ignoreAntd": false 则还会导入antd模块下的所有less文件(如果没有配置dark:true，
+不会加载themes/dark.less，themes/compack.less)，到 ./antd.less
 将@import './antd'导入./components.less文件,同时还会根据extraLibraries配置导入antd design pro组件的样式文件
 提取import文件的变量，删除 import ，写入antd-pro-merge-less/.temp/pro.less 并引用 @import './components'
 将依赖的 antd 相关组件的 less 文件写入./components.less
 开始遍历不同的颜色配置
 根据不同配置生成 antd less 文件
 使用 less 将 pro.less 文件转化为 css 文件，并替换变量
-3、配置信息config/theme.config.json
+#### 3.3、配置信息config/theme.config.json
 extraLibraries：@antd-design/pro-xxx 在生成样式文件时，会加载该指包中样式文件
 ignoreAntd：在生成样式文件时，是否加载antd样式文件
 cache：是否开启缓存 通过比较样式和antd-pro-merge-less/.temp/temp.less文件的hash，判断文件是否需要重新生成，这样就不会在每次启动的时候重新生成样式文件
-4、错误处理 如果运行出现错误 检查node_modules\_antd-pro-merge-less@xxx@antd-pro-merge-less\loopAllLess.js文件，修改文件最后为
+#### 3.4、错误处理 如果运行出现错误 检查node_modules\_antd-pro-merge-less@xxx@antd-pro-merge-less\loopAllLess.js文件，修改文件最后为
 return Promise.resolve(
 // prettier.format(content, {
 //   parser: 'less',
@@ -93,7 +94,7 @@ content
 );
 因为prettier.format在格式化less文件时会将
 @pro-global-footer-prefix-cls: ~'@{ant-prefix}-pro-global-footer' -> @pro-global-footer-prefix-cls ~'@{ant-prefix}-pro-global-footer'
-5、如果配置中开启了缓存cache，如果想强制重新生成样式文件删除antd-pro-merge-less\.temp\temp.less文件  重新运行即可
+#### 3.5、如果config/theme.config.json配置中开启了缓存cache，如果想强制重新生成样式文件删除antd-pro-merge-less\.temp\temp.less文件  重新运行即可
 
 ### 四、数据表名命名规范
 
