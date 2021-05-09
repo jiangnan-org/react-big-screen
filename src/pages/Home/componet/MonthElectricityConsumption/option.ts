@@ -4,11 +4,16 @@
  * @Data: 2021/4/225 22:26
  */
 import _ from 'lodash';
+import { useModel } from 'umi';
 
 export const genOption = (data: {
   date: string,
   value: number
 }[]) => {
+  // 获取状态
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const styleConfig = useModel('styleConfig');
+
   return {
     tooltip: {
       trigger: 'axis',
@@ -26,7 +31,7 @@ export const genOption = (data: {
         color: '#81e75e'
       },
       textStyle: {
-        color: 'rgba(255, 255, 255, 85)'
+        color: styleConfig.textColor
       },
       left: 'center',
       top: 10,
@@ -53,7 +58,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(255, 255, 255, 85)'
+            color: styleConfig.textColor
           }
         },
         type: 'category',
@@ -67,7 +72,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(255, 255, 255, 85)'
+            color: styleConfig.textColor
           }
         },
         // 水平分割线

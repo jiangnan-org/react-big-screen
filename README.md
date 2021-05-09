@@ -85,7 +85,8 @@ dev环境 onDevCompileDone
 extraLibraries：@antd-design/pro-xxx 在生成样式文件时，会加载该指包中样式文件
 ignoreAntd：在生成样式文件时，是否加载antd样式文件
 cache：是否开启缓存 通过比较样式和antd-pro-merge-less/.temp/temp.less文件的hash，判断文件是否需要重新生成，这样就不会在每次启动的时候重新生成样式文件
-#### 3.4、错误处理 如果运行出现错误 检查node_modules\_antd-pro-merge-less@xxx@antd-pro-merge-less\loopAllLess.js文件，修改文件最后为
+#### 3.4、错误处理 
+##### 如果运行出现错误 检查node_modules\_antd-pro-merge-less@xxx@antd-pro-merge-less\loopAllLess.js文件，修改文件最后为
 return Promise.resolve(
 // prettier.format(content, {
 //   parser: 'less',
@@ -94,7 +95,15 @@ content
 );
 因为prettier.format在格式化less文件时会将
 @pro-global-footer-prefix-cls: ~'@{ant-prefix}-pro-global-footer' -> @pro-global-footer-prefix-cls ~'@{ant-prefix}-pro-global-footer'
-#### 3.5、如果config/theme.config.json配置中开启了缓存cache，如果想强制重新生成样式文件删除antd-pro-merge-less\.temp\temp.less文件  重新运行即可
+
+##### pro-card组件存在Bug _@ant-design_pro-card@1.11.7@@ant-design\pro-card\es\components\Statistic\index.less
+.@{ant-prefix}-statistic-title {
+color: @text-color;  # 将之前的固定色rgba(00,00,00,0.45)修改成变量
+}
+
+#### 3.5、如果config/theme.config.json配置中开启了缓存cache
+如果想强制重新生成样式文件删除antd-pro-merge-less\.temp\temp.less文件  重新运行即可
+或者关闭缓存
 
 ### 四、数据表名命名规范
 

@@ -3,7 +3,7 @@ import { defineConfig } from 'umi';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import routes from './routes';
-import darkTheme from '@ant-design/dark-theme';
+// import darkTheme from '@ant-design/dark-theme';
 
 const serveUrlMap = {
   dev: 'http://81.68.217.175:9001/',

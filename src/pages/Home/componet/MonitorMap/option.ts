@@ -4,8 +4,7 @@
  * https://github.com/xiaofan9/echarts-china-map/blob/master/index_v1.html
  * @Data: 2021/4/23 14:37
  */
-import mapStyle from './style/blue';
-
+import './index.less';
 // @ts-ignore
 const { BMap } = window;
 
@@ -16,7 +15,7 @@ const { BMap } = window;
  定义中国东南西北端点，作为第一层
  向数组中添加一次闭合多边形，并将西北角再加一次作为之后画闭合区域的起点
  */
-export const drawBoundary = (bmap: any) => {
+export const drawBoundary = (bmap: any,fillColor: string | undefined) => {
   let pStart = new BMap.Point(180, 90);
   let pEnd = new BMap.Point(0, -90);
   let pArray = [
@@ -270,7 +269,7 @@ export const drawBoundary = (bmap: any) => {
     strokeOpacity: 1,
     strokeColor: 'rgb(20, 20, 20)',
     strokeWeight: 1,
-    fillColor: 'rgb(20, 20, 20)', // 遮蔽层颜色
+    fillColor,
     fillOpacity: 1,
   });
   bmap.addOverlay(polygon1);
@@ -287,14 +286,14 @@ export const drawBoundary = (bmap: any) => {
     strokeOpacity: 1,
     strokeColor: 'rgb(20, 20, 20)',
     strokeWeight: 1,
-    fillColor: 'rgb(20, 20, 20)',
+    fillColor,
     fillOpacity: 1,
   });
   bmap.addOverlay(polygon2);
 };
 
 /* 生成地图所需要的配置 */
-export const genOption = () => {
+export const genOption = (styleJson: any[],textColor: string) => {
   return {
     // 加载 bmap 组件,使用bmap 必须引入百度地图扩展，扩展主要提供了跟 geo 一样的坐标系和底图的绘制 https://github.com/apache/echarts/tree/master/extension-src/bmap
     bmap: {
@@ -303,7 +302,7 @@ export const genOption = () => {
       roam: true, // 是否开启拖拽缩放，可以只设置 'scale' 或者 'move'
       mapStyle: {
         // 百度地图的自定义样式，见 http://developer.baidu.com/map/jsdevelop-11.htm
-        styleJson: mapStyle,
+        styleJson,
       },
     },
     tooltip: {
@@ -323,7 +322,7 @@ export const genOption = () => {
       splitNumber: 3,
       dimension: 2,
       textStyle: {
-        color: 'rgba(255, 255, 255, 85)',
+        color: textColor,
       },
       // 图形的宽度、高度 左下角、图例
       itemWidth: 8,

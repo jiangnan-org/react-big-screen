@@ -20,7 +20,7 @@ const ENVTagColor = {
 };
 
 const GlobalHeaderRight: React.FC = () => {
-  //获取全局初始化信息
+  // 获取全局初始化信息
   const {initialState} = useModel('@@initialState');
 
   const [date, setDate] = useState(moment().format('YYYY-MM-DD HH:mm:ss'));
@@ -38,15 +38,15 @@ const GlobalHeaderRight: React.FC = () => {
     className = `${styles.right}  ${styles.dark}`;
   }
 
-  //1s刷新一次
+  // 1s刷新一次
   useEffect(() => {
-    //定时器
+    // 定时器
     const t = setInterval(() => {
       setDate(moment().format('YYYY-MM-DD HH:mm:ss'));
       setWeek(moment().format('dddd'));
     }, 1000);
 
-    //卸载
+    // 卸载
     return () => {
       clearInterval(t);
     }
