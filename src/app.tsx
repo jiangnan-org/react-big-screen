@@ -172,11 +172,12 @@ const loggerMiddleware = async (ctx: Context, next: () => void) => {
 
   await next();
 
-  let success = (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code == 200 : true);
+  // eslint-disable-next-line eqeqeq
+  const success = (ctx.res.success ? ctx.res.success : true) && (ctx.res.code ? ctx.res.code == 200 : true);
 
   // 映射
   ctx.res = {
-    success: success,
+    success,
     errorMessage: success? '' : ctx.res.errorMessage || ctx.res.msg,
     ...ctx.res
   };

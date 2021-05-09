@@ -3,6 +3,7 @@ import { defineConfig } from 'umi';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import routes from './routes';
+import darkTheme from '@ant-design/dark-theme';
 
 const serveUrlMap = {
   dev: 'http://81.68.217.175:9001/',
@@ -16,10 +17,6 @@ const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
   hash: true,
-  antd: {
-    dark: true, // 开启暗色主题
-    compact: true, // 开启紧凑主题
-  },
   dva: {
     hmr: true,
   },
@@ -47,11 +44,10 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes,
-  // Theme for antd: https://ant.design/docs/react/customize-theme-cn
-  // theme: {
-  //   'primary-color': defaultSettings.primaryColor,
-  //   'font-size-base':'14px',
-  // },
+  // 采用暗黑色主题样式  Theme for antd: https://ant.design/docs/react/customize-theme-cn
+  theme: {
+    // ...darkTheme,    // 部署的时候 配置这个 会根据这个生成暗黑色主题样式文件
+  },
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild
   esbuild: {},

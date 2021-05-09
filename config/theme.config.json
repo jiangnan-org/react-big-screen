@@ -125,5 +125,15 @@
   "isModule": true,
   "ignoreAntd": false,
   "ignoreProLayout": false,
-  "cache": true
+  "cache": true,
+  "extraLibraries": [
+    "@ant-design/pro-card",
+    "@ant-design/pro-form",
+    "@ant-design/pro-descriptions",
+    "@ant-design/pro-field",
+    "@ant-design/pro-list",
+    "@ant-design/pro-provider",
+    "@ant-design/pro-skeleton",
+    "@ant-design/pro-utils"
+  ]
 }
