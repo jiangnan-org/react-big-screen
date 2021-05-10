@@ -22,7 +22,8 @@ xs 超小屏幕如手机 sm 小屏幕如平板  md中等屏幕  lg大屏幕  xl�
 ### 2、然后创建new branch。将xxx版本checkout到new branch上
 ### 3、切换到master分支，合并new branch分支　git merge new branch
 
-或者查看更新日志，选中某一历史版本，Reset　Current　Branch　to　Here　选选择Hard　然后提交
+### 恢复某一版本方法二：
+查看更新日志，点击右上角时钟图标选中某一历史版本 查看Log，Reset　Current　Branch　to　Here　选选择Hard　然后提交
 
 
 ### 三、包安装
