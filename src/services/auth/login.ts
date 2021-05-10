@@ -43,16 +43,16 @@ export async function currentUser(options?: { [key: string]: any }) {
 
 /** 保存token */
 export const saveToken = (token : string) => {
-  sessionStorage.setItem('Authorization', 'Bearer ' + token);
+  localStorage.setItem('Authorization', 'Bearer ' + token);
 };
 
 /** 获取token */
 export const getToken =  () => {
-  let token = sessionStorage.getItem('Authorization');
+  let token = localStorage.getItem('Authorization');
   return token ? token : 'Bearer ';
 };
 
 /** 删除token */
 export const removeToken =  () => {
-  sessionStorage.removeItem('Authorization');
+  localStorage.removeItem('Authorization');
 };
