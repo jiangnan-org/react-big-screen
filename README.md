@@ -22,6 +22,8 @@ xs 超小屏幕如手机 sm 小屏幕如平板  md中等屏幕  lg大屏幕  xl�
 ### 2、然后创建new branch。将xxx版本checkout到new branch上
 ### 3、切换到master分支，合并new branch分支　git merge new branch
 
+或者查看更新日志，选中某一历史版本，Ｒｅｓｅｔ　Ｃｕｒｒｅｎｔ　Ｂｒａｎｃｈ　ｔｏ　Ｈｒｅｅ　选择Ｈａｒｄ
+
 
 ### 三、包安装
 ### 1、npm install xxx@latest 最新包
