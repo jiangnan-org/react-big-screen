@@ -4,8 +4,8 @@
  * @Data: 2021/4/9 17:34
  */
 import React, {useRef, useState} from 'react';
-import {PlusOutlined, EditOutlined, ToolOutlined,HighlightOutlined} from '@ant-design/icons';
-import {Form, Button, Space, Tag, Divider} from 'antd';
+import {PlusOutlined, EditOutlined,HighlightOutlined} from '@ant-design/icons';
+import {Form, Button, Divider} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getAlarmList} from '@/services/alarm/bell';
@@ -32,13 +32,13 @@ export default () => {
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
-  const [selectedRows, setSelectedRows] = useState<API.UserItem[]>([]);
+  const [selectedRows, setSelectedRows] = useState<API.AlarmItem[]>([]);
 
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
 
   /** table列定义 */
-  const columns: ProColumns<API.UserItem>[] = [
+  const columns: ProColumns<API.AlarmItem>[] = [
     {
       dataIndex: 'index',
       title: '序号',
@@ -86,30 +86,22 @@ export default () => {
         1: {text: '已处理'}
       },
     },
-    // {
-    //   title: '创建时间',
-    //   dataIndex: 'createTime',
-    //   valueType: 'date',
-    //   ellipsis: true,
-    //   hideInSearch: true,
-    //   width:200,
-    // },
     {
       title: '操作',
       valueType: 'option',
       render: (text, record, _, action) => (
         <>
-          {/*编辑*/}
+          {/* 编辑 */}
           <a
             key='editable'
             onClick={() => {
-              action.startEditable?.(record.id);
+              action.startEditable?.(record.id as React.Key);
             }}
           >
             <HighlightOutlined />编辑
           </a>
           <Divider type='vertical'/>
-          {/*处理单*/}
+          {/* 处理单 */}
           <a
             key='edit'
             onClick={() => {
@@ -122,8 +114,6 @@ export default () => {
           >
             <EditOutlined style={{'fontSize':'1.2em'}}/>处理单
           </a>
-
-
         </>
       ),
     },
@@ -131,7 +121,7 @@ export default () => {
 
   /** 新增用户表单 */
   const createUserModal = (
-    <ModalForm<API.UserItem>
+    <ModalForm<API.AlarmItem>
       title='新建报警'
       width="680px"
       form={createForm}
@@ -149,9 +139,9 @@ export default () => {
     </ModalForm>
   );
 
-  /**处理单*/
+  /** 处理单 */
   const updateUserModal = (
-    <ModalForm<API.UserItem>
+    <ModalForm<API.AlarmItem>
       title='更新用户'
       width="680px"
       form={updateForm}
@@ -173,19 +163,19 @@ export default () => {
 
   return (
     <React.Fragment>
-      <ProTable<API.UserItem>
+      <ProTable<API.AlarmItem>
         className={styles.table}
         columns={columns}
         actionRef={actionRef}
         request={async (params: API.PageParams = {}) => {
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-          const res: API.PageResponseMessage<API.UserItem> = await getAlarmList(params);
+          const res: API.ResponseMessage<API.AlarmItem[]> = await getAlarmList(params);
           return {
-            data: res.data.records,
+            data: res.data,
             // success 请返回 true，不然 table 会停止解析数据，即使有数据
             success: res.success,
             // 不传会使用 data 的长度，如果是分页一定要传
-            total: res.data.total,
+            total: res.data.length,
 
           }
         }}

@@ -53,16 +53,13 @@ export async function checkUsername(username: string, options?: { [key: string]:
 
 
 
-
-/** 获取用户列表 GET /api/user/list */
-export async function getAlarmList(params: API.PageParams, options?: { [key: string]: any }) {
-  return request<API.PageResponseMessage<API.UserItem>>('/yuncang/api/alarm/getall', {
+/** 获取告警列表 GET /api/alarm/getall */
+export async function getAlarmList(options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.AlarmItem[]>>('/yuncang/api/alarm/getall', {
     method: 'GET',
-    data: buildQueryParam(params),
     ...(options || {}),
 
   });
-
 }
 
 

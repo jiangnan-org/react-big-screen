@@ -6,7 +6,7 @@ import routes from './routes';
 // import darkTheme from '@ant-design/dark-theme';
 
 const serveUrlMap = {
-  dev: 'http://81.68.217.175:9001/',
+  dev: 'http://101.132.248.43:9001/',
   pre: 'https://pre.pro.ant.design/',
   test: 'https://test.pro.ant.design/',
   idc: 'https://idc.pro.ant.design/',
@@ -73,7 +73,7 @@ export default defineConfig({
     requestLibPath: "import { request } from 'umi'",
     // 或者使用在线的版本
     // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json",
-    schemaPath:"http://81.68.217.175:9001/v2/api-docs",
+    schemaPath:"http://101.132.248.43:9001/v2/api-docs",
     // schemaPath: join(__dirname, 'oneapi.json'),
     mock: true,
   },
