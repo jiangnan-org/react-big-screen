@@ -2,17 +2,17 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-/** 增加联系人信息 POST /operator/add */
-export async function addUsingPOST1(
+/** 增加 POST /api/alarm/add */
+export async function addUsingPOST(
   params: {
     // header
     /** token */
     Authorization?: string;
   },
-  body: API.Operator_,
+  body: API.Alarm_,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/operator/add', {
+  return request<API.UserResponseEntityString_>('/api/alarm/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export async function addUsingPOST1(
   });
 }
 
-/** 删除联系人 POST /operator/del */
+/** 删除 POST /api/alarm/del */
 export async function deleteUsingPOST(
   params: {
     // query
@@ -35,7 +35,7 @@ export async function deleteUsingPOST(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/operator/del', {
+  return request<API.UserResponseEntityString_>('/api/alarm/del', {
     method: 'POST',
     headers: {},
     params: {
@@ -45,7 +45,7 @@ export async function deleteUsingPOST(
   });
 }
 
-/** 由id查询联系人信息 GET /operator/get */
+/** 由id查询 GET /api/alarm/get */
 export async function getByIdUsingGET(
   params: {
     // query
@@ -57,7 +57,7 @@ export async function getByIdUsingGET(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityOperator_>('/operator/get', {
+  return request<API.UserResponseEntityAlarm_>('/api/alarm/get', {
     method: 'GET',
     headers: {},
     params: {
@@ -67,7 +67,7 @@ export async function getByIdUsingGET(
   });
 }
 
-/** 获取所有联系人信息 GET /operator/getall */
+/** 获取所有报警配置 GET /api/alarm/getall */
 export async function getAllUsingGET(
   params: {
     // header
@@ -76,7 +76,7 @@ export async function getAllUsingGET(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityListOperator_>('/operator/getall', {
+  return request<API.UserResponseEntityListAlarm_>('/api/alarm/getall', {
     method: 'GET',
     headers: {},
     params: { ...params },
@@ -84,17 +84,17 @@ export async function getAllUsingGET(
   });
 }
 
-/** 修改联系人信息 POST /operator/update */
+/** 修改 POST /api/alarm/update */
 export async function updateUsingPOST(
   params: {
     // header
     /** token */
     Authorization?: string;
   },
-  body: API.Operator_,
+  body: API.Alarm_,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityOperator_>('/operator/update', {
+  return request<API.UserResponseEntityAlarm_>('/api/alarm/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

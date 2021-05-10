@@ -2,17 +2,17 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-/** add POST /api/data/add */
-export async function addUsingPOST1(
+/** login POST /api/login */
+export async function loginUsingPOST(
   params: {
     // header
     /** token */
     Authorization?: string;
   },
-  body: API.Data_,
+  body: API._,
   options?: { [key: string]: any },
 ) {
-  return request<string>('/api/data/add', {
+  return request<API.UserResponseEntityString_>('/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
