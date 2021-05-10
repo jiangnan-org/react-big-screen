@@ -20,7 +20,11 @@ xs 超小屏幕如手机 sm 小屏幕如平板  md中等屏幕  lg大屏幕  xl�
 ### 二、git使用
 ### 1、 如果后面提交的有问题，想恢复到之前某个版本可以使用：git resst  xxxx版本 设置当前指针为xxxx版本
 ### 2、然后创建new branch。将xxx版本checkout到new branch上
-### 3、切换到master分支，合并new branch分支
+### 3、切换到master分支，合并new branch分支　git merge new branch
+
+### 恢复某一版本方法二：
+查看更新日志，点击右上角时钟图标选中某一历史版本 查看Log，Reset　Current　Branch　to　Here　选选择Hard　然后提交
+
 
 ### 三、包安装
 ### 1、npm install xxx@latest 最新包
@@ -130,3 +134,14 @@ color: @text-color;  # 将之前的固定色rgba(00,00,00,0.45)修改成变量
 eslint-utils:
    applyDefault.ts
    
+### 六、java命名规范
+1、方法命名  返回列表的 +s
+  public List<ParameterMapping> getParameterMappings()
+2、成员属性命名 collection +s
+   private List<ResultMapping> resultMappings;
+3、map成员
+Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<>()
+4、方法名称 做到望文生义
+getUserById
+getUserByLoginName
+...

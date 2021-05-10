@@ -10,7 +10,7 @@ import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import type { FormValueType } from './components/UpdateForm';
 import UpdateForm from './components/UpdateForm';
-import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro/rule';
+import { getUserList, addUser, updateUser, deleteUser } from '@/services/auth/user';
 
 /**
  * 添加节点
@@ -20,7 +20,7 @@ import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro
 const handleAdd = async (fields: API.RuleListItem) => {
   const hide = message.loading('正在添加');
   try {
-    await addRule({ ...fields });
+    await addUser({ ...fields });
     hide();
     message.success('添加成功');
     return true;
@@ -39,7 +39,7 @@ const handleAdd = async (fields: API.RuleListItem) => {
 const handleUpdate = async (fields: FormValueType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateRule({
+    await updateUser({
       name: fields.name,
       desc: fields.desc,
       key: fields.key,
@@ -64,7 +64,7 @@ const handleRemove = async (selectedRows: API.RuleListItem[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeRule({
+    await deleteUser({
       key: selectedRows.map((row) => row.key),
     });
     hide();
@@ -232,7 +232,7 @@ const TableList: React.FC = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
           </Button>,
         ]}
-        request={rule}
+        request={getUserList}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
