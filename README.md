@@ -134,3 +134,14 @@ color: @text-color;  # 将之前的固定色rgba(00,00,00,0.45)修改成变量
 eslint-utils:
    applyDefault.ts
    
+### 六、java命名规范
+1、方法命名  返回列表的 +s
+  public List<ParameterMapping> getParameterMappings()
+2、成员属性命名 collection +s
+   private List<ResultMapping> resultMappings;
+3、map成员
+Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<>()
+4、方法名称 做到望文生义
+getUserById
+getUserByLoginName
+...
