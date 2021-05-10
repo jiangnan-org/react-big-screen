@@ -13,22 +13,22 @@ export async function addUser(body: API.UserItem, options?: { [key: string]: any
     ...(options || {}),
   });
 }
+//
+// /** 批量删除用户 POST /api/user/dellist */
+// export async function deleteUser(ids: number[], options?: { [key: string]: any }) {
+//   return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/alarm/dellist', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     params:{
+//       ids
+//     },
+//     ...(options || {}),
+//   });
+// }
 
-/** 批量删除用户 POST /api/user/dellist */
-export async function deleteUser(ids: number[], options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/alarm/dellist', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    params:{
-      ids
-    },
-    ...(options || {}),
-  });
-}
-
-/** 更新用户 POST /api/user/update */
+/** 修改报警 POST /api/alarm/update */
 export async function updateUser(body: API.UserItem, options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/alarm/update', {
     method: 'POST',
@@ -40,33 +40,29 @@ export async function updateUser(body: API.UserItem, options?: { [key: string]: 
   });
 }
 
-/** 检测登录名是否已存在 GET /user/checkusername */
+/** 检测登录名是否已存在 GET /alarm-record/checkusername */
 export async function checkUsername(username: string, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<boolean>>('/yuncang/api/alarm/checkusername', {
+  return request<API.ResponseMessage<boolean>>('/yuncang/api/alarm-record/checkbymail', {
     method: 'GET',
     params: {
-      username,
+      code,
     },
     ...(options || {}),
   });
 }
 
-/** 根据用户名获取用户信息 GET /api/user/get */
-export async function getUserByUsername(username: string, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/alarm/get', {
-    method: 'GET',
-    params: {
-      username,
-    },
-    ...(options || {}),
-  });
-}
+
+
 
 /** 获取用户列表 GET /api/user/list */
 export async function getAlarmList(params: API.PageParams, options?: { [key: string]: any }) {
-  return request<API.PageResponseMessage<API.UserItem>>('/yuncang/api/alarm/list', {
-    method: 'POST',
+  return request<API.PageResponseMessage<API.UserItem>>('/yuncang/api/alarm/getall', {
+    method: 'GET',
     data: buildQueryParam(params),
     ...(options || {}),
+
   });
+
 }
+
+

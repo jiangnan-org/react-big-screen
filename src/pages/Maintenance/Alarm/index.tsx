@@ -46,20 +46,20 @@ export default () => {
       width: 60,
     },
     {
-      dataIndex: 'alarmName',
+      dataIndex: 'name',
       title: '报警名称',
       width: 150,
       ellipsis: true,
     },
     {
-      dataIndex: 'alarmValue',
+      dataIndex: 'max',
       title: '报警数值/报警阈值',
       width: 200,
       ellipsis: true,
       hideInSearch: true,
     },
     {
-      dataIndex: 'detail',
+      dataIndex: 'min',
       title: '报警详情',
       width: 300,
       hideInSearch: true,
@@ -78,7 +78,7 @@ export default () => {
     },
     {
       title: '处理状态',
-      dataIndex: 'statue',
+      dataIndex: 'notifyStatue',
       align: 'center',
       valueType: 'select',
       valueEnum: {
@@ -86,14 +86,14 @@ export default () => {
         1: {text: '已处理'}
       },
     },
-    {
-      title: '创建时间',
-      dataIndex: 'createTime',
-      valueType: 'date',
-      ellipsis: true,
-      hideInSearch: true,
-      width:200,
-    },
+    // {
+    //   title: '创建时间',
+    //   dataIndex: 'createTime',
+    //   valueType: 'date',
+    //   ellipsis: true,
+    //   hideInSearch: true,
+    //   width:200,
+    // },
     {
       title: '操作',
       valueType: 'option',
@@ -186,6 +186,7 @@ export default () => {
             success: res.success,
             // 不传会使用 data 的长度，如果是分页一定要传
             total: res.data.total,
+
           }
         }}
         editable={{
