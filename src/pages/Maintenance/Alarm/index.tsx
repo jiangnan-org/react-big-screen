@@ -120,7 +120,7 @@ export default () => {
   ];
 
   /** 新增用户表单 */
-  const createUserModal = (
+  const createAlarmModal = (
     <ModalForm<API.AlarmItem>
       title='新建报警'
       width="680px"
@@ -128,7 +128,7 @@ export default () => {
       visible={createModalVisible}
       onVisibleChange={setCreateModalVisible}
       onFinish={async (value) => {
-        const success = await actions.handleAddUser(value);
+        const success = await actions.handleAddAlarm(value);
         if (success) {
           setCreateModalVisible(false);
           actionRef.current?.reload();
@@ -140,7 +140,7 @@ export default () => {
   );
 
   /** 处理单 */
-  const updateUserModal = (
+  const updateAlarmModal = (
     <ModalForm<API.AlarmItem>
       title='更新用户'
       width="680px"
@@ -171,11 +171,11 @@ export default () => {
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
           const res: API.ResponseMessage<API.AlarmItem[]> = await getAlarmList(params);
           return {
-            data: res.data,
+            data: res.data.records,
             // success 请返回 true，不然 table 会停止解析数据，即使有数据
             success: res.success,
             // 不传会使用 data 的长度，如果是分页一定要传
-            total: res.data.length,
+            total: res.data.total,
 
           }
         }}
@@ -219,7 +219,7 @@ export default () => {
         <FooterToolbar>
           <Button
             onClick={async () => {
-              let success = await actions.handleDeleteUser(selectedRows);
+              let success = await actions.handleDeleteAlarm(selectedRows);
               if(success) {
                 setSelectedRows([]);
                 // 刷新并清空,页码也会重置，不包括表单
@@ -231,8 +231,8 @@ export default () => {
           </Button>
         </FooterToolbar>
       )}
-      {createUserModal}
-      {updateUserModal}
+      {createAlarmModal}
+      {updateAlarmModal}
     </React.Fragment>
   );
 };

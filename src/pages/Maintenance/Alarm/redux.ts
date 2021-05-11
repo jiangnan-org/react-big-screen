@@ -3,7 +3,7 @@
  * @Description：后端接口处理
  * @Data: 2021/5/8 13:47
  */
-import {addUser, deleteUser, updateUser} from "@/services/auth/user";
+import {addAlarm, deleteAlarm, updateUser} from "@/services/alarm/bell";
 import {message} from 'antd';
 
 
@@ -12,9 +12,9 @@ import {message} from 'antd';
  *
  * @param fields
  */
-const handleAddUser = async (fields: API.UserItem) => {
+const handleAddAlarm = async (fields: API.AlarmItem) => {
   try {
-    await addUser({...fields});
+    await addAlarm({...fields});
     message.success('添加成功');
     return true;
   } catch (error) {
@@ -29,10 +29,10 @@ const handleAddUser = async (fields: API.UserItem) => {
  *
  * @param selectedRows
  */
-const handleDeleteUser = async (selectedRows: API.UserItem[]) => {
+const handleDeleteAlarm = async (selectedRows: API.UserItem[]) => {
   try {
     let ids: any[] = selectedRows.map((row) => row.id);
-    await deleteUser(ids);
+    await deleteAlarm(ids);
     message.success('删除成功');
     return true;
   } catch (error) {
@@ -58,7 +58,7 @@ const handleUpdateUser = async (fields: API.UserItem) => {
 };
 
 export default  {
-  handleAddUser,
-  handleDeleteUser,
+  handleAddAlarm,
+  handleDeleteAlarm,
   handleUpdateUser
 };

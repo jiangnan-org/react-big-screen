@@ -8,9 +8,6 @@ function onChange(date, dateString) {
   console.log(date, dateString);
 }
 
-
-
-
 // 属性类型
 type PropField = {
   editable?: boolean ;    // 可编辑
