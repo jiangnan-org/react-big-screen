@@ -70,7 +70,7 @@ export default () => {
     {
       dataIndex: 'loginName',
       title: '账号',
-      width: 120,
+      width: 100,
       ellipsis: true,
     },
     {
@@ -97,6 +97,7 @@ export default () => {
       dataIndex: 'phone',
       title: '手机号码',
       hideInSearch: true,
+      align: 'center',
       width: 100,
     },
     {
@@ -104,6 +105,7 @@ export default () => {
       dataIndex: 'type',
       hideInSearch: true,
       align: 'center',
+      width: 100,
       render: (type,) => (
         <Space>
           <Tag color={RoleMap[type as number].color} key={RoleMap[type as number].name}>
@@ -117,6 +119,7 @@ export default () => {
       dataIndex: 'gender',
       align: 'center',
       valueType: 'select',
+      width: 60,
       valueEnum: {
         0: {text: '男'},
         1: {text: '女'}
@@ -126,16 +129,17 @@ export default () => {
       title: '创建时间',
       dataIndex: 'createTime',
       valueType: 'date',
-      ellipsis: true,
+      align: 'center',
       hideInSearch: true,
-      width: 120,
+      width: 100,
     },
     {
       title: '更新时间',
       dataIndex: 'updateTime',
       valueType: 'date',
+      align: 'center',
       hideInSearch: true,
-      width: 120,
+      width: 100,
     },
     {
       title: '状态',
@@ -144,6 +148,7 @@ export default () => {
       filters: true,
       onFilter: true,
       valueType: 'select',
+      width: 80,
       valueEnum: {
         0: {text: '激活', status: 'Success'},
         1: {text: '禁用', status: 'Error'}
@@ -152,6 +157,9 @@ export default () => {
     {
       title: '操作',
       valueType: 'option',
+      width: 120,
+      align: 'center',
+      ellipsis: true,
       render: (text, record, _, action) => (
         <>
           <a

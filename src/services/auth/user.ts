@@ -5,13 +5,13 @@ import _ from 'lodash';
 import buildQueryParam from '@/utils/buildQueryParam';
 
 /** 增加用户 POST /api/user/add */
-export async function addUser(body: API.UserItem, options?: { [key: string]: any }) {
+export async function addUser(user: API.UserItem, options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/user/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    data: body,
+    data: user,
     ...(options || {}),
   });
 }
@@ -31,13 +31,13 @@ export async function deleteUser(ids: number[], options?: { [key: string]: any }
 }
 
 /** 更新用户 POST /api/user/update */
-export async function updateUser(body: API.UserItem, options?: { [key: string]: any }) {
+export async function updateUser(user: API.UserItem, options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/user/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    data: body,
+    data: user,
     ...(options || {}),
   });
 }
