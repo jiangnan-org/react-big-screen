@@ -4,8 +4,8 @@
  * @Data: 2021/4/9 17:34
  */
 import React, {useRef, useState} from 'react';
-import {PlusOutlined, EditOutlined,HighlightOutlined} from '@ant-design/icons';
-import {Form, Button, Divider} from 'antd';
+import { EditOutlined,ToolOutlined} from '@ant-design/icons';
+import { Divider, Form, Space, Tag } from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getAlarmList} from '@/services/alarm/bell';
@@ -13,29 +13,51 @@ import AlarmForm from './component/AlarmForm';
 import NewForm from './component/NewForm';
 import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
-import {FooterToolbar} from '@ant-design/pro-layout';
 import actions from './redux';
 import styles from './index.less';
 
+
+
 export default () => {
   /** 表单引用 */
-  const [createForm] = Form.useForm();
   const [updateForm] = Form.useForm();
+  /** 表单引用 */
+  const [editForm] = Form.useForm();
 
   /** 如果是更新、保存当前选中的用户id */
   const [id, setId] = useState<any>(-1);
-
-  /** 新建窗口的弹窗 */
-  const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
-
   /** 分布更新窗口的弹窗 */
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
-
-  /**  批量删除时、选中行  */
-  const [selectedRows, setSelectedRows] = useState<API.AlarmItem[]>([]);
-
+  /** 分布更新编辑的弹窗 */
+  const [editModalVisible, seteditModalVisible] = useState<boolean>(false);
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
+
+  type RoleMapType = Record<number,
+    {
+      name: string;
+      desc: string;
+      color: string
+    }>;
+
+// 具体角色
+  const RoleMap: RoleMapType = {
+    0: {
+      name: '一般',
+      desc: '此重要',
+      color: 'green'
+    },
+    1: {
+      name: '紧急',
+      desc: '重要',
+      color: 'blue'
+    },
+    2: {
+      name: '严重',
+      desc: '非常重要',
+      color: 'red'
+    },
+  };
 
   /** table列定义 */
   const columns: ProColumns<API.AlarmItem>[] = [
@@ -43,67 +65,83 @@ export default () => {
       dataIndex: 'index',
       title: '序号',
       valueType: 'indexBorder',  // 带border的序号列
-      width: 60,
+      width: 5,
     },
     {
       dataIndex: 'name',
       title: '报警名称',
-      width: 150,
+      width: 15,
       ellipsis: true,
     },
     {
       dataIndex: 'max',
       title: '报警数值/报警阈值',
-      width: 200,
+      width: 20,
       ellipsis: true,
       hideInSearch: true,
     },
     {
       dataIndex: 'min',
       title: '报警详情',
-      width: 300,
+      width: 25,
       hideInSearch: true,
       ellipsis: true,
     },
+
     {
       title: '报警级别',
       dataIndex: 'level',
+      hideInSearch: true,
+      width: 10,
       align: 'center',
-      valueType: 'select',
-      valueEnum: {
-        0: {text: '一般'},
-        1: {text: '紧急'},
-        2: {text: '严重'}
-      },
+      render: (type,) => (
+        <Space>
+          <Tag color={RoleMap[type as number].color} key={RoleMap[type as number].name}>
+            {RoleMap[type as number].name}
+          </Tag>
+        </Space>
+      ),
     },
+
     {
-      title: '处理状态',
+      title: '状态',
       dataIndex: 'notifyStatue',
       align: 'center',
+      filters: true,
+      onFilter: true,
+      width: 10,
       valueType: 'select',
       valueEnum: {
-        0: {text: '未处理'},
-        1: {text: '已处理'}
+        0: {text: '已处理', status: 'Success'},
+        1: {text: '未处理', status: 'Error'}
       },
     },
+
+
+
     {
       title: '操作',
       valueType: 'option',
+      width: 10,
       render: (text, record, _, action) => (
         <>
           {/* 编辑 */}
           <a
-            key='editable'
+            key='edit'
             onClick={() => {
-              action.startEditable?.(record.id as React.Key);
+              // 初始化表单显示内容
+              editForm.setFieldsValue(record);
+              setId(record.id);
+              seteditModalVisible(true);
             }}
+            title='编辑'
           >
-            <HighlightOutlined />编辑
+            <EditOutlined style={{'fontSize':'1.2em'}}/>编辑
           </a>
           <Divider type='vertical'/>
           {/* 处理单 */}
           <a
-            key='edit'
+            key='sheet'
             onClick={() => {
               // 初始化表单显示内容
               updateForm.setFieldsValue(record);
@@ -112,37 +150,38 @@ export default () => {
             }}
             title='处理单'
           >
-            <EditOutlined style={{'fontSize':'1.2em'}}/>处理单
+            <ToolOutlined style={{'fontSize':'1.2em'}}/>处理单
           </a>
         </>
       ),
     },
   ];
-
-  /** 新增用户表单 */
-  const createAlarmModal = (
+  /** 处理单 */
+  const editAlarmModal = (
     <ModalForm<API.AlarmItem>
-      title='新建报警'
+      title='处理单'
       width="680px"
-      form={createForm}
-      visible={createModalVisible}
-      onVisibleChange={setCreateModalVisible}
+      form={editForm}
+      visible={editModalVisible}
+      onVisibleChange={seteditModalVisible}
       onFinish={async (value) => {
-        const success = await actions.handleAddAlarm(value);
+        // 指定更新的用户
+        _.assign(value, {id});
+        const success = await actions.handleEditAlarm(value);
         if (success) {
-          setCreateModalVisible(false);
+          seteditModalVisible(false);
           actionRef.current?.reload();
         }
       }}
     >
-      <NewForm/>
+      <NewForm editable={false}/>
     </ModalForm>
   );
 
   /** 处理单 */
   const updateAlarmModal = (
     <ModalForm<API.AlarmItem>
-      title='更新用户'
+      title='处理单'
       width="680px"
       form={updateForm}
       visible={updateModalVisible}
@@ -150,7 +189,7 @@ export default () => {
       onFinish={async (value) => {
         // 指定更新的用户
         _.assign(value, {id});
-        const success = await actions.handleUpdateUser(value);
+        const success = await actions.handleUpdateAlarm(value);
         if (success) {
           setUpdateModalVisible(false);
           actionRef.current?.reload();
@@ -188,51 +227,9 @@ export default () => {
         }}
         dateFormatter='string'
         // headerTitle='用户信息'
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
-        // 工具栏
-        toolBarRender={() => [
-          <Button key='button' icon={<PlusOutlined/>} type='primary' onClick={() => {
-            // 清空表单
-            createForm.setFieldsValue({
-              loginName: undefined,
-              realName:  undefined,
-              email: undefined,
-              wechat: undefined,
-              phone: undefined,
-              password: undefined,
-              gender: 0,
-              state: 0,
-              type: 0
-            });
-            setCreateModalVisible(true)
-          }
-          }>
-            新建
-          </Button>
-        ]}
       />
-      {selectedRows?.length > 0 && (
-        <FooterToolbar>
-          <Button
-            onClick={async () => {
-              let success = await actions.handleDeleteAlarm(selectedRows);
-              if(success) {
-                setSelectedRows([]);
-                // 刷新并清空,页码也会重置，不包括表单
-                actionRef.current?.reloadAndRest?.();
-              }
-            }}
-          >
-            批量删除
-          </Button>
-        </FooterToolbar>
-      )}
-      {createAlarmModal}
       {updateAlarmModal}
+      {editAlarmModal}
     </React.Fragment>
   );
 };
