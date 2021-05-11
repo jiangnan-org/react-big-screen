@@ -11,7 +11,11 @@
 
     // card标题
     .ant-pro-card-header {
+      .ant-pro-card-title{
+        font-weight: bolder;
+      }
       font-size: 1.2em !important;
+      margin-bottom: 12px;
     }
 
     // card内容
@@ -27,13 +31,23 @@
       }
     }
 
-    // form
-    .ant-form {
-      width: 100%;
-
-      .ant-form-item {
-        flex-wrap: nowrap;
-        margin-bottom: 6px;
+    .ant-form-item{
+      flex-direction: row !important;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      flex-wrap: nowrap;
+      .ant-form-item-label{
+        text-align: right !important;
+        width: 100px;
+        padding: 0 !important;
+        label:after {
+          color: @text-color;
+          content: ":";
+          margin: 0 8px 0 2px;
+          top: -.5px;
+          display: inline-block;
+        }
       }
     }
   }

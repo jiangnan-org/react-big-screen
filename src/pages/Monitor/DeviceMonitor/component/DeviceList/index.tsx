@@ -13,11 +13,11 @@ import {Link} from 'umi';
 export default () => {
   // 数据
   const data = [
-    '设备编号：YJSLKLSAPSDS',
-    '设备编号：SDSGFDSGFTRH',
-    '设备编号：SDCDSCGBGGHY',
-    '设备编号：QWSXCVFGGNBH',
-    '设备编号：WEWOPKXDLKXC',
+    '云仓名称：YJSLKLSAPSDS',
+    '云仓名称：SDSGFDSGFTRH',
+    '云仓名称：SDCDSCGBGGHY',
+    '云仓名称：QWSXCVFGGNBH',
+    '云仓名称：WEWOPKXDLKXC',
   ].map((item) => ({
     subTitle: item,
     actions: [
@@ -35,6 +35,7 @@ export default () => {
         defaultPageSize: 3,
         showSizeChanger: false,
       }}
+      /*  一行几列数据 */
       grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl:3  }}
       metas={{
         title: {},

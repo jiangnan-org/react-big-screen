@@ -3,12 +3,15 @@ import {useParams } from "umi";
 import { Tabs } from 'antd';
 import ProCard from "@ant-design/pro-card";
 import Monitor from  './component/Monitor';
+import BaseInfo from './component/BseInfo';
 import styles from "./index.less";
 
 const { TabPane } = Tabs;
 
 export default () => {
-  const params = useParams();
+  const params: {
+    sn: string
+  } = useParams();
 
   const callback = (key: any) => {
     console.log(key,params);
@@ -22,7 +25,7 @@ export default () => {
           <Monitor />
         </TabPane>
         <TabPane tab="信息" key="2">
-          Content of Tab Pane 2
+          <BaseInfo sn={params.sn}/>
         </TabPane>
         <TabPane tab="历史" key="3">
           Content of Tab Pane 3

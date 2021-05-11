@@ -3,7 +3,7 @@ import { defineConfig } from 'umi';
 // import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import routes from './routes';
-// import darkTheme from '@ant-design/dark-theme';
+import darkTheme from '@ant-design/dark-theme';
 
 const serveUrlMap = {
   dev: 'http://101.132.248.43:9001/',
@@ -46,7 +46,7 @@ export default defineConfig({
   routes,
   // 采用暗黑色主题样式  Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
-    // ...darkTheme,    // 部署的时候 配置这个 会根据这个生成暗黑色主题样式文件
+    ...darkTheme,    // 部署的时候 配置这个 会根据这个生成暗黑色主题样式文件
   },
   // esbuild is father build tools
   // https://umijs.org/plugins/plugin-esbuild

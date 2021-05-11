@@ -10,9 +10,8 @@ import EZUIKit from 'ezuikit-js';
 import PowerGenerationCurve from "./PowerGenerationCurve";
 import ElectricityConsumptionCurve from "./ElectricityConsumptionCurve";
 import {getToken} from '@/services/ys';
+
 export default () => {
-  // 播放器
-  const [player, setPlayer] = useState({});
 
   // expireTime
   const [tokenInfo,setTokenInfo] = useState({
@@ -24,9 +23,8 @@ export default () => {
   const width = 600;
 
   const refreshToken = () => {
-    let currentTime = (new Date()).getTime();
     // 提前1h更新token
-    if(tokenInfo.expireTime - currentTime < 60*60*1000 ){
+    if(tokenInfo.expireTime - (new Date()).getTime() < 60*60*1000 ){
       // 刷新token
       getToken('aaf399e239f2491f8e2f9ffd98877635','69fb9e4bb7e19bd9bb2fcf1f34d37aaf')
         .then((res: API.ResponseMessage<YSAPI.TokenItem>)=> {
@@ -34,7 +32,7 @@ export default () => {
           tokenInfo.expireTime = res.data.expireTime;
           tokenInfo.accessToken = res.data.accessToken;
           setTokenInfo(tokenInfo);
-          const player = new EZUIKit.EZUIKitPlayer({
+          EZUIKit.EZUIKitPlayer({
             id: 'video-container', // 视频容器ID
             accessToken: res.data.accessToken,
             url: 'ezopen://UVHJLS@open.ys7.com/F84018634/1.hd.live&autoplay=1',
@@ -43,7 +41,6 @@ export default () => {
             width:600,
             height:400,
           });
-          setPlayer(player);
         }).catch((error) => {
           console.log('fetch token failed', error);
         });
@@ -69,6 +66,7 @@ export default () => {
     <React.Fragment>
       <ProCard className={styles.camera} bordered>
         <ProCard split="vertical" gutter={[32, 16]}>
+          {/* 左侧视频画面 */}
           <ProCard
             title="视频画面"
             className={styles.left}
@@ -81,6 +79,7 @@ export default () => {
             </div>
           </ProCard>
 
+          {/*   右侧电池曲线 */}
           <ProCard
             className={styles.right}
           >

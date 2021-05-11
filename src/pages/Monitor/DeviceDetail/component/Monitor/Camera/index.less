@@ -4,20 +4,26 @@
   width: 100%;
   border-radius: 10px !important;
 
+  :global {
+    .ant-pro-card-header {
+      padding-bottom: 8px;
+      font-size: 1.2em !important;
+    }
+
+    .ant-pro-card-body{
+      padding: 0 !important;
+    }
+  }
+
   .left {
     width: 600px;
     margin-top: 20px;
     min-height: 420px;
     border: none;
-    :global {
-      .ant-pro-card-header {
-        padding-bottom: 8px;
-        font-size: 1.2em !important;
-        background-color: @text-color-secondary;
-      }
 
-      .ant-pro-card-body{
-        padding: 0 !important;
+    :global{
+      .ant-pro-card-header {
+        background-color: @text-color-secondary;
       }
     }
 
@@ -30,12 +36,16 @@
   .right{
     flex: 1;
     width: calc(100vh - 600px);
+    text-align: right;
+    min-height: 320px;
+    margin: 0 20px;
 
     .curve{
-      min-height: 240px;
-      margin-bottom: 36px;
+      min-height: 320px;
       height: 42%;
       width: 100%;
+      max-width: 600px;
+      margin: 0 auto 36px auto;
     }
   }
 }

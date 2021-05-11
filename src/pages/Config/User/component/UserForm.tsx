@@ -66,7 +66,7 @@ const UserForm: React.FC<PropField> = ({editable=true}) => {
         />
         <ProFormSelect
           name='gender'
-          label='性别：'
+          label='性别'
           placeholder='请选择性别'
           width='sm'
           options={[

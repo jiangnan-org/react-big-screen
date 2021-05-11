@@ -22,7 +22,7 @@ export default () => {
   let textColor: string = 'rgba(0, 0, 0, 0.85)';
 
   // 暗色主题
-  if (navTheme && navTheme === 'realDark') {
+  if (!navTheme || navTheme === 'realDark') {
     textColor = 'rgba(255, 255, 255, 0.85)';
     dark = true;
   }

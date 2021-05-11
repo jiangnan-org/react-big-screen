@@ -10,7 +10,6 @@ export const genOption = (data: {
   date: string,
   value: number
 }[]) => {
-  // 获取状态
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const styleConfig = useModel('styleConfig');
 

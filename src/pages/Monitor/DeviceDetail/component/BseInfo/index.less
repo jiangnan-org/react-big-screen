@@ -1,0 +1,53 @@
+@import '~antd/lib/style/themes/default.less';
+
+.baseInfo {
+  .top{
+    }
+    .topRight{
+
+    }
+
+  .topLeft,.bottom{
+    :global{
+      // card内容
+      .ant-pro-card-body-center {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 20px;
+
+        .ant-pro-card-statistic-layout-horizontal {
+          justify-content: flex-start !important;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  :global {
+    // 边框设置
+    .ant-pro-card-border {
+      border: 1px solid @text-color;
+      border-radius: 10px !important;
+      box-shadow: @text-color 0 0 0 1px inset;
+    }
+
+    .ant-pro-card-body{
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    // card标题
+    .ant-pro-card-header {
+      .ant-pro-card-title{
+        font-weight: bolder;
+      }
+      font-size: 1.2em !important;
+      margin-bottom: 12px;
+    }
+  }
+
+  .row {
+    width: 100%;
+  }
+}
