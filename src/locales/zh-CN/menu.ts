@@ -16,6 +16,9 @@ export default {
   'menu.config.alarm': '告警阈值管理',
   'menu.config.user': '用户管理',
   'menu.login': '登录',
+  'menu.account': '账号',
+  'menu.account.center': '个人中心',
+  'menu.account.setting': '个人设置',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500'

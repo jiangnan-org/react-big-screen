@@ -9,7 +9,7 @@ import {Form, Button, Space, Tag, Divider} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
-import UserForm from './component/UserForm';
+import Index from './component/UserForm';
 import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
@@ -203,7 +203,7 @@ export default () => {
         }
       }}
     >
-      <UserForm/>
+      <Index/>
     </ModalForm>
   );
 
@@ -227,7 +227,7 @@ export default () => {
         }
       }}
     >
-      <UserForm editable={false}/>
+      <Index editable={false}/>
     </ModalForm>
   );
 

@@ -6,15 +6,16 @@
       flex-direction: row !important;
       align-items: center;
       .ant-form-item-label{
-        text-align: right !important;
         width: 80px;
         padding: 0 !important;
+        text-align: right !important;
         label:after {
+          display: inline-block;
+          top: -.5px;
+          margin: 0 8px 0 2px;
           color: @text-color;
           content: ":";
-          margin: 0 8px 0 2px;
-          top: -.5px;
-          display: inline-block;
+
         }
       }
     }

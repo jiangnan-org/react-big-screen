@@ -123,6 +123,19 @@ export default [
       }
     ]
   },
+  // 个人信息
+  {
+    path: '/account',
+    name: 'account',
+    hideInMenu:true,
+    routes: [
+      {
+        name: 'setting',
+        path: '/account/setting',
+        component: './Account/Setting',
+      },
+    ]
+  },
   {
     component: './404',
   },

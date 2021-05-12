@@ -1,0 +1,48 @@
+@import '~antd/es/style/themes/default.less';
+
+.container {
+  display: flex;
+  padding-top: 12px;
+
+
+  .left {
+    min-width: 224px;
+  }
+
+  .right {
+    flex: 1;
+    padding-left: 104px;
+    .avatar_title {
+      height: 22px;
+      margin-bottom: 8px;
+      color: @heading-color;
+      font-size: @font-size-base;
+      line-height: 22px;
+    }
+    .avatar {
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .button {
+      width: 144px;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .container {
+    flex-direction: column-reverse;
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 448px;
+      padding: 20px;
+      .avatar_title {
+        display: none;
+      }
+    }
+  }
+}

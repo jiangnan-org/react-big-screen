@@ -31,6 +31,7 @@ const loginOut = async () => {
   }
 };
 
+/**  个人信息下拉列表  */
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
 
@@ -79,7 +80,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     return loading;
   }
 
-  //鼠标停留时  下拉菜单
+  // 鼠标停留时  下拉菜单
   const menuHeaderDropdown = (
     <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
       {menu && (
@@ -89,7 +90,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         </Menu.Item>
       )}
       {menu && (
-        <Menu.Item key="settings">
+        <Menu.Item key="setting">
           <SettingOutlined />
           个人设置
         </Menu.Item>

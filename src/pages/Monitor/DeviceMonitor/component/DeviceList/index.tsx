@@ -34,8 +34,8 @@ export default () => {
 
   return (
     <ResizeObserver
-      onResize={({width,height}) => {
-        if(width > 1248){
+      onResize={({offsetWidth}) => {
+        if(offsetWidth  > 1248){
           setPageSize(3);
         }else{
           setPageSize(2);
