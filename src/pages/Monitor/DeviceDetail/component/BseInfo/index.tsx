@@ -5,7 +5,7 @@
  */
 import React, {useState} from 'react';
 import styles from './index.less';
-import {Card, Descriptions, Divider} from '_antd@4.15.0@antd';
+import {Card, Descriptions, Divider} from 'antd';
 
 // @ts-ignore
 export default ({sn}) => {
@@ -28,6 +28,7 @@ export default ({sn}) => {
     <React.Fragment>
       <div className={styles.container}>
         <Card bordered={false} className={styles.content}>
+          {/*   默认一行三列  */}
           <Descriptions
             title='基础信息'
           >

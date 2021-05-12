@@ -5,7 +5,7 @@
  */
 import React,{useState} from 'react';
 import ProList from '@ant-design/pro-list';
-import Content from './Content';
+import Device from './Device';
 import styles from './index.less';
 import {DesktopOutlined} from '@ant-design/icons';
 import ResizeObserver from 'rc-resize-observer';
@@ -28,7 +28,7 @@ export default () => {
       <Link to={`/monitor/device-detail/${item.substring(5)}`}>查看详情</Link>
     ],
     content: (
-      <Content />
+      <Device />
     ),
   }));
 
@@ -43,14 +43,14 @@ export default () => {
       }}
     >
     <ProList<any>
-      className={styles.container}
+      className={styles.deviceList}
       pagination={{
-        pageSize: pageSize,
+        pageSize,
         showSizeChanger: false,
         responsive:true
       }}
       /*  一行几列数据 */
-      grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl:3  }}
+      grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl:3  }}
       metas={{
         title: {},
         subTitle: {},

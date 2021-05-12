@@ -1,85 +1,45 @@
 import { List, Switch } from 'antd';
-import React, { Component, Fragment } from 'react';
-import { formatMessage } from 'umi';
+import React from 'react';
 
-class NotificationView extends Component {
-  getData = () => {
+export default () => {
+  const getData = () => {
     const Action = (
       <Switch
-        checkedChildren={formatMessage({
-          id: 'accountandsettings.settings.open',
-        })}
-        unCheckedChildren={formatMessage({
-          id: 'accountandsettings.settings.close',
-        })}
+        checkedChildren='开'
+        unCheckedChildren='关'
         defaultChecked
       />
     );
     return [
       {
-        title: formatMessage(
-          {
-            id: 'accountandsettings.notification.password',
-          },
-          {},
-        ),
-        description: formatMessage(
-          {
-            id: 'accountandsettings.notification.password-description',
-          },
-          {},
-        ),
+        title: '告警消息',
+        description:'系统消息将以站内信的形式通知',
         actions: [Action],
       },
       {
-        title: formatMessage(
-          {
-            id: 'accountandsettings.notification.messages',
-          },
-          {},
-        ),
-        description: formatMessage(
-          {
-            id: 'accountandsettings.notification.messages-description',
-          },
-          {},
-        ),
+        title: '系统消息',
+        description:'系统消息将以站内信的形式通知',
         actions: [Action],
       },
       {
-        title: formatMessage(
-          {
-            id: 'accountandsettings.notification.todo',
-          },
-          {},
-        ),
-        description: formatMessage(
-          {
-            id: 'accountandsettings.notification.todo-description',
-          },
-          {},
-        ),
+        title: '代办任务',
+        description:'系统消息将以站内信的形式通知',
         actions: [Action],
       },
     ];
   };
 
-  render() {
-    const data = this.getData();
     return (
-      <Fragment>
+      <React.Fragment>
         <List
           itemLayout="horizontal"
-          dataSource={data}
+          dataSource={getData()}
           renderItem={(item) => (
             <List.Item actions={item.actions}>
               <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
         />
-      </Fragment>
+        </React.Fragment>
     );
-  }
 }
-
-export default NotificationView;

@@ -1,6 +1,6 @@
 @import '~antd/lib/style/themes/default.less';
 
-.container {
+.queryForm {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -16,8 +16,10 @@
       flex-direction: row;
       // 垂直居中
       align-items: center;
+      flex: 1;
     }
 
+    // sm 屏幕时防止flex占满 被强制换行
     .ant-form-item-label,.ant-form-item-control {
       flex: none !important;
       padding: 4px 0 !important;

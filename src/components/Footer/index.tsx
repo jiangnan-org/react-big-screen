@@ -4,7 +4,7 @@ import {DefaultFooter} from '@ant-design/pro-layout';
 
 export default () => {
 
-  //页脚
+  // 页脚
   const defaultFooterDom = (
     <DefaultFooter
       style={{display: 'none'}}

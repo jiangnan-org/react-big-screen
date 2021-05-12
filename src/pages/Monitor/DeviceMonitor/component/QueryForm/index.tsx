@@ -40,7 +40,7 @@ export default () => {
       initialValues={{
         order: 'descend',
       }}
-      className={styles.container}
+      className={styles.queryForm}
       submitter={{
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         render: (props, doms) => (
@@ -49,6 +49,7 @@ export default () => {
             icon={<SearchOutlined/>}
             key='submit'
             onClick={() => props.form?.submit?.()}
+            style={{margin:'4px 0 4px auto'}}
           >
             搜索
           </Button>

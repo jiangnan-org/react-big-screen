@@ -284,8 +284,8 @@ export const drawBoundary = (bmap: any,fillColor: string | undefined) => {
   ];
   const polygon2 = new BMap.Polygon(pArray, {
     strokeOpacity: 1,
-    strokeColor: 'rgb(20, 20, 20)',
-    strokeWeight: 1,
+    strokeColor: fillColor,
+    strokeWeight: 0,
     fillColor,
     fillOpacity: 1,
   });

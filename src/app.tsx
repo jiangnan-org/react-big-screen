@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import {getToken,currentUser as queryCurrentUser} from './services/auth/login';
 import {BookOutlined, LinkOutlined} from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import defaultSettings from '../config/defaultSettings';
 // @ts-ignore
 import type { Context, RequestOptionsInit } from 'umi';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
@@ -20,7 +21,7 @@ export const initialStateConfig = {
 /**
  * 获取全局初始化信息
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
- * 类似案例：https://www.cnblogs.com/chh1995/p/13965159.html
+ * https://beta-pro.ant.design/docs/initial-state-cn
  * 该方法返回的数据最后会被默认注入到一个 namespace 为 @@initialState  的 model 中。可以通过 useModel  这个 hook 来消费它
  * */
 export async function getInitialState(): Promise<{             // Promise<定义期望返回的数据类型>
@@ -46,12 +47,12 @@ export async function getInitialState(): Promise<{             // Promise<定义
     return {
       fetchUserInfo,
       currentUser,
-      settings: {},                                        // ProLayout高阶布局组件参数配置 默认采用config/defaultSettings.ts中设置
+      settings: defaultSettings,
     };
   }
   return {
     fetchUserInfo,
-    settings: {},                                          // ProLayout高阶布局组件参数配置
+    settings: defaultSettings,                                // ProLayout高阶布局组件参数配置
   };
 }
 

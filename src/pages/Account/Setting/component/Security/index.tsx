@@ -1,142 +1,80 @@
-import { FormattedMessage, formatMessage } from 'umi';
-import React, { Component } from 'react';
+import React  from 'react';
 import { List } from 'antd';
+
+// 密码强度
 const passwordStrength = {
   strong: (
-    <span className="strong">
-      <FormattedMessage id="accountandsettings.security.strong" defaultMessage="Strong" />
-    </span>
+    <span className='strong'>强</span>
   ),
   medium: (
-    <span className="medium">
-      <FormattedMessage id="accountandsettings.security.medium" defaultMessage="Medium" />
-    </span>
+    <span className='medium'>中</span>
   ),
   weak: (
-    <span className="weak">
-      <FormattedMessage id="accountandsettings.security.weak" defaultMessage="Weak" />
-      Weak
-    </span>
+    <span className='weak'>弱</span>
   ),
 };
 
-class SecurityView extends Component {
-  getData = () => [
+// 属性类型
+type PropField = {
+  currentUser?: API.UserItem;
+  setCurrentUser: (userInfo?: API.UserItem) => void;
+};
+
+const Security: React.FC<PropField> = ({ currentUser,setCurrentUser })=> {
+  const getData = () => {
+    return [
     {
-      title: formatMessage(
-        {
-          id: 'accountandsettings.security.password',
-        },
-        {},
-      ),
+      title: '账户密码',
       description: (
         <>
-          {formatMessage({
-            id: 'accountandsettings.security.password-description',
-          })}
-          ：{passwordStrength.strong}
+         当前密码强度：{passwordStrength.strong}
         </>
       ),
       actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
+        <a key='Modify'>
+         修改
         </a>,
       ],
     },
     {
-      title: formatMessage(
-        {
-          id: 'accountandsettings.security.phone',
-        },
-        {},
+      title: '密保手机',
+      description: (
+        <>
+          已绑定手机：{currentUser?.phone}
+        </>
       ),
-      description: `${formatMessage(
-        {
-          id: 'accountandsettings.security.phone-description',
-        },
-        {},
-      )}：138****8293`,
       actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
+        <a key='Modify'>
+          修改
         </a>,
       ],
     },
     {
-      title: formatMessage(
-        {
-          id: 'accountandsettings.security.question',
-        },
-        {},
-      ),
-      description: formatMessage(
-        {
-          id: 'accountandsettings.security.question-description',
-        },
-        {},
+      title: '备用邮箱',
+      description: (
+        <>
+          已绑定邮箱：{currentUser?.email}
+          </>
       ),
       actions: [
-        <a key="Set">
-          <FormattedMessage id="accountandsettings.security.set" defaultMessage="Set" />
-        </a>,
-      ],
-    },
-    {
-      title: formatMessage(
-        {
-          id: 'accountandsettings.security.email',
-        },
-        {},
-      ),
-      description: `${formatMessage(
-        {
-          id: 'accountandsettings.security.email-description',
-        },
-        {},
-      )}：ant***sign.com`,
-      actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
-    },
-    {
-      title: formatMessage(
-        {
-          id: 'accountandsettings.security.mfa',
-        },
-        {},
-      ),
-      description: formatMessage(
-        {
-          id: 'accountandsettings.security.mfa-description',
-        },
-        {},
-      ),
-      actions: [
-        <a key="bind">
-          <FormattedMessage id="accountandsettings.security.bind" defaultMessage="Bind" />
-        </a>,
-      ],
-    },
-  ];
+        <a key='Modify'>修改</a>
+      ]
+    }
+  ]};
 
-  render() {
-    const data = this.getData();
     return (
-      <>
+      <React.Fragment>
         <List
-          itemLayout="horizontal"
-          dataSource={data}
+          itemLayout='horizontal'
+          dataSource={getData()}
           renderItem={(item) => (
             <List.Item actions={item.actions}>
               <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
         />
-      </>
-    );
-  }
+      </React.Fragment>
+    )
 }
 
-export default SecurityView;
+export default Security;

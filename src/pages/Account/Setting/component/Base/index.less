@@ -1,6 +1,6 @@
 @import '~antd/es/style/themes/default.less';
 
-.container {
+.base {
   display: flex;
   padding-top: 12px;
 
@@ -31,7 +31,7 @@
 }
 
 @media screen and (max-width: @screen-lg) {
-  .container {
+  .base {
     flex-direction: column-reverse;
 
     .right {
@@ -42,6 +42,34 @@
       padding: 20px;
       .avatar_title {
         display: none;
+      }
+    }
+
+    :global{
+
+      // form
+      .ant-form-item {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .ant-form-item-label {
+          text-align: right !important;
+          width: 80px;
+
+          label::after {
+            top: -.5px;
+            display: inline-block;
+            color: @text-color;
+            content: ":";
+          }
+        }
+      }
+
+      // sm、md 屏幕时防止flex占满 被强制换行
+      .ant-form-item-label,.ant-form-item-control {
+        flex: none !important;
+        padding: 4px 0 !important;
       }
     }
   }

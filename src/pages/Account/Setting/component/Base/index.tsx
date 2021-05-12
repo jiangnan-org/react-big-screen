@@ -1,76 +1,50 @@
-import {UploadOutlined} from '@ant-design/icons';
-import {Button, Upload, Avatar} from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, Upload, Avatar } from 'antd';
 import React from 'react';
 import styles from './index.less';
 import avatar from './avatar.jpeg';
-import ProForm, {ProFormText, ProFormSelect} from '@ant-design/pro-form';
+import ProForm, { ProFormText, ProFormSelect,ProFormRadio } from '@ant-design/pro-form';
+import actions from './redux';
+import _ from 'lodash';
 
-// @ts-ignore
-const AvatarView = ({avatar}) => (
-  <>
-    <div className={styles.avatar_title}>
-      头像
-    </div>
-    <div className={styles.avatar}>
-      <Avatar
-        size={{ xs: 80, sm: 80, md: 80, lg: 100, xl: 120, xxl: 160 }}
-        src={avatar} alt="avatar"
-      />
-    </div>
-    <Upload showUploadList={false}>
-      <div className={styles.button}>
-        <Button>
-          <UploadOutlined/>
-          更换头像
-        </Button>
-      </div>
-    </Upload>
-  </>
-);
 
 // 属性类型
 type PropField = {
   currentUser?: API.UserItem;
+  setCurrentUser: (userInfo?: API.UserItem) => void;
 };
 
-const Base: React.FC<PropField> = ({currentUser}) => {
+const Base: React.FC<PropField> = ({ currentUser,setCurrentUser }) => {
+
   const getAvatarURL = () => {
     if (currentUser) {
       if (currentUser.phone) {
         return currentUser.photo;
       }
-      const url = avatar;
-      return url;
     }
-    return '';
+    return avatar;
   };
 
-  const handleSubmit = (user: API.UserItem) => {
 
+  // 更新用戶
+  const handleSubmit = async (fields: API.UserItem) => {
+    _.assign(currentUser,{...fields});
+    // @ts-ignore
+    const success = await actions.handleUpdateUser(currentUser);
+    if(success){
+      setCurrentUser(currentUser);
+    }
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.base}>
       {/* 基本信息 */}
       <div className={styles.left}>
-        <ProForm
-          layout="vertical"
+        <ProForm<API.UserItem>
+          layout='vertical'
           initialValues={currentUser}
           onFinish={async (values) => {
             handleSubmit(values);
-          }}
-          submitter={{
-            searchConfig: {
-              submitText: '更新'
-            },
-            render: (_, dom) => dom.pop(),
-            submitButtonProps: {
-              loading: false,
-              style: {
-                // width: '80px',
-                margin:'20px auto'
-              },
-            },
           }}
         >
           <ProForm.Group>
@@ -78,6 +52,7 @@ const Base: React.FC<PropField> = ({currentUser}) => {
               name='loginName'
               label='账号'
               width='sm'
+              disabled={true}
               rules={[
                 {
                   required: true,
@@ -86,7 +61,7 @@ const Base: React.FC<PropField> = ({currentUser}) => {
                   type: 'string',
                   min: 6,
                   max: 18,
-                }
+                },
               ]}
             />
             <ProFormSelect
@@ -94,10 +69,10 @@ const Base: React.FC<PropField> = ({currentUser}) => {
               label='类型'
               placeholder='请选择用户类型'
               width='sm'
-              disabled={false}
+              disabled={true}
               options={[
-                {label: '普通用户', value: 0},
-                {label: '超级管理员', value: 1},
+                { label: '普通用户', value: 0 },
+                { label: '超级管理员', value: 1 },
               ]}
               rules={[
                 {
@@ -120,17 +95,16 @@ const Base: React.FC<PropField> = ({currentUser}) => {
                   type: 'string',
                   min: 2,
                   max: 6,
-                }
+                },
               ]}
             />
-            <ProFormSelect
+            <ProFormRadio.Group
               name='gender'
               label='性别'
-              placeholder='请选择性别'
               width='sm'
               options={[
-                {label: '男', value: 0},
-                {label: '女', value: 1},
+                { label: '男', value: 0 },
+                { label: '女', value: 1 },
               ]}
               rules={[
                 {
@@ -148,17 +122,16 @@ const Base: React.FC<PropField> = ({currentUser}) => {
               rules={[
                 {
                   type: 'email',
-                }
+                },
               ]}
             />
-            <ProFormSelect
+            <ProFormRadio.Group
               name='state'
               label='状态'
               width='sm'
-              placeholder='请选择状态'
               options={[
-                {label: '激活', value: 0},
-                {label: '禁用', value: 1},
+                { label: '激活', value: 0 },
+                { label: '禁用', value: 1 },
               ]}
               rules={[
                 {
@@ -178,7 +151,7 @@ const Base: React.FC<PropField> = ({currentUser}) => {
                   type: 'string',
                   max: 18,
                   min: 2,
-                }
+                },
               ]}
             />
             <ProFormText
@@ -187,8 +160,9 @@ const Base: React.FC<PropField> = ({currentUser}) => {
               width='sm'
               rules={[
                 {
-                  pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/
-                }
+                  pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/,
+                  message: '手机号码不正确！'
+                },
               ]}
             />
           </ProForm.Group>
@@ -197,7 +171,23 @@ const Base: React.FC<PropField> = ({currentUser}) => {
 
       {/* 头像 */}
       <div className={styles.right}>
-        <AvatarView avatar={getAvatarURL()}/>
+        <div className={styles.avatar_title}>
+          头像
+        </div>
+        <div className={styles.avatar}>
+          <Avatar
+            size={{ xs: 80, sm: 80, md: 80, lg: 100, xl: 120, xxl: 160 }}
+            src={getAvatarURL()} alt='avatar'
+          />
+        </div>
+        <Upload showUploadList={false}>
+          <div className={styles.button}>
+            <Button>
+              <UploadOutlined />
+              更换头像
+            </Button>
+          </div>
+        </Upload>
       </div>
     </div>
   );
