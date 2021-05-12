@@ -51,27 +51,27 @@ export default () => {
             {...formItemLayout}
           >
             <Row gutter={16}>
-              <Col lg={6} md={6} sm={8} xs={12}>
+              <Col lg={6} md={6} sm={12} xs={24}>
                 <ProFormSwitch
-                  name='loginName'
+                  name='power'
                   label='电源开关'
                 />
               </Col>
-              <Col lg={6} md={6} sm={8} xs={12}>
+              <Col lg={6} md={6} sm={12} xs={24}>
                 <ProFormSwitch
-                  name='type'
+                  name='airport'
                   label='空调开关'
                 />
               </Col>
-              <Col lg={6} md={6} sm={8} xs={12}>
+              <Col lg={6} md={6} sm={12} xs={24}>
                 <ProFormSwitch
-                  name='loginName'
+                  name='light'
                   label='照明开关'
                 />
               </Col>
-              <Col lg={6} md={6} sm={8} xs={12}>
+              <Col lg={6} md={6} sm={12} xs={24}>
                 <ProFormSwitch
-                  name='type'
+                  name='fan'
                   label='排风扇开关'
                 />
               </Col>
