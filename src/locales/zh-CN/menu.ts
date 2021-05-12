@@ -1,7 +1,6 @@
 export default {
   'menu.home': '首页',
-  'menu.monitor': '实时监测',
-  'menu.monitor.device-monitor':'设备监控',
+  'menu.monitor': '设备监控',
   'menu.monitor.device-detail':'设备详情',
   'menu.maintenance': '智能运维',
   'menu.maintenance.alarm': '告警',

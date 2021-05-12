@@ -11,10 +11,13 @@ export default (): React.ReactNode => {
   return (
     <React.Fragment>
       <ProCard split="horizontal" bordered gutter={8}  className={styles.container}>
-        <ProCard className={styles.query}>
+        {/*  查询表单  */}
+        <ProCard>
           <QueryForm />
         </ProCard>
         <Divider />
+
+        {/*  列表  */}
         <ProCard>
           <DeviceList />
         </ProCard>

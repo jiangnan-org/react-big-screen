@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+/**
+ * @Author：zy
+ * @Description：云仓信息
+ * @Data: 2021/5/12 13:17
+ */
+import React, {useState} from 'react';
 import styles from './index.less';
-import ProCard, { StatisticCard } from '@ant-design/pro-card';
-import { Row, Col, Image } from 'antd';
-import yuncangImg from './yuncang.jpg';
-
-const { Statistic } = StatisticCard;
+import {Card, Descriptions, Divider} from '_antd@4.15.0@antd';
 
 // @ts-ignore
 export default ({sn}) => {
@@ -20,215 +21,51 @@ export default ({sn}) => {
   const [cameraInfo] = useState({
     deviceSerial: 'F84018634',       // 设备序列号
     deviceName: 'C8W(F84018634)',    // 设备名称
-    appKey: 'aaf399e239f2491f8e2f9ffd98877635',
-    appSecret: '69fb9e4bb7e19bd9bb2fcf1f34d37aaf',
-
+    url: 'ezopen://UVHJLS@open.ys7.com/F84018634/1.hd.live',    // 视频播放地址
   });
 
-  // 配置信息
-  const [dailyBatteryStatistics] = useState({
-    dailyPowerGeneration: 50,
-    dailyElectricityConsumption: 40,
-
-  });
-
-  // 介绍
   return (
     <React.Fragment>
-      <ProCard split='horizontal' className={styles.baseInfo} gutter={[0, 16]}>
-        {/*  上 gutter水平间距设置为0 样式文件中通过 justify-content: space-between调整 */}
-        <ProCard
-          split='vertical'
-          className={styles.top}
-          gutter={[0, 16]}
-        >
-          {/* 上左 */}
-          <ProCard
-            split='horizontal'
-            colSpan={{ xs: 24, sm: 24, md: 24, lg: '48%', xl: '49%', xxl: '49%' }}
-            bordered
-            className={styles.topLeft}
+      <div className={styles.container}>
+        <Card bordered={false} className={styles.content}>
+          <Descriptions
+            title='基础信息'
           >
-            <ProCard
-              title='云仓信息'
-              layout='center'
-              style={{ paddingBottom: '16px' }}
-            >
-              <Row gutter={[48, 48]} className={styles.row}>
-                <Col span={12}>
-                  <Statistic
-                    value={yuncangInfo.yuncangName}
-                    title='云仓名称：'
-                    layout='horizontal'
-                  />
-                </Col>
-                <Col span={12}>
-                  <Statistic
-                    value={yuncangInfo.collectorSN}
-                    title='采集器SN：'
-                    layout='horizontal'
-                  />
-                </Col>
-              </Row>
-              <Row gutter={[48, 48]} className={styles.row}>
-                <Col span={12}>
-                  <Statistic
-                    value={yuncangInfo.standardSizes}
-                    title='规格尺寸：'
-                    layout='horizontal'
-                  />
-                </Col>
-                <Col span={12}>
-                  <Statistic
-                    value={yuncangInfo.mainDevice}
-                    title='主要设备：'
-                    layout='horizontal'
-                  />
-                </Col>
-              </Row>
-            </ProCard>
+            <Descriptions.Item label='云仓名称'>{yuncangInfo.yuncangName}</Descriptions.Item>
+            <Descriptions.Item label='采集器SN'>{yuncangInfo.collectorSN}</Descriptions.Item>
+            <Descriptions.Item label='规格尺寸'>{yuncangInfo.standardSizes}</Descriptions.Item>
+            <Descriptions.Item label='主要设备'>{yuncangInfo.mainDevice}</Descriptions.Item>
+          </Descriptions>
+          <Divider
+          />
 
-            <ProCard
-              title='配置信息'
-              layout='center'
-              style={{ paddingTop: '16px' }}
-            >
-              <Row gutter={[48, 48]} className={styles.row}>
-                <Col span={12}>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyPowerGeneration}
-                    title='系统电压：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-                <Col>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyElectricityConsumption}
-                    title='系统功率：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-              </Row>
-              <Row gutter={[48, 48]} className={styles.row}>
-                <Col span={12}>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyPowerGeneration}
-                    title='光伏容量：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-                <Col>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyElectricityConsumption}
-                    title='逆变一体机：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-              </Row>
-              <Row gutter={[48, 48]} className={styles.row}>
-                <Col span={12}>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyPowerGeneration}
-                    title='并网侧功率：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-                <Col>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyElectricityConsumption}
-                    title='离网端功率：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-              </Row>
-              <Row gutter={[48, 48]} className={styles.row}>
-                <Col span={12}>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyPowerGeneration}
-                    title='电池容量：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-                <Col>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyElectricityConsumption}
-                    title='电池数量：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-              </Row>
-              <Row gutter={[48, 48]} className={styles.row}>
-                <Col span={12}>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyPowerGeneration}
-                    title='水箱容量：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-                <Col>
-                  <Statistic
-                    value={dailyBatteryStatistics.dailyElectricityConsumption}
-                    title='传感器数量：'
-                    suffix='w'
-                    layout='horizontal'
-                  />
-                </Col>
-              </Row>
-            </ProCard>
-          </ProCard>
-
-          {/*  上右 */}
-          <ProCard
-            layout='center'
-            bordered
-            colSpan={{ xs: 24, sm: 24, md: 24, lg: '48%', xl: '49%', xxl: '49%' }}
-            className={styles.topRight}
+          <Descriptions
+            title='配置信息'
           >
-            <Image
-              width='100%'
-              height='100%'
-              src={yuncangImg}
-            />
-          </ProCard>
-        </ProCard>
+            <Descriptions.Item label='系统电压'>付小小</Descriptions.Item>
+            <Descriptions.Item label='系统功率'>18100000000</Descriptions.Item>
+            <Descriptions.Item label='光伏容量'>菜鸟仓储</Descriptions.Item>
+            <Descriptions.Item label='逆变一体机'>浙江省杭州市西湖区万塘路18号</Descriptions.Item>
+            <Descriptions.Item label='并网侧功率'>无</Descriptions.Item>
+            <Descriptions.Item label='离网端功率'>菜鸟仓储</Descriptions.Item>
+            <Descriptions.Item label='电池容量'>浙江省杭州市西湖区万塘路18号</Descriptions.Item>
+            <Descriptions.Item label='电池数量'>无</Descriptions.Item>
+            <Descriptions.Item label='水箱容量'>无</Descriptions.Item>
+            <Descriptions.Item label='传感器数量'>无</Descriptions.Item>
+          </Descriptions>
+          <Divider/>
 
-        {/*  下 */}
-        <ProCard
-          className={styles.bottom}
-          split='vertical'
-          gutter={[0, 16]}
-        >
-          {/*  下左 */}
-          <ProCard
+          <Descriptions
             title='摄像头信息'
-            layout='center'
-            colSpan={{ xs: 24, sm: 24, md: '48%', lg: '48%', xl: '49%', xxl: '49%' }}
-            bordered
           >
-            <Statistic value={cameraInfo.deviceSerial} title='设备序列号：' layout='horizontal' />
-            <Statistic value={cameraInfo.deviceName} title='设备名称：' layout='horizontal' />
-            <Statistic value={cameraInfo.appKey} title='appKey：' layout='horizontal' />
-            <Statistic value={cameraInfo.appSecret} title='appSecret：' layout='horizontal' />
-          </ProCard>
-
-          {/*  下右 */}
-          <ProCard
-            layout='center'
-            colSpan={{ xs: 24, sm: 24, md: '48%', lg: '48%', xl: '49%', xxl: '49%' }}
-            bordered
-          >
-          </ProCard>
-        </ProCard>
-      </ProCard>
+            <Descriptions.Item label='设备序列号'>{cameraInfo.deviceSerial}</Descriptions.Item>
+            <Descriptions.Item label='设备名称'>{cameraInfo.deviceName}</Descriptions.Item>
+            <Descriptions.Item label='视频播放地址'>{cameraInfo.url}</Descriptions.Item>
+          </Descriptions>
+          <Divider
+          />
+        </Card>
+      </div>
     </React.Fragment>
   );
 };

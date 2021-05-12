@@ -3,12 +3,9 @@
  * 账号 xxxxxx@163.com xxxxxxaa@
  */
 import React, {useState, useEffect} from 'react';
-import ProCard from '@ant-design/pro-card';
 import styles from './index.less';
 // @ts-ignore
 import EZUIKit from 'ezuikit-js';
-import PowerGenerationCurve from "./PowerGenerationCurve";
-import ElectricityConsumptionCurve from "./ElectricityConsumptionCurve";
 import {getToken} from '@/services/ys';
 
 export default () => {
@@ -19,8 +16,6 @@ export default () => {
     accessToken:''
   });
 
-  // 摄像头 宽度和高度
-  const width = 600;
 
   const refreshToken = () => {
     // 提前1h更新token
@@ -32,15 +27,19 @@ export default () => {
           tokenInfo.expireTime = res.data.expireTime;
           tokenInfo.accessToken = res.data.accessToken;
           setTokenInfo(tokenInfo);
-          EZUIKit.EZUIKitPlayer({
+          let player = EZUIKit.EZUIKitPlayer({
             id: 'video-container', // 视频容器ID
             accessToken: res.data.accessToken,
-            url: 'ezopen://UVHJLS@open.ys7.com/F84018634/1.hd.live&autoplay=1',
+            url: 'ezopen://UVHJLS@open.ys7.com/F84018634/1.hd.live',   // 多窗口ezopen播放地址逗号分隔
+            autoplay:true,
             template: 'security', // simple - 极简版;standard-标准版;security - 安防版(预览回放);voice-语音版；
             audio: 1,             // 是否默认开启声音 0 - 关闭 1 - 开启
             width:600,
             height:400,
+            splitBasis: 1 // 设置窗口切割参数
           });
+          // 播放
+          player.play();
         }).catch((error) => {
           console.log('fetch token failed', error);
         });
@@ -64,34 +63,10 @@ export default () => {
 
   return (
     <React.Fragment>
-      <ProCard className={styles.camera} bordered>
-        <ProCard split="vertical" gutter={[32, 16]}>
-          {/* 左侧视频画面 */}
-          <ProCard
-            title="视频画面"
-            className={styles.left}
-            colSpan={{xs: 0, sm: 0, md: 0,
-              lg: `${width}px`,
-              xl: `${width}px`,
-              xxl: `${width}px`}}
-          >
+      <div className={styles.container}>
             <div id="video-container">
             </div>
-          </ProCard>
-
-          {/*   右侧电池曲线 */}
-          <ProCard
-            className={styles.right}
-          >
-            <div className={styles.curve}>
-              <PowerGenerationCurve/>
-            </div>
-            <div className={styles.curve}>
-              <ElectricityConsumptionCurve/>
-            </div>
-          </ProCard>
-        </ProCard>
-      </ProCard>
+      </div>
     </React.Fragment>
   );
 };

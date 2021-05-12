@@ -3,14 +3,18 @@
  * @Author: zy
  * @Description: 设备列表 https://procomponents.ant.design/components/list
  */
-import React from 'react';
+import React,{useState} from 'react';
 import ProList from '@ant-design/pro-list';
-import BaseInfo from './BaseInfo';
+import Content from './Content';
 import styles from './index.less';
 import {DesktopOutlined} from '@ant-design/icons';
+import ResizeObserver from 'rc-resize-observer';
 import {Link} from 'umi';
 
 export default () => {
+  // 默认页大小
+  const [pageSize,setPageSize] = useState(2);
+
   // 数据
   const data = [
     '云仓名称：YJSLKLSAPSDS',
@@ -21,22 +25,32 @@ export default () => {
   ].map((item) => ({
     subTitle: item,
     actions: [
-      <a>表单打印</a>,
       <Link to={`/monitor/device-detail/${item.substring(5)}`}>查看详情</Link>
     ],
     content: (
-      <BaseInfo />
+      <Content />
     ),
   }));
 
   return (
+    <ResizeObserver
+      onResize={({width,height}) => {
+        if(width > 1248){
+          setPageSize(3);
+        }else{
+          setPageSize(2);
+        }
+      }}
+    >
     <ProList<any>
+      className={styles.container}
       pagination={{
-        defaultPageSize: 3,
+        pageSize: pageSize,
         showSizeChanger: false,
+        responsive:true
       }}
       /*  一行几列数据 */
-      grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl:3  }}
+      grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl:3  }}
       metas={{
         title: {},
         subTitle: {},
@@ -49,7 +63,7 @@ export default () => {
         actions: {},
       }}
       dataSource={data}
-      className={styles.deviceList}
     />
+    </ResizeObserver>
   );
 };

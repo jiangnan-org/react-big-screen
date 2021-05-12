@@ -30,8 +30,8 @@ export default [
     icon: 'monitor',
     routes: [
       {
-        path: '/monitor/device-monitor',
-        name: 'device-monitor',
+        path: '/monitor',
+        hideInMenu: true,
         component: './Monitor/DeviceMonitor',
       },
       // 设备详情页面、由设备监控页面进入 不在菜单显示 https://beta-pro.ant.design/docs/router-and-nav-cn

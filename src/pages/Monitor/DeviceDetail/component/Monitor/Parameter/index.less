@@ -1,0 +1,59 @@
+@import '~antd/lib/style/themes/default.less';
+
+.container {
+
+  .form{
+    :global{
+      .ant-card-body{
+        padding: 12px 24px !important;
+      }
+    }
+  }
+
+
+  :global {
+    // card
+    .ant-card-head{
+      min-height: auto;
+      font-weight: bold;
+      border-bottom: none;
+      .ant-card-head-title{
+        padding: 4px auto !important;
+      }
+    }
+
+    // 第一个----
+    .ant-divider-horizontal {
+      margin: 0;
+    }
+
+    // card里面的
+    .ant-card{
+      .ant-divider-horizontal {
+        margin: 8px auto 24px;
+      }
+    }
+
+    // form
+    .ant-form-item{
+      flex-direction: row !important;
+      align-items: center;
+      margin-bottom: 10px;
+      .ant-form-item-label{
+        padding: 0 !important;
+        text-align: right !important;
+
+        label::after {
+          top: -.5px;
+          display: inline-block;
+          color: @text-color;
+          content: ":";
+        }
+      }
+
+      .ant-form-item-label,.ant-form-item-control{
+        flex: none;
+      }
+    }
+  }
+}

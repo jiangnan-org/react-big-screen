@@ -1,7 +1,7 @@
 import React from 'react';
-import ProCard from '@ant-design/pro-card';
+import ProCard from '_@ant-design_pro-card@1.11.7@@ant-design/pro-card';
 import styles from './index.less';
-import ReactEcharts from 'echarts-for-react';
+import ReactEcharts from '_echarts-for-react@3.0.1@echarts-for-react';
 import { genOption } from './option';
 
 export default () => {
@@ -49,7 +49,7 @@ export default () => {
         className={styles.powerCurve}
         title={
           <div>
-            <span className={styles.chinese}>实时发电功率曲线</span>
+            <span className={styles.chinese}>电池放电功率曲线</span>
             <span className={styles.english}>Real time Power Curve</span>
           </div>
         }

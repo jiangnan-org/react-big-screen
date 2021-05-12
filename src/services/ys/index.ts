@@ -17,3 +17,12 @@ export async function getToken(
     }
   });
 }
+
+/** 获取萤石应用信息 */
+export const getAppInfo =  () => {
+  return {
+    appKey: 'aaf399e239f2491f8e2f9ffd98877635',
+    appSecret: '69fb9e4bb7e19bd9bb2fcf1f34d37aaf'
+  }
+};
+
