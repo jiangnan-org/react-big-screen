@@ -41,7 +41,7 @@ export default () => {
 
   return (
     <React.Fragment>
-      <div className={styles.container}>
+      <div className={styles.parameter}>
         <Card title="控制系统" bordered={false} className={styles.form}>
           <ProForm
             onFinish={async (values) => {

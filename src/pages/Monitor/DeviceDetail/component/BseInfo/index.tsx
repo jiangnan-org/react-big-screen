@@ -26,7 +26,7 @@ export default ({sn}) => {
 
   return (
     <React.Fragment>
-      <div className={styles.container}>
+      <div className={styles.baseInfo}>
         <Card bordered={false} className={styles.content}>
           {/*   默认一行三列  */}
           <Descriptions

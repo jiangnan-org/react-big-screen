@@ -19,7 +19,7 @@ export default () => {
 
   return (
     <React.Fragment>
-      <ProCard split="horizontal" bordered gutter={8}  className={styles.container}>
+      <ProCard split="horizontal" bordered gutter={8}  className={styles.deviceDetail}>
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="主画面" key="1">
           <Monitor />

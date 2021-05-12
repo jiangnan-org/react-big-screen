@@ -10,7 +10,7 @@ export default (): React.ReactNode => {
 
   return (
     <React.Fragment>
-      <ProCard split="horizontal" bordered gutter={8}  className={styles.container}>
+      <ProCard split="horizontal" bordered gutter={8}  className={styles.deviceMonitor}>
         {/*  查询表单  */}
         <ProCard>
           <QueryForm />

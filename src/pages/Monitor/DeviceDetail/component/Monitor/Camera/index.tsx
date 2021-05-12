@@ -63,7 +63,7 @@ export default () => {
 
   return (
     <React.Fragment>
-      <div className={styles.container}>
+      <div className={styles.camera}>
             <div id="video-container">
             </div>
       </div>
