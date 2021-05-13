@@ -61,7 +61,7 @@ const NewForm: React.FC<PropField> = ({editable=true}) => {
           options={[
             {label: '一般', value: 0},
             {label: '紧急', value: 1},
-            {label: '严重', value: 1},
+            {label: '严重', value: 2},
           ]}
           rules={[
             {

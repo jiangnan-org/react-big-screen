@@ -3,7 +3,7 @@ import Parameter from './Parameter';
 import Camera from './Camera';
 import ProCard from '@ant-design/pro-card';
 import styles from './index.less';
-import { Divider } from '_antd@4.15.4@antd';
+import { Divider } from 'antd';
 
 export default () => {
   return (

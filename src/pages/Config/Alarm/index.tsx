@@ -5,7 +5,7 @@
  */
 import React, {useRef, useState} from 'react';
 import { EditOutlined,ToolOutlined} from '@ant-design/icons';
-import { Divider, Form, Space, Tag } from 'antd';
+import { Divider, Form} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getAlarmList} from '@/services/alarm/bell';
@@ -33,31 +33,7 @@ export default () => {
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
 
-  type RoleMapType = Record<number,
-    {
-      name: string;
-      desc: string;
-      color: string
-    }>;
 
-// 具体角色
-  const RoleMap: RoleMapType = {
-    0: {
-      name: '一般',
-      desc: '此重要',
-      color: 'green'
-    },
-    1: {
-      name: '紧急',
-      desc: '重要',
-      color: 'blue'
-    },
-    2: {
-      name: '严重',
-      desc: '非常重要',
-      color: 'red'
-    },
-  };
 
   /** table列定义 */
   const columns: ProColumns<API.AlarmItem>[] = [
@@ -91,18 +67,17 @@ export default () => {
     {
       title: '报警级别',
       dataIndex: 'level',
-      hideInSearch: true,
-      width: 10,
       align: 'center',
-      render: (type,) => (
-        <Space>
-          <Tag color={RoleMap[type as number].color} key={RoleMap[type as number].name}>
-            {RoleMap[type as number].name}
-          </Tag>
-        </Space>
-      ),
+      filters: true,
+      onFilter: true,
+      width: 10,
+      valueType: 'select',
+      valueEnum: {
+        0: {text: '一般'},
+        1: {text: '紧急'},
+        2: {text: '严重'}
+      },
     },
-
     {
       title: '状态',
       dataIndex: 'notifyStatue',
