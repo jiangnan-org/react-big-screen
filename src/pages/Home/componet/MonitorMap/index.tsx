@@ -13,6 +13,7 @@ import './extension/bmap/bmap.js'; // echart百度地图扩展
 import loadScript from '@/utils/import-script';
 import { useModel } from 'umi';
 import mapStyleConfig from './style';
+import styles from './index.less';
 import _ from 'lodash';
 
 // @ts-ignore  使用百度API  加载js文件
@@ -69,7 +70,7 @@ export default () => {
 
   return (
     <React.Fragment>
-      <div style={{ height: '100%', width: '100%' }}>
+      <div className={styles.map}>
         <ReactEcharts
           echarts={echarts}
           // @ts-ignore

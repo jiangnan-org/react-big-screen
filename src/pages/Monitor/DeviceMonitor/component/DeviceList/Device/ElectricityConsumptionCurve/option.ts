@@ -13,7 +13,6 @@ export const genOption = (data: {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const styleConfig = useModel('styleConfig');
 
-  console.log('配置',styleConfig);
   return {
     tooltip: {
       trigger: 'axis',

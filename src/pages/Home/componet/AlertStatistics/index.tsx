@@ -5,34 +5,31 @@
  */
 import React from 'react';
 import styles from './index.less';
-import { Badge, Tag } from 'antd';
-import {ToolOutlined,WarningOutlined,AlertOutlined,InfoOutlined} from '@ant-design/icons';
+import { Badge, Tag, Row, Col } from 'antd';
+import { WarningOutlined, AlertOutlined, InfoOutlined } from '@ant-design/icons';
 
 
 export default () => {
   return (
     <React.Fragment>
       <div className={styles.alert}>
-          <div>
-            <Badge count={22}  size="small"  offset={[10, -5]} overflowCount={999}><ToolOutlined /></Badge>
+        <Row gutter={16}>
+          <Col lg={8} md={8} sm={8} xs={12} >
+            <Badge count={89} size='small' offset={[10, -5]} overflowCount={999}><AlertOutlined /></Badge>
+            <Tag>紧急告警</Tag>
+          </Col>
+
+          <Col lg={8} md={8} sm={8} xs={12}>
+            <Badge count={22} size='small' offset={[10, -5]} overflowCount={999}><WarningOutlined /></Badge>
             <Tag>严重告警</Tag>
-          </div>
+          </Col>
 
-        <div>
-          <Badge count={100}  size="small"  offset={[10, -5]} overflowCount={999}><WarningOutlined /></Badge>
-          <Tag>重要告警</Tag>
-        </div>
-
-        <div>
-          <Badge count={89} size="small"  offset={[10, -5]} overflowCount={999}><AlertOutlined /></Badge>
-          <Tag>次要告警</Tag>
-        </div>
-
-        <div>
-          <Badge count={1000} size="small"  offset={[10, -5]} overflowCount={4}><InfoOutlined /></Badge>
-          <Tag>提示告警</Tag>
-        </div>
+          <Col lg={8} md={8} sm={8} xs={12}>
+            <Badge count={100} size='small' offset={[10, -5]} overflowCount={999}>< InfoOutlined /></Badge>
+            <Tag>一般告警</Tag>
+          </Col>
+        </Row>
       </div>
     </React.Fragment>
-  )
+  );
 }
