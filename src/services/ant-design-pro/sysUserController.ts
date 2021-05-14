@@ -3,7 +3,7 @@
 import { request } from 'umi';
 
 /** 增加用户 POST /api/user/add */
-export async function addUsingPOST3(
+export async function addUsingPOST5(
   params: {
     // header
     /** token */
@@ -13,6 +13,27 @@ export async function addUsingPOST3(
   options?: { [key: string]: any },
 ) {
   return request<API.UserResponseEntityString_>('/api/user/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { ...params },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 修改本人(普通用户)密码 POST /api/user/changepassword */
+export async function changePasswordUsingPOST(
+  params: {
+    // header
+    /** token */
+    Authorization?: string;
+  },
+  body: API.SysUserPasswordUpdateDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.UserResponseEntitySysUser_>('/api/user/changepassword', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -46,7 +67,7 @@ export async function checkUsernameUsingGET(
 }
 
 /** 删除用户 POST /api/user/del */
-export async function deleteUsingPOST2(
+export async function deleteUsingPOST4(
   params: {
     // query
     /** id */
@@ -68,7 +89,7 @@ export async function deleteUsingPOST2(
 }
 
 /** 删除用户(批量) POST /api/user/dellist */
-export async function deleteByIdsUsingPOST1(
+export async function deleteByIdsUsingPOST2(
   params: {
     // query
     /** ids */
@@ -129,7 +150,7 @@ export async function getMeUsingGET(
 }
 
 /** 获取所有用户(分页) POST /api/user/list */
-export async function getByPageUsingPOST1(
+export async function getByPageUsingPOST3(
   params: {
     // header
     /** token */
@@ -150,7 +171,7 @@ export async function getByPageUsingPOST1(
 }
 
 /** 修改用户信息 POST /api/user/update */
-export async function updateUsingPOST2(
+export async function updateUsingPOST6(
   params: {
     // header
     /** token */
@@ -160,6 +181,27 @@ export async function updateUsingPOST2(
   options?: { [key: string]: any },
 ) {
   return request<API.UserResponseEntitySysUser_>('/api/user/update', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: { ...params },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 修改本人(普通用户)信息 POST /api/user/updateme */
+export async function updateMeUsingPOST(
+  params: {
+    // header
+    /** token */
+    Authorization?: string;
+  },
+  body: API.SysUserSelfUpdateDTO,
+  options?: { [key: string]: any },
+) {
+  return request<API.UserResponseEntitySysUser_>('/api/user/updateme', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
