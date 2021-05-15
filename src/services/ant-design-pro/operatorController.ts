@@ -3,7 +3,7 @@
 import { request } from 'umi';
 
 /** 增加联系人信息 POST /api/operator/add */
-export async function addUsingPOST2(
+export async function addUsingPOST4(
   params: {
     // header
     /** token */
@@ -24,7 +24,7 @@ export async function addUsingPOST2(
 }
 
 /** 删除联系人 POST /api/operator/del */
-export async function deleteUsingPOST1(
+export async function deleteUsingPOST3(
   params: {
     // query
     /** id */
@@ -46,7 +46,7 @@ export async function deleteUsingPOST1(
 }
 
 /** 删除联系人(批量) POST /api/operator/dellist */
-export async function deleteByIdsUsingPOST(
+export async function deleteByIdsUsingPOST1(
   params: {
     // query
     /** ids */
@@ -68,7 +68,7 @@ export async function deleteByIdsUsingPOST(
 }
 
 /** 由id查询联系人信息 GET /api/operator/get */
-export async function getByIdUsingGET1(
+export async function getByIdUsingGET2(
   params: {
     // query
     /** id */
@@ -90,7 +90,7 @@ export async function getByIdUsingGET1(
 }
 
 /** 获取所有联系人(分页) POST /api/operator/list */
-export async function getByPageUsingPOST(
+export async function getByPageUsingPOST2(
   params: {
     // header
     /** token */
@@ -111,7 +111,7 @@ export async function getByPageUsingPOST(
 }
 
 /** 修改联系人信息 POST /api/operator/update */
-export async function updateUsingPOST1(
+export async function updateUsingPOST5(
   params: {
     // header
     /** token */

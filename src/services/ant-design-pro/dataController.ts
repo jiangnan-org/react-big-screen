@@ -22,3 +22,25 @@ export async function addUsingPOST1(
     ...(options || {}),
   });
 }
+
+/** receiveDataFromYc GET /api/data/receive */
+export async function receiveDataFromYcUsingGET(
+  params: {
+    // query
+    /** message */
+    message?: string;
+    // header
+    /** token */
+    Authorization?: string;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<string>('/api/data/receive', {
+    method: 'GET',
+    headers: {},
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}

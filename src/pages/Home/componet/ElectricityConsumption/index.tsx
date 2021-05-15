@@ -3,12 +3,53 @@
  * @Description：总量统计
  * @Data: 2021/4/22 19:40
  */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProCard, {StatisticCard} from '@ant-design/pro-card';
 import styles from './index.less';
-
+import { useModel } from 'umi';
+import { getPowerConsumption } from '@/services/home';
+import { message } from 'antd';
 
 export default () => {
+
+  // 数据
+  const [data,setData] = useState<API.PowerConsumption>({});
+
+  // 获取系统配置
+  const systemConfig = useModel('systemConfig');
+
+  // 刷新数据
+  const refreshData = async () => {
+    try {
+      // 登录
+      const res: API.ResponseMessage<API.PowerConsumption> = await getPowerConsumption();
+      setData(res.data || {
+        realTimePower:200,
+        monthConsumption:200,
+        yearConsumption:200,
+        capacity:200,
+        count:200,
+        dailyConsumption:200
+      });
+    } catch (error) {
+      message.error(error,2);
+    }
+  };
+
+  useEffect(()=>{
+    // 刷新数据
+    refreshData();
+
+    // 定时器
+    const t = setInterval(() => {
+      // refreshData();
+    }, systemConfig.samplingInterval);
+
+    // 卸载
+    return () => {
+      clearInterval(t);
+    };
+  },[]);
 
   return (
     <React.Fragment>
@@ -27,7 +68,7 @@ export default () => {
               precision: 2,
               valueStyle: {color: '#EFB41F'},
               groupSeparator: ',',
-              value: 2.16,
+              value: data.realTimePower,
               suffix: (
                 <span className={styles.suffix}>MW</span>
               )
@@ -46,7 +87,7 @@ export default () => {
               precision: 2,
               valueStyle: {color: '#EC3D11'},
               groupSeparator: ',',
-              value: 0.017,
+              value: data.dailyConsumption,
               suffix: (
                 <span className={styles.suffix}>万kWh</span>
               )
@@ -70,7 +111,7 @@ export default () => {
                 title: '数量',
                 valueStyle: {color: '#0BF5A3'},
                 groupSeparator: ',',
-                value: 98,
+                value: data.count,
                 suffix: (
                   <span className={styles.suffix}>座</span>
                 ),
@@ -89,7 +130,7 @@ export default () => {
                 precision: 2,
                 valueStyle: {color: '#0BF5A3'},
                 groupSeparator: ',',
-                value: 17.61,
+                value: data.capacity,
                 suffix: (
                   <span className={styles.suffix}>万MW</span>
                 ),
@@ -121,7 +162,7 @@ export default () => {
                 precision: 2,
                 valueStyle: {color: '#E0BC0C'},
                 groupSeparator: ',',
-                value: 9212,
+                value: data.monthConsumption,
                 suffix: (
                   <span className={styles.suffix}>万kWh</span>
                 ),
@@ -140,7 +181,7 @@ export default () => {
                 precision: 2,
                 valueStyle: {color: '#E0BC0C'},
                 groupSeparator: ',',
-                value: 40684,
+                value: data.yearConsumption,
                 suffix: (
                   <span className={styles.suffix}>万kWh</span>
                 ),
