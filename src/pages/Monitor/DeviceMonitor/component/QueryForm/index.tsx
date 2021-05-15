@@ -4,15 +4,20 @@
  * @Description: 查询表单 https://procomponents.ant.design/components/field-set
  */
 import ProForm, {ProFormSelect, ProFormRadio, ProFormDependency} from '@ant-design/pro-form';
-import {message, Button, Input, Form, Select, Row, Col} from 'antd'
+import {Button, Input, Form, Select, Row, Col} from 'antd'
 import provinces, {ProvinceItem} from './province';
 import _ from 'lodash';
 import styles from './index.less';
 import {SearchOutlined} from '@ant-design/icons';
 import React from 'react';
+import { useModel } from 'umi';
+
 
 const {Option} = Select;
 export default () => {
+
+  // 监控参数
+  const { setFields } = useModel('monitor');
 
   // https://ant.design/components/form-cn/#header
   const [form] = Form.useForm();
@@ -33,8 +38,7 @@ export default () => {
     }>
       form={form}
       onFinish={async (values: any) => {
-        message.success('提交成功');
-        console.log('提交内容', values);
+        setFields(values);
       }}
       // 默认值
       initialValues={{
@@ -44,15 +48,26 @@ export default () => {
       submitter={{
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         render: (props, doms) => (
+          <>
+            <Button
+              key='rest'
+              /**  触发重置事件 */
+              onClick={() => props.form?.resetFields?.()}
+              style={{margin:'4px 12px 4px auto'}}
+            >
+              重置
+            </Button>
           <Button
             type='primary'
             icon={<SearchOutlined/>}
             key='submit'
+            /**  触发onFinish事件 */
             onClick={() => props.form?.submit?.()}
             style={{margin:'4px 0 4px auto'}}
           >
             搜索
           </Button>
+          </>
         ),
       }}
     >
@@ -64,10 +79,9 @@ export default () => {
                 name='sortBy'
                 placeholder='请选择排序字段'
                 options={[
-                  {label: '设备异常数', value: 'exceptionNumber'},
-                  {label: '电池电量', value: 'batteryPower'},
+                  {label: '电池电量', value: 'batterySize'},
                   {label: '发电量', value: 'powerGeneration'},
-                  {label: '用电量', value: 'energyUsed'},
+                  {label: '用电量', value: 'powerConsumption'},
                   {label: '告警数', value: 'alertNumber'}
                 ]}
               />

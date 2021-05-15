@@ -5,16 +5,24 @@ import styles from './index.less';
 import {Row, Col} from 'antd';
 import {Descriptions} from 'antd';
 
-export default () => {
+// 属性类型
+type PropField = {
+  yuncang: API.Yuncang;    // 可编辑
+};
+
+const Index: React.FC<PropField> = (props) => {
+  // 获取云仓信息
+  const {yuncang} = props;
+
   return (
     <React.Fragment>
       <Row gutter={[16, 16]} className={styles.device}>
         <Col span={24}>
-          <Descriptions column={{xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1}} className={styles.info}>
-            <Descriptions.Item label="电池容量">69kW</Descriptions.Item>
-            <Descriptions.Item label="发电量">99kW</Descriptions.Item>
-            <Descriptions.Item label="用电量">77kW</Descriptions.Item>
-            <Descriptions.Item label="告警数">20</Descriptions.Item>
+          <Descriptions column={{xxl: 4, xl: 3, lg: 3, md: 2, sm: 2, xs: 1}} className={styles.info}>
+            <Descriptions.Item label='电池容量'>{yuncang?.batterySize }kW</Descriptions.Item>
+            <Descriptions.Item label='发电量'>99kW</Descriptions.Item>
+            <Descriptions.Item label='用电量'>77kW</Descriptions.Item>
+            <Descriptions.Item label='告警数'>20</Descriptions.Item>
           </Descriptions>
           <div className={styles.curve}>
             <PowerGenerationCurve/>
@@ -27,4 +35,6 @@ export default () => {
     </React.Fragment>
   )
 }
+
+export default Index;
 

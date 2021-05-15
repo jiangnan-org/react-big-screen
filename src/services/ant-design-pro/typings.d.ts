@@ -363,11 +363,6 @@ declare namespace API {
     msg?: string;
   };
 
-  type UserResponseEntityIPageYuncang_ = {
-    code?: number;
-    data?: IPageYuncang_;
-    msg?: string;
-  };
 
   type UserResponseEntityListPointVO_ = {
     code?: number;
@@ -405,69 +400,6 @@ declare namespace API {
     msg?: string;
   };
 
-  type UserResponseEntityYuncang_ = {
-    code?: number;
-    data?: Yuncang_;
-    msg?: string;
-  };
-
-  type UserResponseEntityString_ = {
-    code?: number;
-    data?: string;
-    msg?: string;
-  };
-
-  type Yuncang_ = {
-    /** 电池数量 */
-    batteryNum?: number;
-    /** 电池容量 */
-    batterySize?: number;
-    /** 电池类型 */
-    batteryType?: number;
-    /** 光伏容量 */
-    capacity?: number;
-    city?: string;
-    /** 逆变一体机 */
-    converter?: string;
-    createTime?: string;
-    id?: number;
-    installTime?: string;
-    /** 纬度 */
-    latitude?: number;
-    /** 经度 */
-    longitude?: number;
-    /** 主要设备 */
-    mainDevice?: string;
-    /** 运营模式 */
-    mode?: string;
-    name?: string;
-    /** 备注 */
-    note?: string;
-    /** 系统参数 */
-    parameter?: string;
-    pic?: string;
-    /** 系统额定功率 */
-    power?: number;
-    /** 并网端功率 */
-    powerGrid?: number;
-    /** 离网端功率 */
-    powerIsolated?: number;
-    province?: string;
-    /** 传感器参数 */
-    sensor?: string;
-    /** 规格尺寸 */
-    size?: number;
-    /** 采集器SN */
-    sn?: string;
-    /** 0运行,1报警,2停止 */
-    state?: number;
-    /** 水箱容量 */
-    tankCapacity?: number;
-    updateTime?: string;
-    video?: string;
-    /** 系统电压 */
-    voltage?: number;
-  };
 
   type _ = {
     /** 密码 */

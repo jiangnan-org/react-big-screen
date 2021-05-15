@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { Badge, Tag, Row, Col, message } from 'antd';
 import { WarningOutlined, AlertOutlined, InfoOutlined } from '@ant-design/icons';
-import { useModel } from '@@/plugin-model/useModel';
+import { useModel } from 'umi';
 import { getAlarmCount } from '@/services/home';
 
 

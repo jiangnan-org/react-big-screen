@@ -6,7 +6,7 @@ import buildQueryParam from '@/utils/buildQueryParam';
 
 /** 增加用户 POST /api/user/add */
 export async function addUser(user: API.UserItem, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/user/add', {
+  return request<API.ResponseMessage<string>>('/yuncang/api/user/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,8 +17,8 @@ export async function addUser(user: API.UserItem, options?: { [key: string]: any
 }
 
 /** 批量删除用户 POST /api/user/dellist */
-export async function deleteUser(ids: number[], options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/user/dellist', {
+export async function deleteUsers(ids: number[], options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<string>>('/yuncang/api/user/dellist', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -46,6 +46,9 @@ export async function updateUser(user: API.UserItem, options?: { [key: string]: 
 export async function checkUsername(username: string, options?: { [key: string]: any }) {
   return request<API.ResponseMessage<boolean>>('/yuncang/api/user/checkusername', {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     params: {
       username,
     },
@@ -57,6 +60,9 @@ export async function checkUsername(username: string, options?: { [key: string]:
 export async function getUserByUsername(username: string, options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.UserItem>>('/yuncang/api/user/get', {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     params: {
       username,
     },
@@ -68,6 +74,9 @@ export async function getUserByUsername(username: string, options?: { [key: stri
 export async function getUserList(params: API.PageParams, options?: { [key: string]: any }) {
   return request<API.PageResponseMessage<API.UserItem>>('/yuncang/api/user/list', {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     data: buildQueryParam(params),
     ...(options || {}),
   });

@@ -110,29 +110,29 @@ const Index: React.FC<PropField> = ({editable=true}) => {
       </ProForm.Group>
 
       <ProForm.Group >
-      <ProFormText
-        name='wechat'
-        label='微信号'
-        width='sm'
-        rules={[
-          {
-            type: 'string',
-            max: 18,
-            min:2,
-          }
-        ]}
-      />
+        <ProFormText
+          name='wechat'
+          label='微信号'
+          width='sm'
+          rules={[
+            {
+              type: 'string',
+              max: 18,
+              min:2,
+            }
+          ]}
+        />
 
-      <ProFormText
-        name='phone'
-        label='手机号码'
-        width='sm'
-        rules={[
-          {
-            pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/
-          }
-        ]}
-      />
+        <ProFormText
+          name='phone'
+          label='手机号码'
+          width='sm'
+          rules={[
+            {
+              pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/
+            }
+          ]}
+        />
       </ProForm.Group>
 
       <ProFormText.Password

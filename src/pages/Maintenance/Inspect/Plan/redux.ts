@@ -3,7 +3,7 @@
  * @Description：后端接口处理
  * @Data: 2021/5/8 13:47
  */
-import {addUser, deleteUser, updateUser} from "@/services/auth/user";
+import {addUser, deleteUsers, updateUser} from "@/services/auth/user";
 import {message} from 'antd';
 
 
@@ -32,7 +32,7 @@ const handleAddType = async (fields: API.UserItem) => {
 const handleDeleteType = async (selectedRows: API.UserItem[]) => {
   try {
     let ids: any[] = selectedRows.map((row) => row.id);
-    await deleteUser(ids);
+    await deleteUsers(ids);
     message.success('删除成功');
     return true;
   } catch (error) {

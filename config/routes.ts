@@ -36,7 +36,7 @@ export default [
       },
       // 设备详情页面、由设备监控页面进入 不在菜单显示 https://beta-pro.ant.design/docs/router-and-nav-cn
       {
-        path: '/monitor/device-detail/:sn',
+        path: '/monitor/device-detail/:id',
         name: 'device-detail',
         hideInMenu: true,
         component: './Monitor/DeviceDetail',
