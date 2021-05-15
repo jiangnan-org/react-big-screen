@@ -3,7 +3,7 @@
 import { request } from 'umi';
 
 /** 增加 POST /api/yuncang/add */
-export async function addUsingPOST6(
+export async function addUsingPOST4(
   params: {
     // header
     /** token */
@@ -24,7 +24,7 @@ export async function addUsingPOST6(
 }
 
 /** 删除 POST /api/yuncang/del */
-export async function deleteUsingPOST5(
+export async function deleteUsingPOST3(
   params: {
     // query
     /** id */
@@ -45,30 +45,8 @@ export async function deleteUsingPOST5(
   });
 }
 
-/** 删除(批量) POST /api/yuncang/dellist */
-export async function deleteByIdsUsingPOST3(
-  params: {
-    // query
-    /** ids */
-    ids: string[];
-    // header
-    /** token */
-    Authorization?: string;
-  },
-  options?: { [key: string]: any },
-) {
-  return request<API.UserResponseEntityString_>('/api/yuncang/dellist', {
-    method: 'POST',
-    headers: {},
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
-}
-
 /** 由id查询 GET /api/yuncang/get */
-export async function getByIdUsingGET3(
+export async function getByIdUsingGET2(
   params: {
     // query
     /** id */
@@ -89,29 +67,25 @@ export async function getByIdUsingGET3(
   });
 }
 
-/** 获取所有云仓(分页) POST /api/yuncang/list */
-export async function getByPageUsingPOST4(
+/** 获取所有云仓 GET /api/yuncang/getall */
+export async function getAllUsingGET1(
   params: {
     // header
     /** token */
     Authorization?: string;
   },
-  body: API.PageRequestDTO,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityIPageYuncang_>('/api/yuncang/list', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  return request<API.UserResponseEntityListYuncang_>('/api/yuncang/getall', {
+    method: 'GET',
+    headers: {},
     params: { ...params },
-    data: body,
     ...(options || {}),
   });
 }
 
 /** 修改 POST /api/yuncang/update */
-export async function updateUsingPOST7(
+export async function updateUsingPOST3(
   params: {
     // header
     /** token */

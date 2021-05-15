@@ -3,7 +3,7 @@
  * @Description：后端接口处理
  * @Data: 2021/5/8 13:47
  */
-import {updateAlarm} from "@/services/alarm/bell";
+import {updateAlarm,dealAlarm} from "@/services/alarm/bell";
 import {message} from 'antd';
 
 /**
@@ -11,7 +11,7 @@ import {message} from 'antd';
  *
  * @param fields
  */
-const handleUpdateAlarm = async (fields: API.UserItem) => {
+const handleUpdateAlarm = async (fields: API.AlarmItem) => {
   try {
     await updateAlarm(fields);
     message.success('更新成功');
@@ -23,7 +23,18 @@ const handleUpdateAlarm = async (fields: API.UserItem) => {
 };
 
 
-const handleEditAlarm = async (fields: API.UserItem) => {
+const handleDealAlarm = async (fields: API.SheetItem) => {
+  try {
+    await dealAlarm(fields);
+    message.success('更新成功');
+    return true;
+  } catch (error) {
+    message.error(error, 2);
+    return false;
+  }
+};
+
+const handleEditAlarm = async (fields: API.AlarmItem) => {
   try {
     await updateAlarm(fields);
     message.success('更新成功');
@@ -36,5 +47,6 @@ const handleEditAlarm = async (fields: API.UserItem) => {
 
 export default  {
   handleUpdateAlarm,
+  handleDealAlarm,
   handleEditAlarm
 };

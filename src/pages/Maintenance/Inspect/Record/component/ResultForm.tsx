@@ -11,19 +11,19 @@ type PropField = {
 const ResultForm: React.FC<PropField> = ({editable=true}) => {
   const columns = [
     {
-      title: '姓名',
+      title: '巡视项目',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
+      title: '描述',
+      dataIndex: 'describe',
+      key: 'describe',
     },
     {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
+      title: '是否完成',
+      dataIndex: 'or',
+      key: 'or',
     },
   ];
   return (

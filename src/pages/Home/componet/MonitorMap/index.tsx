@@ -15,8 +15,6 @@ import { useModel } from 'umi';
 import mapStyleConfig from './style';
 import styles from './index.less';
 import _ from 'lodash';
-import { getYunCangStatus } from '@/services/home';
-import { message } from 'antd';
 
 // @ts-ignore  使用百度API  加载js文件
 loadScript(['http://api.map.baidu.com/api?v=2.0&ak=Gdgx1WXQnc8r3B7tAlGZt6AmWWegt0zx']);
@@ -32,40 +30,6 @@ export default () => {
     fillColor: 'rgb(20,20,20)'
   });
 
-  // 数据
-  const [data,setData] = useState<API.YunCangStatus>({});
-
-  // 获取系统配置
-  const systemConfig = useModel('systemConfig');
-
-  // 刷新数据
-  const refreshData = async () => {
-    try {
-      // 登录
-      const res: API.ResponseMessage<API.YunCangStatus> = await getYunCangStatus();
-      setData(res.data);
-    } catch (error) {
-      message.error(error,2);
-    }
-  };
-
-  // 地图数据获取
-  useEffect(()=>{
-    // 刷新数据
-    refreshData();
-
-    // 定时器
-    const t = setInterval(() => {
-      // refreshData();
-    }, systemConfig.samplingInterval);
-
-    // 卸载
-    return () => {
-      clearInterval(t);
-    };
-  },[]);
-
-  // 地图样式设定
   useEffect(() => {
     // 暗黑色样式
     if(styleConfig.dark){
@@ -112,7 +76,7 @@ export default () => {
           // @ts-ignore
           ref={echartRef}
           style={{ width: '100%', height: '100%' }}
-          option={genOption(mapStyleConfig.darkBlue.styleJson,styleConfig.textColor,data)}
+          option={genOption(mapStyleConfig.darkBlue.styleJson,styleConfig.textColor)}
         />
       </div>
     </React.Fragment>

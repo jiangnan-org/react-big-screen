@@ -5,7 +5,6 @@
  * @Data: 2021/4/23 14:37
  */
 import './index.less';
-import _ from 'lodash';
 // @ts-ignore
 const { BMap } = window;
 
@@ -294,21 +293,7 @@ export const drawBoundary = (bmap: any,fillColor: string | undefined) => {
 };
 
 /* 生成地图所需要的配置 */
-export const genOption = (styleJson: any[],textColor: string,data: API.YunCangStatus) => {
-  const res: any = [];
-  _.forEach(data.alarming,item => {
-    res.push([item.latitude,item.longitude,'告警运行']);
-  } );
-
-  _.forEach(data.running,item => {
-    res.push([item.latitude,item.longitude,'正常运行']);
-  } );
-
-  _.forEach(data.stopping,item => {
-    res.push([item.latitude,item.longitude,'未运行']);
-  } );
-
-
+export const genOption = (styleJson: any[],textColor: string) => {
   return {
     // 加载 bmap 组件,使用bmap 必须引入百度地图扩展，扩展主要提供了跟 geo 一样的坐标系和底图的绘制 https://github.com/apache/echarts/tree/master/extension-src/bmap
     bmap: {
@@ -374,13 +359,12 @@ export const genOption = (styleJson: any[],textColor: string,data: API.YunCangSt
       {
         type: 'scatter',
         coordinateSystem: 'bmap', // 使用百度地图坐标系
-        data: res
-        // data: [
-        //   // 数据格式跟在 geo 坐标系上一样，每一项都是 [纬度, 经度，数值大小，其它维度...]
-        //   [120, 30, '正常运行'],
-        //   [119, 32.295, '告警运行'],
-        //   [119.5, 28.54, '未运行'],
-        // ],
+        data: [
+          // 数据格式跟在 geo 坐标系上一样，每一项都是 [经度，纬度，数值大小，其它维度...]
+          [120, 30, '正常运行'],
+          [119, 32.295, '告警运行'],
+          [119.5, 28.54, '未运行'],
+        ],
       },
     ],
   };

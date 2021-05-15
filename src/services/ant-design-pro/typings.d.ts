@@ -28,7 +28,6 @@ declare namespace API {
     value?: string;
   };
 
-
   type PageRequestDTO = {
     /** 查询全部 */
     all?: boolean;
@@ -39,7 +38,6 @@ declare namespace API {
     /** 页大小 */
     pageSize?: number;
   };
-
 
   type SysUserDTO = {
     age?: number;
@@ -57,67 +55,14 @@ declare namespace API {
     wechat?: string;
   };
 
-  type SysUserPasswordUpdateDTO = {
-    /** 新密码 */
-    newPassword?: string;
-    /** 原始密码 */
-    oldPassword?: string;
-  };
-
-  type SysUserSelfUpdateDTO = {
-    age?: number;
-    email?: string;
-    gender?: number;
-    id?: number;
-    loginName?: string;
-    phone?: string;
-    /** 用户头像 */
-    photo?: string;
-    realName?: string;
-    wechat?: string;
-  };
-
-
-  type AlarmProcessList_ = {
-    alarmRecordId?: number;
-    /** 问题描述 */
-    description?: string;
-    id?: number;
-    /** 故障现象 */
-    name?: string;
-    /** 图片 */
-    pic?: string;
-    /** 处理方法 */
-    solveMethod?: string;
-  };
-
-  type AlarmRecord_ = {
-    /** 对应报警编号 */
-    alarmId?: number;
-    /** 报警时间 */
-    alarmTime?: string;
-    /** 报警详情 */
-    details?: string;
-    id?: number;
-    /** 报警级别,0提示，1次要，2重要，3严重 */
-    level?: number;
-    /** 报警名称 */
-    name?: string;
-    /** 已处理；处理单 */
-    state?: string;
-    /** 实际值 */
-    value?: number;
-    yuncangId?: number;
-  };
-
   type Alarm_ = {
     /** 联控设备 */
     device?: string;
     /** 联控设备动作 */
     deviceAct?: string;
     id?: number;
-    /** 报警级别,0提示，1次要，2重要，3严重 */
-    level?: number;
+    /** 报警级别 */
+    level?: string;
     /** 报警阈值 */
     max?: number;
     /** 报警阈值 */
@@ -144,11 +89,6 @@ declare namespace API {
     createTime?: string;
     /** 电流 */
     current?: number;
-    /** 日用电量 */
-    dailyConsumption?: number;
-    /** 日发电量 */
-    dailyGeneration?: number;
-    /** 门开关状态：0关，1开 */
     doorState?: number;
     /** 湿度 */
     humidity?: number;
@@ -157,46 +97,15 @@ declare namespace API {
     latitude?: number;
     /** 经度 */
     longitude?: number;
-    /** 月用电量 */
-    monthConsumption?: number;
-    /** 月发电量 */
-    monthGeneration?: number;
     /** 备注 */
     note?: string;
-    /** 光伏发电实时功率 */
     pvPower?: number;
-    /** 云仓状态：0运行，1报警，2停止 */
     systemState?: number;
     temperature?: number;
-    /** 实时用电功率 */
     usedPower?: number;
     /** 电压 */
     voltage?: number;
-    /** 年用电量 */
-    yearConsumption?: number;
-    /** 年发电量 */
-    yearGeneration?: number;
     yuncangId?: number;
-  };
-
-  type IPageAlarmRecord_ = {
-    current?: number;
-    hitCount?: boolean;
-    pages?: number;
-    records?: AlarmRecord_[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type IPageAlarm_ = {
-    current?: number;
-    hitCount?: boolean;
-    pages?: number;
-    records?: Alarm_[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
   };
 
   type IPageOperator_ = {
@@ -217,36 +126,6 @@ declare namespace API {
     searchCount?: boolean;
     size?: number;
     total?: number;
-  };
-
-  type IPageYuncang_ = {
-    current?: number;
-    hitCount?: boolean;
-    pages?: number;
-    records?: Yuncang_[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type InspectionProject_ = {
-    description?: string;
-    id?: number;
-    inspectionRecordId?: number;
-    isFinished?: number;
-    name?: string;
-    sortNum?: number;
-  };
-
-  type InspectionRecord_ = {
-    corPersonId?: number;
-    endTime?: string;
-    id?: number;
-    isFinished?: number;
-    mainPersonId?: number;
-    note?: string;
-    startTime?: string;
-    type?: string;
   };
 
   type Operator_ = {
@@ -277,39 +156,9 @@ declare namespace API {
     wechat?: string;
   };
 
-  type UserResponseEntityAlarmProcessList_ = {
-    code?: number;
-    data?: AlarmProcessList_;
-    msg?: string;
-  };
-
-  type UserResponseEntityAlarmRecord_ = {
-    code?: number;
-    data?: AlarmRecord_;
-    msg?: string;
-  };
-
   type UserResponseEntityAlarm_ = {
     code?: number;
     data?: Alarm_;
-    msg?: string;
-  };
-
-  type UserResponseEntityAlertsVO_ = {
-    code?: number;
-    data?: AlertsVO;
-    msg?: string;
-  };
-
-  type UserResponseEntityIPageAlarmRecord_ = {
-    code?: number;
-    data?: IPageAlarmRecord_;
-    msg?: string;
-  };
-
-  type UserResponseEntityIPageAlarm_ = {
-    code?: number;
-    data?: IPageAlarm_;
     msg?: string;
   };
 
@@ -325,34 +174,21 @@ declare namespace API {
     msg?: string;
   };
 
-  type UserResponseEntityIPageYuncang_ = {
+  type UserResponseEntityListAlarm_ = {
     code?: number;
-    data?: IPageYuncang_;
+    data?: Alarm_[];
     msg?: string;
   };
 
-
-  type UserResponseEntityLocationVO_ = {
+  type UserResponseEntityListYuncang_ = {
     code?: number;
-    data?: LocationVO;
+    data?: Yuncang_[];
     msg?: string;
   };
 
   type UserResponseEntityOperator_ = {
     code?: number;
     data?: Operator_;
-    msg?: string;
-  };
-
-  type UserResponseEntityPowerConsumptionVO_ = {
-    code?: number;
-    data?: PowerConsumptionVO;
-    msg?: string;
-  };
-
-  type UserResponseEntityPowerGenerationVO_ = {
-    code?: number;
-    data?: PowerGenerationVO;
     msg?: string;
   };
 
@@ -403,7 +239,7 @@ declare namespace API {
     /** 系统参数 */
     parameter?: string;
     pic?: string;
-    /** 系统额定功率 */
+    /** 系统功率 */
     power?: number;
     /** 并网端功率 */
     powerGrid?: number;
@@ -416,7 +252,6 @@ declare namespace API {
     size?: number;
     /** 采集器SN */
     sn?: string;
-    /** 0运行,1报警,2停止 */
     state?: number;
     /** 水箱容量 */
     tankCapacity?: number;

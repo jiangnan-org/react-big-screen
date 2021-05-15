@@ -10,6 +10,7 @@ import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
 import RecordForm from './component/RecordForm';
+import ResultForm from './component/ResultForm';
 import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
@@ -29,6 +30,9 @@ export default () => {
 
   /** 分布更新窗口的弹窗 */
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
+
+  /** 巡视项目结果弹窗 */
+  const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
   const [selectedRows, setSelectedRows] = useState<API.UserItem[]>([]);
@@ -114,7 +118,7 @@ export default () => {
               // 初始化表单显示内容
               updateForm.setFieldsValue(record);
               setId(record.id);
-              setUpdateModalVisible(true);
+              setResultModalVisible(true);
             }}
             title='巡视项目结果'
           >
@@ -149,11 +153,33 @@ export default () => {
       ),
     },
   ];
+  /** 编辑巡视信息表单 */
+  const resultModal = (
+    <ModalForm<API.UserItem>
+      title='编辑巡视信息表单'
+      width="680px"
+      form={updateForm}
+      visible={resultModalVisible}
+      onVisibleChange={setResultModalVisible}
+      onFinish={async (value) => {
+        // 指定更新的用户
+        _.assign(value, {id});
+        const success = await actions.handleUpdateRecord(value);
+        if (success) {
+          setResultModalVisible(false);
+          actionRef.current?.reload();
+        }
+      }}
+    >
+      <ResultForm editable={false}/>
+    </ModalForm>
+  );
 
-  /** 新增用户表单 */
+
+  /** 新增记录表单 */
   const createRecordModal = (
     <ModalForm<API.UserItem>
-      title='新建用户'
+      title='新建巡视信息'
       width="680px"
       form={createForm}
       visible={createModalVisible}
@@ -170,10 +196,10 @@ export default () => {
     </ModalForm>
   );
 
-  /** 更新用户表单 */
+  /** 编辑巡视信息表单 */
   const updateRecordModal = (
     <ModalForm<API.UserItem>
-      title='更新用户'
+      title='编辑巡视记录信息'
       width="680px"
       form={updateForm}
       visible={updateModalVisible}
@@ -263,6 +289,7 @@ export default () => {
           </Button>
         </FooterToolbar>
       )}
+      {resultModal}
       {createRecordModal}
       {updateRecordModal}
     </React.Fragment>

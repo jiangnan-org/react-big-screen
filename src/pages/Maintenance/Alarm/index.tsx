@@ -5,7 +5,7 @@
  */
 import React, {useRef, useState} from 'react';
 import { EditOutlined,ToolOutlined} from '@ant-design/icons';
-import { Divider, Form, Space, Tag } from 'antd';
+import { Divider, Form} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getAlarmList} from '@/services/alarm/bell';
@@ -50,14 +50,14 @@ export default () => {
       ellipsis: true,
     },
     {
-      dataIndex: 'max',
+      dataIndex: 'value',
       title: '报警数值/报警阈值',
       width: 20,
       ellipsis: true,
       hideInSearch: true,
     },
     {
-      dataIndex: 'min',
+      dataIndex: 'details',
       title: '报警详情',
       width: 25,
       hideInSearch: true,
@@ -80,7 +80,7 @@ export default () => {
     },
     {
       title: '状态',
-      dataIndex: 'notifyStatue',
+      dataIndex: 'state',
       align: 'center',
       filters: true,
       onFilter: true,
@@ -90,6 +90,13 @@ export default () => {
         0: {text: '已处理', status: 'Success'},
         1: {text: '未处理', status: 'Error'}
       },
+    },
+    {
+      dataIndex: 'alarmTime',
+      title: '时间',
+      width: 20,
+      hideInSearch: true,
+      ellipsis: true,
     },
 
 
@@ -131,10 +138,10 @@ export default () => {
       ),
     },
   ];
-  /** 处理单 */
+  /** 编辑 */
   const editAlarmModal = (
     <ModalForm<API.AlarmItem>
-      title='处理单'
+      title='编辑'
       width="680px"
       form={editForm}
       visible={editModalVisible}
@@ -155,7 +162,7 @@ export default () => {
 
   /** 处理单 */
   const updateAlarmModal = (
-    <ModalForm<API.AlarmItem>
+    <ModalForm<API.SheetItem>
       title='处理单'
       width="680px"
       form={updateForm}
@@ -164,7 +171,7 @@ export default () => {
       onFinish={async (value) => {
         // 指定更新的用户
         _.assign(value, {id});
-        const success = await actions.handleUpdateAlarm(value);
+        const success = await actions.handleDealAlarm(value);
         if (success) {
           setUpdateModalVisible(false);
           actionRef.current?.reload();

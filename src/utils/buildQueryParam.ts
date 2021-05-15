@@ -19,7 +19,7 @@ export default (params: API.PageParams) => {
         condition: "LIKE",
         field: key,
         // @ts-ignore
-        value
+        value: value
       });
     }
   });
@@ -28,6 +28,6 @@ export default (params: API.PageParams) => {
     pageNum: params.current,
     pageSize: params.pageSize,
     all: false,
-    conditions
+    conditions: conditions
   }
 }

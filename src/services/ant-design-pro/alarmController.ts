@@ -45,28 +45,6 @@ export async function deleteUsingPOST(
   });
 }
 
-/** 删除(批量) POST /api/alarm/dellist */
-export async function deleteByIdsUsingPOST(
-  params: {
-    // query
-    /** ids */
-    ids: string[];
-    // header
-    /** token */
-    Authorization?: string;
-  },
-  options?: { [key: string]: any },
-) {
-  return request<API.UserResponseEntityString_>('/api/alarm/dellist', {
-    method: 'POST',
-    headers: {},
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
-}
-
 /** 由id查询 GET /api/alarm/get */
 export async function getByIdUsingGET(
   params: {
@@ -89,23 +67,19 @@ export async function getByIdUsingGET(
   });
 }
 
-/** 获取所有报警配置(分页) POST /api/alarm/list */
-export async function getByPageUsingPOST(
+/** 获取所有报警配置 GET /api/alarm/getall */
+export async function getAllUsingGET(
   params: {
     // header
     /** token */
     Authorization?: string;
   },
-  body: API.PageRequestDTO,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityIPageAlarm_>('/api/alarm/list', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  return request<API.UserResponseEntityListAlarm_>('/api/alarm/getall', {
+    method: 'GET',
+    headers: {},
     params: { ...params },
-    data: body,
     ...(options || {}),
   });
 }
