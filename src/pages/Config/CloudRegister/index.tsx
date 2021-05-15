@@ -1,63 +1,87 @@
-import React from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Alert, Typography } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
-import styles from './index.less';
+import { Form, Input, Select, Upload, Button } from 'antd';
+import { Layout } from 'antd';
+import {  InboxOutlined } from '@ant-design/icons';
 
-const CodePreview: React.FC = ({ children }) => (
-  <pre className={styles.pre}>
-    <code>
-      <Typography.Text copyable>{children}</Typography.Text>
-    </code>
-  </pre>
-);
+const normFile = (e: any) => {
+  console.log('Upload event:', e);
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e && e.fileList;
+};
 
-export default (): React.ReactNode => {
-  const intl = useIntl();
+
+const {  Content } = Layout;
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 8 },
+};
+
+/* eslint-disable no-template-curly-in-string */
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    SN: '${label} 采集器',
+    number: '${label} is not a valid number!',
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}',
+  },
+};
+/* eslint-enable no-template-curly-in-string */
+
+const Demo = () => {
+  const onFinish = (values: any) => {
+    console.log(values);
+  };
+
   return (
-    <PageContainer>
-      <Card>
-        <Alert
-          message={intl.formatMessage({
-            id: 'pages.welcome.alertMessage',
-            defaultMessage: '更快更强的重型组件，已经发布。',
-          })}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 24,
-          }}
-        />
-        <Typography.Text strong>
-          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="高级表格" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/table"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-table</CodePreview>
-        <Typography.Text
-          strong
-          style={{
-            marginBottom: 12,
-          }}
-        >
-          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="高级布局" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/layout"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
-      </Card>
-    </PageContainer>
+    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+      <Form.Item name={['user', 'name']} label="名称" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'SN']} label="采集器SN" rules={[{ type: 'SN' }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'website']} label="配置信息">
+        <Input />
+      </Form.Item>
+      <Form.Item name={['user', 'website']} label="视频地址配置">
+        <Input />
+      </Form.Item>
+      <Form.Item label="图片上传">
+        <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
+          <Upload.Dragger name="files" action="/upload.do">
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+          </Upload.Dragger>
+        </Form.Item>
+      </Form.Item>
+
+      <Form.Item name={['user', 'introduction']} label="介绍">
+        <Input.TextArea />
+      </Form.Item>
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+        <Button type="primary" htmlType="submit">
+          提交
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
+
+export default()=>{
+  return(
+    <Layout>
+      <Content style={{ padding: '0 50px' }}>
+        <div className="site-layout-content"><Demo /></div>
+      </Content>
+    </Layout>
+
+
+  );
+}
+
