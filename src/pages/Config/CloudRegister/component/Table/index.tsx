@@ -3,51 +3,46 @@
  * @Description：ProTable - 高级表格  https://procomponents.ant.design/components/table
  * @Data: 2021/4/9 17:34
  */
-import React, {useRef, useState} from 'react';
-import {PlusOutlined, EditOutlined, ToolOutlined} from '@ant-design/icons';
-import {Form, Button, Space, Tag, Divider} from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import {EditOutlined} from '@ant-design/icons';
+import {Button, Space, Tag} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import {getUserList} from '@/services/auth/user';
+import {getYuncangList} from '@/services/yuncang';
 import YunCangForm from './Form';
-import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
 import actions from './redux';
 import styles from './index.less';
+import { useModel } from 'umi';
 
-// 角色类型
-type RoleMapType = Record<number,
+// 运行模式类型
+type ModeMapType = Record<number,
   {
     name: string;
-    desc: string;
     color: string
   }>;
 
-// 具体角色
-const RoleMap: RoleMapType = {
+// 具体运行模式
+const ModeMap: ModeMapType = {
   0: {
-    name: '普通用户',
-    desc: '仅拥有指定项目的权限',
+    name: '租赁',
     color: 'red'
   },
   1: {
-    name: '超级管理员',
-    desc: '拥有所有权限',
+    name: '自持',
     color: 'green'
   },
 };
 
 
 export default () => {
-  /** 云仓更新引用 */
-  const [updateForm] = Form.useForm();
 
-  /** 如果是更新、保存当前选中的用户id */
-  const [id, setId] = useState<any>(-1);
+  /** 当前更新 选中云仓信息 */
+  const [yuncang, setYuncang] = useState<API.YuncangItem>({});
 
-  /** 分布更新窗口的弹窗 */
-  const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
+  /** 更新窗口的弹窗 */
+  const [visible, setVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
   const [selectedRows, setSelectedRows] = useState<API.UserItem[]>([]);
@@ -55,8 +50,11 @@ export default () => {
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
 
+  /** 获取选中树节点 */
+  const {selectedKeys} = useModel('cloudRegister');
+
   /** table列定义 */
-  const columns: ProColumns<API.UserItem>[] = [
+  const columns: ProColumns<API.YuncangItem>[] = [
     {
       dataIndex: 'index',
       title: '序号',
@@ -64,62 +62,46 @@ export default () => {
       width: 48,
     },
     {
-      dataIndex: 'loginName',
-      title: '账号',
+      dataIndex: 'name',
+      title: '云仓名称',
       width: 100,
       ellipsis: true,
     },
     {
-      dataIndex: 'realName',
-      title: '姓名',
-      width: 100,
+      dataIndex: 'sn',
+      title: '采集器SN',
+      width: 120,
+      align: 'center',
       ellipsis: true,
     },
     {
-      dataIndex: 'email',
-      title: '邮箱',
-      width: 150,
+      dataIndex: 'size',
+      title: '规格尺寸',
+      width: 80,
+      align: 'center',
       hideInSearch: true,
       ellipsis: true,
     },
     {
-      dataIndex: 'wechat',
-      title: '微信号',
-      width: 100,
-      hideInSearch: true,
-      ellipsis: true
-    },
-    {
-      dataIndex: 'phone',
-      title: '手机号码',
+      title: '运营模式',
+      dataIndex: 'mode',
       hideInSearch: true,
       align: 'center',
       width: 100,
-    },
-    {
-      title: '用户类型',
-      dataIndex: 'type',
-      hideInSearch: true,
-      align: 'center',
-      width: 100,
-      render: (type,) => (
+      render: (mode,) => (
         <Space>
-          <Tag color={RoleMap[type as number].color} key={RoleMap[type as number].name}>
-            {RoleMap[type as number].name}
+          <Tag color={ModeMap[mode as number]?.color || 'red'} key={ModeMap[mode as number]?.name}>
+            {ModeMap[mode as number]?.name || '租赁'}
           </Tag>
         </Space>
       ),
     },
     {
-      title: '性别',
-      dataIndex: 'gender',
-      align: 'center',
-      valueType: 'select',
-      width: 60,
-      valueEnum: {
-        0: {text: '男'},
-        1: {text: '女'}
-      },
+      title: '主要设备',
+      dataIndex: 'mainDevice',
+      hideInSearch: true,
+      width: 100,
+      ellipsis: true,
     },
     {
       title: '创建时间',
@@ -143,69 +125,60 @@ export default () => {
       align: 'center',
       filters: true,
       onFilter: true,
-      valueType: 'select',
+      valueType: 'radio',
       width: 80,
       valueEnum: {
-        0: {text: '激活', status: 'Success'},
-        1: {text: '禁用', status: 'Error'}
+        0: {text: '运行', status: 'Processing'},
+        1: {text: '报警', status: 'Error'},
+        2: {text: '停止', status: 'Default'}
       },
     },
     {
-      title: '操作',
-      valueType: 'option',
+      dataIndex: 'note',
+      title: '描述',
+      hideInSearch: true,
+      align: 'center',
       width: 120,
+      ellipsis: true,
+    },
+    {
+      title: '操作',
+      width: 60,
       align: 'center',
       ellipsis: true,
-      render: (text, record, _, action) => (
+      render: (text, record) => (
         <>
           <a
             key='edit'
             onClick={() => {
               // 初始化表单显示内容
-              updateForm.setFieldsValue(record);
-              setId(record.id);
-              setUpdateModalVisible(true);
+              setYuncang(record);
+              setVisible(true);
             }}
             title='编辑'
           >
             <EditOutlined style={{'fontSize':'1.2em'}}/>
-          </a>
-          <Divider type='vertical'/>
-          <a
-            key='authorization'
-            onClick={()=>{}}
-            title='项目授权'
-          >
-            <ToolOutlined style={{'fontSize':'1.2em'}}/>
           </a>
         </>
       ),
     },
   ];
 
-  /** 更新用户表单 */
-  const updateUserModal = (
-    <ModalForm<API.UserItem>
-      title='更新云仓'
-      width='760px'
-      form={updateForm}
-      visible={updateModalVisible}
-      onVisibleChange={setUpdateModalVisible}
-      onFinish={async (value) => {
-        // 指定更新的用户
-        _.assign(value, {id});
-        // 移除密码 不进行密码更新
-        delete value.password;
-        const success = await actions.handleUpdateUser(value);
-        if (success) {
-          setUpdateModalVisible(false);
-          actionRef.current?.reload();
-        }
-      }}
-    >
-      <YunCangForm editable={false}/>
-    </ModalForm>
-  );
+  /** 提交 */
+  const onFinish = async (values: API.YuncangItem) => {
+    // 设置Id
+    _.assign(values,{id:yuncang.id});
+    const success = await actions.handleUpdateYuncang(values);
+    if (success) {
+      setVisible(false);
+      actionRef.current?.reload();
+    }
+  };
+
+  /** 选中节点发生改变 重新加载 */
+  useEffect(() => {
+    actionRef.current?.reload();
+  }, [selectedKeys]);
 
   return (
     <React.Fragment>
@@ -215,7 +188,7 @@ export default () => {
         actionRef={actionRef}
         request={async (params: API.PageParams = {}) => {
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-          const res: API.PageResponseMessage<API.UserItem> = await getUserList(params);
+          const res: API.PageResponseMessage<API.YuncangItem> = await getYuncangList(params);
           return {
             data: res.data.records,
             // success 请返回 true，不然 table 会停止解析数据，即使有数据
@@ -245,7 +218,7 @@ export default () => {
         <FooterToolbar>
           <Button
             onClick={async () => {
-              let success = await actions.handleDeleteUser(selectedRows);
+              const success = await actions.handleDeleteYuncangs(selectedRows);
               if(success) {
                 setSelectedRows([]);
                 // 刷新并清空,页码也会重置，不包括表单
@@ -257,7 +230,15 @@ export default () => {
           </Button>
         </FooterToolbar>
       )}
-      {updateUserModal}
+
+      {/* 由于关闭就销毁组件、因此可以设置初始值 */}
+      <YunCangForm
+        onFinish={onFinish}
+        visible={visible}
+        setVisible={setVisible}
+        editable={false}
+        initialValues={yuncang}
+      />
     </React.Fragment>
   );
 };

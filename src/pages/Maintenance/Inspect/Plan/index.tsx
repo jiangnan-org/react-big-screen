@@ -4,8 +4,8 @@
  * @Data: 2021/4/9 17:34
  */
 import React, {useRef, useState} from 'react';
-import {PlusOutlined,EditOutlined,ToolOutlined} from '@ant-design/icons';
-import {Form,Button,Divider} from 'antd';
+import {PlusOutlined,EditOutlined} from '@ant-design/icons';
+import {Form,Button} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';

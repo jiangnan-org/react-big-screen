@@ -1,39 +1,32 @@
 /**
  * @Author：zy
- * @Description：ProTable - 高级表格  https://procomponents.ant.design/components/table
+ * @Description：告警页面
  * @Data: 2021/4/9 17:34
  */
 import React, {useRef, useState} from 'react';
-import { EditOutlined,ToolOutlined} from '@ant-design/icons';
-import { Divider, Form} from 'antd';
+import { IssuesCloseOutlined,FormOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
+import { Divider, Modal} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getAlarmList} from '@/services/alarm/bell';
-import AlarmForm from './component/AlarmForm';
-import NewForm from './component/NewForm';
-import {ModalForm} from '@ant-design/pro-form';
+import HandlingOrderForm from './component/Form';
 import _ from 'lodash';
 import actions from './redux';
 import styles from './index.less';
 
 
-
 export default () => {
-  /** 表单引用 */
-  const [updateForm] = Form.useForm();
-  /** 表单引用 */
-  const [editForm] = Form.useForm();
+  /** 处理单、保存当前选中的告警id */
+  const [id, setId] = useState<number>(-1);
 
-  /** 如果是更新、保存当前选中的用户id */
-  const [id, setId] = useState<any>(-1);
-  /** 分布更新窗口的弹窗 */
-  const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
-  /** 分布更新编辑的弹窗 */
-  const [editModalVisible, seteditModalVisible] = useState<boolean>(false);
+  /** 处理单信息 */
+  const [sheet,setSheet] = useState<API.AlarmSheetItem>({});
+
+  /** 处理单窗口 */
+  const [visible, setVisible] = useState<boolean>(false);
+
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
-
-
 
   /** table列定义 */
   const columns: ProColumns<API.AlarmItem>[] = [
@@ -41,7 +34,7 @@ export default () => {
       dataIndex: 'index',
       title: '序号',
       valueType: 'indexBorder',  // 带border的序号列
-      width: 5,
+      width: 4,
     },
     {
       dataIndex: 'name',
@@ -51,9 +44,10 @@ export default () => {
     },
     {
       dataIndex: 'value',
-      title: '报警数值/报警阈值',
-      width: 20,
+      title: '报警数值',
+      width: 12,
       ellipsis: true,
+      align: 'center',
       hideInSearch: true,
     },
     {
@@ -63,15 +57,13 @@ export default () => {
       hideInSearch: true,
       ellipsis: true,
     },
-
     {
       title: '报警级别',
       dataIndex: 'level',
       align: 'center',
-      filters: true,
-      onFilter: true,
+      ellipsis: true,
       width: 10,
-      valueType: 'select',
+      valueType: 'radioButton',
       valueEnum: {
         0: {text: '一般'},
         1: {text: '紧急'},
@@ -84,6 +76,7 @@ export default () => {
       align: 'center',
       filters: true,
       onFilter: true,
+      ellipsis: true,
       width: 10,
       valueType: 'select',
       valueEnum: {
@@ -93,94 +86,80 @@ export default () => {
     },
     {
       dataIndex: 'alarmTime',
-      title: '时间',
+      title: '告警时间',
+      align: 'center',
       width: 20,
       hideInSearch: true,
       ellipsis: true,
     },
-
-
-
     {
       title: '操作',
       valueType: 'option',
-      width: 10,
-      render: (text, record, _, action) => (
+      width: 12,
+      align: 'center',
+      ellipsis: true,
+      render: (text, record,) => (
         <>
           {/* 编辑 */}
           <a
             key='edit'
             onClick={() => {
-              // 初始化表单显示内容
-              editForm.setFieldsValue(record);
-              setId(record.id);
-              seteditModalVisible(true);
+              Modal.confirm({
+                title: '确认',
+                icon: <ExclamationCircleOutlined />,
+                content: '您确定要忽略该告警么？',
+                okText: '确认',
+                cancelText: '取消',
+                onOk:async ()=>{
+                  const success = await actions.handleDealAlarm({
+                    alarmRecordId:record.id,
+                    name:'无',
+                    description:'无',
+                    phenomenon:'无',
+                    solveMethod: '无'
+                  });
+                  if (success) {
+                    actionRef.current?.reload();
+                  }
+                }
+              });
             }}
-            title='编辑'
+            title='确认'
           >
-            <EditOutlined style={{'fontSize':'1.2em'}}/>编辑
+            <IssuesCloseOutlined style={{'fontSize':'1.2em'}} />
           </a>
           <Divider type='vertical'/>
           {/* 处理单 */}
           <a
             key='sheet'
             onClick={() => {
-              // 初始化表单显示内容
-              updateForm.setFieldsValue(record);
-              setId(record.id);
-              setUpdateModalVisible(true);
+              // 已经处理 处理单id
+              if(record.alarmId){
+                // 异步请求获取处理单信息
+                 setSheet(sheet);
+              }
+              setId(record.id || -1);
+              setVisible(true);
             }}
             title='处理单'
           >
-            <ToolOutlined style={{'fontSize':'1.2em'}}/>处理单
+            <FormOutlined style={{'fontSize':'1.2em'}}/>
           </a>
         </>
       ),
     },
   ];
-  /** 编辑 */
-  const editAlarmModal = (
-    <ModalForm<API.AlarmItem>
-      title='编辑'
-      width="680px"
-      form={editForm}
-      visible={editModalVisible}
-      onVisibleChange={seteditModalVisible}
-      onFinish={async (value) => {
-        // 指定更新的用户
-        _.assign(value, {id});
-        const success = await actions.handleEditAlarm(value);
-        if (success) {
-          seteditModalVisible(false);
-          actionRef.current?.reload();
-        }
-      }}
-    >
-      <NewForm editable={false}/>
-    </ModalForm>
-  );
 
-  /** 处理单 */
-  const updateAlarmModal = (
-    <ModalForm<API.SheetItem>
-      title='处理单'
-      width="680px"
-      form={updateForm}
-      visible={updateModalVisible}
-      onVisibleChange={setUpdateModalVisible}
-      onFinish={async (value) => {
-        // 指定更新的用户
-        _.assign(value, {id});
-        const success = await actions.handleDealAlarm(value);
-        if (success) {
-          setUpdateModalVisible(false);
-          actionRef.current?.reload();
-        }
-      }}
-    >
-      <AlarmForm editable={false}/>
-    </ModalForm>
-  );
+  /** 按提交  */
+  const onFinish = async (values: API.AlarmSheetItem) => {
+    // 处理单
+    _.assign(values, {alarmRecordId:id});
+    const success = await actions.handleDealAlarm(values);
+    if (success) {
+      setVisible(false);
+      actionRef.current?.reload();
+    }
+  };
 
   return (
     <React.Fragment>
@@ -190,14 +169,13 @@ export default () => {
         actionRef={actionRef}
         request={async (params: API.PageParams = {}) => {
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-          const res: API.ResponseMessage<API.AlarmItem[]> = await getAlarmList(params);
+          const res: API.PageResponseMessage<API.AlarmItem[]> = await getAlarmList(params);
           return {
             data: res.data.records,
             // success 请返回 true，不然 table 会停止解析数据，即使有数据
             success: res.success,
             // 不传会使用 data 的长度，如果是分页一定要传
             total: res.data.total,
-
           }
         }}
         editable={{
@@ -208,10 +186,14 @@ export default () => {
           labelWidth: 'auto',
         }}
         dateFormatter='string'
-        // headerTitle='用户信息'
+        toolBarRender={false}
       />
-      {updateAlarmModal}
-      {editAlarmModal}
+      <HandlingOrderForm
+        visible={visible}
+        setVisible={setVisible}
+        onFinish={onFinish}
+        initialValues={sheet}
+      />
     </React.Fragment>
   );
 };

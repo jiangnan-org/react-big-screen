@@ -1,21 +1,17 @@
 import { request } from 'umi';
-import _ from 'lodash';
 import buildQueryParam from '@/utils/buildQueryParam';
 
-/** 处理单POST /api/alarm-process-list/update */
-export async function dealAlarm(body: API.SheetItem, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.SheetItem>>('/yuncang/api/alarm-process-list/update', {
+/** 处理单 POST /api/alarm-process-list/update */
+export async function dealAlarm(sheet: API.AlarmSheetItem, options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.AlarmSheetItem>>('/yuncang/api/alarm-process-list/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    data: body,
+    data: sheet,
     ...(options || {}),
   });
 }
-
-
-
 
 /** 编辑 POST /api/alarm-record/update */
 export async function updateAlarm(body: API.AlarmItem, options?: { [key: string]: any }) {

@@ -1,20 +1,21 @@
 /**
- * 用户编辑表单 ModelForm
+ * 告警处理单 ModelForm
  * https://procomponents.ant.design/components/modal-form
  */
 import React from 'react';
-import ProForm,{ ProFormSelect, ProFormText, } from '@ant-design/pro-form';
+import { ModalForm, ProFormText } from '@ant-design/pro-form';
 import styles from './index.less';
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
 const { Dragger } = Upload;
 
-const props = {
+const draggerProps = {
   name: 'file',
   multiple: true,
+  height: 160,
   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  onChange(info) {
+  onChange(info: any) {
     const { status } = info.file;
     if (status !== 'uploading') {
       console.log(info.file, info.fileList);
@@ -27,19 +28,32 @@ const props = {
   },
 };
 
-
-
 // 属性类型
 type PropField = {
-  editable?: boolean ;    // 可编辑
+  initialValues?: API.YuncangItem
+  onFinish: (values: API.AlarmSheetItem) => Promise<void>
+  visible: boolean
+  setVisible: (value: boolean) => void
 };
 
-const AlarmForm: React.FC<PropField> = ({editable=true}) => {
+const Index: React.FC<PropField> = ({
+                                      onFinish,
+                                      visible,
+                                      setVisible,
+                                      initialValues
+                                    }) => {
   return (
-    <div className={styles.alarmForm}>
+      <ModalForm<API.AlarmSheetItem>
+        title='处理单'
+        visible={visible}
+        onVisibleChange={setVisible}
+        onFinish={onFinish}
+        initialValues={initialValues}
+        className={styles.handlingOrderForm}
+      >
         <ProFormText
-          name='alarmName'
-          label='报警名称：'
+          name='name'
+          label='故障名称：'
           rules={[
             {
               required: false,
@@ -50,7 +64,7 @@ const AlarmForm: React.FC<PropField> = ({editable=true}) => {
           ]}
         />
       <ProFormText
-        name='alarmView'
+        name='phenomenon'
         label='故障现象：'
         rules={[
           {
@@ -62,7 +76,7 @@ const AlarmForm: React.FC<PropField> = ({editable=true}) => {
         ]}
       />
       <ProFormText
-        name='alarmDescribe'
+        name='description'
         label='问题描述：'
         rules={[
           {
@@ -74,7 +88,7 @@ const AlarmForm: React.FC<PropField> = ({editable=true}) => {
         ]}
       />
       <ProFormText
-        name='alarmDeal'
+        name='solveMethod'
         label='处理方法：'
         rules={[
           {
@@ -86,12 +100,7 @@ const AlarmForm: React.FC<PropField> = ({editable=true}) => {
         ]}
       />
 
-
-
-
-
-      {/**/}
-      <Dragger {...props}>
+      <Dragger {...draggerProps}>
         <p className="alarm-upload-drag-icon">
           <InboxOutlined />
         </p>
@@ -101,8 +110,8 @@ const AlarmForm: React.FC<PropField> = ({editable=true}) => {
           band files
         </p>
       </Dragger>
-    </div>
+      </ModalForm>
   );
 };
 
-export default AlarmForm;
+export default Index;

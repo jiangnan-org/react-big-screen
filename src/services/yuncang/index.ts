@@ -1,9 +1,10 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from 'umi';
+import buildQueryParam from '@/utils/buildQueryParam';
 
 /** 增加 POST /api/yuncang/add */
-export async function addYuncang(body: API.Yuncang, options?: { [key: string]: any }) {
+export async function addYuncang(body: API.YuncangItem, options?: { [key: string]: any }) {
   return request<API.ResponseMessage<string>>('/yuncang/api/yuncang/add', {
     method: 'POST',
     headers: {
@@ -43,8 +44,8 @@ export async function deleteYuncangs(ids: number[], options?: { [key: string]: a
 }
 
 /** 修改 POST /api/yuncang/update */
-export async function updateYuncang(yuncang: API.Yuncang, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.Yuncang>>('/yuncang/api/yuncang/update', {
+export async function updateYuncang(yuncang: API.YuncangItem, options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.YuncangItem>>('/yuncang/api/yuncang/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ export async function updateYuncang(yuncang: API.Yuncang, options?: { [key: stri
 
 /** 由id查询 GET /api/yuncang/get */
 export async function getYuncangById(id: number, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.Yuncang>>('/yuncang/api/yuncang/get', {
+  return request<API.ResponseMessage<API.YuncangItem>>('/yuncang/api/yuncang/get', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -69,8 +70,8 @@ export async function getYuncangById(id: number, options?: { [key: string]: any 
   });
 }
 
-/** 获取所有云仓(分页) POST /api/yuncang/list */
-export async function getYuncangList(params: API.PageParams & {
+/** 监控页面 获取所有云仓(分页) POST /api/yuncang/list */
+export async function getYuncangListInMonitorPage(params: API.PageParams & {
   sortBy?: string,
   order?: string,
   province?: string,
@@ -100,7 +101,7 @@ export async function getYuncangList(params: API.PageParams & {
     });
   }
 
-  return request<API.PageResponseMessage<API.Yuncang>>('/yuncang/api/yuncang/list', {
+  return request<API.PageResponseMessage<API.YuncangItem>>('/yuncang/api/yuncang/list', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -111,6 +112,18 @@ export async function getYuncangList(params: API.PageParams & {
       all: false,
       conditions
     },
+    ...(options || {}),
+  });
+}
+
+/** 获取所有云仓(分页) POST /api/yuncang/list */
+export async function getYuncangList(params: API.PageParams, options?: { [key: string]: any }) {
+  return request<API.PageResponseMessage<API.YuncangItem>>('/yuncang/api/yuncang/list', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: buildQueryParam(params),
     ...(options || {}),
   });
 }

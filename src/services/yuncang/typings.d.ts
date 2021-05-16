@@ -6,7 +6,7 @@
 declare namespace API {
 
   /** 云仓信息 */
-  type Yuncang = {
+  type YuncangItem = {
     /** 云仓id  */
     id?: number;
     /** 云仓名称 */

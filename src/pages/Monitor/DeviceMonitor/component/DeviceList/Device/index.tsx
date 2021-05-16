@@ -7,7 +7,7 @@ import {Descriptions} from 'antd';
 
 // 属性类型
 type PropField = {
-  yuncang: API.Yuncang;    // 可编辑
+  yuncang: API.YuncangItem;    // 可编辑
 };
 
 const Index: React.FC<PropField> = (props) => {

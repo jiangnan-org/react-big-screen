@@ -11,13 +11,13 @@ import { getYuncangById } from '@/services/yuncang';
 // @ts-ignore
 export default ({id}) => {
   // 云仓信息
-  const [yuncang,setYuncang] = useState<API.Yuncang>({});
+  const [yuncang,setYuncang] = useState<API.YuncangItem>({});
 
 
   // 获取云仓信息
   const handleGetYuncang =  async (id: number) => {
     try{
-      const res: API.ResponseMessage<API.Yuncang> = await getYuncangById(id);
+      const res: API.ResponseMessage<API.YuncangItem> = await getYuncangById(id);
       setYuncang(res.data);
     }catch (error) {
       message.error(error, 2);
@@ -53,6 +53,7 @@ export default ({id}) => {
             <Descriptions.Item label='经度'>{yuncang.longitude}</Descriptions.Item>
             <Descriptions.Item label='运营模式'>{yuncang.mode}</Descriptions.Item>
             <Descriptions.Item label='主要设备'>{yuncang.mainDevice}</Descriptions.Item>
+            <Descriptions.Item label='描述'>{yuncang.note}</Descriptions.Item>
           </Descriptions>
           <Divider
           />
@@ -64,12 +65,12 @@ export default ({id}) => {
             <Descriptions.Item label='系统额定功率'>{yuncang.power}kW</Descriptions.Item>
             <Descriptions.Item label='光伏容量'>{yuncang.capacity}kW</Descriptions.Item>
             <Descriptions.Item label='逆变一体机'>{yuncang.converter}</Descriptions.Item>
-            <Descriptions.Item label='并网侧功率'>{yuncang.powerGrid}</Descriptions.Item>
-            <Descriptions.Item label='离网端功率'>{yuncang.powerIsolated}</Descriptions.Item>
-            <Descriptions.Item label='电池容量'>{yuncang.batterySize}</Descriptions.Item>
+            <Descriptions.Item label='并网侧功率'>{yuncang.powerGrid}kW</Descriptions.Item>
+            <Descriptions.Item label='离网端功率'>{yuncang.powerIsolated}kW</Descriptions.Item>
+            <Descriptions.Item label='电池容量'>{yuncang.batterySize}mAh</Descriptions.Item>
             <Descriptions.Item label='电池数量'>{yuncang.batteryNum}</Descriptions.Item>
             <Descriptions.Item label='电池类型'>{yuncang.batteryType}</Descriptions.Item>
-            <Descriptions.Item label='水箱容量'>{yuncang.tankCapacity}</Descriptions.Item>
+            <Descriptions.Item label='水箱容量'>{yuncang.tankCapacity}L</Descriptions.Item>
             <Descriptions.Item label='传感器数量'>{yuncang.sensor}</Descriptions.Item>
           </Descriptions>
           <Divider/>

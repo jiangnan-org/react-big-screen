@@ -10,7 +10,7 @@ import styles from './index.less';
 import { DesktopOutlined } from '@ant-design/icons';
 import ResizeObserver from 'rc-resize-observer';
 import { Link } from 'umi';
-import { getYuncangList } from '@/services/yuncang';
+import { getYuncangListInMonitorPage } from '@/services/yuncang';
 import _ from 'lodash';
 import { useModel } from 'umi';
 import { ActionType } from '@ant-design/pro-table';
@@ -29,7 +29,7 @@ export default () => {
   const actionRef = useRef<ActionType>();
 
   // 根据宽度调整
-  const handleOnResize = (offsetWidth) => {
+  const handleOnResize = (offsetWidth: number) => {
     if (offsetWidth > 1280) {
       setPageSize(3);
     } else {
@@ -41,11 +41,13 @@ export default () => {
   useEffect(() => {
     // 根据宽度调整
     if (ref.current) {
-      const width = ref.current ? ref.current.offsetWidth : 0;
+      // @ts-ignore
+      const width = ref.current ? ref.current?.offsetWidth : 0;
       handleOnResize(width);
     }
   }, [ref.current]);
 
+  // 查询字段发生改变 重新查询
   useEffect(() => {
     actionRef.current?.reload();
   }, [fields]);
@@ -57,7 +59,7 @@ export default () => {
           handleOnResize(offsetWidth);
         }}
       >
-        <ProList<API.Yuncang>
+        <ProList<API.YuncangItem>
           className={styles.deviceList}
           pagination={{
             pageSize,
@@ -91,7 +93,7 @@ export default () => {
             _.assign(params, { ...fields });
 
             // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-            const res: API.PageResponseMessage<API.Yuncang> = await getYuncangList(params);
+            const res: API.PageResponseMessage<API.YuncangItem> = await getYuncangListInMonitorPage(params);
 
             // 功率曲线
             _.forEach(res.data.records, record => {

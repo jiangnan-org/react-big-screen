@@ -50,7 +50,7 @@ export default () => {
   /** 新建窗口的弹窗 */
   const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
 
-  /** 分布更新窗口的弹窗 */
+  /** 更新窗口的弹窗 */
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
@@ -156,7 +156,6 @@ export default () => {
     },
     {
       title: '操作',
-      valueType: 'option',
       width: 120,
       align: 'center',
       ellipsis: true,
@@ -195,8 +194,8 @@ export default () => {
       form={createForm}
       visible={createModalVisible}
       onVisibleChange={setCreateModalVisible}
-      onFinish={async (value) => {
-        const success = await actions.handleAddUser(value);
+      onFinish={async (values) => {
+        const success = await actions.handleAddUser(values);
         if (success) {
           setCreateModalVisible(false);
           actionRef.current?.reload();
@@ -215,12 +214,12 @@ export default () => {
       form={updateForm}
       visible={updateModalVisible}
       onVisibleChange={setUpdateModalVisible}
-      onFinish={async (value) => {
+      onFinish={async (values) => {
         // 指定更新的用户
-        _.assign(value, {id});
+        _.assign(values, {id});
         // 移除密码 不进行密码更新
-        delete value.password;
-        const success = await actions.handleUpdateUser(value);
+        delete values.password;
+        const success = await actions.handleUpdateUser(values);
         if (success) {
           setUpdateModalVisible(false);
           actionRef.current?.reload();

@@ -29,9 +29,10 @@ const handleAddUser = async (fields: API.UserItem) => {
  *
  * @param selectedRows
  */
-const handleDeleteUser = async (selectedRows: API.UserItem[]) => {
+const handleDeleteUsers = async (selectedRows: API.UserItem[]) => {
   try {
-    let ids: any[] = selectedRows.map((row) => row.id);
+    // @ts-ignore
+    const ids: number[] = selectedRows.map((row) => row.id);
     await deleteUsers(ids);
     message.success('删除成功');
     return true;
@@ -59,6 +60,6 @@ const handleUpdateUser = async (fields: API.UserItem) => {
 
 export default  {
   handleAddUser,
-  handleDeleteUser,
+  handleDeleteUser: handleDeleteUsers,
   handleUpdateUser
 };

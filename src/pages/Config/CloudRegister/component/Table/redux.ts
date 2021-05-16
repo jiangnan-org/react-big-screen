@@ -3,7 +3,7 @@
  * @Description：后端接口处理
  * @Data: 2021/5/8 13:47
  */
-import {addUser, deleteUsers, updateUser} from "@/services/auth/user";
+import {addYuncang, deleteYuncangs, updateYuncang} from "@/services/yuncang";
 import {message} from 'antd';
 
 
@@ -12,9 +12,9 @@ import {message} from 'antd';
  *
  * @param fields
  */
-const handleAddUser = async (fields: API.UserItem) => {
+const handleAddYuncang = async (fields: API.YuncangItem) => {
   try {
-    await addUser({...fields});
+    await addYuncang({...fields});
     message.success('添加成功');
     return true;
   } catch (error) {
@@ -29,10 +29,11 @@ const handleAddUser = async (fields: API.UserItem) => {
  *
  * @param selectedRows
  */
-const handleDeleteUser = async (selectedRows: API.UserItem[]) => {
+const handleDeleteYuncangs = async (selectedRows: API.YuncangItem[]) => {
   try {
-    let ids: any[] = selectedRows.map((row) => row.id);
-    await deleteUsers(ids);
+    // @ts-ignore
+    const ids: number[]  = selectedRows.map((row) => row.id) ;
+    await deleteYuncangs(ids);
     message.success('删除成功');
     return true;
   } catch (error) {
@@ -42,13 +43,13 @@ const handleDeleteUser = async (selectedRows: API.UserItem[]) => {
 };
 
 /**
- * 更新用户
+ * 更新云仓
  *
  * @param fields
  */
-const handleUpdateUser = async (fields: API.UserItem) => {
+const handleUpdateYuncang = async (fields: API.YuncangItem) => {
   try {
-    await updateUser(fields);
+    await updateYuncang(fields);
     message.success('更新成功');
     return true;
   } catch (error) {
@@ -58,7 +59,7 @@ const handleUpdateUser = async (fields: API.UserItem) => {
 };
 
 export default  {
-  handleAddUser,
-  handleDeleteUser,
-  handleUpdateUser
+  handleAddYuncang,
+  handleDeleteYuncangs,
+  handleUpdateYuncang
 };
