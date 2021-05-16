@@ -11,9 +11,9 @@ type PropField = {
   editable?: boolean ;    // 可编辑
 };
 
-const RecordForm: React.FC<PropField> = ({editable=true}) => {
+const Index: React.FC<PropField> = ({editable=true}) => {
   return (
-    <div className={styles.userForm}>
+    <div className={styles.recordForm}>
 
       <ProForm.Group>
         <ProFormDatePicker width='sm' name="firsttime" label="开始时间" />
@@ -77,4 +77,4 @@ const RecordForm: React.FC<PropField> = ({editable=true}) => {
   );
 };
 
-export default RecordForm;
+export default Index;

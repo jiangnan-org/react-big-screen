@@ -9,7 +9,7 @@ import {Form,Button} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
-import NewForm from './component/NewForm';
+import PlanForm from './component/Form';
 import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
@@ -155,7 +155,7 @@ export default () => {
         }
       }}
     >
-      <NewForm/>
+      <PlanForm/>
     </ModalForm>
   );
 
@@ -179,7 +179,7 @@ export default () => {
         }
       }}
     >
-      <NewForm editable={false}/>
+      <PlanForm editable={false}/>
     </ModalForm>
   );
 

@@ -8,7 +8,7 @@ type PropField = {
 };
 
 
-const ResultForm: React.FC<PropField> = ({editable=true}) => {
+const Index: React.FC<PropField> = ({editable=true}) => {
   const columns = [
     {
       title: '巡视项目',
@@ -27,10 +27,10 @@ const ResultForm: React.FC<PropField> = ({editable=true}) => {
     },
   ];
   return (
-    <div className={styles.ResultForm}>
+    <div className={styles.resultForm}>
       <Table columns={columns} />
     </div>
   );
 };
 
-export default ResultForm;
+export default Index;

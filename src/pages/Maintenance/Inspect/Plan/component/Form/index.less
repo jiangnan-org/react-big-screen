@@ -1,0 +1,22 @@
+@import '~antd/lib/style/themes/default.less';
+
+.planForm{
+  :global{
+    .ant-form-item{
+      flex-direction: row !important;
+      align-items: center;
+      .ant-form-item-label{
+        text-align: right !important;
+        width: 80px;
+        padding: 0 !important;
+        label:after {
+          color: @text-color;
+          content: ":";
+          margin: 0 8px 0 2px;
+          top: -.5px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

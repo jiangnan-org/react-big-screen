@@ -4,8 +4,8 @@
  * @Data: 2021/4/9 17:34
  */
 import React, {useRef, useState} from 'react';
-import {PlusOutlined, EditOutlined, ToolOutlined} from '@ant-design/icons';
-import {Form, Button, Space, Tag, Divider} from 'antd';
+import {PlusOutlined, EditOutlined} from '@ant-design/icons';
+import {Form, Button} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
@@ -106,11 +106,10 @@ export default () => {
 
     {
       title: '巡视项目',
-      valueType: 'project',
       width: 120,
       align: 'center',
       ellipsis: true,
-      render: (text, record, _, action) => (
+      render: (text, record) => (
         <>
           <a
             key='project'
@@ -135,7 +134,7 @@ export default () => {
       width: 120,
       align: 'center',
       ellipsis: true,
-      render: (text, record, _, action) => (
+      render: (text, record) => (
         <>
           <a
             key='edit'
@@ -277,7 +276,7 @@ export default () => {
         <FooterToolbar>
           <Button
             onClick={async () => {
-              let success = await actions.handleDeleteRecord(selectedRows);
+              const success = await actions.handleDeleteRecord(selectedRows);
               if(success) {
                 setSelectedRows([]);
                 // 刷新并清空,页码也会重置，不包括表单

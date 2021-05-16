@@ -11,9 +11,9 @@ type PropField = {
   editable?: boolean ;    // 可编辑
 };
 
-const NewForm: React.FC<PropField> = ({editable=true}) => {
+const Index: React.FC<PropField> = ({editable=true}) => {
   return (
-    <div className={styles.userForm}>
+    <div className={styles.planForm}>
       <ProForm.Group >
         <ProFormText
           name='principal'
@@ -78,4 +78,4 @@ const NewForm: React.FC<PropField> = ({editable=true}) => {
   );
 };
 
-export default NewForm;
+export default Index;
