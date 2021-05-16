@@ -17,7 +17,7 @@ import actions from './redux';
 import styles from './index.less';
 
 // 角色类型
-type RoleMapType = Record<number,
+type RoleMapType = Record<string,
   {
     name: string;
     desc: string;
@@ -26,12 +26,12 @@ type RoleMapType = Record<number,
 
 // 具体角色
 const RoleMap: RoleMapType = {
-  0: {
+  'USER': {
     name: '普通用户',
     desc: '仅拥有指定项目的权限',
     color: 'red'
   },
-  1: {
+  'ADMINISTRATOR': {
     name: '超级管理员',
     desc: '拥有所有权限',
     color: 'green'
@@ -150,8 +150,8 @@ export default () => {
       valueType: 'select',
       width: 80,
       valueEnum: {
-        0: {text: '激活', status: 'Success'},
-        1: {text: '禁用', status: 'Error'}
+        'ENABLE': {text: '激活', status: 'Success'},
+        'DISABLE': {text: '禁用', status: 'Error'}
       },
     },
     {
@@ -159,7 +159,7 @@ export default () => {
       width: 120,
       align: 'center',
       ellipsis: true,
-      render: (text, record, _, action) => (
+      render: (text, record) => (
         <>
           <a
             key='edit'
@@ -233,7 +233,7 @@ export default () => {
   return (
     <React.Fragment>
       <ProTable<API.UserItem>
-        className={styles.table}
+        className={styles.userTable}
         columns={columns}
         actionRef={actionRef}
         request={async (params: API.PageParams = {}) => {
@@ -273,8 +273,8 @@ export default () => {
               phone: undefined,
               password: undefined,
               gender: 0,
-              state: 0,
-              type: 0
+              state: 'ENABLE',
+              type: 'USER'
             });
             setCreateModalVisible(true)
           }

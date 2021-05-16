@@ -101,7 +101,7 @@ const Index: React.FC<PropField> = ({
       >
         <ProForm.Group>
           <ProFormText
-            name='name'
+            name='yuncangName'
             label='云仓名称'
             width='sm'
             rules={[
@@ -116,7 +116,7 @@ const Index: React.FC<PropField> = ({
             ]}
           />
           <ProFormText
-            name='sn'
+            name='collectorSn'
             label='采集器SN'
             width='sm'
             disabled={!editable}
@@ -146,11 +146,11 @@ const Index: React.FC<PropField> = ({
             options={[
               {
                 label: '租赁',
-                value: 0,
+                value: 'LEASE',
               },
               {
                 label: '自持',
-                value: 1,
+                value: 'SELF_SUSTAINING',
               }
             ]}
           />

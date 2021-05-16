@@ -15,7 +15,7 @@ import { useModel } from 'umi';
 import mapStyleConfig from './style';
 import styles from './index.less';
 import _ from 'lodash';
-import { getYunCangStatus } from '@/services/home';
+import { getYunCangState } from '@/services/home';
 import { message } from 'antd';
 
 // @ts-ignore  使用百度API  加载js文件
@@ -33,7 +33,7 @@ export default () => {
   });
 
   // 数据
-  const [data,setData] = useState<API.YunCangStatus>({});
+  const [data,setData] = useState<API.YunCangState[]>([]);
 
   // 获取系统配置
   const systemConfig = useModel('systemConfig');
@@ -42,7 +42,7 @@ export default () => {
   const refreshData = async () => {
     try {
       // 登录
-      const res: API.ResponseMessage<API.YunCangStatus> = await getYunCangStatus();
+      const res: API.ResponseMessage<API.YunCangState[]> = await getYunCangState();
       setData(res.data);
     } catch (error) {
       message.error(error,2);

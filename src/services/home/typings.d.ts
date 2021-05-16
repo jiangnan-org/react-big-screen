@@ -50,22 +50,15 @@ declare namespace API {
   };
 
   /** 地理坐标 */
-  type Coordinate = {
+  type YunCangState = {
     /** 纬度 */
     latitude: number;
     /** 经度 */
     longitude: number;
+    /** 云仓状态 */
+    state: string;
   };
 
-  /** 地图信息 */
-  type YunCangStatus = {
-    /** 告警运行 */
-    alarming?: Coordinate[];
-    /** 正常运行 */
-    running?: Coordinate[];
-    /** 未运行 */
-    stopping?: Coordinate[];
-  };
 
   /**  时间->值 键值对  */
   type Point = {

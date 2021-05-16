@@ -44,8 +44,8 @@ export default ({id}) => {
           <Descriptions
             title='基础信息'
           >
-            <Descriptions.Item label='云仓名称'>{yuncang.name}</Descriptions.Item>
-            <Descriptions.Item label='采集器SN'>{yuncang.sn}</Descriptions.Item>
+            <Descriptions.Item label='云仓名称'>{yuncang.yuncangName}</Descriptions.Item>
+            <Descriptions.Item label='采集器SN'>{yuncang.collectorSn}</Descriptions.Item>
             <Descriptions.Item label='规格尺寸'>{yuncang.size}</Descriptions.Item>
             <Descriptions.Item label='省份'>{yuncang.province}</Descriptions.Item>
             <Descriptions.Item label='城市'>{yuncang.city}</Descriptions.Item>

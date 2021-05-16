@@ -17,7 +17,7 @@ import styles from './index.less';
 import { useModel } from 'umi';
 
 // 运行模式类型
-type ModeMapType = Record<number,
+type ModeMapType = Record<string,
   {
     name: string;
     color: string
@@ -25,11 +25,11 @@ type ModeMapType = Record<number,
 
 // 具体运行模式
 const ModeMap: ModeMapType = {
-  0: {
+  'LEASE': {
     name: '租赁',
     color: 'red'
   },
-  1: {
+  'SELF_SUSTAINING': {
     name: '自持',
     color: 'green'
   },
@@ -62,13 +62,13 @@ export default () => {
       width: 48,
     },
     {
-      dataIndex: 'name',
+      dataIndex: 'yuncangName',
       title: '云仓名称',
       width: 100,
       ellipsis: true,
     },
     {
-      dataIndex: 'sn',
+      dataIndex: 'collectorSn',
       title: '采集器SN',
       width: 120,
       align: 'center',
@@ -91,7 +91,7 @@ export default () => {
       render: (mode,) => (
         <Space>
           <Tag color={ModeMap[mode as number]?.color || 'red'} key={ModeMap[mode as number]?.name}>
-            {ModeMap[mode as number]?.name || '租赁'}
+            {ModeMap[mode as number]?.name }
           </Tag>
         </Space>
       ),
@@ -128,9 +128,9 @@ export default () => {
       valueType: 'radio',
       width: 80,
       valueEnum: {
-        0: {text: '运行', status: 'Processing'},
-        1: {text: '报警', status: 'Error'},
-        2: {text: '停止', status: 'Default'}
+        'RUNNING': {text: '运行', status: 'Processing'},
+        'ALARMING': {text: '报警', status: 'Error'},
+        'STOPPING': {text: '停止', status: 'Default'}
       },
     },
     {

@@ -31,9 +31,9 @@ declare namespace API {
     phone?: string;
     photo?: string;
     realName?: string;
-    state?: number;
+    state?: string;
     /** 用户类型：0超级管理；1普通用户 */
-    type?: number;
+    type?: string;
     updateTime?: string;
     wechat?: string;
   };

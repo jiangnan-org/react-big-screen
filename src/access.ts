@@ -7,6 +7,6 @@ export default function access(initialState: { currentUser?: API.UserItem | unde
   const { currentUser } = initialState || {};
   return {
     //  只有管理员可访问
-    adminRouteFilter: currentUser && currentUser.type === 1,
+    adminRouteFilter: currentUser && currentUser.type === 'ADMINISTRATOR',
   };
 }

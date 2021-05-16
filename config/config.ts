@@ -8,7 +8,7 @@ import routes from './routes';
 const serveUrlMap = {
   dev: 'http://101.132.248.43:9001/',
   pre: 'https://pre.pro.ant.design/',
-  test: 'https://test.pro.ant.design/',
+  test: 'http://127.0.0.1:9001/',
   idc: 'https://idc.pro.ant.design/',
 };
 
@@ -76,5 +76,27 @@ export default defineConfig({
     schemaPath:"http://101.132.248.43:9001/v2/api-docs",
     // schemaPath: join(__dirname, 'oneapi.json'),
     mock: true,
+  },
+  // https://github.com/ant-design/ant-design-pro/issues/8037
+  chunks: ['vendors', 'umi'],
+  chainWebpack: function (config, { webpack }) {
+    config.merge({
+      optimization: {
+        splitChunks: {
+          chunks: 'all',
+          minChunks: 2,
+          automaticNameDelimiter: '.',
+          cacheGroups: {
+            vendor: {
+              name: 'vendors',
+              test({ resource }) {
+                return /[\\/]node_modules[\\/]/.test(resource);
+              },
+              priority: 10,
+            },
+          },
+        },
+      },
+    });
   },
 });

@@ -37,8 +37,8 @@ const Index: React.FC<PropField> = ({editable=true}) => {
           width='sm'
           disabled={!editable}
           options={[
-            {label: '普通用户', value: 0},
-            {label: '超级管理员', value: 1},
+            {label: '普通用户', value: 'USER'},
+            {label: '超级管理员', value: 'ADMINISTRATOR'},
           ]}
           rules={[
             {
@@ -98,8 +98,8 @@ const Index: React.FC<PropField> = ({editable=true}) => {
           width='sm'
           placeholder='请选择状态'
           options={[
-            {label: '激活', value: 0},
-            {label: '禁用', value: 1},
+            {label: '激活', value: 'ENABLE'},
+            {label: '禁用', value: 'DISABLE'},
           ]}
           rules={[
             {

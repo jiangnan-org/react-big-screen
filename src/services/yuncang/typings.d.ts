@@ -10,9 +10,9 @@ declare namespace API {
     /** 云仓id  */
     id?: number;
     /** 云仓名称 */
-    name?: string;
+    yuncangName?: string;
     /** 采集器SN */
-    sn?: string;
+    collectorSn?: string;
     /** 规格尺寸 */
     size?: number;
     /** 省份 */
