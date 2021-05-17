@@ -73,7 +73,7 @@ export default () => {
           metas={{
             title: {},
             subTitle: {
-              dataIndex: 'name',
+              dataIndex: 'yuncangName',
               title: '云仓名称',
             },
             actions: {

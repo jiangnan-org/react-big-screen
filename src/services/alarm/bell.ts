@@ -1,9 +1,9 @@
 import { request } from 'umi';
 import buildQueryParam from '@/utils/buildQueryParam';
 
-/** 处理单 POST /api/alarm-process-list/update */
+/** 处理单 POST /api/alarm-process-list/add */
 export async function dealAlarm(sheet: API.AlarmSheetItem, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.AlarmSheetItem>>('/yuncang/api/alarm-process-list/update', {
+  return request<API.ResponseMessage<API.AlarmSheetItem>>('/yuncang/api/alarm-process-list/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

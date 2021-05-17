@@ -30,7 +30,7 @@ const draggerProps = {
 
 // 属性类型
 type PropField = {
-  initialValues?: API.YuncangItem
+  initialValues?: API.AlarmSheetItem
   onFinish: (values: API.AlarmSheetItem) => Promise<void>
   visible: boolean
   setVisible: (value: boolean) => void

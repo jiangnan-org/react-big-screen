@@ -29,13 +29,6 @@ export default ({id}) => {
      handleGetYuncang(id);
   },[])
 
-  // 萤石摄像头信息
-  const [cameraInfo] = useState({
-    deviceSerial: 'F84018634',       // 设备序列号
-    deviceName: 'C8W(F84018634)',    // 设备名称
-    url: 'ezopen://UVHJLS@open.ys7.com/F84018634/1.hd.live',    // 视频播放地址
-  });
-
   return (
     <React.Fragment>
       <div className={styles.baseInfo}>
@@ -78,9 +71,9 @@ export default ({id}) => {
           <Descriptions
             title='摄像头信息'
           >
-            <Descriptions.Item label='设备序列号'>{cameraInfo.deviceSerial}</Descriptions.Item>
-            <Descriptions.Item label='设备名称'>{cameraInfo.deviceName}</Descriptions.Item>
-            <Descriptions.Item label='视频播放地址'>{cameraInfo.url}</Descriptions.Item>
+            <Descriptions.Item label='设备序列号'>{yuncang.cameraSn}</Descriptions.Item>
+            <Descriptions.Item label='设备名称'>{yuncang.cameraName}</Descriptions.Item>
+            <Descriptions.Item label='视频播放地址'>{yuncang.videoAddress}</Descriptions.Item>
           </Descriptions>
           <Divider
           />

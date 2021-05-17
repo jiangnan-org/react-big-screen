@@ -3,12 +3,12 @@
  * @Description：告警页面
  * @Data: 2021/4/9 17:34
  */
-import React, {useRef, useState} from 'react';
-import { IssuesCloseOutlined,FormOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
-import { Divider, Modal} from 'antd';
-import type {ProColumns, ActionType} from '@ant-design/pro-table';
+import React, { useRef, useState } from 'react';
+import { IssuesCloseOutlined, FormOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Divider, Modal } from 'antd';
+import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import {getAlarmList} from '@/services/alarm/bell';
+import { getAlarmList } from '@/services/alarm/bell';
 import HandlingOrderForm from './component/Form';
 import _ from 'lodash';
 import actions from './redux';
@@ -20,7 +20,7 @@ export default () => {
   const [id, setId] = useState<number>(-1);
 
   /** 处理单信息 */
-  const [sheet,setSheet] = useState<API.AlarmSheetItem>({});
+  const [sheet, setSheet] = useState<API.AlarmSheetItem>({});
 
   /** 处理单窗口 */
   const [visible, setVisible] = useState<boolean>(false);
@@ -65,9 +65,10 @@ export default () => {
       width: 10,
       valueType: 'radioButton',
       valueEnum: {
-        0: {text: '一般'},
-        1: {text: '紧急'},
-        2: {text: '严重'}
+        'NOTIFY': { text: '通知' },
+        'SECONDARY': { text: '一般' },
+        'IMPORTANT': { text: '紧急' },
+        'CRITICAL': { text: '严重' },
       },
     },
     {
@@ -80,8 +81,8 @@ export default () => {
       width: 10,
       valueType: 'select',
       valueEnum: {
-        0: {text: '已处理', status: 'Success'},
-        1: {text: '未处理', status: 'Error'}
+        'HANDLED': { text: '已处理', status: 'Success' },
+        'UNHANDLED': { text: '未处理', status: 'Error' },
       },
     },
     {
@@ -98,52 +99,58 @@ export default () => {
       width: 12,
       align: 'center',
       ellipsis: true,
-      render: (text, record,) => (
+      render: (text, record) => (
         <>
           {/* 编辑 */}
-          <a
-            key='edit'
-            onClick={() => {
-              Modal.confirm({
-                title: '确认',
-                icon: <ExclamationCircleOutlined />,
-                content: '您确定要忽略该告警么？',
-                okText: '确认',
-                cancelText: '取消',
-                onOk:async ()=>{
-                  const success = await actions.handleDealAlarm({
-                    alarmRecordId:record.id,
-                    name:'无',
-                    description:'无',
-                    phenomenon:'无',
-                    solveMethod: '无'
-                  });
-                  if (success) {
-                    actionRef.current?.reload();
-                  }
-                }
-              });
-            }}
-            title='确认'
-          >
-            <IssuesCloseOutlined style={{'fontSize':'1.2em'}} />
-          </a>
-          <Divider type='vertical'/>
-          {/* 处理单 */}
+          {record.state === 'UNHANDLED' && (
+            <a
+              key='edit'
+              onClick={() => {
+                Modal.confirm({
+                  title: '确认',
+                  icon: <ExclamationCircleOutlined />,
+                  content: '您确定要忽略该告警么？',
+                  okText: '确认',
+                  cancelText: '取消',
+                  onOk: async () => {
+                    const success = await actions.handleDealAlarm({
+                      alarmRecordId: record.id,
+                      name: '无',
+                      description: '无',
+                      phenomenon: '无',
+                      solveMethod: '无',
+                    });
+                    if (success) {
+                      actionRef.current?.reload();
+                    }
+                  },
+                });
+              }}
+              title='确认'
+            >
+              <IssuesCloseOutlined style={{ 'fontSize': '1.2em' }} />
+            </a>
+          )}
+          {record.state === 'HANDLED' && (
+            <IssuesCloseOutlined style={{ 'fontSize': '1.2em' }} />
+          )}
+
+          <Divider type='vertical' />
+
           <a
             key='sheet'
             onClick={() => {
               // 已经处理 处理单id
-              if(record.alarmId){
+              if (record.alarmId) {
                 // 异步请求获取处理单信息
-                 setSheet(sheet);
+                setSheet(sheet);
               }
               setId(record.id || -1);
               setVisible(true);
             }}
             title='处理单'
           >
-            <FormOutlined style={{'fontSize':'1.2em'}}/>
+            <FormOutlined style={{ 'fontSize': '1.2em' }} />
           </a>
         </>
       ),
@@ -153,7 +160,7 @@ export default () => {
   /** 按提交  */
   const onFinish = async (values: API.AlarmSheetItem) => {
     // 处理单
-    _.assign(values, {alarmRecordId:id});
+    _.assign(values, { alarmRecordId: id });
     const success = await actions.handleDealAlarm(values);
     if (success) {
       setVisible(false);
@@ -176,7 +183,7 @@ export default () => {
             success: res.success,
             // 不传会使用 data 的长度，如果是分页一定要传
             total: res.data.total,
-          }
+          };
         }}
         editable={{
           type: 'multiple',

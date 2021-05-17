@@ -51,6 +51,14 @@ declare namespace API {
     /** 传感器数量 */
     sensor?: string;
 
+    /** 摄像头SN */
+    cameraSn?: string,
+    /** 摄像头名称 */
+    cameraName?: string,
+    /** 视频播放地址 */
+    videoAddress?: string,
+
+
     /** 创建时间 */
     createTime?: string;
     /** 安装时间 */

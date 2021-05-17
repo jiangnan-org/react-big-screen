@@ -314,12 +314,12 @@ const Index: React.FC<PropField> = ({
       >
         <ProForm.Group>
           <ProFormText
-            name='deviceSerial'
+            name='cameraSn'
             label='设备序列号'
             width='sm'
           />
           <ProFormText
-            name='deviceName'
+            name='cameraName'
             label='设备名称'
             width='sm'
           />
@@ -327,7 +327,7 @@ const Index: React.FC<PropField> = ({
 
         <ProForm.Group>
           <ProFormText
-            name='url'
+            name='videoAddress'
             label='视频播放地址'
             width='sm'
           />
