@@ -39,9 +39,8 @@ export default () => {
   /** table列定义 */
   const columns: ProColumns<API.ValueItem>[] = [
     {
-      dataIndex: 'index',
-      title: '序号',
-      valueType: 'indexBorder',  // 带border的序号列
+      dataIndex: 'yuncangId',
+      title: '云仓编号',
       width: 48,
     },
     {
