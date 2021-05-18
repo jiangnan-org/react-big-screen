@@ -5,11 +5,9 @@
  */
 import _ from 'lodash';
 import { useModel } from 'umi';
+import * as mathUtils from '@/utils/mathUtils';
 
-export const genOption = (data: {
-  date: string,
-  value: number
-}[]) => {
+export const genOption = (data: API.Point[]) => {
   // 获取状态
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const styleConfig = useModel('styleConfig');
@@ -132,7 +130,7 @@ export const genOption = (data: {
           }
         },
         symbolSize: 2,
-        data: _.map(data, item => item.value)
+        data: _.map(data, item => mathUtils.kW2MW(item.value))
       }]
   };
 };

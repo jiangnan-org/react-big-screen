@@ -13,7 +13,9 @@ import MonthElectricityConsumption from './componet/MonthElectricityConsumption'
 import YearElectricityConsumption from './componet/YearElectricityConsumption';
 import AlertStatistics from './componet/AlertStatistics';
 import RcResizeObserver from 'rc-resize-observer';
-import {getPowerConsumption, getPowerGeneration, getYunCangState, getYearGenerationCurve,getYearConsumptionCurve,getMonthConsumptionCurve,getMonthGenerationCurve} from "@/services/home";
+import {getPowerConsumption, getPowerGeneration, getYunCangState, getYearGenerationCurve,
+  getYearConsumptionCurve,getMonthConsumptionCurve,getMonthGenerationCurve,
+  getRealTimeConsumptionCurve,getRealTimeGenerationCurve} from "@/services/home";
 import {useModel} from 'umi';
 
 export default (): React.ReactNode => {
@@ -38,6 +40,12 @@ export default (): React.ReactNode => {
 
   /**  月用电功率曲线 */
   const [monthConsumptionCurve,setMonthConsumptionCurve] = useState<API.Point[]>([]);
+
+    /**  实时发电功率曲线 */
+    const [realTimeGenerationCurve,setRealTimeGenerationCurve] = useState<API.Point[]>([]);
+
+  /**  实时用电功率曲线 */
+  const [realTimeConsumptionCurve,setRealTimeConsumptionCurve] = useState<API.Point[]>([]);
 
   // 响应式布局
   const [responsive, setResponsive] = useState(false);
@@ -108,6 +116,28 @@ export default (): React.ReactNode => {
     }
   };
 
+  /**  刷新实时发电功率曲线 */
+  const refreshRealTimeGenerationCurveData = async () => {
+    try {
+      // 登录
+      const res: API.ResponseMessage<API.Point[]> = await getRealTimeGenerationCurve();
+      setRealTimeGenerationCurve(res.data );
+    } catch (error) {
+      message.error(error,2);
+    }
+  };
+
+  /**  刷新月用电功率曲线 */
+  const refreshRealTimeConsumptionCurveData = async () => {
+    try {
+      // 登录
+      const res: API.ResponseMessage<API.Point[]> = await getRealTimeConsumptionCurve();
+      setRealTimeConsumptionCurve(res.data );
+    } catch (error) {
+      message.error(error,2);
+    }
+  };
+
   /**  定时拉取数据 */
   useEffect(()=>{
     // 刷新数据
@@ -117,6 +147,8 @@ export default (): React.ReactNode => {
     refreshYearConsumptionCurveData();
     refreshMonthGenerationCurveData();
     refreshMonthConsumptionCurveData();
+    refreshRealTimeGenerationCurveData();
+    refreshRealTimeConsumptionCurveData();
 
     // 定时器
     const t = setInterval(() => {
@@ -126,6 +158,8 @@ export default (): React.ReactNode => {
       refreshYearConsumptionCurveData();
       refreshMonthGenerationCurveData();
       refreshMonthConsumptionCurveData();
+      refreshRealTimeGenerationCurveData();
+      refreshRealTimeConsumptionCurveData();
     }, systemConfig.samplingInterval);
 
     // 卸载
@@ -160,7 +194,7 @@ export default (): React.ReactNode => {
         {/*  中間部分 */}
         <ProCard gutter={[8, 0]} split={responsive ? 'horizontal' : 'vertical'} className={styles.middle}>
           <ProCard colSpan={{ xs: 24, sm: 24, md: 12, lg: 8, xl: 8 }} layout='center' bordered>
-            <PowerGenerationCurve />
+            <PowerGenerationCurve realTimeGenerationCurve={realTimeGenerationCurve}/>
           </ProCard>
           <ProCard colSpan={{ xs: 24, sm: 24, md: 0, lg: 8, xl: 8 }} layout='center' bordered>
             <MonthPowerGeneration monthGenerationCurve={monthGenerationCurve}/>
@@ -173,7 +207,7 @@ export default (): React.ReactNode => {
         {/*  下半部分 */}
         <ProCard gutter={[8, 0]} split={responsive ? 'horizontal' : 'vertical'} className={styles.bottom}>
           <ProCard colSpan={{ xs: 24, sm: 24, md: 12, lg: 8, xl: 8 }} layout='center' bordered>
-            <ElectricityConsumptionCurve />
+            <ElectricityConsumptionCurve realTimeConsumptionCurve={realTimeConsumptionCurve} />
           </ProCard>
           <ProCard colSpan={{ xs: 24, sm: 24, md: 0, lg: 8, xl: 8 }} layout='center' bordered>
             <MonthElectricityConsumption monthConsumptionCurve={monthConsumptionCurve}/>

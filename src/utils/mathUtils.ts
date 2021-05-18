@@ -9,12 +9,12 @@
  */
 export const kW2MW = (value: number) => {
   // 1MW = 1000kW
-  return (value / 1000).toFixed(4);
+  return (value / 1000).toFixed(2);
 };
 
 /**
- * 功率kW转为wMW 保留四位小数
+ * 功率kW转为MW 保留四位小数
  */
 export const kW2TenThousandkW= (value: number) => {
-  return (value / 10000).toFixed(4);
+  return (value / 10000).toFixed(2);
 };
