@@ -1,63 +1,78 @@
-import React from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Alert, Typography } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+/**
+ * @Author：zy
+ * @Description：ProTable - 高级表格  https://procomponents.ant.design/components/table
+ * @Data: 2021/4/9 17:34
+ */
+import React, {useRef} from 'react';
+import type {ProColumns, ActionType} from '@ant-design/pro-table';
+import ProTable from '@ant-design/pro-table';
+import {getUserList} from '@/services/auth/user';
 import styles from './index.less';
+import {Link} from "umi";
 
-const CodePreview: React.FC = ({ children }) => (
-  <pre className={styles.pre}>
-    <code>
-      <Typography.Text copyable>{children}</Typography.Text>
-    </code>
-  </pre>
-);
+export default () => {
 
-export default (): React.ReactNode => {
-  const intl = useIntl();
+
+  /** Table action 的引用，便于自定义触发 */
+  const actionRef = useRef<ActionType>();
+
+  /** table列定义 */
+  const columns: ProColumns<API.UserItem>[] = [
+
+
+    {
+      dataIndex: 'principal',
+      title: '编号',
+      width: 100,
+      ellipsis: true,
+    },
+    {
+      dataIndex: 'kind',
+      title: '名称',
+      width: 100,
+      hideInSearch: true,
+      ellipsis: true
+    },
+    {
+      title: '巡视项目',
+      width: 120,
+      align: 'center',
+      ellipsis: true,
+      render: (text, record) => (
+        <>
+          <Link key={record.id} to={`/maintenance/inspect/manager/${record.id}`}>巡视项目</Link>
+        </>
+      ),
+    },
+  ];
   return (
-    <PageContainer>
-      <Card>
-        <Alert
-          message={intl.formatMessage({
-            id: 'pages.welcome.alertMessage',
-            defaultMessage: '更快更强的重型组件，已经发布。',
-          })}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 24,
-          }}
-        />
-        <Typography.Text strong>
-          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="高级表格" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/table"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-table</CodePreview>
-        <Typography.Text
-          strong
-          style={{
-            marginBottom: 12,
-          }}
-        >
-          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="高级布局" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/layout"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
-      </Card>
-    </PageContainer>
+    <React.Fragment>
+      <ProTable<API.UserItem>
+        className={styles.table}
+        columns={columns}
+        actionRef={actionRef}
+        request={async (params: API.PageParams = {}) => {
+          // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
+          const res: API.PageResponseMessage<API.UserItem> = await getUserList(params);
+          return {
+            data: res.data.records,
+            // success 请返回 true，不然 table 会停止解析数据，即使有数据
+            success: res.success,
+            // 不传会使用 data 的长度，如果是分页一定要传
+            total: res.data.total,
+          }
+        }}
+        editable={{
+          type: 'multiple',
+        }}
+        rowKey='id'
+        search={{                // 配置列的搜索相关，false 为隐藏
+          labelWidth: 'auto',
+        }}
+        dateFormatter='string'
+
+
+      />
+    </React.Fragment>
   );
 };

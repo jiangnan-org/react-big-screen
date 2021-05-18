@@ -3,6 +3,8 @@
  * @Description：路由配置 https://beta-pro.ant.design/docs/router-and-nav-cn
  * @Data: 2021/3/24 8:49
  */
+import {pathMatch} from "react-dev-inspector/plugins/babel/visitor";
+
 export default [
   // 登录
   {
@@ -61,7 +63,8 @@ export default [
           {
             path: '/maintenance/inspect/type',
             name: 'type',
-            component: './Maintenance/Inspect/Type',
+            component:'./Maintenance/Inspect/Type'
+
           },
           {
             path: '/maintenance/inspect/plan',
@@ -72,19 +75,28 @@ export default [
             path: '/maintenance/inspect/record',
             name: 'record',
             component: './Maintenance/Inspect/Record',
-          }
+          },
+          {
+            path: '/maintenance/inspect/manager',
+            name: 'manager',
+            component:'./Maintenance/Inspect/Manager',
+            // hideInMenu: true,
+
+          },
+
         ]
       },
     ]
   },
-  // 运营
-  {
-    path: '/operation',
-    name: 'operation',
-    icon: 'appstore',
-    component: './Operation',
-  },
-  // 报表
+  // // 运营
+  // {
+  //   path: '/operation',
+  //   name: 'operation',
+  //   icon: 'appstore',
+  //   component: './Operation',
+  //   hideInMenu: true,
+  // },
+ // 报表
   {
     path: '/report',
     name: 'report',
