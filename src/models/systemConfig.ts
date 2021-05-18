@@ -5,6 +5,6 @@
  */
 export default () => {
   /** 首页数据刷新间隔  s */
-  const samplingInterval = 60 * 1000;
+  const samplingInterval = 30 * 1000;
   return {samplingInterval };
 };

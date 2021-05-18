@@ -3,53 +3,17 @@
  * @Description：总量统计
  * @Data: 2021/4/22 19:40
  */
-import React, { useEffect, useState } from 'react';
+import React  from 'react';
 import ProCard, {StatisticCard} from '@ant-design/pro-card';
 import styles from './index.less';
-import { useModel } from 'umi';
-import { getPowerConsumption } from '@/services/home';
-import { message } from 'antd';
+import * as mathUtils from '@/utils/mathUtils';
 
-export default () => {
+// 属性类型
+type PropField = {
+  powerConsumption?:  API.PowerConsumption ;
+};
 
-  // 数据
-  const [data,setData] = useState<API.PowerConsumption>({});
-
-  // 获取系统配置
-  const systemConfig = useModel('systemConfig');
-
-  // 刷新数据
-  const refreshData = async () => {
-    try {
-      // 登录
-      const res: API.ResponseMessage<API.PowerConsumption> = await getPowerConsumption();
-      setData(res.data || {
-        realTimePower:200,
-        monthConsumption:200,
-        yearConsumption:200,
-        capacity:200,
-        count:200,
-        dailyConsumption:200
-      });
-    } catch (error) {
-      message.error(error,2);
-    }
-  };
-
-  useEffect(()=>{
-    // 刷新数据
-    refreshData();
-
-    // 定时器
-    const t = setInterval(() => {
-      // refreshData();
-    }, systemConfig.samplingInterval);
-
-    // 卸载
-    return () => {
-      clearInterval(t);
-    };
-  },[]);
+const Index: React.FC<PropField> = ({powerConsumption}) => {
 
   return (
     <React.Fragment>
@@ -61,14 +25,14 @@ export default () => {
             statistic={{
               title: (
                 <div>
-                  <span className={styles.chinese}>实时功率</span>
+                  <span className={styles.chinese}>实时用电功率</span>
                   <span className={styles.english}>Real time Power</span>
                 </div>
               ),
               precision: 2,
               valueStyle: {color: '#EFB41F'},
               groupSeparator: ',',
-              value: data.realTimePower,
+              value: mathUtils.kW2MW(powerConsumption?.realTimePower || 0.0),
               suffix: (
                 <span className={styles.suffix}>MW</span>
               )
@@ -87,7 +51,7 @@ export default () => {
               precision: 2,
               valueStyle: {color: '#EC3D11'},
               groupSeparator: ',',
-              value: data.dailyConsumption,
+              value: mathUtils.kW2TenThousandkW(powerConsumption?.dailyConsumption || 0.0),
               suffix: (
                 <span className={styles.suffix}>万kWh</span>
               )
@@ -111,7 +75,7 @@ export default () => {
                 title: '数量',
                 valueStyle: {color: '#0BF5A3'},
                 groupSeparator: ',',
-                value: data.count,
+                value: powerConsumption?.count || 0,
                 suffix: (
                   <span className={styles.suffix}>座</span>
                 ),
@@ -130,7 +94,7 @@ export default () => {
                 precision: 2,
                 valueStyle: {color: '#0BF5A3'},
                 groupSeparator: ',',
-                value: data.capacity,
+                value: mathUtils.kW2TenThousandkW(powerConsumption?.capacity || 0),
                 suffix: (
                   <span className={styles.suffix}>万MW</span>
                 ),
@@ -162,7 +126,7 @@ export default () => {
                 precision: 2,
                 valueStyle: {color: '#E0BC0C'},
                 groupSeparator: ',',
-                value: data.monthConsumption,
+                value: mathUtils.kW2TenThousandkW(powerConsumption?.monthConsumption || 0.0),
                 suffix: (
                   <span className={styles.suffix}>万kWh</span>
                 ),
@@ -181,7 +145,7 @@ export default () => {
                 precision: 2,
                 valueStyle: {color: '#E0BC0C'},
                 groupSeparator: ',',
-                value: data.yearConsumption,
+                value: mathUtils.kW2TenThousandkW(powerConsumption?.yearConsumption || 0.0),
                 suffix: (
                   <span className={styles.suffix}>万kWh</span>
                 ),
@@ -199,4 +163,6 @@ export default () => {
       </ProCard>
     </React.Fragment>
   )
-}
+};
+
+export default Index;

@@ -62,7 +62,7 @@ declare namespace API {
 
   /**  时间->值 键值对  */
   type Point = {
-    time: number;
+    date: number;
     value: number;
   };
 
