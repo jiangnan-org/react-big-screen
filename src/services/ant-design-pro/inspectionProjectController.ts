@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-/** 新增巡检项目 POST /inspection-project/add */
-export async function addUsingPOST2(
+/** 新增巡检项目 POST /api/inspection-project/add */
+export async function addUsingPOST1(
   params: {
     // query
     /** rid */
@@ -15,7 +15,7 @@ export async function addUsingPOST2(
   body: API.InspectionProject_,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/inspection-project/add', {
+  return request<API.UserResponseEntityString_>('/api/inspection-project/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -28,8 +28,8 @@ export async function addUsingPOST2(
   });
 }
 
-/** 修改巡检项目 POST /inspection-project/update */
-export async function updateUsingPOST3(
+/** 修改巡检项目 POST /api/inspection-project/update */
+export async function updateUsingPOST1(
   params: {
     // query
     /** rid */
@@ -41,7 +41,7 @@ export async function updateUsingPOST3(
   body: API.InspectionProject_,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/inspection-project/update', {
+  return request<API.UserResponseEntityString_>('/api/inspection-project/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

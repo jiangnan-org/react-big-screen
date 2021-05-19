@@ -1,11 +1,11 @@
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, Upload, Avatar } from 'antd';
-import React from 'react';
+import { Button, Upload, message, Avatar } from 'antd';
+import React, { useState } from 'react';
 import styles from './index.less';
-import avatar from './avatar.jpeg';
 import ProForm, { ProFormText, ProFormSelect,ProFormRadio } from '@ant-design/pro-form';
 import actions from './redux';
 import _ from 'lodash';
+import { getFileUploadUrl,getFileDownloadUrl,requestHeader } from '@/services/file';
 
 
 // 属性类型
@@ -15,25 +15,66 @@ type PropField = {
 };
 
 const Base: React.FC<PropField> = ({ currentUser,setCurrentUser }) => {
+  // 图片正在上传
+  const [uploading,setUploading] = useState<boolean>(false);
 
-  const getAvatarURL = () => {
-    if (currentUser) {
-      if (currentUser.phone) {
-        return currentUser.photo;
-      }
-    }
-    return avatar;
-  };
-
+  // 上传成功返回的文件名
+  const [imageFileName,setImageFileName] = useState<string>(currentUser?.photo || '');
 
   // 更新用戶
   const handleSubmit = async (fields: API.UserItem) => {
-    _.assign(currentUser,{...fields});
+    // 保存图片
+    _.assign(currentUser,{...fields,photo:imageFileName});
     // @ts-ignore
     const success = await actions.handleUpdateUser(currentUser);
     if(success){
       setCurrentUser(currentUser);
     }
+  };
+
+  // 前端AntD框架的upload组件上传图片时遇到的一些坑 https://www.cnblogs.com/qianguyihao/p/10460834.html
+  const uploadProps = {
+    accept: '.jpg, .jpeg, .png, .ico',              // 限制上传文件类型
+    headers: requestHeader,                          // 请求头 携带token信息
+    multiple: false,                                  // 不可以多选
+    showUploadList: false,                           // 不显示上传列表
+    action: getFileUploadUrl,
+    data: (file: any) => {
+      return {
+        file                                         // file 是当前正在上传的图片
+      }
+    },
+    // 校验上传文件 限制图片大小
+    beforeUpload: (file: any) => {
+      // 最大2MB
+      const isLt = file.size / 1024 / 1024 < 2;
+      if (!isLt) {
+        message.info('图片大小必须小于2MB', 2);
+        return false;
+      }
+      return true;
+    },
+    // 上传图片发生改变   file 是当前正在上传的单个img
+    onChange:  (info: any) => {
+      const {file} = info;
+      // 判断正在上传的图片状态
+      if (file.status === 'uploading') {
+        setUploading(true);
+        return;
+      }
+
+      // 有response表示请求完成
+      if (file.response) {
+        setUploading(false);
+        if (file.response.code === 200) {
+          // 保存文件名 在点击保存按钮时保存到数据库
+          setImageFileName(file.response.data);
+        } else {
+          setImageFileName('');
+          message.info(file.response.msg ? file.response.msg : '文件上传失败', 2);
+        }
+      }
+    },
   };
 
   return (
@@ -177,12 +218,12 @@ const Base: React.FC<PropField> = ({ currentUser,setCurrentUser }) => {
         <div className={styles.avatar}>
           <Avatar
             size={{ xs: 80, sm: 80, md: 80, lg: 100, xl: 120, xxl: 160 }}
-            src={getAvatarURL()} alt='avatar'
+            src={(imageFileName && getFileDownloadUrl(imageFileName)) || '/avatar.jpeg'} alt='avatar'
           />
         </div>
-        <Upload showUploadList={false}>
+        <Upload  {...uploadProps}>
           <div className={styles.button}>
-            <Button>
+            <Button loading={uploading}>
               <UploadOutlined />
               更换头像
             </Button>

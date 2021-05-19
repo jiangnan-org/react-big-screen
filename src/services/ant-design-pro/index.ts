@@ -2,27 +2,29 @@
 /* eslint-disable */
 // API 更新时间：
 // API 唯一标识：
-import * as alarmProcessListController from './alarmProcessListController';
+import * as abstractFileController from './abstractFileController';
+import * as alarmProcessController from './alarmProcessController';
 import * as alarmRecordController from './alarmRecordController';
-import * as alarmController from './alarmController';
-import * as dataController from './dataController';
+import * as alarmSettingController from './alarmSettingController';
+import * as realtimeDataController from './realtimeDataController';
 import * as homePageController from './homePageController';
-import * as loginController from './loginController';
-import * as operatorController from './operatorController';
-import * as sysUserController from './sysUserController';
-import * as yuncangController from './yuncangController';
 import * as inspectionProjectController from './inspectionProjectController';
 import * as inspectionRecordController from './inspectionRecordController';
+import * as loginController from './loginController';
+import * as sysUserController from './sysUserController';
+import * as yuncangController from './yuncangController';
+import * as inspectionPlanController from './inspectionPlanController';
 export default {
-  alarmProcessListController,
+  abstractFileController,
+  alarmProcessController,
   alarmRecordController,
-  alarmController,
-  dataController,
+  alarmSettingController,
+  realtimeDataController,
   homePageController,
-  loginController,
-  operatorController,
-  sysUserController,
-  yuncangController,
   inspectionProjectController,
   inspectionRecordController,
+  loginController,
+  sysUserController,
+  yuncangController,
+  inspectionPlanController,
 };

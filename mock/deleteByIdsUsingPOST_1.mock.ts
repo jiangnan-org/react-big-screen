@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 
 export default {
-  'POST /api/operator/dellist': (req: Request, res: Response) => {
+  'POST /api/yuncang/dellist': (req: Request, res: Response) => {
     res.status(200).send({});
   },
 };

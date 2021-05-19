@@ -23,6 +23,9 @@ export default () => {
   /** 表单是否可编辑 */
   const [editable,setEditable] = useState<boolean>(true);
 
+  /** 处理单中图片 */
+  const [picture,setPicture] = useState<string>('');
+
   /** 处理单、保存当前选中的告警id */
   const [id, setId] = useState<number>(-1);
 
@@ -37,6 +40,7 @@ export default () => {
     try {
       const res: API.ResponseMessage<API.AlarmProcessItem> = await getAlarmProcessByAlarmRecordId(id);
       form.setFieldsValue(res.data);
+      setPicture(res.data.pic || '');
     } catch (error) {
       message.error(error, 2);
     }
@@ -166,12 +170,13 @@ export default () => {
             key='sheet'
             onClick={() => {
               // 已经处理 处理单id
-              if (record.id) {
+              if (record.state === 'HANDLED') {
                 setEditable(false);
                 // 异步请求获取处理单信息
-                handleGetAlarmProcess(record.id);
+                handleGetAlarmProcess(record.id as number);
               }else{
                 setEditable(true);
+                setPicture('');
                 // 清空字段
                 form.resetFields();
               }
@@ -190,7 +195,7 @@ export default () => {
   /** 按提交  */
   const onFinish = async (values: API.AlarmProcessItem) => {
     // 处理单
-    _.assign(values, { alarmRecordId: id });
+    _.assign(values, { alarmRecordId: id,pic:picture });
     const success = await actions.handleDealAlarm(values);
     if (success) {
       setVisible(false);
@@ -241,6 +246,8 @@ export default () => {
       />
       <HandlingOrderForm
         form={form}
+        picture={picture}
+        setPicture={setPicture}
         editable={editable}
         visible={visible}
         setVisible={setVisible}

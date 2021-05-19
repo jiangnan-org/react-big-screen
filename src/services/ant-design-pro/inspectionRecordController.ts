@@ -2,8 +2,8 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-/** 新增巡视记录 POST /inspection-record/add */
-export async function addUsingPOST3(
+/** 新增巡视记录 POST /api/inspection-record/add */
+export async function addUsingPOST2(
   params: {
     // header
     /** token */
@@ -12,7 +12,7 @@ export async function addUsingPOST3(
   body: API.InspectionRecord_,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/inspection-record/add', {
+  return request<API.UserResponseEntityString_>('/api/inspection-record/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export async function addUsingPOST3(
   });
 }
 
-/** 删除巡视记录 POST /inspection-record/delete */
+/** 删除巡视记录 POST /api/inspection-record/delete */
 export async function deleteUsingPOST2(
   params: {
     // query
@@ -35,7 +35,7 @@ export async function deleteUsingPOST2(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/inspection-record/delete', {
+  return request<API.UserResponseEntityString_>('/api/inspection-record/delete', {
     method: 'POST',
     headers: {},
     params: {
@@ -45,8 +45,8 @@ export async function deleteUsingPOST2(
   });
 }
 
-/** 修改巡视记录 POST /inspection-record/update */
-export async function updateUsingPOST4(
+/** 修改巡视记录 POST /api/inspection-record/update */
+export async function updateUsingPOST2(
   params: {
     // header
     /** token */
@@ -55,7 +55,7 @@ export async function updateUsingPOST4(
   body: API.InspectionRecord_,
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/inspection-record/update', {
+  return request<API.UserResponseEntityString_>('/api/inspection-record/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

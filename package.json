@@ -93,6 +93,7 @@
     "@umijs/preset-dumi": "^1.1.0-rc.6",
     "@umijs/preset-react": "^1.7.4",
     "@umijs/yorkie": "^2.0.3",
+    "antd-img-crop": "^3.14.1",
     "carlo": "^0.9.46",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",

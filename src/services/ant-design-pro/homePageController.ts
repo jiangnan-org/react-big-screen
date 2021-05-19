@@ -3,7 +3,7 @@
 import { request } from 'umi';
 
 /** 预警信息 GET /api/home/alarm */
-export async function alertsUsingGET(
+export async function getAlarmCountUsingGET(
   params: {
     // header
     /** token */
@@ -11,7 +11,7 @@ export async function alertsUsingGET(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityAlertsVO_>('/api/home/alarm', {
+  return request<API.UserResponseEntityAlertCountVO_>('/api/home/alarm', {
     method: 'GET',
     headers: {},
     params: { ...params },
@@ -20,7 +20,7 @@ export async function alertsUsingGET(
 }
 
 /** 用电量统计信息 GET /api/home/consumption */
-export async function powerConsumptionUsingGET(
+export async function getPowerConsumptionUsingGET(
   params: {
     // header
     /** token */
@@ -37,7 +37,7 @@ export async function powerConsumptionUsingGET(
 }
 
 /** 发电量统计信息 GET /api/home/generation */
-export async function powerGenerationUsingGET(
+export async function getPowerGenerationUsingGET(
   params: {
     // header
     /** token */
@@ -54,7 +54,7 @@ export async function powerGenerationUsingGET(
 }
 
 /** 地图位置信息 GET /api/home/locations */
-export async function locationsUsingGET(
+export async function getYunCangStateUsingGET(
   params: {
     // header
     /** token */
@@ -62,7 +62,7 @@ export async function locationsUsingGET(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityLocationVO_>('/api/home/locations', {
+  return request<API.UserResponseEntityListYuncangStateVO_>('/api/home/locations', {
     method: 'GET',
     headers: {},
     params: { ...params },
@@ -70,8 +70,8 @@ export async function locationsUsingGET(
   });
 }
 
-/** 月用电曲线(未完成) GET /api/home/month-consumption */
-export async function monthConsumptionCurveUsingGET(
+/** 月用电曲线 GET /api/home/month-consumption */
+export async function getMonthConsumptionCurveUsingGET(
   params: {
     // header
     /** token */
@@ -87,8 +87,8 @@ export async function monthConsumptionCurveUsingGET(
   });
 }
 
-/** 月发电曲线(未完成) GET /api/home/month-generation */
-export async function monthGenerationCurveUsingGET(
+/** 月发电曲线 GET /api/home/month-generation */
+export async function getMonthGenerationCurveUsingGET(
   params: {
     // header
     /** token */
@@ -104,8 +104,8 @@ export async function monthGenerationCurveUsingGET(
   });
 }
 
-/** 实时用电曲线(未完成) GET /api/home/real-time-consumption */
-export async function realTimeConsumptionCurveUsingGET(
+/** 实时功率曲线 GET /api/home/real-time-consumption */
+export async function getRealTimeConsumptionCurveUsingGET(
   params: {
     // header
     /** token */
@@ -121,8 +121,8 @@ export async function realTimeConsumptionCurveUsingGET(
   });
 }
 
-/** 实时发电曲线(未完成) GET /api/home/real-time-generation */
-export async function realTimeGenerationCurveUsingGET(
+/** 实时发电功率曲线 GET /api/home/real-time-generation */
+export async function getRealTimeGenerationCurveUsingGET(
   params: {
     // header
     /** token */
@@ -138,8 +138,8 @@ export async function realTimeGenerationCurveUsingGET(
   });
 }
 
-/** 年用电曲线(未完成) GET /api/home/year-consumption */
-export async function yearConsumptionCurveUsingGET(
+/** 年用电曲线 GET /api/home/year-consumption */
+export async function getYearConsumptionCurveUsingGET(
   params: {
     // header
     /** token */
@@ -155,8 +155,8 @@ export async function yearConsumptionCurveUsingGET(
   });
 }
 
-/** 年发电曲线(未完成) GET /api/home/year-generation */
-export async function yearGenerationCurveUsingGET(
+/** 年发电曲线 GET /api/home/year-generation */
+export async function getYearGenerationCurveUsingGET(
   params: {
     // header
     /** token */

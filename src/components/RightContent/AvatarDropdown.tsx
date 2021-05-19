@@ -6,6 +6,7 @@ import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import {removeToken} from '@/services/auth/login';
+import { getFileDownloadUrl } from '@/services/file';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -106,7 +107,10 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar size="small" className={styles.avatar} src={currentUser.photo} alt="avatar" />
+        <Avatar size="small" className={styles.avatar}
+                src={(currentUser.photo && getFileDownloadUrl(currentUser.photo)) || '/avatar.jpeg'}
+                alt="avatar"
+        />
         <span className={`${styles.name} anticon`}>{currentUser.realName}</span>
       </span>
     </HeaderDropdown>

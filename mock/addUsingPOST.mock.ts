@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 
 export default {
-  'POST /api/alarm/add': (req: Request, res: Response) => {
+  'POST /inspection-plan/insert': (req: Request, res: Response) => {
     res.status(200).send({});
   },
 };

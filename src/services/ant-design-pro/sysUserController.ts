@@ -3,7 +3,7 @@
 import { request } from 'umi';
 
 /** 增加用户 POST /api/user/add */
-export async function addUsingPOST5(
+export async function addUsingPOST3(
   params: {
     // header
     /** token */
@@ -67,7 +67,7 @@ export async function checkUsernameUsingGET(
 }
 
 /** 删除用户 POST /api/user/del */
-export async function deleteUsingPOST4(
+export async function deleteUsingPOST3(
   params: {
     // query
     /** id */
@@ -89,7 +89,7 @@ export async function deleteUsingPOST4(
 }
 
 /** 删除用户(批量) POST /api/user/dellist */
-export async function deleteByIdsUsingPOST2(
+export async function deleteByIdsUsingPOST(
   params: {
     // query
     /** ids */
@@ -150,7 +150,7 @@ export async function getMeUsingGET(
 }
 
 /** 获取所有用户(分页) POST /api/user/list */
-export async function getByPageUsingPOST3(
+export async function getByPageUsingPOST1(
   params: {
     // header
     /** token */
@@ -171,7 +171,7 @@ export async function getByPageUsingPOST3(
 }
 
 /** 修改用户信息 POST /api/user/update */
-export async function updateUsingPOST6(
+export async function updateUsingPOST3(
   params: {
     // header
     /** token */

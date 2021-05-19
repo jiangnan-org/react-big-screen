@@ -25,18 +25,18 @@ export async function checkByMailUsingGET(
 }
 
 /** 删除报警记录 POST /api/alarm-record/delete */
-export async function deleteUsingPOST1(
+export async function deleteUsingPOST(
   params: {
     // query
     /** id */
-    id: string;
+    id: number;
     // header
     /** token */
     Authorization?: string;
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityString_>('/api/alarm-record/delete', {
+  return request<API.UserResponseEntityBoolean_>('/api/alarm-record/delete', {
     method: 'POST',
     headers: {},
     params: {
@@ -47,7 +47,7 @@ export async function deleteUsingPOST1(
 }
 
 /** 获取所有报警记录(分页) POST /api/alarm-record/list */
-export async function getByPageUsingPOST1(
+export async function getAlarmRecordByPageUsingPOST(
   params: {
     // header
     /** token */
@@ -57,27 +57,6 @@ export async function getByPageUsingPOST1(
   options?: { [key: string]: any },
 ) {
   return request<API.UserResponseEntityIPageAlarmRecord_>('/api/alarm-record/list', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    params: { ...params },
-    data: body,
-    ...(options || {}),
-  });
-}
-
-/** 编辑报警记录 POST /api/alarm-record/update */
-export async function updateUsingPOST2(
-  params: {
-    // header
-    /** token */
-    Authorization?: string;
-  },
-  body: API.AlarmRecord_,
-  options?: { [key: string]: any },
-) {
-  return request<API.UserResponseEntityAlarmRecord_>('/api/alarm-record/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
