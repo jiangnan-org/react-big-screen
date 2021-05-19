@@ -13,7 +13,7 @@ const { Dragger } = Upload;
 const draggerProps = {
   name: 'file',
   multiple: true,
-  height: 160,
+  height: 120,
   action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
   onChange(info: any) {
     const { status } = info.file;
@@ -30,30 +30,38 @@ const draggerProps = {
 
 // 属性类型
 type PropField = {
-  initialValues?: API.AlarmSheetItem
-  onFinish: (values: API.AlarmSheetItem) => Promise<void>
+  form?: any,
+  editable?: boolean,
+  onFinish: (values: API.AlarmProcessItem) => Promise<void>
   visible: boolean
   setVisible: (value: boolean) => void
 };
 
-const Index: React.FC<PropField> = ({
+const Index: React.FC<PropField> = ({form,
+                                      editable=true,
                                       onFinish,
                                       visible,
                                       setVisible,
-                                      initialValues
                                     }) => {
   return (
-      <ModalForm<API.AlarmSheetItem>
+      <ModalForm<API.AlarmProcessItem>
+        form={form}
         title='处理单'
         visible={visible}
+        width={600}
         onVisibleChange={setVisible}
         onFinish={onFinish}
-        initialValues={initialValues}
+        submitter={{
+          submitButtonProps:{
+            disabled:!editable
+          }
+        }}
         className={styles.handlingOrderForm}
       >
         <ProFormText
           name='name'
           label='故障名称：'
+          disabled={!editable}
           rules={[
             {
               required: false,
@@ -66,6 +74,7 @@ const Index: React.FC<PropField> = ({
       <ProFormText
         name='phenomenon'
         label='故障现象：'
+        disabled={!editable}
         rules={[
           {
             required: false,
@@ -78,6 +87,7 @@ const Index: React.FC<PropField> = ({
       <ProFormText
         name='description'
         label='问题描述：'
+        disabled={!editable}
         rules={[
           {
             required: false,
@@ -90,6 +100,7 @@ const Index: React.FC<PropField> = ({
       <ProFormText
         name='solveMethod'
         label='处理方法：'
+        disabled={!editable}
         rules={[
           {
             required: false,
@@ -100,7 +111,7 @@ const Index: React.FC<PropField> = ({
         ]}
       />
 
-      <Dragger {...draggerProps}>
+      <Dragger {...draggerProps} disabled={!editable}>
         <p className="alarm-upload-drag-icon">
           <InboxOutlined />
         </p>

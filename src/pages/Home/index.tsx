@@ -13,7 +13,7 @@ import MonthElectricityConsumption from './componet/MonthElectricityConsumption'
 import YearElectricityConsumption from './componet/YearElectricityConsumption';
 import AlertStatistics from './componet/AlertStatistics';
 import RcResizeObserver from 'rc-resize-observer';
-import {getPowerConsumption, getPowerGeneration, getYunCangState, getYearGenerationCurve,
+import {getPowerConsumption, getPowerGeneration, getYuncangState, getYearGenerationCurve,
   getYearConsumptionCurve,getMonthConsumptionCurve,getMonthGenerationCurve,
   getRealTimeConsumptionCurve,getRealTimeGenerationCurve} from "@/services/home";
 import {useModel} from 'umi';
@@ -46,6 +46,9 @@ export default (): React.ReactNode => {
 
   /**  实时用电功率曲线 */
   const [realTimeConsumptionCurve,setRealTimeConsumptionCurve] = useState<API.Point[]>([]);
+
+  /**  云仓状态  */
+  const [yuncangState,setYuncangState] = useState<API.YuncangState[]>([]);
 
   // 响应式布局
   const [responsive, setResponsive] = useState(false);
@@ -138,6 +141,17 @@ export default (): React.ReactNode => {
     }
   };
 
+  // 刷新云仓状态数据
+  const refreshYuncangStateData = async () => {
+    try {
+      // 登录
+      const res: API.ResponseMessage<API.YuncangState[]> = await getYuncangState();
+      setYuncangState(res.data);
+    } catch (error) {
+      message.error(error,2);
+    }
+  };
+
   /**  定时拉取数据 */
   useEffect(()=>{
     // 刷新数据
@@ -149,6 +163,7 @@ export default (): React.ReactNode => {
     refreshMonthConsumptionCurveData();
     refreshRealTimeGenerationCurveData();
     refreshRealTimeConsumptionCurveData();
+    refreshYuncangStateData();
 
     // 定时器
     const t = setInterval(() => {
@@ -160,6 +175,7 @@ export default (): React.ReactNode => {
       refreshMonthConsumptionCurveData();
       refreshRealTimeGenerationCurveData();
       refreshRealTimeConsumptionCurveData();
+      refreshYuncangStateData();
     }, systemConfig.samplingInterval);
 
     // 卸载
@@ -184,7 +200,7 @@ export default (): React.ReactNode => {
             <PowerGeneration powerGeneration={powerGeneration} />
           </ProCard>
           <ProCard colSpan={{ xs: 24, sm: 24, md: 0, lg: 0, xl: 8, xxl:8 }} layout='center' bordered>
-            {/*<MonitorMap />*/}
+            <MonitorMap yuncangState={yuncangState}/>
           </ProCard>
           <ProCard colSpan={{ xs: 24, sm: 24, md: 12, lg: 12, xl: 8, xxl:8 }} layout='center' bordered>
             <ElectricityConsumption  powerConsumption={powerConsumption}/>

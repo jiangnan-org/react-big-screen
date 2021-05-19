@@ -3,64 +3,76 @@
  * @Description：总量统计
  * @Data: 2021/4/22 19:40
  */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './index.less';
-import { Badge, Tag, Row, Col, message } from 'antd';
-import { WarningOutlined, AlertOutlined, InfoOutlined } from '@ant-design/icons';
+import { Badge, Tag, Row, Col } from 'antd';
+import { WarningOutlined, AlertOutlined, InfoOutlined,CommentOutlined } from '@ant-design/icons';
 import {Link, useModel} from 'umi';
-import { getAlarmCount } from '@/services/home';
+import * as enumUtils from '@/utils/enumUtils';
 
 
 export default () => {
-  // 数据
-  const [data,setData] = useState<API.AlarmCount>({});
-
   // 获取系统配置
-  const systemConfig = useModel('systemConfig');
-
-  // 刷新数据
-  const refreshData = async () => {
-    try {
-      // 登录
-      const res: API.ResponseMessage<API.AlarmCount> = await getAlarmCount();
-      setData(res.data);
-    } catch (error) {
-      message.error(error,2);
-    }
-  };
-
-  useEffect(()=>{
-    // 刷新数据
-    refreshData();
-
-    // 定时器
-    const t = setInterval(() => {
-      // refreshData();
-    }, systemConfig.samplingInterval);
-
-    // 卸载
-    return () => {
-      clearInterval(t);
-    };
-  },[]);
+  const alarm = useModel('alarm');
 
   return (
     <React.Fragment>
       <div className={styles.alert}>
         <Row gutter={16}>
-          <Col lg={8} md={8} sm={8} xs={12} >
-            <Badge count={data.criticalNum} size='small' offset={[10, -5]} overflowCount={999}><AlertOutlined /></Badge>
-            <Tag><Link to={`/maintenance/alarm/`}>紧急告警</Link></Tag>
+          <Col lg={6} md={6} sm={12} xs={12} >
+            <Badge
+              count={alarm.alarmCount.criticalNum}
+              size='small'
+              offset={[10, -5]}
+              overflowCount={99}
+              showZero
+              style={{ backgroundColor: alarm.alarmCount.criticalNum === 0 ? '#52c41a':'red' }}
+            >
+              <AlertOutlined />
+            </Badge>
+            <Tag><Link to={`/maintenance/alarm/`}>{enumUtils.AlarmLevelEnum.CRITICAL.text}</Link></Tag>
           </Col>
 
-          <Col lg={8} md={8} sm={8} xs={12}>
-            <Badge count={data.importantNum} size='small' offset={[10, -5]} overflowCount={999}><WarningOutlined /></Badge>
-            <Tag><Link to={`/maintenance/alarm/`}>严重告警</Link></Tag>
+          <Col lg={6} md={6} sm={12} xs={12}>
+            <Badge
+              count={alarm.alarmCount.importantNum}
+              size='small'
+              offset={[10, -5]}
+              overflowCount={99}
+              showZero
+              style={{ backgroundColor: alarm.alarmCount.importantNum === 0 ? '#52c41a':'red' }}
+            >
+              <WarningOutlined />
+            </Badge>
+            <Tag><Link to={`/maintenance/alarm/`}>{enumUtils.AlarmLevelEnum.IMPORTANT.text}</Link></Tag>
           </Col>
 
-          <Col lg={8} md={8} sm={8} xs={12}>
-            <Badge count={data.secondaryNum} size='small' offset={[10, -5]} overflowCount={999}>< InfoOutlined /></Badge>
-            <Tag><Link to={`/maintenance/alarm/`}>一般告警</Link></Tag>
+          <Col lg={6} md={6} sm={12} xs={12}>
+            <Badge
+              count={alarm.alarmCount.secondaryNum}
+              size='small'
+              offset={[10, -5]}
+              overflowCount={99 }
+              showZero
+              style={{ backgroundColor: alarm.alarmCount.secondaryNum === 0 ? '#52c41a':'red' }}
+            >
+              < InfoOutlined/>
+            </Badge>
+            <Tag><Link to={`/maintenance/alarm/`}>{enumUtils.AlarmLevelEnum.SECONDARY.text}</Link></Tag>
+          </Col>
+
+          <Col lg={6} md={6} sm={12} xs={12}>
+            <Badge
+              count={alarm.alarmCount.notifyNum}
+              size='small'
+              offset={[10, -5]}
+              overflowCount={999}
+              showZero
+              style={{ backgroundColor: alarm.alarmCount.notifyNum === 0 ? '#52c41a':'red' }}
+            >
+              < CommentOutlined />
+            </Badge>
+            <Tag><Link to={`/maintenance/alarm/`}>{enumUtils.AlarmLevelEnum.NOTIFY.text}</Link></Tag>
           </Col>
         </Row>
       </div>

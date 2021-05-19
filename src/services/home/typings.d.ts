@@ -49,8 +49,12 @@ declare namespace API {
     yearGeneration?: number;
   };
 
-  /** 地理坐标 */
-  type YunCangState = {
+  /** 云仓状态 */
+  type YuncangState = {
+    // 云仓id
+    yuncangId; number,
+    // 云仓名称
+    name; string,
     /** 纬度 */
     latitude: number;
     /** 经度 */

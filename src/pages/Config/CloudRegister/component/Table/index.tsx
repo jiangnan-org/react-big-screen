@@ -5,7 +5,7 @@
  */
 import React, { useEffect, useRef, useState } from 'react';
 import {EditOutlined} from '@ant-design/icons';
-import {Button, Space, Tag} from 'antd';
+import {Button, Space,message, Tag} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getYuncangList} from '@/services/yuncang';
@@ -15,25 +15,7 @@ import {FooterToolbar} from '@ant-design/pro-layout';
 import actions from './redux';
 import styles from './index.less';
 import { useModel } from 'umi';
-
-// 运行模式类型
-type ModeMapType = Record<string,
-  {
-    name: string;
-    color: string
-  }>;
-
-// 具体运行模式
-const ModeMap: ModeMapType = {
-  'LEASE': {
-    name: '租赁',
-    color: 'red'
-  },
-  'SELF_SUSTAINING': {
-    name: '自持',
-    color: 'green'
-  },
-};
+import * as enumUtils from '@/utils/enumUtils';
 
 
 export default () => {
@@ -45,7 +27,7 @@ export default () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
-  const [selectedRows, setSelectedRows] = useState<API.UserItem[]>([]);
+  const [selectedRows, setSelectedRows] = useState<API.YuncangItem[]>([]);
 
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
@@ -88,10 +70,10 @@ export default () => {
       hideInSearch: true,
       align: 'center',
       width: 100,
-      render: (mode,) => (
+      render: (mode: any,) => (
         <Space>
-          <Tag color={ModeMap[mode as number]?.color || 'red'} key={ModeMap[mode as number]?.name}>
-            {ModeMap[mode as number]?.name }
+          <Tag color={enumUtils.YuncangModeEnum[mode]?.color || 'red'} key={enumUtils.YuncangModeEnum[mode]?.text}>
+            {enumUtils.YuncangModeEnum[mode]?.text }
           </Tag>
         </Space>
       ),
@@ -127,11 +109,7 @@ export default () => {
       onFilter: true,
       valueType: 'radio',
       width: 80,
-      valueEnum: {
-        'RUNNING': {text: '运行', status: 'Processing'},
-        'ALARMING': {text: '报警', status: 'Error'},
-        'STOPPING': {text: '停止', status: 'Default'}
-      },
+      valueEnum: enumUtils.YuncangStateEnum,
     },
     {
       dataIndex: 'note',
@@ -182,11 +160,20 @@ export default () => {
 
   return (
     <React.Fragment>
-      <ProTable<API.UserItem>
-        className={styles.table}
+      <ProTable<API.YuncangItem>
+        className={styles.cloudRegisterTable}
+        // @ts-ignore
         columns={columns}
         actionRef={actionRef}
+        onRequestError={()=>{
+          message.error('数据加载失败',2);
+        }}
         request={async (params: API.PageParams = {}) => {
+          // 如果包含枚举类型
+          if(params.hasOwnProperty('state')){
+            // @ts-ignore
+            _.assign(params,{state:enumUtils.YuncangStateEnum[params?.state]?.value});
+          }
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
           const res: API.PageResponseMessage<API.YuncangItem> = await getYuncangList(params);
           return {

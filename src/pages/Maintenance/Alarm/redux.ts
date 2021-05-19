@@ -11,7 +11,7 @@ import {message} from 'antd';
  *
  * @param fields
  */
-const handleDealAlarm = async (fields: API.AlarmSheetItem) => {
+const handleDealAlarm = async (fields: API.AlarmProcessItem) => {
   try {
     await dealAlarm(fields);
     message.success('处理成功');

@@ -1,6 +1,7 @@
 /**
  * @Author：zy
- * @Description：监控地图 * echart如果想引入百度地图：必须手动导入bmap包，这个是echart得扩展功能  https://github.com/apache/echarts/tree/master/extension-src/bmap
+ * @Description：监控地图 * echart如果想引入百度地图：必须手动导入bmap包，这个是echart得扩展功能
+ * https://github.com/apache/echarts/tree/master/extension-src/bmap
  * echarts-for-react： https://www.npmjs.com/package/echarts-for-react
  * echart官网： https://echarts.apache.org/examples/zh/editor.html?c=effectScatter-bmap
  * @Data: 2021/4/23 18:40
@@ -15,13 +16,16 @@ import { useModel } from 'umi';
 import mapStyleConfig from './style';
 import styles from './index.less';
 import _ from 'lodash';
-import { getYunCangState } from '@/services/home';
-import { message } from 'antd';
 
 // @ts-ignore  使用百度API  加载js文件
 loadScript(['http://api.map.baidu.com/api?v=2.0&ak=Gdgx1WXQnc8r3B7tAlGZt6AmWWegt0zx']);
 
-export default () => {
+// 属性类型
+type PropField = {
+  yuncangState:  API.YuncangState[] ;
+};
+
+const Index: React.FC<PropField> = ({yuncangState}) => {
   // 组件真正实例的引用
   const echartRef = React.createRef();
 
@@ -32,50 +36,15 @@ export default () => {
     fillColor: 'rgb(20,20,20)'
   });
 
-  // 数据
-  const [data,setData] = useState<API.YunCangState[]>([]);
-
-  // 获取系统配置
-  const systemConfig = useModel('systemConfig');
-
-  // 刷新数据
-  const refreshData = async () => {
-    try {
-      // 登录
-      const res: API.ResponseMessage<API.YunCangState[]> = await getYunCangState();
-      setData(res.data);
-    } catch (error) {
-      message.error(error,2);
-    }
-  };
-
-  // 地图数据获取
-  useEffect(()=>{
-    // 刷新数据
-    refreshData();
-
-    // 定时器
-    const t = setInterval(() => {
-      // refreshData();
-    }, systemConfig.samplingInterval);
-
-    // 卸载
-    return () => {
-      clearInterval(t);
-    };
-  },[]);
-
   // 地图样式设定
   useEffect(() => {
     // 暗黑色样式
     if(styleConfig.dark){
       // 不要直接赋值  下面这样赋值会改变引用
-      _.assign(otherMapStyle,{fillColor:mapStyleConfig.darkBlue.fillColor})
-      // @ts-ignore
+      _.assign(otherMapStyle,{fillColor:'rgb(20, 20, 20)'});
       setOtherMapStyle(otherMapStyle);
     }else{
-      _.assign(otherMapStyle,{fillColor:mapStyleConfig.brown.fillColor})
-      // @ts-ignore
+      _.assign(otherMapStyle,{fillColor:'rgb(255, 255, 255)'});
       setOtherMapStyle(otherMapStyle);
     }
 
@@ -85,22 +54,13 @@ export default () => {
 
       // 获取百度地图实例，使用百度地图自带的控件
       const bmap = echartInstance.getModel().getComponent('bmap').getBMap();
+      //绘制中国区域行政边界
+      drawBoundary(bmap, otherMapStyle.fillColor);
 
-      // 使用定时器绘制边界
-      const t = setInterval( ()=> {
-        drawBoundary(bmap,otherMapStyle.fillColor);
-      }, 500);
-
-      // 卸载
-      return () => {
-        if(t != null) {
-          clearInterval(t);
-        }
-      }
-    }
-
-    return ()=>{
-
+      // 在初始化地图以及地图缩放时调用此方法
+      bmap.addEventListener("zoomstart", function () {
+        drawBoundary(bmap, otherMapStyle.fillColor); //绘制中国区域行政边界
+      });
     }
   }, [echartRef.current,styleConfig.dark]);
 
@@ -112,9 +72,11 @@ export default () => {
           // @ts-ignore
           ref={echartRef}
           style={{ width: '100%', height: '100%' }}
-          option={genOption(mapStyleConfig.darkBlue.styleJson,styleConfig.textColor,data)}
+          option={genOption(mapStyleConfig.light.style,styleConfig.textColor,yuncangState)}
         />
       </div>
     </React.Fragment>
   );
 };
+
+export default Index;

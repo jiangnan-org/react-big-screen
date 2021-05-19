@@ -5,22 +5,26 @@
  */
 import React, { useRef, useState } from 'react';
 import { IssuesCloseOutlined, FormOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Divider, Modal } from 'antd';
+import { Divider, Modal, message,Space, Form, Tag } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import { getAlarmList } from '@/services/alarm/bell';
+import {getAlarmProcessByAlarmRecordId, getAlarmList} from '@/services/alarm/bell';
 import HandlingOrderForm from './component/Form';
 import _ from 'lodash';
 import actions from './redux';
 import styles from './index.less';
+import * as enumUtils from '@/utils/enumUtils';
 
 
 export default () => {
+  /** 表单引用 */
+  const [form] = Form.useForm();
+
+  /** 表单是否可编辑 */
+  const [editable,setEditable] = useState<boolean>(true);
+
   /** 处理单、保存当前选中的告警id */
   const [id, setId] = useState<number>(-1);
-
-  /** 处理单信息 */
-  const [sheet, setSheet] = useState<API.AlarmSheetItem>({});
 
   /** 处理单窗口 */
   const [visible, setVisible] = useState<boolean>(false);
@@ -28,13 +32,36 @@ export default () => {
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
 
+  /** 获取告警处理单 */
+  const handleGetAlarmProcess = async (id: number) => {
+    try {
+      const res: API.ResponseMessage<API.AlarmProcessItem> = await getAlarmProcessByAlarmRecordId(id);
+      form.setFieldsValue(res.data);
+    } catch (error) {
+      message.error(error, 2);
+    }
+  };
+
   /** table列定义 */
   const columns: ProColumns<API.AlarmItem>[] = [
     {
       dataIndex: 'index',
       title: '序号',
       valueType: 'indexBorder',  // 带border的序号列
-      width: 4,
+      width: 6,
+    },
+    {
+      dataIndex: 'yuncangName',
+      title: '云仓名称',
+      width: 12,
+      ellipsis: true,
+    },
+    {
+      dataIndex: 'collectorSn',
+      title: '采集器SN',
+      width: 15,
+      ellipsis: true,
+      hideInSearch: true,
     },
     {
       dataIndex: 'name',
@@ -64,12 +91,14 @@ export default () => {
       ellipsis: true,
       width: 10,
       valueType: 'radioButton',
-      valueEnum: {
-        'NOTIFY': { text: '通知' },
-        'SECONDARY': { text: '一般' },
-        'IMPORTANT': { text: '紧急' },
-        'CRITICAL': { text: '严重' },
-      },
+      valueEnum: enumUtils.AlarmLevelEnum,
+      render: (level: any,record) =>(
+        <Space>
+          <Tag color={enumUtils.AlarmLevelEnum[record.level as string].color } key={enumUtils.AlarmLevelEnum[record.level as string].text}>
+            {enumUtils.AlarmLevelEnum[record.level as string].text}
+          </Tag>
+        </Space>
+      )
     },
     {
       title: '状态',
@@ -80,10 +109,7 @@ export default () => {
       ellipsis: true,
       width: 10,
       valueType: 'select',
-      valueEnum: {
-        'HANDLED': { text: '已处理', status: 'Success' },
-        'UNHANDLED': { text: '未处理', status: 'Error' },
-      },
+      valueEnum: enumUtils.AlarmRecordStateEnum,
     },
     {
       dataIndex: 'alarmTime',
@@ -126,13 +152,12 @@ export default () => {
                   },
                 });
               }}
-              title='确认'
             >
-              <IssuesCloseOutlined style={{ 'fontSize': '1.2em' }} />
+              <IssuesCloseOutlined   title='确认' style={{ 'fontSize': '1.2em' }} />
             </a>
           )}
           {record.state === 'HANDLED' && (
-            <IssuesCloseOutlined style={{ 'fontSize': '1.2em' }} />
+            <IssuesCloseOutlined  title='确认' style={{ 'fontSize': '1.2em' }} />
           )}
 
           <Divider type='vertical' />
@@ -141,9 +166,14 @@ export default () => {
             key='sheet'
             onClick={() => {
               // 已经处理 处理单id
-              if (record.alarmId) {
+              if (record.id) {
+                setEditable(false);
                 // 异步请求获取处理单信息
-                setSheet(sheet);
+                handleGetAlarmProcess(record.id);
+              }else{
+                setEditable(true);
+                // 清空字段
+                form.resetFields();
               }
               setId(record.id || -1);
               setVisible(true);
@@ -158,7 +188,7 @@ export default () => {
   ];
 
   /** 按提交  */
-  const onFinish = async (values: API.AlarmSheetItem) => {
+  const onFinish = async (values: API.AlarmProcessItem) => {
     // 处理单
     _.assign(values, { alarmRecordId: id });
     const success = await actions.handleDealAlarm(values);
@@ -171,10 +201,24 @@ export default () => {
   return (
     <React.Fragment>
       <ProTable<API.AlarmItem>
-        className={styles.table}
+        className={styles.alarmTable}
         columns={columns}
         actionRef={actionRef}
+        onRequestError={()=>{
+          message.error('数据加载失败',2);
+        }}
         request={async (params: API.PageParams = {}) => {
+          // 如果包含枚举类型
+          if(params.hasOwnProperty('level')){
+            // @ts-ignore
+            _.assign(params,{level:enumUtils.AlarmLevelEnum[params?.level]?.value});
+          }
+
+          if(params.hasOwnProperty('state')){
+            // @ts-ignore
+            _.assign(params,{state:enumUtils.AlarmRecordStateEnum[params?.state]?.value});
+          }
+
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
           const res: API.PageResponseMessage<API.AlarmItem[]> = await getAlarmList(params);
           return {
@@ -196,10 +240,11 @@ export default () => {
         toolBarRender={false}
       />
       <HandlingOrderForm
+        form={form}
+        editable={editable}
         visible={visible}
         setVisible={setVisible}
         onFinish={onFinish}
-        initialValues={sheet}
       />
     </React.Fragment>
   );

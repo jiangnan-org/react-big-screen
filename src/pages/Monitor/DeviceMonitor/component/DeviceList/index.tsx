@@ -88,10 +88,9 @@ export default () => {
             },
             content: {},
           }}
+          // 用于 request 查询的额外参数，一旦变化会触发重新加载
+          params={fields}
           request={async (params: API.PageParams = {}) => {
-            // 追加查询参数
-            _.assign(params, { ...fields });
-
             // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
             const res: API.PageResponseMessage<API.YuncangItem> = await getYuncangListInMonitorPage(params);
 

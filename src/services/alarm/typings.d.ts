@@ -16,7 +16,7 @@ declare namespace API {
     /** 报警详情 */
     detail?: string;
     /** 报警级别 */
-    level?: number;
+    level?: string;
     /** 报警名称 */
     name?: string;
     /** 处理标志 */
@@ -29,7 +29,7 @@ declare namespace API {
   };
 
   /** 告警处理单 */
-  type AlarmSheetItem = {
+  type AlarmProcessItem = {
     /** 告警处理单id  */
     Id?: number;
     /**  告警记录id */

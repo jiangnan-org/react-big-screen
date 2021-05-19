@@ -2,13 +2,41 @@ import { request } from 'umi';
 import buildQueryParam from '@/utils/buildQueryParam';
 
 /** 处理单 POST /api/alarm-process-list/add */
-export async function dealAlarm(sheet: API.AlarmSheetItem, options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.AlarmSheetItem>>('/yuncang/api/alarm-process-list/add', {
+export async function dealAlarm(sheet: API.AlarmProcessItem, options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.AlarmProcessItem>>('/yuncang/api/alarm-process-list/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     data: sheet,
+    ...(options || {}),
+  });
+}
+
+/** 通过告警处理单id查询处理单 POST /api/alarm-process-list/get */
+export async function getAlarmProcessById(id: number, options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.AlarmProcessItem>>('/yuncang/api/alarm-process-list/get', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params:{
+      id
+    },
+    ...(options || {}),
+  });
+}
+
+/** 通过告警记录id查询处理单 POST /api/alarm-process-list/getbyalarmrecordid */
+export async function getAlarmProcessByAlarmRecordId(id: number, options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.AlarmProcessItem>>('/yuncang/api/alarm-process-list/getbyalarmrecordid', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params:{
+      id
+    },
     ...(options || {}),
   });
 }

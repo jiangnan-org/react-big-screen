@@ -36,8 +36,8 @@ export async function getPowerGeneration(options?: { [key: string]: any }) {
 }
 
 /** 地图位置信息 GET /api/home/locations */
-export async function getYunCangState(options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.YunCangState[]>>('/yuncang/api/home/locations', {
+export async function getYuncangState(options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.YuncangState[]>>('/yuncang/api/home/locations', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

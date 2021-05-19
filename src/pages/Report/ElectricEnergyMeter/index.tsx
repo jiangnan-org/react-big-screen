@@ -4,8 +4,6 @@
  * @Data: 2021/4/9 17:34
  */
 import React, {useRef} from 'react';
-
-import {Space, Tag} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';

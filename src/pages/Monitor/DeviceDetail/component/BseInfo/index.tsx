@@ -7,6 +7,7 @@ import React, {useState,useEffect} from 'react';
 import styles from './index.less';
 import { Card, Descriptions, Divider, message } from 'antd';
 import { getYuncangById } from '@/services/yuncang';
+import * as enumUtils from '@/utils/enumUtils';
 
 // @ts-ignore
 export default ({id}) => {
@@ -22,12 +23,12 @@ export default ({id}) => {
     }catch (error) {
       message.error(error, 2);
     }
-  }
+  };
 
   // 获取云仓信息
   useEffect( ()=>{
      handleGetYuncang(id);
-  },[])
+  },[]);
 
   return (
     <React.Fragment>
@@ -44,7 +45,7 @@ export default ({id}) => {
             <Descriptions.Item label='城市'>{yuncang.city}</Descriptions.Item>
             <Descriptions.Item label='纬度'>{yuncang.latitude}</Descriptions.Item>
             <Descriptions.Item label='经度'>{yuncang.longitude}</Descriptions.Item>
-            <Descriptions.Item label='运营模式'>{yuncang.mode}</Descriptions.Item>
+            <Descriptions.Item label='运营模式'>{yuncang.mode && enumUtils.YuncangModeEnum[yuncang.mode].text}</Descriptions.Item>
             <Descriptions.Item label='主要设备'>{yuncang.mainDevice}</Descriptions.Item>
             <Descriptions.Item label='描述'>{yuncang.note}</Descriptions.Item>
           </Descriptions>

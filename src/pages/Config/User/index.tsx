@@ -5,7 +5,7 @@
  */
 import React, {useRef, useState} from 'react';
 import {PlusOutlined, EditOutlined, ToolOutlined} from '@ant-design/icons';
-import {Form, Button, Space, Tag, Divider} from 'antd';
+import {Form, Button, Space, message, Tag, Divider} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {getUserList} from '@/services/auth/user';
@@ -15,28 +15,7 @@ import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
 import actions from './redux';
 import styles from './index.less';
-
-// 角色类型
-type RoleMapType = Record<string,
-  {
-    name: string;
-    desc: string;
-    color: string
-  }>;
-
-// 具体角色
-const RoleMap: RoleMapType = {
-  'USER': {
-    name: '普通用户',
-    desc: '仅拥有指定项目的权限',
-    color: 'red'
-  },
-  'ADMINISTRATOR': {
-    name: '超级管理员',
-    desc: '拥有所有权限',
-    color: 'green'
-  },
-};
+import * as enumUtils from '@/utils/enumUtils';
 
 
 export default () => {
@@ -106,10 +85,10 @@ export default () => {
       hideInSearch: true,
       align: 'center',
       width: 100,
-      render: (type,) => (
+      render: (type: any,) => (
         <Space>
-          <Tag color={RoleMap[type as number].color} key={RoleMap[type as number].name}>
-            {RoleMap[type as number].name}
+          <Tag color={enumUtils.UserTypeEnum[type].color} key={enumUtils.UserTypeEnum[type].text}>
+            {enumUtils.UserTypeEnum[type].text}
           </Tag>
         </Space>
       ),
@@ -119,6 +98,7 @@ export default () => {
       dataIndex: 'gender',
       align: 'center',
       valueType: 'select',
+      hideInSearch: true,
       width: 60,
       valueEnum: {
         0: {text: '男'},
@@ -149,10 +129,7 @@ export default () => {
       onFilter: true,
       valueType: 'select',
       width: 80,
-      valueEnum: {
-        'ENABLE': {text: '激活', status: 'Success'},
-        'DISABLE': {text: '禁用', status: 'Error'}
-      },
+      valueEnum:enumUtils.GeneralStateEnum,
     },
     {
       title: '操作',
@@ -236,7 +213,15 @@ export default () => {
         className={styles.userTable}
         columns={columns}
         actionRef={actionRef}
+        onRequestError={()=>{
+        message.error('数据加载失败',2);
+      }}
         request={async (params: API.PageParams = {}) => {
+          // 如果包含枚举类型
+          if(params.hasOwnProperty('state')){
+            // @ts-ignore
+            _.assign(params,{state:enumUtils.GeneralStateEnum[params?.state]?.value});
+          }
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
           const res: API.PageResponseMessage<API.UserItem> = await getUserList(params);
           return {
