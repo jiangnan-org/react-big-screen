@@ -8,11 +8,13 @@ import {Descriptions} from 'antd';
 // 属性类型
 type PropField = {
   yuncang: API.YuncangItem;    // 可编辑
+  realTimeGenerationCurve: API.Point[],
+  realTimeConsumptionCurve: API.Point[]
 };
 
-const Index: React.FC<PropField> = (props) => {
-  // 获取云仓信息
-  const {yuncang} = props;
+const Index: React.FC<PropField> = ({ yuncang,
+                                      realTimeGenerationCurve,
+                                      realTimeConsumptionCurve}) => {
 
   return (
     <React.Fragment>
@@ -25,10 +27,10 @@ const Index: React.FC<PropField> = (props) => {
             <Descriptions.Item label='告警数'>20</Descriptions.Item>
           </Descriptions>
           <div className={styles.curve}>
-            <PowerGenerationCurve/>
+            <PowerGenerationCurve realTimeGenerationCurve={realTimeGenerationCurve}/>
           </div>
           <div className={styles.curve}>
-            <ElectricityConsumptionCurve/>
+            <ElectricityConsumptionCurve realTimeConsumptionCurve={realTimeConsumptionCurve}/>
           </div>
         </Col>
       </Row>

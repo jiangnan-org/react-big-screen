@@ -1,6 +1,6 @@
 /**
  * @Author：zy
- * @Description：用户与权限接口使用类型定义
+ * @Description：主页接口使用类型定义
  * @Data: 2021/4/9 17:37
  */
 declare namespace API {

@@ -14,6 +14,8 @@ import { getYuncangListInMonitorPage } from '@/services/yuncang';
 import _ from 'lodash';
 import { useModel } from 'umi';
 import { ActionType } from '@ant-design/pro-table';
+import { getRealTimeGenerationCurve,getRealTimeConsumptionCurve } from '@/services/realtime-data';
+import { message } from 'antd';
 
 export default () => {
   // ref
@@ -27,6 +29,28 @@ export default () => {
 
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
+
+  // 获取用电功率曲线
+  const handleGetPowerConsumptionCurve = async(yuncangIds: number[]) => {
+    try {
+      const res = await getRealTimeConsumptionCurve(yuncangIds);
+      return res.data;
+    }catch(err){
+      message.error(err,2);
+      return {}
+    }
+  };
+
+  // 获取发电功率曲线
+  const handleGetPowerGenerationCurve = async(yuncangIds: number[]) => {
+    try {
+      const res = await getRealTimeGenerationCurve(yuncangIds);
+      return res.data;
+    }catch(err){
+      message.error(err,2);
+      return {}
+    }
+  };
 
   // 根据宽度调整
   const handleOnResize = (offsetWidth: number) => {
@@ -94,10 +118,20 @@ export default () => {
             // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
             const res: API.PageResponseMessage<API.YuncangItem> = await getYuncangListInMonitorPage(params);
 
-            // 功率曲线
-            _.forEach(res.data.records, record => {
-              _.assign(record, { content: (<Device yuncang={record} />) });
-            });
+            if(res.success && res.data.records?.length  &&  res.data.records.length > 0) {
+              // 获取云仓id
+              const yuncangIds = res.data.records.map(item=>item.id);
+              const realTimeConsumptionCurve = await handleGetPowerConsumptionCurve(yuncangIds);
+              const realTimeGenerationCurve = await  handleGetPowerGenerationCurve(yuncangIds);
+
+              // 功率曲线
+              _.forEach(res.data.records, record => {
+                _.assign(record, { content: (<Device yuncang={record}
+                                                     realTimeGenerationCurve={realTimeGenerationCurve[record.id]}
+                                                     realTimeConsumptionCurve={realTimeConsumptionCurve[record.id]}
+                  />) });
+              });
+            }
 
             return {
               data: res.data.records,

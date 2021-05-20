@@ -1,15 +1,12 @@
 /**
  * @Author：zy
  * @Description：生成折线所需要的配置
- * @Data: 2021/4/225 22:26
+ * @Data: 2021/4/25 22:26
  */
 import _ from 'lodash';
 import { useModel } from 'umi';
 
-export const genOption = (data: {
-  date: string,
-  value: number
-}[]) => {
+export const genOption = (data: API.Point[]) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const styleConfig = useModel('styleConfig');
 
@@ -30,7 +27,7 @@ export const genOption = (data: {
         color: '#17dea6'
       },
       textStyle: {
-        color: styleConfig.textColor
+        color:styleConfig.textColor
       },
       left: 'center',
       top: 10,
@@ -58,7 +55,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: styleConfig.textColor
+            color:styleConfig.textColor
           }
         },
         type: 'category',
@@ -73,7 +70,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: styleConfig.textColor
+            color:styleConfig.textColor
           }
         },
         // 水平分割线
@@ -84,7 +81,7 @@ export const genOption = (data: {
             color: '#b3aaaa'
           }
         },
-        name: 'MW',
+        name: 'kW',
         type: 'value',
       }
     ],

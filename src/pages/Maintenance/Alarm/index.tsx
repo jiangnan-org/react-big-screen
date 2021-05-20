@@ -16,8 +16,6 @@ import actions from './redux';
 import styles from './index.less';
 import * as enumUtils from '@/utils/enumUtils';
 
-
-
 export default () => {
   /** 提交单表单引用 */
   const [handlingOrderForm] = Form.useForm();

@@ -1,6 +1,6 @@
 // https://umijs.org/config/
 import { defineConfig } from 'umi';
-// import { join } from 'path';
+import { join } from 'path';
 import defaultSettings from './defaultSettings';
 import routes from './routes';
 // import darkTheme from '@ant-design/dark-theme';
@@ -73,8 +73,8 @@ export default defineConfig({
     requestLibPath: "import { request } from 'umi'",
     // 或者使用在线的版本
     // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json",
-    schemaPath:"http://101.132.248.43:9001/v2/api-docs",
-    // schemaPath: join(__dirname, 'oneapi.json'),
+    // schemaPath:"http://101.132.248.43:9001/v2/api-docs",
+    schemaPath: join(__dirname, 'oneapi.json'),
     mock: true,
   },
   // https://github.com/ant-design/ant-design-pro/issues/8037
