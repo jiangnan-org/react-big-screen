@@ -8,6 +8,7 @@ import { IssuesCloseOutlined, FormOutlined, ExclamationCircleOutlined } from '@a
 import { Divider, Modal, message,Space, Form, Tag } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
+import {useParams} from 'umi';
 import {getAlarmProcessByAlarmRecordId, getAlarmList} from '@/services/alarm/bell';
 import HandlingOrderForm from './component/Form';
 import _ from 'lodash';
@@ -17,6 +18,11 @@ import * as enumUtils from '@/utils/enumUtils';
 
 
 export default () => {
+  // 获取请求参数
+  const pathParams: {
+    level: string
+  } = useParams();
+
   /** 表单引用 */
   const [form] = Form.useForm();
 
@@ -95,6 +101,9 @@ export default () => {
       ellipsis: true,
       width: 100,
       valueType: 'radioButton',
+      fieldProps:{
+        defaultValue:params.level
+      },
       valueEnum: enumUtils.AlarmLevelEnum,
       render: (level: any,record) =>(
         <Space>
@@ -220,6 +229,11 @@ export default () => {
           message.error('数据加载失败',2);
         }}
         request={async (params: API.PageParams = {}) => {
+          // 如果有路径参数
+          if(pathParams.level){
+            // @ts-ignore
+            _.assign(params,{level:enumUtils.AlarmLevelEnum[pathParams?.level]?.value});
+          }
           // 如果包含枚举类型
           if(params.hasOwnProperty('level')){
             // @ts-ignore

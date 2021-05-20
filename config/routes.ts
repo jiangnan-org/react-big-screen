@@ -52,7 +52,7 @@ export default [
     icon: 'tool',
     routes: [
       {
-        path: '/maintenance/alarm',
+        path: '/maintenance/alarm/:level',
         name: 'alarm',
         component: './Maintenance/Alarm',
       },
