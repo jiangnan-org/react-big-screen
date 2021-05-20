@@ -174,7 +174,7 @@ const Index: React.FC<PropField> = ({
         <ProForm.Group>
           <ProFormText
             name='longitude'
-            label='维度'
+            label='经度'
             width='sm'
             disabled={!editable}
             rules={[
@@ -185,7 +185,7 @@ const Index: React.FC<PropField> = ({
           />
           <ProFormText
             name='latitude'
-            label='经度'
+            label='纬度'
             width='sm'
             disabled={!editable}
             rules={[
