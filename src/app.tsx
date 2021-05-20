@@ -126,12 +126,11 @@ const codeMessage = {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
-  // 两者只会存在一个  response：接口没响应返回  data：接口响应成功返回
+  // 两者只会存在一个  response：接口没响应的返回  data：接口响应成功返回的业务数据
   const {response, data} = error;
 
   let errorText;
 
-  // 其他
   if (response && response.status) {
     console.log('errorHandler response ', response);
     errorText = codeMessage[response.status] || response.statusText;
@@ -144,7 +143,7 @@ const errorHandler = (error: ResponseError) => {
     });
   }
 
-  if (data) {
+  if (data && data.code) {
     console.log('errorHandler data ', data);
     errorText = data.msg;
     // token无效
