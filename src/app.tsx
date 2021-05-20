@@ -4,18 +4,18 @@ import {notification} from 'antd';
 import {history} from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import {getToken,currentUser as queryCurrentUser} from './services/auth/login';
+import {getToken, currentUser as queryCurrentUser, removeToken} from './services/auth/login';
 import {BookOutlined, LinkOutlined} from '@ant-design/icons';
-import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import type {Settings as LayoutSettings} from '@ant-design/pro-layout';
 import defaultSettings from '../config/defaultSettings';
 // @ts-ignore
-import type { Context, RequestOptionsInit } from 'umi';
-import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
-import type { ResponseError } from 'umi-request';
+import type {Context, RequestOptionsInit} from 'umi';
+import type {RequestConfig, RunTimeLayoutConfig} from 'umi';
+import type {ResponseError} from 'umi-request';
 
 /* 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
-  loading:<PageLoading />
+  loading: <PageLoading/>
 };
 
 /**
@@ -60,13 +60,13 @@ export async function getInitialState(): Promise<{             // Promise<定义
  * 覆盖默认内置布局 https://beta-pro.ant.design/docs/layout-cn
  *  https://umijs.org/zh-CN/plugins/plugin-layout
  */
-export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+export const layout: RunTimeLayoutConfig = ({initialState}) => {
   return {
-    rightContentRender: () => <RightContent />,          // 右上角
+    rightContentRender: () => <RightContent/>,          // 右上角
     disableContentMargin: false,
-    footerRender: () => <Footer />,                      // 自定义 footer
+    footerRender: () => <Footer/>,                      // 自定义 footer
     onPageChange: () => {                                // 路由发生变化
-      const { location } = history;
+      const {location} = history;
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== '/login') {
         history.push('/login');
@@ -74,7 +74,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     links: [
       <>
-        <LinkOutlined />
+        <LinkOutlined/>
         <span
           onClick={() => {
             window.open('/umi/plugin/openapi');
@@ -84,7 +84,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
         </span>
       </>,
       <>
-        <BookOutlined />
+        <BookOutlined/>
         <span
           onClick={() => {
             window.open('/~docs');
@@ -126,23 +126,34 @@ const codeMessage = {
  * @see https://beta-pro.ant.design/docs/request-cn
  */
 const errorHandler = (error: ResponseError) => {
-  const { response, data } = error;
-  console.log('请求错误',error);
+  // 两者只会存在一个  response：接口没响应返回  data：接口响应成功返回
+  const {response, data} = error;
 
-  // 如果有data，表示状态码是200 业务错误
-  if(data){
-    throw data.msg;
-  }
+  let errorText;
 
   // 其他
   if (response && response.status) {
-    const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
+    console.log('errorHandler response ', response);
+    errorText = codeMessage[response.status] || response.statusText;
+
+    const {status, url} = response;
 
     notification.error({
       message: `请求错误 ${status}: ${url}`,
       description: errorText,
     });
+  }
+
+  if (data) {
+    console.log('errorHandler data ', data);
+    errorText = data.msg;
+    // token无效
+    if (data.code === 401) {
+      // 移除token
+      removeToken();
+      // 跳转到登录页面
+      history.push('/login');
+    }
   }
 
   if (!response) {
@@ -152,13 +163,13 @@ const errorHandler = (error: ResponseError) => {
     });
   }
 
-  throw error;
+  throw errorText;
 };
 
 
 // 将接口的返回映射为统一的接口规范  该配置只是用于错误处理，不会影响最终传递给页面的数据格式 https://umijs.org/plugins/plugin-request
 const errorConfig = {
-  adaptor: (resData: any)  => {
+  adaptor: (resData: any) => {
     return {
       ...resData,
     };
@@ -168,8 +179,8 @@ const errorConfig = {
 // 日志输出
 const loggerMiddleware = async (ctx: Context, next: () => void) => {
   // 输出请求信息
-  const { req } = ctx;
-  console.log('requestConfig：',req.url,' ',req.options);
+  const {req} = ctx;
+  console.log('requestConfig：', req.url, ' ', req.options);
 
   await next();
 
@@ -179,20 +190,20 @@ const loggerMiddleware = async (ctx: Context, next: () => void) => {
   // 映射
   ctx.res = {
     success,
-    errorMessage: success? '' : ctx.res.errorMessage || ctx.res.msg,
+    errorMessage: success ? '' : ctx.res.errorMessage || ctx.res.msg,
     ...ctx.res
   };
 
   // 输出响应信息
-  console.log('response：',ctx.res);
+  console.log('response：', ctx.res);
 };
 
 // 新增自动添加AccessToken的请求前拦截器
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
-  const authHeader = { Authorization: getToken() };
+  const authHeader = {Authorization: getToken()};
   return {
     url: `${url}`,
-    options: { ...options, interceptors: true, headers: authHeader },
+    options: {...options, interceptors: true, headers: authHeader},
   };
 };
 
@@ -200,6 +211,6 @@ const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => {
 export const request: RequestConfig = {
   errorHandler,
   errorConfig,
-  middlewares:[loggerMiddleware],
+  middlewares: [loggerMiddleware],
   requestInterceptors: [authHeaderInterceptor],
 };

@@ -63,7 +63,7 @@ export const drawBoundary = (bmap: any,fillColor: string | undefined) => {
 export const genOption = (style: any,textColor: string,data: API.YuncangState[]) => {
   const res: any = [];
   _.forEach(data,item => {
-    res.push([item.latitude,item.longitude,item.state,item.yuncangId,item.name]);
+    res.push([item.longitude,item.latitude,item.state,item.yuncangId,item.name]);
   } );
 
 
@@ -81,7 +81,7 @@ export const genOption = (style: any,textColor: string,data: API.YuncangState[])
       trigger: 'item',
       formatter(params: { value: string[] }) {
         //  params是数组array里每个项
-        return `云仓名称:${params.value[4]}<br>经度：${params.value[1]}<br/>纬度：${params.value[0]}<br/>`;
+        return `云仓名称:${params.value[4]}<br>经度：${params.value[0]}<br/>纬度：${params.value[1]}<br/>`;
       },
     },
     visualMap: {

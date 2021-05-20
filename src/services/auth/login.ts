@@ -48,8 +48,7 @@ export const saveToken = (token : string) => {
 
 /** 获取token */
 export const getToken =  () => {
-  let token = localStorage.getItem('Authorization');
-  return token ? token : 'Bearer ';
+  return localStorage.getItem('Authorization');
 };
 
 /** 删除token */

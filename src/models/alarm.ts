@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import {getAlarmCount} from "@/services/home";
 import {message} from 'antd';
+import {getToken} from '@/services/auth/login';
 
 /**
  * @Author：zy
@@ -13,6 +14,10 @@ export default () => {
 
   // 刷新告警数目数据
   const refreshAlarmCountData = async () => {
+    // token无效
+    if(!getToken()){
+      return;
+    }
     try {
       // 登录
       const res: API.ResponseMessage<API.AlarmCount> = await getAlarmCount();

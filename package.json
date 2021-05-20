@@ -56,6 +56,7 @@
     "@umijs/plugin-openapi": "^1.0.1",
     "@umijs/route-utils": "^1.0.33",
     "antd": "^4.9.4",
+    "antd-img-crop": "^3.14.1",
     "classnames": "^2.2.6",
     "echarts": "^5.1.0",
     "echarts-for-react": "^3.0.1",

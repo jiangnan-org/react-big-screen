@@ -12,7 +12,7 @@ declare namespace API {
     /** 告警设置id */
     alarmId?: number;
     /** 报警时间 */
-    alarmTime?: any;
+    alarmTime?: string;
     /** 报警详情 */
     detail?: string;
     /** 报警级别 */
