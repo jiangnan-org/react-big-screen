@@ -32,8 +32,8 @@ export default () => {
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
 
-  /** 获取选中树节点 */
-  const {selectedKeys} = useModel('cloudRegister');
+  /** 获取选中地址 */
+  const {selectedAddress,setSelectedAddress,setSelectedKeys} = useModel('cloudRegister');
 
   /** table列定义 */
   const columns: ProColumns<API.YuncangItem>[] = [
@@ -155,8 +155,11 @@ export default () => {
 
   /** 选中节点发生改变 重新加载 */
   useEffect(() => {
+    if(selectedAddress){
+      console.log('选中',selectedAddress);
+    }
     actionRef.current?.reload();
-  }, [selectedKeys]);
+  }, [selectedAddress]);
 
   return (
     <React.Fragment>
@@ -168,6 +171,7 @@ export default () => {
         onRequestError={()=>{
           message.error('数据加载失败',2);
         }}
+        params={selectedAddress}
         request={async (params: API.PageParams = {}) => {
           // 如果包含枚举类型
           if(params.hasOwnProperty('state')){
@@ -190,6 +194,14 @@ export default () => {
         rowKey='id'
         search={{                // 配置列的搜索相关，false 为隐藏
           labelWidth: 'auto',
+          optionRender: (searchConfig, formProps, dom) => [
+            <Button key='cancel' title='取消左侧树节点选择' onClick={()=>{
+              setSelectedKeys([])
+              setSelectedAddress({});
+              actionRef.current?.reload();
+            }}>取消</Button>,
+            ...dom
+          ],
         }}
         dateFormatter='string'
         // headerTitle='用户信息'

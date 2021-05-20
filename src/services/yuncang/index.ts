@@ -127,3 +127,29 @@ export async function getYuncangList(params: API.PageParams, options?: { [key: s
     ...(options || {}),
   });
 }
+
+/** 获取完整树结构 GET /api/address/get */
+export async function getAddressTree(options ?: {[key: string]: any}) {
+  return request<API.ResponseMessage<API.AddressTreeItem[]>>('/yuncang/api/address/get', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...(options || {}),
+  });
+}
+
+/** 根据id获取树结构 GET /api/address/getbyid */
+export async function getAddressTreeById(id: number,options ?: {[key: string]: any}) {
+  return request<API.ResponseMessage<API.AddressTreeItem>>('/yuncang/api/address/getbyid', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+     id
+    },
+    ...(options || {}),
+  });
+}
+

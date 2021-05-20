@@ -8,5 +8,11 @@ import React,{ useState } from 'react';
 export default () => {
   // 设置选中的树节点
   const [selectedKeys,setSelectedKeys] = useState<React.Key[]>([]);
-  return { selectedKeys,setSelectedKeys };
+
+  // 设置选中的地址
+  const [selectedAddress,setSelectedAddress] = useState<{
+    province?:string,
+    city?:string
+  }>({});
+  return { selectedKeys,setSelectedKeys,selectedAddress,setSelectedAddress };
 };

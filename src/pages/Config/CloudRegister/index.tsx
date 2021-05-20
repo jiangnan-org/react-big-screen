@@ -13,7 +13,7 @@ export default ()=>{
     <React.Fragment>
       <div className={styles.cloudRegister}>
       <Row gutter={12}>
-        <Col lg={4} md={24}>
+        <Col lg={4} md={6} sm={24} xs={24}>
           <Card
             bordered={false}
             style={{
@@ -23,7 +23,7 @@ export default ()=>{
               <Tree />
           </Card>
         </Col>
-        <Col lg={20} md={24}>
+        <Col lg={20} md={18} sm={24} xs={24}>
            <Table />
         </Col>
       </Row>

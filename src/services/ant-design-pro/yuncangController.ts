@@ -45,7 +45,7 @@ export async function deleteByIdsUsingPOST1(
   });
 }
 
-/** 通过告警处理单id查询 GET /api/yuncang/get */
+/** 通过云仓id查询 GET /api/yuncang/get */
 export async function getYuncangUsingGET(
   params: {
     // query

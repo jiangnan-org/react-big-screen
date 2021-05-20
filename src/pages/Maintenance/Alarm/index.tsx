@@ -111,8 +111,14 @@ export default () => {
       filters: true,
       onFilter: true,
       ellipsis: true,
+      // 查询表单中的权重，权重大排序靠前
+      order: 2,
       width: 100,
       valueType: 'select',
+      // 表单查询时默认值
+      fieldProps:{
+        defaultValue:'UNHANDLED'
+      },
       valueEnum: enumUtils.AlarmRecordStateEnum,
     },
     {

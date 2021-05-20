@@ -2,80 +2,74 @@
  * 云仓树结构
  */
 import React,{useState,useEffect} from 'react';
-import { Tree } from 'antd';
+import { Tree,message } from 'antd';
 import styles from './index.less';
 import { useModel } from 'umi';
+import {getAddressTree} from '@/services/yuncang';
+import _ from 'lodash';
 
 interface DataNode {
   title: string;
+  levels: number,
   key: string;
   isLeaf?: boolean;
   children?: DataNode[];
 }
 
-const initTreeData: DataNode[] = [
-  {
-    title: '江苏省',
-    key: '0-0',
-    children: [
-      {
-        title: '无锡市',
-        key: '0-0-0',
-        children: [
-          { title: '滨湖区', key: '0-0-0-0' },
-          { title: '新吴区', key: '0-0-0-1' },
-          { title: '梁溪区', key: '0-0-0-2' },
-        ],
-      },
-      {
-        title: '苏州市',
-        key: '0-0-1',
-        children: [{ title: '姑苏区', key: '0-0-1-0' }],
-      },
-      {
-        title: '南京市',
-        key: '0-0-2',
-        children: [
-          { title: '玄武区', key: '0-0-2-0' },
-          { title: '江宁区', key: '0-0-2-1'},
-        ],
-      },
-    ],
-  },
-  {
-    title: '安徽省',
-    key: '0-1',
-    children: [
-      {
-        title: '合肥市',
-        key: '0-1-0',
-        children: [
-          { title: '肥西县', key: '0-1-0-0'},
-          { title: '肥东县', key: '0-1-0-1' },
-        ],
-      },
-    ],
-  },
-];
-
 export default () => {
 
   // 选中树节点
-  const {selectedKeys,setSelectedKeys} = useModel('cloudRegister');
+  const {selectedKeys,setSelectedKeys,setSelectedAddress} = useModel('cloudRegister');
 
   // 数据
-  const [data,setDate] = useState(initTreeData);
+  const [addressTree,setAddressTree] = useState<DataNode[]>([]);
 
+  // 获取树结构
+  const handleGetAddressTree = async ()=> {
+    try {
+      let res: API.ResponseMessage<API.AddressTreeItem[]> = await getAddressTree();
 
-  // 选择发生改变
-  const onSelect = (selectedKeysValue: React.Key[]) => {
-    setSelectedKeys(selectedKeysValue);
+      // 遍历树
+      const convert = (tree: API.AddressTreeItem) => {
+        // 如果有子节点
+        if(tree.children && tree.children.length > 0){
+            _.forEach(tree.children,item=>convert(item));
+        }
+        tree.title = tree.name;
+        tree.key = tree.id;
+      };
+
+      let data: API.AddressTreeItem[] = res.data;
+      _.forEach(data,item=>convert(item));
+      // @ts-ignore
+      setAddressTree(data);
+    }catch(err){
+      message.error(err, 2);
+    }
   };
 
   // 加载
   useEffect(()=>{
-    setDate(initTreeData);
+    handleGetAddressTree();
   },[]);
+
+
+  // @ts-ignore 选择发生改变
+  const onSelect = (selectedKeysValue: React.Key[],{node}) => {
+    // 省
+    if(node.levels === 0){
+      setSelectedAddress({
+        province:node.title
+      });
+    }
+    // 市
+    if(node.levels === 1){
+      setSelectedAddress({
+        city:node.title
+      });
+    }
+    setSelectedKeys(selectedKeysValue);
+  };
 
   return (
     <React.Fragment>
@@ -84,10 +78,11 @@ export default () => {
           className="draggable-tree"
           showLine={{showLeafIcon:false}}
           showIcon={false}
-          defaultExpandedKeys={['0-0-0','0-1-0']}
+          autoExpandParent={true}
           onSelect={onSelect}
           selectedKeys={selectedKeys}
-          treeData={data}
+          // @ts-ignore
+          treeData={addressTree}
         />
       </div>
     </React.Fragment>

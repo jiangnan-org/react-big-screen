@@ -2,638 +2,1091 @@
 /* eslint-disable */
 
 declare namespace API {
-  type AdvanceQueryConditionDTO = {
-    columnName?: string;
+  
+  type AdvanceQueryConditionDTO =  {
+    'columnName'
+    ?: string;
     /** 查询条件 */
-    condition?:
-      | 'EQ'
-      | 'NE'
-      | 'IN'
-      | 'NOT_IN'
-      | 'GT'
-      | 'GE'
-      | 'LE'
-      | 'LIKE'
-      | 'NOT_LIKE'
-      | 'LIKE_LEFT'
-      | 'LIKE_RIGHT'
-      | 'IS_NULL'
-      | 'IS_NOT_NULL'
-      | 'ORDER_BY_ASC'
-      | 'ORDER_BY_DESC'
-      | 'APPLY';
+    'condition'
+    ?: "EQ" | "NE" | "IN" | "NOT_IN" | "GT" | "GE" | "LE" | "LIKE" | "NOT_LIKE" | "LIKE_LEFT" | "LIKE_RIGHT" | "IS_NULL" | "IS_NOT_NULL" | "ORDER_BY_ASC" | "ORDER_BY_DESC" | "APPLY";
     /** 查询字段 */
-    field?: string;
+    'field'
+    ?: string;
     /** 查询值 */
-    value?: string;
-  };
+    'value'
+    ?: string;
+  }
 
-  type AlarmProcessAddDTO = {
+  type AlarmProcessAddDTO =  {
     /** 告警id */
-    alarmRecordId?: number;
+    'alarmRecordId'
+    ?: number;
     /** 问题描述 */
-    description?: string;
+    'description'
+    ?: string;
     /** 故障名称 */
-    name?: string;
+    'name'
+    ?: string;
     /** 故障现象 */
-    phenomenon?: string;
+    'phenomenon'
+    ?: string;
     /** 图片 */
-    pic?: string;
+    'pic'
+    ?: string;
     /** 处理方法 */
-    solveMethod?: string;
-  };
+    'solveMethod'
+    ?: string;
+  }
 
-  type AlarmSettingAddDTO = {
+  type AlarmSettingAddDTO =  {
     /** 联控设备 */
-    device?: string;
+    'device'
+    ?: string;
     /** 联控设备动作 */
-    deviceAct?: string;
+    'deviceAct'
+    ?: string;
     /** 报警级别,0提示，1次要，2重要，3严重 */
-    level?: 'NOTIFY' | 'SECONDARY' | 'IMPORTANT' | 'CRITICAL';
+    'level'
+    ?: "NOTIFY" | "SECONDARY" | "IMPORTANT" | "CRITICAL";
     /** 报警阈值 */
-    max?: number;
+    'max'
+    ?: number;
     /** 报警阈值 */
-    min?: number;
+    'min'
+    ?: number;
     /** 报警参数名称 */
-    name?: string;
+    'name'
+    ?: string;
     /** 0开启；1关闭 */
-    notifyState?: 'ENABLE' | 'DISABLE';
+    'notifyState'
+    ?: "ENABLE" | "DISABLE";
     /** 0控制设备，1微信通知，2短信通知，3邮件通知 */
-    notifyType?: 'CONTROLL' | 'WETCHAT' | 'SMS' | 'EMAIL';
+    'notifyType'
+    ?: "CONTROLL" | "WETCHAT" | "SMS" | "EMAIL";
     /** 关联用户 */
-    operatorId?: number;
+    'operatorId'
+    ?: number;
     /** 云仓编号 */
-    yuncangId?: number;
-  };
+    'yuncangId'
+    ?: number;
+  }
 
-  type AlarmSettingUpdateDTO = {
+  type AlarmSettingUpdateDTO =  {
     /** 联控设备 */
-    device?: string;
+    'device'
+    ?: string;
     /** 联控设备动作 */
-    deviceAct?: string;
+    'deviceAct'
+    ?: string;
     /** 告警设置id */
-    id?: number;
+    'id'
+    ?: number;
     /** 报警级别,0提示，1次要，2重要，3严重 */
-    level?: 'NOTIFY' | 'SECONDARY' | 'IMPORTANT' | 'CRITICAL';
+    'level'
+    ?: "NOTIFY" | "SECONDARY" | "IMPORTANT" | "CRITICAL";
     /** 报警阈值 */
-    max?: number;
+    'max'
+    ?: number;
     /** 报警阈值 */
-    min?: number;
+    'min'
+    ?: number;
     /** 0开启；1关闭 */
-    notifyState?: 'ENABLE' | 'DISABLE';
+    'notifyState'
+    ?: "ENABLE" | "DISABLE";
     /** 0控制设备，1微信通知，2短信通知，3邮件通知 */
-    notifyType?: 'CONTROLL' | 'WETCHAT' | 'SMS' | 'EMAIL';
+    'notifyType'
+    ?: "CONTROLL" | "WETCHAT" | "SMS" | "EMAIL";
     /** 关联用户 */
-    operatorId?: number;
-  };
+    'operatorId'
+    ?: number;
+  }
 
-  type AlertCountVO = {
-    criticalNum?: number;
-    importantNum?: number;
-    notifyNum?: number;
-    secondaryNum?: number;
-  };
+  type AlertCountVO =  {
+    'criticalNum'
+    ?: number;
+    'importantNum'
+    ?: number;
+    'notifyNum'
+    ?: number;
+    'secondaryNum'
+    ?: number;
+  }
 
-  type PageRequestDTO = {
+  type File =  {
+    'absolute'
+    ?: boolean;
+    'absoluteFile'
+    ?: File;
+    'absolutePath'
+    ?: string;
+    'canonicalFile'
+    ?: File;
+    'canonicalPath'
+    ?: string;
+    'directory'
+    ?: boolean;
+    'executable'
+    ?: boolean;
+    'file'
+    ?: boolean;
+    'freeSpace'
+    ?: number;
+    'hidden'
+    ?: boolean;
+    'lastModified'
+    ?: number;
+    'name'
+    ?: string;
+    'parent'
+    ?: string;
+    'parentFile'
+    ?: File;
+    'path'
+    ?: string;
+    'readable'
+    ?: boolean;
+    'totalSpace'
+    ?: number;
+    'usableSpace'
+    ?: number;
+    'writable'
+    ?: boolean;
+  }
+
+  type InputStream = true;
+
+  type PageRequestDTO =  {
     /** 查询全部 */
-    all?: boolean;
+    'all'
+    ?: boolean;
     /** 高级查询条件 */
-    conditions?: AdvanceQueryConditionDTO[];
+    'conditions'
+    ?: AdvanceQueryConditionDTO[];
     /** 页码 */
-    pageNum?: number;
+    'pageNum'
+    ?: number;
     /** 页大小 */
-    pageSize?: number;
-  };
+    'pageSize'
+    ?: number;
+  }
 
-  type PointVO = {
-    date?: string;
-    value?: number;
-  };
+  type PointVO =  {
+    'date'
+    ?: string;
+    'value'
+    ?: number;
+  }
 
-  type PowerConsumptionVO = {
-    capacity?: number;
-    count?: number;
-    dailyConsumption?: number;
-    monthConsumption?: number;
-    realTimePower?: number;
-    yearConsumption?: number;
-  };
+  type PowerConsumptionVO =  {
+    'capacity'
+    ?: number;
+    'count'
+    ?: number;
+    'dailyConsumption'
+    ?: number;
+    'monthConsumption'
+    ?: number;
+    'realTimePower'
+    ?: number;
+    'yearConsumption'
+    ?: number;
+  }
 
-  type PowerGenerationVO = {
-    capacity?: number;
-    count?: number;
-    dailyGeneration?: number;
-    monthGeneration?: number;
-    realTimePower?: number;
-    yearGeneration?: number;
-  };
+  type PowerGenerationVO =  {
+    'capacity'
+    ?: number;
+    'count'
+    ?: number;
+    'dailyGeneration'
+    ?: number;
+    'monthGeneration'
+    ?: number;
+    'realTimePower'
+    ?: number;
+    'yearGeneration'
+    ?: number;
+  }
 
-  type SysUserDTO = {
-    age?: number;
-    email?: string;
-    gender?: number;
-    id?: number;
-    loginName?: string;
-    password?: string;
-    phone?: string;
-    photo?: string;
-    realName?: string;
-    state?: 'ENABLE' | 'DISABLE';
+  type Resource =  {
+    'description'
+    ?: string;
+    'file'
+    ?: File;
+    'filename'
+    ?: string;
+    'inputStream'
+    ?: InputStream;
+    'open'
+    ?: boolean;
+    'readable'
+    ?: boolean;
+    'uri'
+    ?: URI;
+    'url'
+    ?: URL;
+  }
+
+  type SysUserDTO =  {
+    'age'
+    ?: number;
+    'email'
+    ?: string;
+    'gender'
+    ?: number;
+    'id'
+    ?: number;
+    'loginName'
+    ?: string;
+    'password'
+    ?: string;
+    'phone'
+    ?: string;
+    'photo'
+    ?: string;
+    'realName'
+    ?: string;
+    'state'
+    ?: "ENABLE" | "DISABLE";
     /** 用户类型：0超级管理；1普通用户 */
-    type?: 'USER' | 'ADMINISTRATOR';
-    wechat?: string;
-  };
+    'type'
+    ?: "USER" | "ADMINISTRATOR";
+    'wechat'
+    ?: string;
+  }
 
-  type SysUserPasswordUpdateDTO = {
+  type SysUserPasswordUpdateDTO =  {
     /** 新密码 */
-    newPassword?: string;
+    'newPassword'
+    ?: string;
     /** 原始密码 */
-    oldPassword?: string;
-  };
+    'oldPassword'
+    ?: string;
+  }
 
-  type SysUserSelfUpdateDTO = {
-    age?: number;
-    email?: string;
-    gender?: number;
-    id?: number;
-    loginName?: string;
-    phone?: string;
+  type SysUserSelfUpdateDTO =  {
+    'age'
+    ?: number;
+    'email'
+    ?: string;
+    'gender'
+    ?: number;
+    'id'
+    ?: number;
+    'loginName'
+    ?: string;
+    'phone'
+    ?: string;
     /** 用户头像 */
-    photo?: string;
-    realName?: string;
-    wechat?: string;
-  };
+    'photo'
+    ?: string;
+    'realName'
+    ?: string;
+    'wechat'
+    ?: string;
+  }
 
-  type YuncangAddDTO = {
+  type URI =  {
+    'absolute'
+    ?: boolean;
+    'authority'
+    ?: string;
+    'fragment'
+    ?: string;
+    'host'
+    ?: string;
+    'opaque'
+    ?: boolean;
+    'path'
+    ?: string;
+    'port'
+    ?: number;
+    'query'
+    ?: string;
+    'rawAuthority'
+    ?: string;
+    'rawFragment'
+    ?: string;
+    'rawPath'
+    ?: string;
+    'rawQuery'
+    ?: string;
+    'rawSchemeSpecificPart'
+    ?: string;
+    'rawUserInfo'
+    ?: string;
+    'scheme'
+    ?: string;
+    'schemeSpecificPart'
+    ?: string;
+    'userInfo'
+    ?: string;
+  }
+
+  type URL =  {
+    'authority'
+    ?: string;
+    'content'
+    ?: Record<string, any>;
+    'defaultPort'
+    ?: number;
+    'deserializedFields'
+    ?: URLStreamHandler;
+    'file'
+    ?: string;
+    'host'
+    ?: string;
+    'path'
+    ?: string;
+    'port'
+    ?: number;
+    'protocol'
+    ?: string;
+    'query'
+    ?: string;
+    'ref'
+    ?: string;
+    'serializedHashCode'
+    ?: number;
+    'userInfo'
+    ?: string;
+  }
+
+  type URLStreamHandler = true;
+
+  type YuncangAddDTO =  {
     /** 电池数量 */
-    batteryNum?: number;
+    'batteryNum'
+    ?: number;
     /** 电池容量 */
-    batterySize?: number;
+    'batterySize'
+    ?: number;
     /** 电池类型 */
-    batteryType?: number;
+    'batteryType'
+    ?: number;
     /** 摄像头名称 */
-    cameraName?: string;
+    'cameraName'
+    ?: string;
     /** 摄像头SN */
-    cameraSn?: string;
+    'cameraSn'
+    ?: string;
     /** 光伏容量 */
-    capacity?: number;
+    'capacity'
+    ?: number;
     /** 城市 */
-    city?: string;
+    'city'
+    ?: string;
     /** 采集器SN */
-    collectorSn?: string;
+    'collectorSn'
+    ?: string;
     /** 逆变一体机 */
-    converter?: string;
+    'converter'
+    ?: string;
     /** 纬度 */
-    latitude?: number;
+    'latitude'
+    ?: number;
     /** 经度 */
-    longitude?: number;
+    'longitude'
+    ?: number;
     /** 主要设备 */
-    mainDevice?: string;
+    'mainDevice'
+    ?: string;
     /** 运行模式 */
-    mode?: 'LEASE' | 'SELF_SUSTAINING';
+    'mode'
+    ?: "LEASE" | "SELF_SUSTAINING";
     /** 备注 */
-    note?: string;
+    'note'
+    ?: string;
     /** 系统额定功率 */
-    power?: number;
+    'power'
+    ?: number;
     /** 并网端功率 */
-    powerGrid?: number;
+    'powerGrid'
+    ?: number;
     /** 离网端功率 */
-    powerIsolated?: number;
+    'powerIsolated'
+    ?: number;
     /** 省份 */
-    province?: string;
+    'province'
+    ?: string;
     /** 传感器数量 */
-    sensorNum?: number;
+    'sensorNum'
+    ?: number;
     /** 规格尺寸 */
-    size?: number;
+    'size'
+    ?: number;
     /** 水箱容量 */
-    tankCapacity?: number;
+    'tankCapacity'
+    ?: number;
     /** 视频播放地址 */
-    videoAddress?: string;
+    'videoAddress'
+    ?: string;
     /** 系统电压 */
-    voltage?: number;
+    'voltage'
+    ?: number;
     /** 云仓名称 */
-    yuncangName?: string;
-  };
+    'yuncangName'
+    ?: string;
+  }
 
-  type YuncangStateVO = {
-    latitude?: number;
-    longitude?: number;
-    name?: string;
-    state?: 'RUNNING' | 'ALARMING' | 'STOPPING';
-    yuncangId?: number;
-  };
+  type YuncangStateVO =  {
+    'latitude'
+    ?: number;
+    'longitude'
+    ?: number;
+    'name'
+    ?: string;
+    'state'
+    ?: "RUNNING" | "ALARMING" | "STOPPING";
+    'yuncangId'
+    ?: number;
+  }
 
-  type YuncangUpdateDTO = {
+  type YuncangUpdateDTO =  {
     /** 电池数量 */
-    batteryNum?: number;
+    'batteryNum'
+    ?: number;
     /** 电池容量 */
-    batterySize?: number;
+    'batterySize'
+    ?: number;
     /** 电池类型 */
-    batteryType?: number;
+    'batteryType'
+    ?: number;
     /** 摄像头名称 */
-    cameraName?: string;
+    'cameraName'
+    ?: string;
     /** 摄像头SN */
-    cameraSn?: string;
+    'cameraSn'
+    ?: string;
     /** 光伏容量 */
-    capacity?: number;
+    'capacity'
+    ?: number;
     /** 城市 */
-    city?: string;
+    'city'
+    ?: string;
     /** 逆变一体机 */
-    converter?: string;
+    'converter'
+    ?: string;
     /** 云仓id */
-    id?: number;
+    'id'
+    ?: number;
     /** 纬度 */
-    latitude?: number;
+    'latitude'
+    ?: number;
     /** 经度 */
-    longitude?: number;
+    'longitude'
+    ?: number;
     /** 主要设备 */
-    mainDevice?: string;
+    'mainDevice'
+    ?: string;
     /** 运行模式 */
-    mode?: 'LEASE' | 'SELF_SUSTAINING';
+    'mode'
+    ?: "LEASE" | "SELF_SUSTAINING";
     /** 备注 */
-    note?: string;
+    'note'
+    ?: string;
     /** 系统额定功率 */
-    power?: number;
+    'power'
+    ?: number;
     /** 并网端功率 */
-    powerGrid?: number;
+    'powerGrid'
+    ?: number;
     /** 离网端功率 */
-    powerIsolated?: number;
+    'powerIsolated'
+    ?: number;
     /** 省份 */
-    province?: string;
+    'province'
+    ?: string;
     /** 传感器数量 */
-    sensorNum?: number;
+    'sensorNum'
+    ?: number;
     /** 规格尺寸 */
-    size?: number;
+    'size'
+    ?: number;
     /** 水箱容量 */
-    tankCapacity?: number;
+    'tankCapacity'
+    ?: number;
     /** 视频播放地址 */
-    videoAddress?: string;
+    'videoAddress'
+    ?: string;
     /** 系统电压 */
-    voltage?: number;
+    'voltage'
+    ?: number;
     /** 云仓名称 */
-    yuncangName?: string;
-  };
+    'yuncangName'
+    ?: string;
+  }
 
-  type AlarmProcessList_ = {
-    alarmRecordId?: number;
+  type AlarmProcessList_ =  {
+    'alarmRecordId'
+    ?: number;
     /** 问题描述 */
-    description?: string;
-    id?: number;
+    'description'
+    ?: string;
+    'id'
+    ?: number;
     /** 故障名称 */
-    name?: string;
+    'name'
+    ?: string;
     /** 故障现象 */
-    phenomenon?: string;
+    'phenomenon'
+    ?: string;
     /** 图片 */
-    pic?: string;
+    'pic'
+    ?: string;
     /** 处理方法 */
-    solveMethod?: string;
-  };
+    'solveMethod'
+    ?: string;
+  }
 
-  type AlarmRecord_ = {
+  type AlarmRecord_ =  {
     /** 对应告警设置编号 */
-    alarmId?: number;
+    'alarmId'
+    ?: number;
     /** 报警时间 */
-    alarmTime?: string;
+    'alarmTime'
+    ?: string;
     /** 采集器SN */
-    collectorSn?: string;
+    'collectorSn'
+    ?: string;
     /** 报警详情 */
-    details?: string;
-    id?: number;
+    'details'
+    ?: string;
+    'id'
+    ?: number;
     /** 报警级别,0提示，1次要，2重要，3严重 */
-    level?: 'NOTIFY' | 'SECONDARY' | 'IMPORTANT' | 'CRITICAL';
+    'level'
+    ?: "NOTIFY" | "SECONDARY" | "IMPORTANT" | "CRITICAL";
     /** 报警名称 */
-    name?: string;
+    'name'
+    ?: string;
     /** 已处理；处理单 */
-    state?: 'HANDLED' | 'UNHANDLED';
+    'state'
+    ?: "HANDLED" | "UNHANDLED";
     /** 实际值 */
-    value?: number;
-    yuncangId?: number;
+    'value'
+    ?: number;
+    'yuncangId'
+    ?: number;
     /** 云仓名称 */
-    yuncangName?: string;
-  };
+    'yuncangName'
+    ?: string;
+  }
 
-  type Alarm_ = {
+  type Alarm_ =  {
     /** 联控设备 */
-    device?: string;
+    'device'
+    ?: string;
     /** 联控设备动作 */
-    deviceAct?: string;
-    id?: number;
+    'deviceAct'
+    ?: string;
+    'id'
+    ?: number;
     /** 报警级别,0提示，1次要，2重要，3严重 */
-    level?: 'NOTIFY' | 'SECONDARY' | 'IMPORTANT' | 'CRITICAL';
+    'level'
+    ?: "NOTIFY" | "SECONDARY" | "IMPORTANT" | "CRITICAL";
     /** 报警阈值 */
-    max?: number;
+    'max'
+    ?: number;
     /** 报警阈值 */
-    min?: number;
+    'min'
+    ?: number;
     /** 报警参数名称 */
-    name?: string;
+    'name'
+    ?: string;
     /** 0开启；1关闭 */
-    notifyState?: 'ENABLE' | 'DISABLE';
+    'notifyState'
+    ?: "ENABLE" | "DISABLE";
     /** 0控制设备，1微信通知，2短信通知，3邮件通知 */
-    notifyType?: 'CONTROLL' | 'WETCHAT' | 'SMS' | 'EMAIL';
+    'notifyType'
+    ?: "CONTROLL" | "WETCHAT" | "SMS" | "EMAIL";
     /** 关联用户 */
-    operatorId?: number;
+    'operatorId'
+    ?: number;
     /** 云仓编号 */
-    yuncangId?: number;
-  };
+    'yuncangId'
+    ?: number;
+  }
 
-  type Data_ = {
-    batteryCurrent?: number;
-    batteryPower?: number;
-    batterySoc?: number;
+  type Data_ =  {
+    'batteryCurrent'
+    ?: number;
+    'batteryPower'
+    ?: number;
+    'batterySoc'
+    ?: number;
     /** 电池温度 */
-    batteryTemp?: number;
-    batteryVoltage?: number;
-    createTime?: string;
+    'batteryTemp'
+    ?: number;
+    'batteryVoltage'
+    ?: number;
+    'createTime'
+    ?: string;
     /** 电流 */
-    current?: number;
+    'current'
+    ?: number;
     /** 日用电量 */
-    dailyConsumption?: number;
+    'dailyConsumption'
+    ?: number;
     /** 日发电量 */
-    dailyGeneration?: number;
+    'dailyGeneration'
+    ?: number;
     /** 门开关状态：0关，1开 */
-    doorState?: number;
+    'doorState'
+    ?: number;
     /** 湿度 */
-    humidity?: number;
-    id?: number;
+    'humidity'
+    ?: number;
+    'id'
+    ?: number;
     /** 纬度 */
-    latitude?: number;
+    'latitude'
+    ?: number;
     /** 经度 */
-    longitude?: number;
+    'longitude'
+    ?: number;
     /** 备注 */
-    note?: string;
+    'note'
+    ?: string;
     /** 光伏发电实时功率 */
-    pvPower?: number;
+    'pvPower'
+    ?: number;
     /** 云仓状态：0运行，1报警，2停止 */
-    systemState?: number;
-    temperature?: number;
+    'systemState'
+    ?: number;
+    'temperature'
+    ?: number;
     /** 实时用电功率 */
-    usedPower?: number;
+    'usedPower'
+    ?: number;
     /** 电压 */
-    voltage?: number;
-    yuncangId?: number;
-  };
+    'voltage'
+    ?: number;
+    'yuncangId'
+    ?: number;
+  }
 
-  type IPageAlarmRecord_ = {
-    current?: number;
-    hitCount?: boolean;
-    pages?: number;
-    records?: AlarmRecord_[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
+  type IPageAlarmRecord_ =  {
+    'current'
+    ?: number;
+    'hitCount'
+    ?: boolean;
+    'pages'
+    ?: number;
+    'records'
+    ?: AlarmRecord_[];
+    'searchCount'
+    ?: boolean;
+    'size'
+    ?: number;
+    'total'
+    ?: number;
+  }
 
-  type IPageAlarm_ = {
-    current?: number;
-    hitCount?: boolean;
-    pages?: number;
-    records?: Alarm_[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
+  type IPageAlarm_ =  {
+    'current'
+    ?: number;
+    'hitCount'
+    ?: boolean;
+    'pages'
+    ?: number;
+    'records'
+    ?: Alarm_[];
+    'searchCount'
+    ?: boolean;
+    'size'
+    ?: number;
+    'total'
+    ?: number;
+  }
 
-  type IPageSysUser_ = {
-    current?: number;
-    hitCount?: boolean;
-    pages?: number;
-    records?: SysUser_[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
+  type IPageSysUser_ =  {
+    'current'
+    ?: number;
+    'hitCount'
+    ?: boolean;
+    'pages'
+    ?: number;
+    'records'
+    ?: SysUser_[];
+    'searchCount'
+    ?: boolean;
+    'size'
+    ?: number;
+    'total'
+    ?: number;
+  }
 
-  type IPageYuncang_ = {
-    current?: number;
-    hitCount?: boolean;
-    pages?: number;
-    records?: Yuncang_[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
+  type IPageYuncang_ =  {
+    'current'
+    ?: number;
+    'hitCount'
+    ?: boolean;
+    'pages'
+    ?: number;
+    'records'
+    ?: Yuncang_[];
+    'searchCount'
+    ?: boolean;
+    'size'
+    ?: number;
+    'total'
+    ?: number;
+  }
 
-  type InspectionPlan_ = {
+  type InspectionPlan_ =  {
     /** 协作人id */
-    corPersonId?: number;
+    'corPersonId'
+    ?: number;
     /** 首次工作日期 */
-    firstDate?: string;
+    'firstDate'
+    ?: string;
     /** 频次 */
-    frequency?: number;
-    id?: number;
+    'frequency'
+    ?: number;
+    'id'
+    ?: number;
     /** 是否停用 */
-    isOff?: number;
+    'isOff'
+    ?: number;
     /** 负责人id */
-    mainPersonId?: number;
+    'mainPersonId'
+    ?: number;
     /** 下次工作日期 */
-    nextDate?: string;
+    'nextDate'
+    ?: string;
     /** 备注 */
-    note?: string;
+    'note'
+    ?: string;
     /** 类型 */
-    type?: string;
-  };
+    'type'
+    ?: string;
+  }
 
-  type InspectionProject_ = {
-    description?: string;
-    id?: number;
-    inspectionRecordId?: number;
-    isFinished?: number;
-    name?: string;
-    sortNum?: number;
-  };
+  type InspectionProject_ =  {
+    'description'
+    ?: string;
+    'id'
+    ?: number;
+    'inspectionRecordId'
+    ?: number;
+    'isFinished'
+    ?: number;
+    'name'
+    ?: string;
+    'sortNum'
+    ?: number;
+  }
 
-  type InspectionRecord_ = {
-    corPersonId?: number;
-    endTime?: string;
-    id?: number;
-    isFinished?: number;
-    mainPersonId?: number;
-    note?: string;
-    startTime?: string;
-    type?: string;
-  };
+  type InspectionRecord_ =  {
+    'corPersonId'
+    ?: number;
+    'endTime'
+    ?: string;
+    'id'
+    ?: number;
+    'isFinished'
+    ?: number;
+    'mainPersonId'
+    ?: number;
+    'note'
+    ?: string;
+    'startTime'
+    ?: string;
+    'type'
+    ?: string;
+  }
 
-  type SysUser_ = {
-    age?: number;
-    createTime?: string;
-    email?: string;
-    gender?: number;
-    id?: number;
-    loginName?: string;
-    password?: string;
-    phone?: string;
-    photo?: string;
-    realName?: string;
-    state?: 'ENABLE' | 'DISABLE';
+  type SysUser_ =  {
+    'age'
+    ?: number;
+    'createTime'
+    ?: string;
+    'email'
+    ?: string;
+    'gender'
+    ?: number;
+    'id'
+    ?: number;
+    'loginName'
+    ?: string;
+    'password'
+    ?: string;
+    'phone'
+    ?: string;
+    'photo'
+    ?: string;
+    'realName'
+    ?: string;
+    'state'
+    ?: "ENABLE" | "DISABLE";
     /** 用户类型：0超级管理；1普通用户 */
-    type?: 'USER' | 'ADMINISTRATOR';
-    updateTime?: string;
-    wechat?: string;
-  };
+    'type'
+    ?: "USER" | "ADMINISTRATOR";
+    'updateTime'
+    ?: string;
+    'wechat'
+    ?: string;
+  }
 
-  type UserResponseEntityAlarmProcessList_ = {
-    code?: number;
-    data?: AlarmProcessList_;
-    msg?: string;
-  };
+  type UserResponseEntityAlarmProcessList_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: AlarmProcessList_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityAlarm_ = {
-    code?: number;
-    data?: Alarm_;
-    msg?: string;
-  };
+  type UserResponseEntityAlarm_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: Alarm_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityAlertCountVO_ = {
-    code?: number;
-    data?: AlertCountVO;
-    msg?: string;
-  };
+  type UserResponseEntityAlertCountVO_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: AlertCountVO;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityData_ = {
-    code?: number;
-    data?: Data_;
-    msg?: string;
-  };
+  type UserResponseEntityData_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: Data_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityIPageAlarmRecord_ = {
-    code?: number;
-    data?: IPageAlarmRecord_;
-    msg?: string;
-  };
+  type UserResponseEntityIPageAlarmRecord_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: IPageAlarmRecord_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityIPageAlarm_ = {
-    code?: number;
-    data?: IPageAlarm_;
-    msg?: string;
-  };
+  type UserResponseEntityIPageAlarm_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: IPageAlarm_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityIPageSysUser_ = {
-    code?: number;
-    data?: IPageSysUser_;
-    msg?: string;
-  };
+  type UserResponseEntityIPageSysUser_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: IPageSysUser_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityIPageYuncang_ = {
-    code?: number;
-    data?: IPageYuncang_;
-    msg?: string;
-  };
+  type UserResponseEntityIPageYuncang_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: IPageYuncang_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityInspectionPlan_ = {
-    code?: number;
-    data?: InspectionPlan_;
-    msg?: string;
-  };
+  type UserResponseEntityInspectionPlan_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: InspectionPlan_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityListPointVO_ = {
-    code?: number;
-    data?: PointVO[];
-    msg?: string;
-  };
+  type UserResponseEntityListPointVO_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: PointVO[];
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityListYuncangStateVO_ = {
-    code?: number;
-    data?: YuncangStateVO[];
-    msg?: string;
-  };
+  type UserResponseEntityListYuncangStateVO_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: YuncangStateVO[];
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityPowerConsumptionVO_ = {
-    code?: number;
-    data?: PowerConsumptionVO;
-    msg?: string;
-  };
+  type UserResponseEntityPowerConsumptionVO_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: PowerConsumptionVO;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityPowerGenerationVO_ = {
-    code?: number;
-    data?: PowerGenerationVO;
-    msg?: string;
-  };
+  type UserResponseEntityPowerGenerationVO_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: PowerGenerationVO;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntitySysUser_ = {
-    code?: number;
-    data?: SysUser_;
-    msg?: string;
-  };
+  type UserResponseEntitySysUser_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: SysUser_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityYuncang_ = {
-    code?: number;
-    data?: Yuncang_;
-    msg?: string;
-  };
+  type UserResponseEntityYuncang_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: Yuncang_;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityBoolean_ = {
-    code?: number;
-    data?: boolean;
-    msg?: string;
-  };
+  type UserResponseEntityBoolean_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: boolean;
+    'msg'
+    ?: string;
+  }
 
-  type UserResponseEntityString_ = {
-    code?: number;
-    data?: string;
-    msg?: string;
-  };
+  type UserResponseEntityString_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: string;
+    'msg'
+    ?: string;
+  }
 
-  type Yuncang_ = {
+  type Yuncang_ =  {
     /** 电池数量 */
-    batteryNum?: number;
+    'batteryNum'
+    ?: number;
     /** 电池容量 */
-    batterySize?: number;
+    'batterySize'
+    ?: number;
     /** 电池类型 */
-    batteryType?: number;
+    'batteryType'
+    ?: number;
     /** 摄像头名称 */
-    cameraName?: string;
+    'cameraName'
+    ?: string;
     /** 摄像头SN */
-    cameraSn?: string;
+    'cameraSn'
+    ?: string;
     /** 光伏容量 */
-    capacity?: number;
+    'capacity'
+    ?: number;
     /** 城市 */
-    city?: string;
+    'city'
+    ?: string;
     /** 采集器SN */
-    collectorSn?: string;
+    'collectorSn'
+    ?: string;
     /** 逆变一体机 */
-    converter?: string;
-    createTime?: string;
-    id?: number;
-    installTime?: string;
+    'converter'
+    ?: string;
+    'createTime'
+    ?: string;
+    'id'
+    ?: number;
+    'installTime'
+    ?: string;
     /** 纬度 */
-    latitude?: number;
+    'latitude'
+    ?: number;
     /** 经度 */
-    longitude?: number;
+    'longitude'
+    ?: number;
     /** 主要设备 */
-    mainDevice?: string;
+    'mainDevice'
+    ?: string;
     /** 运行模式 */
-    mode?: 'LEASE' | 'SELF_SUSTAINING';
+    'mode'
+    ?: "LEASE" | "SELF_SUSTAINING";
     /** 备注 */
-    note?: string;
+    'note'
+    ?: string;
     /** 系统额定功率 */
-    power?: number;
+    'power'
+    ?: number;
     /** 并网端功率 */
-    powerGrid?: number;
+    'powerGrid'
+    ?: number;
     /** 离网端功率 */
-    powerIsolated?: number;
+    'powerIsolated'
+    ?: number;
     /** 省份 */
-    province?: string;
+    'province'
+    ?: string;
     /** 传感器数量 */
-    sensorNum?: number;
+    'sensorNum'
+    ?: number;
     /** 规格尺寸 */
-    size?: number;
+    'size'
+    ?: number;
     /** 0运行,1报警,2停止 */
-    state?: 'RUNNING' | 'ALARMING' | 'STOPPING';
+    'state'
+    ?: "RUNNING" | "ALARMING" | "STOPPING";
     /** 水箱容量 */
-    tankCapacity?: number;
-    updateTime?: string;
+    'tankCapacity'
+    ?: number;
+    'updateTime'
+    ?: string;
     /** 视频播放地址 */
-    videoAddress?: string;
+    'videoAddress'
+    ?: string;
     /** 系统电压 */
-    voltage?: number;
+    'voltage'
+    ?: number;
     /** 云仓名称 */
-    yuncangName?: string;
-  };
+    'yuncangName'
+    ?: string;
+  }
 
-  type _ = {
+  type _ =  {
     /** 密码 */
-    password: string;
+    'password'
+    : string;
     /** 用户名 */
-    username: string;
-  };
+    'username'
+    : string;
+  }
+
+  type 2 =  {
+    'children'
+    ?: 2[];
+    'id'
+    ?: number;
+    'levels'
+    ?: number;
+    'name'
+    ?: string;
+    'parentId'
+    ?: number;
+  }
+
 }

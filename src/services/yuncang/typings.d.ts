@@ -69,7 +69,21 @@ declare namespace API {
     note?: string;
 
     /** 0运行,1报警,2停止 */
-    state?: number;
-
+    state?: string;
   };
+
+  type AddressTreeItem = {
+    /**  节点id */
+    id: number,
+    key?: number,
+    /*  所属层级 0：省  1：市 2：县 */
+    levels: number,
+    /*  名称 */
+    name: string,
+    title?: string,
+    /** 父节点id */
+    parentId: number,
+    /** 子节点 */
+    children?:AddressTreeItem[],
+  }
 }
