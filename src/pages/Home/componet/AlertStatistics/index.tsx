@@ -30,7 +30,7 @@ export default () => {
             >
               <AlertOutlined />
             </Badge>
-            <Tag><Link to={`/maintenance/alarm/CRITICAL`}>{enumUtils.AlarmLevelEnum.CRITICAL.text}</Link></Tag>
+            <Tag><Link to={`/maintenance/alarm?level=CRITICAL`}>{enumUtils.AlarmLevelEnum.CRITICAL.text}</Link></Tag>
           </Col>
 
           <Col lg={6} md={6} sm={12} xs={12}>
@@ -44,7 +44,7 @@ export default () => {
             >
               <WarningOutlined />
             </Badge>
-            <Tag><Link to={`/maintenance/alarm/IMPORTANT`}>{enumUtils.AlarmLevelEnum.IMPORTANT.text}</Link></Tag>
+            <Tag><Link to={`/maintenance/alarm?level=IMPORTANT`}>{enumUtils.AlarmLevelEnum.IMPORTANT.text}</Link></Tag>
           </Col>
 
           <Col lg={6} md={6} sm={12} xs={12}>
@@ -58,7 +58,7 @@ export default () => {
             >
               < InfoOutlined/>
             </Badge>
-            <Tag><Link to={`/maintenance/alarm/SECONDARY`}>{enumUtils.AlarmLevelEnum.SECONDARY.text}</Link></Tag>
+            <Tag><Link to={`/maintenance/alarm?level=SECONDARY`}>{enumUtils.AlarmLevelEnum.SECONDARY.text}</Link></Tag>
           </Col>
 
           <Col lg={6} md={6} sm={12} xs={12}>
@@ -72,7 +72,7 @@ export default () => {
             >
               < CommentOutlined />
             </Badge>
-            <Tag><Link to={`/maintenance/alarm/NOTIFY`}>{enumUtils.AlarmLevelEnum.NOTIFY.text}</Link></Tag>
+            <Tag><Link to={`/maintenance/alarm?level=NOTIFY`}>{enumUtils.AlarmLevelEnum.NOTIFY.text}</Link></Tag>
           </Col>
         </Row>
       </div>

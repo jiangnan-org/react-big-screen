@@ -25,6 +25,8 @@ declare namespace API {
     value?: number;
     /** 云仓编号 */
     yuncangId?: number;
+    /** 云仓名称 */
+    yuncangName?: string
 
   };
 

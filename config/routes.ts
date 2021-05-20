@@ -52,7 +52,7 @@ export default [
     icon: 'tool',
     routes: [
       {
-        path: '/maintenance/alarm/:level',
+        path: '/maintenance/alarm',
         name: 'alarm',
         component: './Maintenance/Alarm',
       },
@@ -89,13 +89,13 @@ export default [
     ]
   },
   // // 运营
-  // {
-  //   path: '/operation',
-  //   name: 'operation',
-  //   icon: 'appstore',
-  //   component: './Operation',
-  //   hideInMenu: true,
-  // },
+  {
+    path: '/operation',
+    name: 'operation',
+    icon: 'appstore',
+    component: './Operation',
+    hideInMenu: true,
+  },
  // 报表
   {
     path: '/report',

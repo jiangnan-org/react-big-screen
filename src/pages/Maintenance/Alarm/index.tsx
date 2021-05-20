@@ -3,12 +3,12 @@
  * @Description：告警页面
  * @Data: 2021/4/9 17:34
  */
-import React, { useRef, useState } from 'react';
+import React, {  useRef, useState } from 'react';
 import { IssuesCloseOutlined, FormOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Divider, Modal, message,Space, Form, Tag } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import {useParams} from 'umi';
+import {history} from 'umi';
 import {getAlarmProcessByAlarmRecordId, getAlarmList} from '@/services/alarm/bell';
 import HandlingOrderForm from './component/Form';
 import _ from 'lodash';
@@ -17,14 +17,10 @@ import styles from './index.less';
 import * as enumUtils from '@/utils/enumUtils';
 
 
-export default () => {
-  // 获取请求参数
-  const pathParams: {
-    level: string
-  } = useParams();
 
-  /** 表单引用 */
-  const [form] = Form.useForm();
+export default () => {
+  /** 提交单表单引用 */
+  const [handlingOrderForm] = Form.useForm();
 
   /** 表单是否可编辑 */
   const [editable,setEditable] = useState<boolean>(true);
@@ -45,7 +41,7 @@ export default () => {
   const handleGetAlarmProcess = async (id: number) => {
     try {
       const res: API.ResponseMessage<API.AlarmProcessItem> = await getAlarmProcessByAlarmRecordId(id);
-      form.setFieldsValue(res.data);
+      handlingOrderForm.setFieldsValue(res.data);
       setPicture(res.data.pic || '');
     } catch (error) {
       message.error(error, 2);
@@ -99,13 +95,11 @@ export default () => {
       dataIndex: 'level',
       align: 'center',
       ellipsis: true,
+      order: 1,
       width: 100,
       valueType: 'radioButton',
-      fieldProps:{
-        defaultValue:params.level
-      },
       valueEnum: enumUtils.AlarmLevelEnum,
-      render: (level: any,record) =>(
+      render: (_: any,record) =>(
         <Space>
           <Tag color={enumUtils.AlarmLevelEnum[record.level as string].color } key={enumUtils.AlarmLevelEnum[record.level as string].text}>
             {enumUtils.AlarmLevelEnum[record.level as string].text}
@@ -124,10 +118,6 @@ export default () => {
       order: 2,
       width: 100,
       valueType: 'select',
-      // 表单查询时默认值
-      fieldProps:{
-        defaultValue:'UNHANDLED'
-      },
       valueEnum: enumUtils.AlarmRecordStateEnum,
     },
     {
@@ -194,7 +184,7 @@ export default () => {
                 setEditable(true);
                 setPicture('');
                 // 清空字段
-                form.resetFields();
+                handlingOrderForm.resetFields();
               }
               setId(record.id || -1);
               setVisible(true);
@@ -225,17 +215,18 @@ export default () => {
         className={styles.alarmTable}
         columns={columns}
         actionRef={actionRef}
+        form={{
+          // 初始值
+          initialValues:{
+            level: history.location.query?.level as string || undefined,
+            state: 'UNHANDLED',
+          },
+        }}
         onRequestError={()=>{
           message.error('数据加载失败',2);
         }}
         request={async (params: API.PageParams = {}) => {
-          // 如果有路径参数
-          if(pathParams.level){
-            // @ts-ignore
-            _.assign(params,{level:enumUtils.AlarmLevelEnum[pathParams?.level]?.value});
-          }
-          // 如果包含枚举类型
-          if(params.hasOwnProperty('level')){
+          if(params.hasOwnProperty('level')){   // 如果包含枚举类型
             // @ts-ignore
             _.assign(params,{level:enumUtils.AlarmLevelEnum[params?.level]?.value});
           }
@@ -266,7 +257,7 @@ export default () => {
         toolBarRender={false}
       />
       <HandlingOrderForm
-        form={form}
+        form={handlingOrderForm}
         picture={picture}
         setPicture={setPicture}
         editable={editable}
