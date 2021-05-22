@@ -11,14 +11,10 @@ import { drawBoundary, genOption } from './option';
 import ReactEcharts from 'echarts-for-react';
 import * as echarts from 'echarts';
 import './extension/bmap/bmap.js'; // echart百度地图扩展
-import loadScript from '@/utils/import-script';
 import { useModel } from 'umi';
 import mapStyleConfig from './style';
 import styles from './index.less';
 import _ from 'lodash';
-
-// @ts-ignore  使用百度API  加载js文件
-loadScript(['http://api.map.baidu.com/api?v=2.0&ak=Gdgx1WXQnc8r3B7tAlGZt6AmWWegt0zx']);
 
 // 属性类型
 type PropField = {
@@ -54,12 +50,12 @@ const Index: React.FC<PropField> = ({yuncangState}) => {
 
       // 获取百度地图实例，使用百度地图自带的控件
       const bmap = echartInstance.getModel().getComponent('bmap').getBMap();
-      //绘制中国区域行政边界
+      // 绘制中国区域行政边界
       drawBoundary(bmap, otherMapStyle.fillColor);
 
       // 在初始化地图以及地图缩放时调用此方法
       bmap.addEventListener("zoomstart", function () {
-        drawBoundary(bmap, otherMapStyle.fillColor); //绘制中国区域行政边界
+        drawBoundary(bmap, otherMapStyle.fillColor); // 绘制中国区域行政边界
       });
     }
   }, [echartRef.current,styleConfig.dark]);

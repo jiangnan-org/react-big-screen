@@ -19,7 +19,6 @@ import {getPowerConsumption, getPowerGeneration, getYuncangState, getYearGenerat
 import {useModel} from 'umi';
 
 export default (): React.ReactNode => {
-
   /** 获取系统配置 */
   const systemConfig = useModel('systemConfig');
 

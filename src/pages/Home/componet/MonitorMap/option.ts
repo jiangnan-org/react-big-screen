@@ -17,7 +17,7 @@ const { BMap } = window;
  定义中国东南西北端点，作为第一层
  向数组中添加一次闭合多边形，并将西北角再加一次作为之后画闭合区域的起点
  */
-export const drawBoundary = (bmap: any,fillColor: string | undefined) => {
+export const drawBoundary = (bmap: any,fillColor: string) => {
   let pStart = new BMap.Point(180, 90);
   let pEnd = new BMap.Point(0, -90);
   let pArray = [
