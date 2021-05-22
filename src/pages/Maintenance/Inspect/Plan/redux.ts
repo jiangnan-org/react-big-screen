@@ -3,7 +3,7 @@
  * @Description：后端接口处理
  * @Data: 2021/5/8 13:47
  */
-import {addUser, deleteUsers, updateUser} from "@/services/auth/user";
+import {addPlan, deletePlan, updatePlan} from "@/services/inspect/plan/intend";
 import {message} from 'antd';
 
 
@@ -12,9 +12,9 @@ import {message} from 'antd';
  *
  * @param fields
  */
-const handleAddType = async (fields: API.UserItem) => {
+const handleAddPlan = async (fields: API.PlanItem) => {
   try {
-    await addUser({...fields});
+    await addPlan({...fields});
     message.success('添加成功');
     return true;
   } catch (error) {
@@ -29,10 +29,10 @@ const handleAddType = async (fields: API.UserItem) => {
  *
  * @param selectedRows
  */
-const handleDeleteType = async (selectedRows: API.UserItem[]) => {
+const handleDeletePlan = async (selectedRows: API.PlanItem[]) => {
   try {
     let ids: any[] = selectedRows.map((row) => row.id);
-    await deleteUsers(ids);
+    await deletePlan(ids);
     message.success('删除成功');
     return true;
   } catch (error) {
@@ -46,9 +46,9 @@ const handleDeleteType = async (selectedRows: API.UserItem[]) => {
  *
  * @param fields
  */
-const handleUpdateType = async (fields: API.UserItem) => {
+const handleUpdatePlan = async (fields: API.PlanItem) => {
   try {
-    await updateUser(fields);
+    await updatePlan(fields);
     message.success('更新成功');
     return true;
   } catch (error) {
@@ -58,7 +58,7 @@ const handleUpdateType = async (fields: API.UserItem) => {
 };
 
 export default  {
-  handleAddType,
-  handleDeleteType,
-  handleUpdateType
+  handleAddPlan,
+  handleDeletePlan,
+  handleUpdatePlan
 };

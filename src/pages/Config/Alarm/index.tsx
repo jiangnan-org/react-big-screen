@@ -220,15 +220,6 @@ export default () => {
           <Button key='button' icon={<PlusOutlined/>} type='primary' onClick={() => {
             // 清空表单
             createForm.setFieldsValue({
-              loginName: undefined,
-              realName:  undefined,
-              email: undefined,
-              wechat: undefined,
-              phone: undefined,
-              password: undefined,
-              gender: 0,
-              state: 0,
-              type: 0
             });
             setCreateModalVisible(true)
           }
