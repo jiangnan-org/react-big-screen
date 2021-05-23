@@ -8,13 +8,15 @@ import {PlusOutlined,EditOutlined} from '@ant-design/icons';
 import {Form,Button} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import {getUserList} from '@/services/auth/user';
-import PlanForm from './component/Form';
+import {getPlanList} from '@/services/inspect/plan/intend';
+import Index from './component/Form';
 import {ModalForm} from '@ant-design/pro-form';
 import _ from 'lodash';
 import {FooterToolbar} from '@ant-design/pro-layout';
 import actions from './redux';
 import styles from './index.less';
+
+
 
 
 export default () => {
@@ -32,13 +34,13 @@ export default () => {
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
-  const [selectedRows, setSelectedRows] = useState<API.UserItem[]>([]);
+  const [selectedRows, setSelectedRows] = useState<API.PlanItem[]>([]);
 
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
 
   /** table列定义 */
-  const columns: ProColumns<API.UserItem>[] = [
+  const columns: ProColumns<API.PlanItem>[] = [
     {
       dataIndex: 'index',
       title: '序号',
@@ -46,31 +48,46 @@ export default () => {
       width: 48,
     },
     {
-      dataIndex: 'firsttime',
+      dataIndex: 'firstData',
       title: '首次工作时间',
       width: 100,
       hideInSearch: true,
       ellipsis: true,
     },
     {
-      dataIndex: 'nexttime',
+      dataIndex: 'nextData',
       title: '下次工作时间',
       width: 100,
       hideInSearch: true,
       ellipsis: true,
     },
     {
-      dataIndex: 'principal',
       title: '负责人',
+      dataIndex: 'mainPersonId',
+      align: 'center',
+      filters: true,
+      onFilter: true,
+      hideInSearch: true,
+      valueType: 'select',
       width: 150,
-      ellipsis: true,
+      valueEnum: {
+        0: {text: '小王'},
+        1: {text: '小李'}
+      },
     },
     {
-      dataIndex: 'collaborator',
+      dataIndex: 'corPersonId',
       title: '协作人',
-      width: 100,
+      align: 'center',
+      filters: true,
+      onFilter: true,
       hideInSearch: true,
-      ellipsis: true
+      valueType: 'select',
+      width: 150,
+      valueEnum: {
+        0: {text: '张三'},
+        1: {text: '李四'}
+      },
     },
     {
       title: '频次',
@@ -87,7 +104,7 @@ export default () => {
       },
     },
     {
-      dataIndex: 'kind',
+      dataIndex: 'type',
       title: '巡视类型',
       width: 100,
       hideInSearch: true,
@@ -95,7 +112,7 @@ export default () => {
     },
     {
       title: '状态',
-      dataIndex: 'state',
+      dataIndex: 'isOff',
       align: 'center',
       filters: true,
       onFilter: true,
@@ -107,7 +124,7 @@ export default () => {
       },
     },
     {
-      dataIndex: 'remark',
+      dataIndex: 'note',
       title: '备注',
       width: 100,
       hideInSearch: true,
@@ -139,29 +156,29 @@ export default () => {
     },
   ];
 
-  /** 新增用户表单 */
-  const createTypeModal = (
-    <ModalForm<API.UserItem>
-      title='新建用户'
+  /** 新增触发器 */
+  const createPlanModal = (
+    <ModalForm<API.PlanItem>
+      title='新增触发器'
       width="680px"
       form={createForm}
       visible={createModalVisible}
       onVisibleChange={setCreateModalVisible}
       onFinish={async (value) => {
-        const success = await actions.handleAddType(value);
+        const success = await actions.handleAddPlan(value);
         if (success) {
           setCreateModalVisible(false);
           actionRef.current?.reload();
         }
       }}
     >
-      <PlanForm/>
+      <Index/>
     </ModalForm>
   );
 
-  /** 更新用户表单 */
-  const updateTypeModal = (
-    <ModalForm<API.UserItem>
+  /** 更新触发器 */
+  const updatePlanModal = (
+    <ModalForm<API.PlanItem>
       title='更新用户'
       width="680px"
       form={updateForm}
@@ -170,28 +187,26 @@ export default () => {
       onFinish={async (value) => {
         // 指定更新的用户
         _.assign(value, {id});
-        // 移除密码 不进行密码更新
-        delete value.password;
-        const success = await actions.handleUpdateType(value);
+        const success = await actions.handleUpdatePlan(value);
         if (success) {
           setUpdateModalVisible(false);
           actionRef.current?.reload();
         }
       }}
     >
-      <PlanForm editable={false}/>
+      <Index editable={false}/>
     </ModalForm>
   );
 
   return (
     <React.Fragment>
-      <ProTable<API.UserItem>
+      <ProTable<API.PlanItem>
         className={styles.table}
         columns={columns}
         actionRef={actionRef}
         request={async (params: API.PageParams = {}) => {
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-          const res: API.PageResponseMessage<API.UserItem> = await getUserList(params);
+          const res: API.PageResponseMessage<API.PlanItem> = await getPlanList(params);
           return {
             data: res.data.records,
             // success 请返回 true，不然 table 会停止解析数据，即使有数据
@@ -219,15 +234,6 @@ export default () => {
           <Button key='button' icon={<PlusOutlined/>} type='primary' onClick={() => {
             // 清空表单
             createForm.setFieldsValue({
-              loginName: undefined,
-              realName:  undefined,
-              email: undefined,
-              wechat: undefined,
-              phone: undefined,
-              password: undefined,
-              gender: 0,
-              state: 0,
-              type: 0
             });
             setCreateModalVisible(true)
           }
@@ -240,7 +246,7 @@ export default () => {
         <FooterToolbar>
           <Button
             onClick={async () => {
-              let success = await actions.handleDeleteType(selectedRows);
+              let success = await actions.handleDeletePlan(selectedRows);
               if(success) {
                 setSelectedRows([]);
                 // 刷新并清空,页码也会重置，不包括表单
@@ -252,8 +258,8 @@ export default () => {
           </Button>
         </FooterToolbar>
       )}
-      {createTypeModal}
-      {updateTypeModal}
+      {createPlanModal}
+      {updatePlanModal}
     </React.Fragment>
   );
 };
