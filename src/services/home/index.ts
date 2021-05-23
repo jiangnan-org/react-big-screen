@@ -13,6 +13,17 @@ export async function getAlarmCount(options?: { [key: string]: any }) {
   });
 }
 
+/** 云仓状态信息 GET /api/home/state */
+export async function getYuncangState(options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<API.YuncangState[]>>('/yuncang/api/home/state', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...(options || {}),
+  });
+}
+
 /** 用电量统计信息 GET /api/home/consumption */
 export async function getPowerConsumption(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.PowerConsumption>>('/yuncang/api/home/consumption', {
@@ -35,18 +46,8 @@ export async function getPowerGeneration(options?: { [key: string]: any }) {
   });
 }
 
-/** 地图位置信息 GET /api/home/locations */
-export async function getYuncangState(options?: { [key: string]: any }) {
-  return request<API.ResponseMessage<API.YuncangState[]>>('/yuncang/api/home/locations', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    ...(options || {}),
-  });
-}
 
-/** 月用电曲线 GET /api/home/month-consumption */
+/** 月用电量统计曲线 GET /api/home/month-consumption */
 export async function getMonthConsumptionCurve(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.Point[]>>('/yuncang/api/home/month-consumption', {
     method: 'GET',
@@ -57,7 +58,7 @@ export async function getMonthConsumptionCurve(options?: { [key: string]: any })
   });
 }
 
-/** 月发电曲线 GET /api/home/month-generation */
+/** 月发电量统计曲线 GET /api/home/month-generation */
 export async function getMonthGenerationCurve(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.Point[]>>('/yuncang/api/home/month-generation', {
     method: 'GET',
@@ -68,8 +69,8 @@ export async function getMonthGenerationCurve(options?: { [key: string]: any }) 
   });
 }
 
-/** 实时用电曲线 GET /api/home/real-time-consumption */
-export async function getRealTimeConsumptionCurve(options?: { [key: string]: any }) {
+/** 实时用电功率曲线 GET /api/home/real-time-consumption */
+export async function getPowerConsumptionCurve(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.Point[]>>('/yuncang/api/home/real-time-consumption', {
     method: 'GET',
     headers: {
@@ -79,8 +80,8 @@ export async function getRealTimeConsumptionCurve(options?: { [key: string]: any
   });
 }
 
-/** 实时发电曲线 GET /api/home/real-time-generation */
-export async function getRealTimeGenerationCurve(options?: { [key: string]: any }) {
+/** 实时发电功率曲线 GET /api/home/real-time-generation */
+export async function getPowerGenerationCurve(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.Point[]>>('/yuncang/api/home/real-time-generation', {
     method: 'GET',
     headers: {
@@ -90,7 +91,7 @@ export async function getRealTimeGenerationCurve(options?: { [key: string]: any 
   });
 }
 
-/** 年用电曲线 GET /api/home/year-consumption */
+/** 年用电量统计曲线 GET /api/home/year-consumption */
 export async function getYearConsumptionCurve(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.Point[]>>('/yuncang/api/home/year-consumption', {
     method: 'GET',
@@ -101,7 +102,7 @@ export async function getYearConsumptionCurve(options?: { [key: string]: any }) 
   });
 }
 
-/** 年发电曲线 GET /api/home/year-generation */
+/** 年发电量统计曲线 GET /api/home/year-generation */
 export async function getYearGenerationCurve(options?: { [key: string]: any }) {
   return request<API.ResponseMessage<API.Point[]>>('/yuncang/api/home/year-generation', {
     method: 'GET',

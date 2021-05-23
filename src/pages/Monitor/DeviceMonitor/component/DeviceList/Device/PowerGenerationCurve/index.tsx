@@ -6,10 +6,10 @@ import { genOption } from './option';
 
 // 属性类型
 type PropField = {
-  realTimeGenerationCurve:  API.Point[] ;
+  powerGenerationCurve:  API.Point[] ;
 };
 
-const Index: React.FC<PropField> = ({realTimeGenerationCurve}) => {
+const Index: React.FC<PropField> = ({powerGenerationCurve}) => {
 
   return (
     <React.Fragment>
@@ -22,7 +22,7 @@ const Index: React.FC<PropField> = ({realTimeGenerationCurve}) => {
           </div>
         }
       >
-        <ReactEcharts option={genOption(realTimeGenerationCurve)} style={{ width: '100%', height: '100%' }} />
+        <ReactEcharts option={genOption(powerGenerationCurve)} style={{ width: '100%', height: '100%' }} />
       </ProCard>
     </React.Fragment>
   );

@@ -9,14 +9,19 @@ import { Card, Descriptions, Divider, message } from 'antd';
 import { getYuncangById } from '@/services/yuncang';
 import * as enumUtils from '@/utils/enumUtils';
 
-// @ts-ignore
-export default ({id}) => {
+
+// 属性类型
+type PropField = {
+  yuncangId: number ;    // 可编辑
+};
+
+const Index: React.FC<PropField> = ({yuncangId}) => {
   // 云仓信息
   const [yuncang,setYuncang] = useState<API.YuncangItem>({});
 
 
   // 获取云仓信息
-  const handleGetYuncang =  async (id: number) => {
+  const handleYuncang =  async (id: number) => {
     try{
       const res: API.ResponseMessage<API.YuncangItem> = await getYuncangById(id);
       setYuncang(res.data);
@@ -27,7 +32,7 @@ export default ({id}) => {
 
   // 获取云仓信息
   useEffect( ()=>{
-     handleGetYuncang(id);
+     handleYuncang(yuncangId);
   },[]);
 
   return (
@@ -72,9 +77,9 @@ export default ({id}) => {
           <Descriptions
             title='摄像头信息'
           >
-            <Descriptions.Item label='设备序列号'>{yuncang.cameraSn}</Descriptions.Item>
-            <Descriptions.Item label='设备名称'>{yuncang.cameraName}</Descriptions.Item>
-            <Descriptions.Item label='视频播放地址'>{yuncang.videoAddress}</Descriptions.Item>
+            <Descriptions.Item label='设备序列号'>{yuncang.cameraDeviceSerial}</Descriptions.Item>
+            <Descriptions.Item label='设备验证码'>{yuncang.cameraValidateCode}</Descriptions.Item>
+            <Descriptions.Item label='视频播放地址'>{yuncang.cameraVideoAddress}</Descriptions.Item>
           </Descriptions>
           <Divider
           />
@@ -83,3 +88,5 @@ export default ({id}) => {
     </React.Fragment>
   );
 };
+
+export default Index;

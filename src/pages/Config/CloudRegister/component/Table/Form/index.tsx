@@ -84,7 +84,10 @@ const Index: React.FC<PropField> = ({
           <Modal
             width={820}
             title='更新云仓'
-            onCancel={() => setVisible(false)}
+            onCancel={() => {
+              setCurrent(0);
+              setVisible(false)}
+            }
             visible={visible}
             footer={submitter}
             destroyOnClose
@@ -110,7 +113,7 @@ const Index: React.FC<PropField> = ({
               },
               {
                 type: 'string',
-                min: 6,
+                min: 2,
                 max: 18,
               },
             ]}
@@ -220,7 +223,8 @@ const Index: React.FC<PropField> = ({
             label='系统电压'
             width='sm'
             fieldProps={{
-              suffix: <span className='ant-form-text'>V</span>
+              suffix: <span className='ant-form-text'>V</span>,
+              type: 'number'
             }}
           />
           <ProFormText
@@ -228,7 +232,8 @@ const Index: React.FC<PropField> = ({
             label='系统额定功率'
             width='sm'
             fieldProps={{
-              suffix: <span className='ant-form-text'>kW</span>
+              suffix: <span className='ant-form-text'>kW</span>,
+              type: 'number'
             }}
           />
         </ProForm.Group>
@@ -239,7 +244,8 @@ const Index: React.FC<PropField> = ({
             label='光伏容量'
             width='sm'
             fieldProps={{
-              suffix: <span className='ant-form-text'>kW</span>
+              suffix: <span className='ant-form-text'>kWh</span>,
+              type: 'number'
             }}
           />
           <ProFormText
@@ -255,7 +261,8 @@ const Index: React.FC<PropField> = ({
             label='并网侧功率'
             width='sm'
             fieldProps={{
-              suffix: <span className='ant-form-text'>kW</span>
+              suffix: <span className='ant-form-text'>kW</span>,
+              type: 'number'
             }}
           />
           <ProFormText
@@ -263,7 +270,8 @@ const Index: React.FC<PropField> = ({
             label='离网端功率'
             width='sm'
             fieldProps={{
-              suffix: <span className='ant-form-text'>kW</span>
+              suffix: <span className='ant-form-text'>kW</span>,
+              type: 'number'
             }}
           />
         </ProForm.Group>
@@ -274,13 +282,17 @@ const Index: React.FC<PropField> = ({
             label='电池容量'
             width='sm'
             fieldProps={{
-              suffix: <span className='ant-form-text'>mAh</span>
+              suffix: <span className='ant-form-text'>mAh</span>,
+              type: 'number'
             }}
           />
           <ProFormText
             name='batteryNum'
             label='电池数量'
             width='sm'
+            fieldProps={{
+              type: 'number'
+            }}
           />
         </ProForm.Group>
 
@@ -295,7 +307,8 @@ const Index: React.FC<PropField> = ({
             label='水箱容量'
             width='sm'
             fieldProps={{
-              suffix: <span className='ant-form-text'>L</span>
+              suffix: <span className='ant-form-text'>L</span>,
+              type: 'number'
             }}
           />
         </ProForm.Group>
@@ -305,6 +318,9 @@ const Index: React.FC<PropField> = ({
             name='sensor'
             label='传感器数量'
             width='sm'
+            fieldProps={{
+              type: 'number'
+            }}
           />
         </ProForm.Group>
       </StepsForm.StepForm>
@@ -314,20 +330,22 @@ const Index: React.FC<PropField> = ({
       >
         <ProForm.Group>
           <ProFormText
-            name='cameraSn'
-            label='设备序列号'
+            name='cameraDeviceSerial'
+            label='序列号'
             width='sm'
+            tooltip='萤石摄像头，设备序列号'
           />
           <ProFormText
-            name='cameraName'
-            label='设备名称'
+            name='cameraValidateCode'
+            label='验证码'
             width='sm'
+            tooltip='萤石摄像头，设备验证码，设备机身上的六位大写字母'
           />
         </ProForm.Group>
 
         <ProForm.Group>
           <ProFormText
-            name='videoAddress'
+            name='cameraVideoAddress'
             label='视频播放地址'
             width='sm'
           />

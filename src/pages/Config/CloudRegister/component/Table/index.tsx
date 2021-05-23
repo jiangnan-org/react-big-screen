@@ -18,8 +18,8 @@ import { useModel } from 'umi';
 import * as enumUtils from '@/utils/enumUtils';
 
 
-export default () => {
 
+export default () => {
   /** 当前更新 选中云仓信息 */
   const [yuncang, setYuncang] = useState<API.YuncangItem>({});
 
@@ -144,7 +144,7 @@ export default () => {
 
   /** 提交 */
   const onFinish = async (values: API.YuncangItem) => {
-    // 设置Id
+    // 设置id
     _.assign(values,{id:yuncang.id});
     const success = await actions.handleUpdateYuncang(values);
     if (success) {
@@ -155,9 +155,7 @@ export default () => {
 
   /** 选中节点发生改变 重新加载 */
   useEffect(() => {
-    if(selectedAddress){
-      console.log('选中',selectedAddress);
-    }
+    // 刷新
     actionRef.current?.reload();
   }, [selectedAddress]);
 
@@ -191,16 +189,18 @@ export default () => {
         editable={{
           type: 'multiple',
         }}
+
         rowKey='id'
         search={{                // 配置列的搜索相关，false 为隐藏
           labelWidth: 'auto',
           optionRender: (searchConfig, formProps, dom) => [
-            <Button key='cancel' title='取消左侧树节点选择' onClick={()=>{
+            <Button key='reset'  onClick={()=>{
               setSelectedKeys([])
               setSelectedAddress({});
-              actionRef.current?.reload();
-            }}>取消</Button>,
-            ...dom
+              // @ts-ignore 重置到默认值，包括表单
+              actionRef.current?.reset();
+            }}>重置</Button>,
+            dom[1]
           ],
         }}
         dateFormatter='string'

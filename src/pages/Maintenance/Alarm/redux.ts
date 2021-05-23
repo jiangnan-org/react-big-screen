@@ -3,7 +3,7 @@
  * @Description：后端接口处理
  * @Data: 2021/5/8 13:47
  */
-import {dealAlarm} from '@/services/alarm/bell';
+import {dealAlarm} from '@/services/alarm';
 import {message} from 'antd';
 
 /**

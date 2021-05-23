@@ -9,7 +9,7 @@ import { Divider, Modal, message,Space, Form, Tag } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import {history} from 'umi';
-import {getAlarmProcessByAlarmRecordId, getAlarmList} from '@/services/alarm/bell';
+import {getAlarmProcessByAlarmRecordId, getAlarmList} from '@/services/alarm';
 import HandlingOrderForm from './component/Form';
 import _ from 'lodash';
 import actions from './redux';
@@ -36,9 +36,9 @@ export default () => {
   const actionRef = useRef<ActionType>();
 
   /** 获取告警处理单 */
-  const handleGetAlarmProcess = async (id: number) => {
+  const handleGetAlarmProcess = async (alarmRecordId: number) => {
     try {
-      const res: API.ResponseMessage<API.AlarmProcessItem> = await getAlarmProcessByAlarmRecordId(id);
+      const res: API.ResponseMessage<API.AlarmProcessItem> = await getAlarmProcessByAlarmRecordId(alarmRecordId);
       handlingOrderForm.setFieldsValue(res.data);
       setPicture(res.data.pic || '');
     } catch (error) {
@@ -97,7 +97,7 @@ export default () => {
       width: 100,
       valueType: 'radioButton',
       valueEnum: enumUtils.AlarmLevelEnum,
-      render: (_: any,record) =>(
+      render: (text: any,record) =>(
         <Space>
           <Tag color={enumUtils.AlarmLevelEnum[record.level as string].color } key={enumUtils.AlarmLevelEnum[record.level as string].text}>
             {enumUtils.AlarmLevelEnum[record.level as string].text}

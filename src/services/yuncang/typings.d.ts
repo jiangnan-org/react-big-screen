@@ -51,12 +51,12 @@ declare namespace API {
     /** 传感器数量 */
     sensor?: string;
 
-    /** 摄像头SN */
-    cameraSn?: string,
-    /** 摄像头名称 */
-    cameraName?: string,
-    /** 视频播放地址 */
-    videoAddress?: string,
+    /** 萤石摄像头，设备序列号 */
+    cameraDeviceSerial?: string,
+    /** 萤石摄像头，设备验证码，设备机身上的六位大写字母 */
+    cameraValidateCode?: string,
+    /** 萤石摄像头，视频直播地址 */
+    cameraVideoAddress?: string,
 
 
     /** 创建时间 */
@@ -72,6 +72,7 @@ declare namespace API {
     state?: string;
   };
 
+  /** 地址数结构 */
   type AddressTreeItem = {
     /**  节点id */
     id: number,
@@ -84,6 +85,35 @@ declare namespace API {
     /** 父节点id */
     parentId: number,
     /** 子节点 */
-    children?:AddressTreeItem[],
+    children?: AddressTreeItem[],
+  }
+
+
+  /** 云仓分页查询参数 */
+  type YuncangPageParams = {
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+    /** 省份 */
+    province?: string;
+    /** 城市 */
+    city?: string,
+    /** 排序字段,支持consumption、generation、alarmCount */
+    sortBy?: | 'consumption' | 'generation' | 'alarmCount',
+    /** 排序方式,支持asc、desc */
+    order?: | 'asc' | 'desc',
+  };
+
+  /**  云仓统计数据  */
+  type YuncangStatisticData = {
+    /** 云仓id */
+    yuncangId: number,
+    /** 总发电量 单位kWh */
+    generation: number,
+    /** 总用电量 单位kWh */
+    consumption: number,
+    /** 告警总数 */
+    alarmCount: number,
   }
 }

@@ -59,12 +59,7 @@ export default defineConfig({
       target: serveUrlMap[REACT_APP_ENV],
       changeOrigin: true,
       pathRewrite: { '^/yuncang/api': '/api' },
-    },
-    '/ys/api': {
-      target: 'https://open.ys7.com/',
-      changeOrigin: true,
-      pathRewrite: { '^/ys/api': '/api' },
-    },
+    }
   },
   manifest: {
     basePath: '/',

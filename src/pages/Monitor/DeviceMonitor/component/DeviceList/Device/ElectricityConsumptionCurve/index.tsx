@@ -5,10 +5,10 @@ import ReactEcharts from 'echarts-for-react';
 import { genOption } from './option';
 // 属性类型
 type PropField = {
-  realTimeConsumptionCurve:  API.Point[] ;
+  powerConsumptionCurve:  API.Point[] ;
 };
 
-const Index: React.FC<PropField> = ({realTimeConsumptionCurve}) => {
+const Index: React.FC<PropField> = ({powerConsumptionCurve}) => {
   return (
     <React.Fragment>
       <ProCard
@@ -20,7 +20,7 @@ const Index: React.FC<PropField> = ({realTimeConsumptionCurve}) => {
           </div>
         }
       >
-        <ReactEcharts option={genOption(realTimeConsumptionCurve)} style={{ width: '100%', height: '100%' }} />
+        <ReactEcharts option={genOption(powerConsumptionCurve)} style={{ width: '100%', height: '100%' }} />
       </ProCard>
     </React.Fragment>
   );

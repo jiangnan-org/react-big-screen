@@ -70,51 +70,20 @@ export async function getYuncangById(id: number, options?: { [key: string]: any 
   });
 }
 
-/** 监控页面 获取所有云仓(分页) POST /api/yuncang/list */
-export async function getYuncangListInMonitorPage(params: API.PageParams & {
-  sortBy?: string,
-  order?: string,
-  province?: string,
-  city?: string
-}, options?: { [key: string]: any }) {
-  // 构建高级查询条件
-  let conditions: API.QueryCondition[] = [{
-    condition: params?.order === 'ascend' ?  'ORDER_BY_ASC' : 'ORDER_BY_DESC',
-    field: params?.sortBy ? params?.sortBy : 'id'
-  }] ;
-
-  if(params.province){
-    conditions.push({
-      condition: 'LIKE',
-      field: 'province',
-      // @ts-ignore
-      value: params.province
-    });
-  }
-
-  if(params.city){
-    conditions.push({
-      condition: 'LIKE',
-      field: 'city',
-      // @ts-ignore
-      value: params.city
-    });
-  }
-
-  return request<API.PageResponseMessage<API.YuncangItem>>('/yuncang/api/yuncang/list', {
-    method: 'POST',
+/** 根据云仓id列表获取云仓运行统计数据  总发电量、总用电量、告警数等 GET /api/yuncang/statistic/get */
+export async function getYuncangStatisticData(ids: number[], options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<object>>('/yuncang/api/yuncang/statistic/get', {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    data:  {
-      pageNum: params.current,
-      pageSize: params.pageSize,
-      all: false,
-      conditions
+    params: {
+      ids,
     },
     ...(options || {}),
   });
 }
+
 
 /** 获取所有云仓(分页) POST /api/yuncang/list */
 export async function getYuncangList(params: API.PageParams, options?: { [key: string]: any }) {
@@ -124,6 +93,18 @@ export async function getYuncangList(params: API.PageParams, options?: { [key: s
       'Content-Type': 'application/json',
     },
     data: buildQueryParam(params),
+    ...(options || {}),
+  });
+}
+
+/** 根据统计量、区域分页查询 获取云仓信息 POST /api/yuncang/listbystatistic */
+export async function getYuncangListByStatistic(params: API.YuncangPageParams, options?: { [key: string]: any }) {
+  return request<API.PageResponseMessage<API.YuncangItem>>('/yuncang/api/yuncang/listbystatistic', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: params,
     ...(options || {}),
   });
 }

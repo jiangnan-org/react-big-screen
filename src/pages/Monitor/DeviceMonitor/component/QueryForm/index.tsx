@@ -42,7 +42,7 @@ export default () => {
       }}
       // 默认值
       initialValues={{
-        order: 'descend',
+        order: 'desc',
       }}
       className={styles.queryForm}
       submitter={{
@@ -79,10 +79,9 @@ export default () => {
                 name='sortBy'
                 placeholder='请选择排序字段'
                 options={[
-                  {label: '电池电量', value: 'batterySize'},
-                  {label: '发电量', value: 'powerGeneration'},
-                  {label: '用电量', value: 'powerConsumption'},
-                  {label: '告警数', value: 'alertNumber'}
+                  {label: '发电量', value: 'generation'},
+                  {label: '用电量', value: 'consumption'},
+                  {label: '告警数', value: 'alarmCount'}
                 ]}
               />
               <ProFormRadio.Group
@@ -91,11 +90,11 @@ export default () => {
                 options={[
                   {
                     label: '降序',
-                    value: 'descend',
+                    value: 'desc',
                   },
                   {
                     label: '升序',
-                    value: 'ascend',
+                    value: 'asc',
                   }
                 ]}
               />

@@ -272,7 +272,7 @@ export default () => {
         <FooterToolbar>
           <Button
             onClick={async () => {
-              let success = await actions.handleDeleteUser(selectedRows);
+              const success = await actions.handleDeleteUser(selectedRows);
               if(success) {
                 setSelectedRows([]);
                 // 刷新并清空,页码也会重置，不包括表单

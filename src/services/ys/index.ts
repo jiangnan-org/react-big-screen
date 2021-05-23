@@ -3,26 +3,42 @@
  */
 import { request } from 'umi';
 
-/** 根据appKey和secret获取accessToken GET /api/lapp/token/get */
-export async function getToken(
-  appKey: string,
-  appSecret: string
-
-) {
-  return request<API.ResponseMessage<YSAPI.TokenItem>>('/ys/api/lapp/token/get', {
-    method: 'POST',
-    params:{
-      appKey,
-      appSecret
+/** 获取accessToken GET /api/ys/lapp/token/get */
+export async function getToken() {
+  return request<API.ResponseMessage<YSAPI.YingshiTokenItem>>('/yuncang/api/ys/token/get', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
     }
   });
 }
 
-/** 获取萤石应用信息 */
-export const getAppInfo =  () => {
-  return {
-    appKey: 'aaf399e239f2491f8e2f9ffd98877635',
-    appSecret: '69fb9e4bb7e19bd9bb2fcf1f34d37aaf'
-  }
+/** 获取accessToken GET /api/ys/lapp/token/get */
+export async function getAddress(accessToken: string,deviceSerial: string,validateCode: string) {
+  return request<API.ResponseMessage<YSAPI.YingshiAddressItem>>('/yuncang/api/ys/v2/live/address/get', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params:{
+      accessToken,
+      deviceSerial,
+      validateCode
+    }
+  });
+}
+
+
+/** 保存token信息 */
+export const saveTokenInfo = (tokenInfo: YSAPI.YingshiTokenItem) => {
+  localStorage.setItem('YSAuthorization', JSON.stringify(tokenInfo));
 };
 
+/** 获取token信息 */
+export const getTokenInfo =  () => {
+  const value = localStorage.getItem('YSAuthorization');
+  if(value){
+    return JSON.parse(value);
+  }
+  return value;
+};

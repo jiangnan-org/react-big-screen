@@ -11,7 +11,7 @@ export async function getAlarmCountUsingGET(
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.UserResponseEntityAlertCountVO_>('/api/home/alarm', {
+  return request<API.UserResponseEntityAlarmCountVO_>('/api/home/alarm', {
     method: 'GET',
     headers: {},
     params: { ...params },

@@ -15,7 +15,7 @@ import AlertStatistics from './componet/AlertStatistics';
 import RcResizeObserver from 'rc-resize-observer';
 import {getPowerConsumption, getPowerGeneration, getYuncangState, getYearGenerationCurve,
   getYearConsumptionCurve,getMonthConsumptionCurve,getMonthGenerationCurve,
-  getRealTimeConsumptionCurve,getRealTimeGenerationCurve} from "@/services/home";
+  getPowerConsumptionCurve,getPowerGenerationCurve} from "@/services/home";
 import {useModel} from 'umi';
 
 export default (): React.ReactNode => {
@@ -122,7 +122,7 @@ export default (): React.ReactNode => {
   const refreshRealTimeGenerationCurveData = async () => {
     try {
       // 登录
-      const res: API.ResponseMessage<API.Point[]> = await getRealTimeGenerationCurve();
+      const res: API.ResponseMessage<API.Point[]> = await getPowerGenerationCurve();
       setRealTimeGenerationCurve(res.data );
     } catch (error) {
       message.error(error,2);
@@ -133,7 +133,7 @@ export default (): React.ReactNode => {
   const refreshRealTimeConsumptionCurveData = async () => {
     try {
       // 登录
-      const res: API.ResponseMessage<API.Point[]> = await getRealTimeConsumptionCurve();
+      const res: API.ResponseMessage<API.Point[]> = await getPowerConsumptionCurve();
       setRealTimeConsumptionCurve(res.data );
     } catch (error) {
       message.error(error,2);

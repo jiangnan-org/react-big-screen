@@ -89,7 +89,7 @@ export async function getByPageUsingPOST2(
 }
 
 /** 修改 POST /api/yuncang/update */
-export async function updateUsingPOST4(
+export async function updateUsingPOST1(
   params: {
     // header
     /** token */

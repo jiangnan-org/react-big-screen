@@ -17,6 +17,17 @@ declare namespace API {
     ?: string;
   }
 
+  type AlarmCountVO =  {
+    'criticalNum'
+    ?: number;
+    'importantNum'
+    ?: number;
+    'notifyNum'
+    ?: number;
+    'secondaryNum'
+    ?: number;
+  }
+
   type AlarmProcessAddDTO =  {
     /** 告警id */
     'alarmRecordId'
@@ -101,17 +112,6 @@ declare namespace API {
     ?: number;
   }
 
-  type AlertCountVO =  {
-    'criticalNum'
-    ?: number;
-    'importantNum'
-    ?: number;
-    'notifyNum'
-    ?: number;
-    'secondaryNum'
-    ?: number;
-  }
-
   type File =  {
     'absolute'
     ?: boolean;
@@ -154,6 +154,120 @@ declare namespace API {
   }
 
   type InputStream = true;
+
+  type InspectionPlanDTO =  {
+    /** 协作人id */
+    'corPersonId'
+    ?: number;
+    /** 首次工作日期 */
+    'firstDate'
+    ?: string;
+    /** 频次 */
+    'frequency'
+    ?: number;
+    /** 是否停用 */
+    'isOff'
+    ?: number;
+    /** 负责人id */
+    'mainPersonId'
+    ?: number;
+    /** 下次工作日期 */
+    'nextDate'
+    ?: string;
+    /** 备注 */
+    'note'
+    ?: string;
+    /** 类型 */
+    'type'
+    ?: string;
+  }
+
+  type InspectionPlanUpdateDTO =  {
+    /** 巡视計劃id */
+    'id'
+    ?: number;
+  }
+
+  type InspectionProjectDTO =  {
+    /** 巡视项目描述 */
+    'description'
+    ?: string;
+    /** 巡视记录id */
+    'inspectionRecordId'
+    ?: number;
+    /** 是否完成 */
+    'isFinished'
+    ?: number;
+    /** 巡视项目名称 */
+    'name'
+    ?: string;
+    /** 排序号 */
+    'sortNum'
+    ?: number;
+  }
+
+  type InspectionProjectUpdateDTO =  {
+    /** 巡视项目描述 */
+    'description'
+    ?: string;
+    /** 巡视项目id */
+    'id'
+    ?: number;
+    /** 巡视记录id */
+    'inspectionRecordId'
+    ?: number;
+    /** 是否完成 */
+    'isFinished'
+    ?: number;
+    /** 巡视项目名称 */
+    'name'
+    ?: string;
+    /** 排序号 */
+    'sortNum'
+    ?: number;
+  }
+
+  type InspectionRecordAddDTO =  {
+    /** 协作人id */
+    'corPersonId'
+    ?: number;
+    /** 是否完成 */
+    'isFinished'
+    ?: number;
+    /** 负责人id */
+    'mainPersonId'
+    ?: number;
+    /** 备注 */
+    'note'
+    ?: string;
+    /** 开始时间 */
+    'startTime'
+    ?: string;
+    /** 巡检类型 */
+    'type'
+    ?: string;
+  }
+
+  type InspectionRecordUpdateDTO =  {
+    /** 协作人id */
+    'corPersonId'
+    ?: number;
+    /** 结束时间 */
+    'endTime'
+    ?: string;
+    /** 巡检记录id */
+    'id'
+    ?: number;
+    /** 是否完成 */
+    'isFinished'
+    ?: number;
+    /** 负责人id */
+    'mainPersonId'
+    ?: number;
+    /** 备注 */
+    'note'
+    ?: string;
+  }
 
   type PageRequestDTO =  {
     /** 查询全部 */
@@ -441,6 +555,18 @@ declare namespace API {
     ?: number;
   }
 
+  type YuncangStatisticDataVO =  {
+    /** 告警总数 */
+    'alarmCount'
+    ?: number;
+    /** 总用电量 单位kWh */
+    'consumption'
+    ?: number;
+    /** 总发电量 单位kWh */
+    'generation'
+    ?: number;
+  }
+
   type YuncangUpdateDTO =  {
     /** 电池数量 */
     'batteryNum'
@@ -517,8 +643,12 @@ declare namespace API {
   }
 
   type AlarmProcessList_ =  {
+    /** 告警记录id */
     'alarmRecordId'
     ?: number;
+    /** 创建时间 */
+    'createTime'
+    ?: string;
     /** 问题描述 */
     'description'
     ?: string;
@@ -565,6 +695,7 @@ declare namespace API {
     /** 实际值 */
     'value'
     ?: number;
+    /** 云仓id */
     'yuncangId'
     ?: number;
     /** 云仓名称 */
@@ -608,20 +739,31 @@ declare namespace API {
   }
 
   type Data_ =  {
-    'batteryCurrent'
+    /** 空调开发：0关，1开 */
+    'airSwitch'
+    ?: "OPEN" | "CLOSE";
+    /** 电池充电电流 */
+    'batteryChargeCurrent'
     ?: number;
-    'batteryPower'
+    /** 电池充电功率 */
+    'batteryChargePower'
     ?: number;
-    'batterySoc'
+    /** 电池放电电流 */
+    'batteryDischargeCurrent'
+    ?: number;
+    /** 电池放电功率 */
+    'batteryDischargePower'
     ?: number;
     /** 电池温度 */
     'batteryTemp'
     ?: number;
+    /** 电池电压 */
     'batteryVoltage'
     ?: number;
+    /** 创建时间 */
     'createTime'
     ?: string;
-    /** 电流 */
+    /** 电仓系统电流 */
     'current'
     ?: number;
     /** 日用电量 */
@@ -630,10 +772,10 @@ declare namespace API {
     /** 日发电量 */
     'dailyGeneration'
     ?: number;
-    /** 门开关状态：0关，1开 */
-    'doorState'
-    ?: number;
-    /** 湿度 */
+    /** 排风扇开发：0关，1开 */
+    'fanSwitch'
+    ?: "OPEN" | "CLOSE";
+    /** 电仓室内湿度 */
     'humidity'
     ?: number;
     'id'
@@ -641,26 +783,31 @@ declare namespace API {
     /** 纬度 */
     'latitude'
     ?: number;
+    /** 照明开发：0关，1开 */
+    'lightSwitch'
+    ?: "OPEN" | "CLOSE";
     /** 经度 */
     'longitude'
     ?: number;
     /** 备注 */
     'note'
     ?: string;
-    /** 光伏发电实时功率 */
+    /** 电源开发：0关，1开 */
+    'powerSwitch'
+    ?: "OPEN" | "CLOSE";
+    /** 实时发电功率 */
     'pvPower'
     ?: number;
-    /** 云仓状态：0运行，1报警，2停止 */
-    'systemState'
-    ?: number;
+    /** 电仓室内温度 */
     'temperature'
     ?: number;
     /** 实时用电功率 */
     'usedPower'
     ?: number;
-    /** 电压 */
+    /** 电仓系统电压 */
     'voltage'
     ?: number;
+    /** 云仓id */
     'yuncangId'
     ?: number;
   }
@@ -691,6 +838,40 @@ declare namespace API {
     ?: number;
     'records'
     ?: Alarm_[];
+    'searchCount'
+    ?: boolean;
+    'size'
+    ?: number;
+    'total'
+    ?: number;
+  }
+
+  type IPageInspectionPlan_ =  {
+    'current'
+    ?: number;
+    'hitCount'
+    ?: boolean;
+    'pages'
+    ?: number;
+    'records'
+    ?: InspectionPlan_[];
+    'searchCount'
+    ?: boolean;
+    'size'
+    ?: number;
+    'total'
+    ?: number;
+  }
+
+  type IPageInspectionRecord_ =  {
+    'current'
+    ?: number;
+    'hitCount'
+    ?: boolean;
+    'pages'
+    ?: number;
+    'records'
+    ?: InspectionRecord_[];
     'searchCount'
     ?: boolean;
     'size'
@@ -828,6 +1009,15 @@ declare namespace API {
     ?: string;
   }
 
+  type UserResponseEntityAlarmCountVO_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: AlarmCountVO;
+    'msg'
+    ?: string;
+  }
+
   type UserResponseEntityAlarmProcessList_ =  {
     'code'
     ?: number;
@@ -842,15 +1032,6 @@ declare namespace API {
     ?: number;
     'data'
     ?: Alarm_;
-    'msg'
-    ?: string;
-  }
-
-  type UserResponseEntityAlertCountVO_ =  {
-    'code'
-    ?: number;
-    'data'
-    ?: AlertCountVO;
     'msg'
     ?: string;
   }
@@ -882,6 +1063,24 @@ declare namespace API {
     ?: string;
   }
 
+  type UserResponseEntityIPageInspectionPlan_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: IPageInspectionPlan_;
+    'msg'
+    ?: string;
+  }
+
+  type UserResponseEntityIPageInspectionRecord_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: IPageInspectionRecord_;
+    'msg'
+    ?: string;
+  }
+
   type UserResponseEntityIPageSysUser_ =  {
     'code'
     ?: number;
@@ -909,6 +1108,33 @@ declare namespace API {
     ?: string;
   }
 
+  type UserResponseEntityInspectionProject_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: InspectionProject_;
+    'msg'
+    ?: string;
+  }
+
+  type UserResponseEntityInspectionRecord_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: InspectionRecord_;
+    'msg'
+    ?: string;
+  }
+
+  type UserResponseEntityListInspectionProject_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: InspectionProject_[];
+    'msg'
+    ?: string;
+  }
+
   type UserResponseEntityListPointVO_ =  {
     'code'
     ?: number;
@@ -923,6 +1149,15 @@ declare namespace API {
     ?: number;
     'data'
     ?: YuncangStateVO[];
+    'msg'
+    ?: string;
+  }
+
+  type UserResponseEntityList_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: 2[];
     'msg'
     ?: string;
   }
@@ -981,6 +1216,15 @@ declare namespace API {
     ?: string;
   }
 
+  type UserResponseEntity_ =  {
+    'code'
+    ?: number;
+    'data'
+    ?: 2;
+    'msg'
+    ?: string;
+  }
+
   type Yuncang_ =  {
     /** 电池数量 */
     'batteryNum'
@@ -1009,10 +1253,12 @@ declare namespace API {
     /** 逆变一体机 */
     'converter'
     ?: string;
+    /** 创建时间 */
     'createTime'
     ?: string;
     'id'
     ?: number;
+    /** 安装时间 */
     'installTime'
     ?: string;
     /** 纬度 */
@@ -1054,12 +1300,13 @@ declare namespace API {
     /** 水箱容量 */
     'tankCapacity'
     ?: number;
+    /** 更新时间 */
     'updateTime'
     ?: string;
     /** 视频播放地址 */
     'videoAddress'
     ?: string;
-    /** 系统电压 */
+    /** 系统额定电压 */
     'voltage'
     ?: number;
     /** 云仓名称 */
