@@ -64,7 +64,7 @@ window.umi_plugin_ant_themeVar 变量上，SettingDrawer 会读取这个变量�
 官方錯誤解決方案：https://github.com/ant-design/ant-design-pro/issues
 antd-pro 主题色实现原理 https://juejin.cn/post/6926442970388365319
 
-### 3、动态加载主题测原理
+### 3、动态加载主题色原理
 #### 3.1、umi-plugin-antd-theme 插件流程分析
 更改 cssLoader 配置，修改 src 目录下 less 文件 CSS Modules 选择器名称
 加载工程固定路径下主题配置文件 config/theme.config.json覆盖默认配置(配置配置为空，也就是使用组件原始配置样式)

@@ -7,7 +7,7 @@ import routes from './routes';
 
 const serveUrlMap = {
   dev: 'http://101.132.248.43:9001/',
-  pre: 'https://pre.pro.ant.design/',
+  pre: 'http://127.0.0.1:9002/',
   test: 'http://127.0.0.1:9001/',
   idc: 'https://idc.pro.ant.design/',
 };
