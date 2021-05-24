@@ -37,12 +37,12 @@ export default () => {
       return;
     }
 
-    let token = encodeURIComponent('Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxIiwidHlwZSI6MSwic3ViIjoibG1hZG1pbiIsImlzcyI6IjA5OGY2YmNkNDYyMWQzNzNjYWRlNGU4MzI2MjdiNGY2IiwiaWF0IjoxNjIxODQ3NzAyLCJhdWQiOiJyZXN0YXBpdXNlciIsImV4cCI6MTYyMTg2NDk4MiwibmJmIjoxNjIxODQ3NzAyfQ.NuNPF0TktJZSeRvtWjDhS6-lPQrPb8MR72MiNHLIu98');
+    let token = getToken();
     // @ts-ignore
-    let socket = new WebSocket('ws://127.0.0.1:9002/websocket/1111');
-    // if (!socket) {
-    //   console.log('您的浏览器不支持websocket协议！'); //不进来这个表示浏览器支持WebSocket
-    // }
+    let socket = new WebSocket('ws://127.0.0.1:9002/api/websocket/'+token.substring(7));
+    if (!socket) {
+      console.log('您的浏览器不支持websocket协议！'); //不进来这个表示浏览器支持WebSocket
+    }
     socket.onclose = () => {
       console.log('onclose');
     };
