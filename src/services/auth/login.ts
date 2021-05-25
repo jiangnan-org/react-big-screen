@@ -41,6 +41,17 @@ export async function currentUser(options?: { [key: string]: any }) {
   });
 }
 
+/** 获取websocket地址 POST /api/websocket/url */
+export async function getWebSocketUrl(options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<string>>('/yuncang/api/websocket/url', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...(options || {}),
+  });
+}
+
 /** 保存token */
 export const saveToken = (token : string) => {
   localStorage.setItem('Authorization', 'Bearer ' + token);
