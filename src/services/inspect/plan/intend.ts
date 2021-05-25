@@ -1,5 +1,4 @@
 import { request } from 'umi';
-import _ from 'lodash';
 import buildQueryParam from '@/utils/buildQueryParam';
 
 /** 增加巡视计划 POST /api/inspection-plan/add */

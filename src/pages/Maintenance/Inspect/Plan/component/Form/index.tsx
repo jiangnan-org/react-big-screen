@@ -15,21 +15,31 @@ const Index: React.FC<PropField> = ({editable=true}) => {
   return (
     <div className={styles.planForm}>
       <ProForm.Group >
-        <ProFormText
-          name='principal'
+        <ProFormSelect
+          name='mainPersonId'
           label='负责人'
           width='sm'
+          options={[
+            {label: '张三', value: 0},
+            {label: '李四', value: 1},
+            {label: '王五', value: 2},
+          ]}
         />
-        <ProFormText
-          name='collaborator'
+        <ProFormSelect
+          name='corPersonId'
           label='协作人'
           width='sm'
+          options={[
+            {label: '大傻子', value: 0},
+            {label: '二傻子', value: 1},
+            {label: '小傻子', value: 2},
+          ]}
         />
       </ProForm.Group>
 
       <ProForm.Group >
         <ProFormText
-          name='kind'
+          name='type'
           label='巡视类型'
           width='sm'
         />
@@ -50,7 +60,7 @@ const Index: React.FC<PropField> = ({editable=true}) => {
           ]}
         />
         <ProFormSelect
-          name='state'
+          name='isOff'
           label='状态'
           placeholder='巡视状态'
           width='sm'
@@ -62,11 +72,11 @@ const Index: React.FC<PropField> = ({editable=true}) => {
       </ProForm.Group>
 
       <ProForm.Group>
-        <ProFormDatePicker width='sm' name="firsttime" label="首次工作" /><ProFormDatePicker width='sm' name="nexttime" label="下次工作" />
+        <ProFormDatePicker width='sm' name="firstData" label="首次工作" /><ProFormDatePicker width='sm' name="nextData" label="下次工作" />
       </ProForm.Group>
 
       <ProFormText
-        name='remark'
+        name='note'
         label='备注'
         width='sm'
       />

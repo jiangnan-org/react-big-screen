@@ -63,6 +63,7 @@ export default [
           {
             path: '/maintenance/inspect/type',
             name: 'type',
+            hideInMenu: true,
             component:'./Maintenance/Inspect/Type'
 
           },
@@ -80,7 +81,7 @@ export default [
             path: '/maintenance/inspect/manager',
             name: 'manager',
             component:'./Maintenance/Inspect/Manager',
-            // hideInMenu: true,
+            hideInMenu: true,
 
           },
 

@@ -16,27 +16,37 @@ const Index: React.FC<PropField> = ({editable=true}) => {
     <div className={styles.recordForm}>
 
       <ProForm.Group>
-        <ProFormDatePicker width='sm' name="firsttime" label="开始时间" />
+        <ProFormDatePicker width='sm' name="startTime" label="开始时间" />
       </ProForm.Group>
       <ProForm.Group>
-        <ProFormDatePicker width='sm' name="finaltime" label="结束时间" />
+        <ProFormDatePicker width='sm' name="endTime" label="结束时间" />
       </ProForm.Group>
       <ProForm.Group >
-        <ProFormText
-          name='principal'
+        <ProFormSelect
+          name='mainPersonId'
           label='负责人'
           width='sm'
+          options={[
+            {label: '张三', value: 0},
+            {label: '李四', value: 1},
+            {label: '王五', value: 2},
+          ]}
         />
-        <ProFormText
-          name='collaborator'
+        <ProFormSelect
+          name='corPerson'
           label='协作人'
           width='sm'
+          options={[
+            {label: '大傻子', value: 0},
+            {label: '二傻子', value: 1},
+            {label: '小傻子', value: 2},
+          ]}
         />
       </ProForm.Group>
 
       <ProForm.Group >
         <ProFormText
-          name='kind'
+          name='type'
           label='巡视类型'
           width='sm'
         />
@@ -46,17 +56,7 @@ const Index: React.FC<PropField> = ({editable=true}) => {
 
       <ProForm.Group>
         <ProFormSelect
-          name='frequency'
-          label='频次'
-          width='sm'
-          options={[
-            {label: '每年', value: 0},
-            {label: '每月', value: 1},
-            {label: '每周', value: 2},
-          ]}
-        />
-        <ProFormSelect
-          name='state'
+          name='isFinished'
           label='是否完成'
           width='sm'
           options={[
@@ -69,7 +69,7 @@ const Index: React.FC<PropField> = ({editable=true}) => {
 
 
       <ProFormText
-        name='remark'
+        name='note'
         label='备注'
         width='sm'
       />

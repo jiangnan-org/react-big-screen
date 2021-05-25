@@ -3,7 +3,7 @@
  * @Description：后端接口处理
  * @Data: 2021/5/8 13:47
  */
-import {addUser, deleteUsers, updateUser} from "@/services/auth/user";
+import {addRecord, deleteRecord, updateRecord} from "@/services/inspect/record/note";
 import {message} from 'antd';
 
 
@@ -14,7 +14,7 @@ import {message} from 'antd';
  */
 const handleAddRecord = async (fields: API.UserItem) => {
   try {
-    await addUser({...fields});
+    await addRecord({...fields});
     message.success('添加成功');
     return true;
   } catch (error) {
@@ -32,7 +32,7 @@ const handleAddRecord = async (fields: API.UserItem) => {
 const handleDeleteRecord = async (selectedRows: API.UserItem[]) => {
   try {
     let ids: any[] = selectedRows.map((row) => row.id);
-    await deleteUsers(ids);
+    await deleteRecord(ids);
     message.success('删除成功');
     return true;
   } catch (error) {
@@ -48,7 +48,7 @@ const handleDeleteRecord = async (selectedRows: API.UserItem[]) => {
  */
 const handleUpdateRecord = async (fields: API.UserItem) => {
   try {
-    await updateUser(fields);
+    await updateRecord(fields);
     message.success('更新成功');
     return true;
   } catch (error) {

@@ -71,8 +71,9 @@ export default () => {
       valueType: 'select',
       width: 150,
       valueEnum: {
-        0: {text: '小王'},
-        1: {text: '小李'}
+        0: {text: '张三'},
+        1: {text: '李四'},
+        2: {text: '王五'},
       },
     },
     {
@@ -85,8 +86,9 @@ export default () => {
       valueType: 'select',
       width: 150,
       valueEnum: {
-        0: {text: '张三'},
-        1: {text: '李四'}
+        0: {text: '大傻子'},
+        1: {text: '二傻子'},
+        2: {text: '小傻子'},
       },
     },
     {

@@ -8,7 +8,7 @@ import {PlusOutlined, EditOutlined} from '@ant-design/icons';
 import {Form, Button} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import {getUserList} from '@/services/auth/user';
+import {getRecordList} from '@/services/inspect/record/note';
 import RecordForm from './component/RecordForm';
 import ResultForm from './component/ResultForm';
 import {ModalForm} from '@ant-design/pro-form';
@@ -35,13 +35,13 @@ export default () => {
   const [resultModalVisible, setResultModalVisible] = useState<boolean>(false);
 
   /**  批量删除时、选中行  */
-  const [selectedRows, setSelectedRows] = useState<API.UserItem[]>([]);
+  const [selectedRows, setSelectedRows] = useState<API.RecordItem[]>([]);
 
   /** Table action 的引用，便于自定义触发 */
   const actionRef = useRef<ActionType>();
 
   /** table列定义 */
-  const columns: ProColumns<API.UserItem>[] = [
+  const columns: ProColumns<API.RecordItem>[] = [
     {
       dataIndex: 'index',
       title: '序号',
@@ -49,7 +49,7 @@ export default () => {
       width: 48,
     },
     {
-      dataIndex:'strattime',
+      dataIndex:'startTime',
       title:'开始时间',
       width:100,
       hideInSearch: true,
@@ -57,27 +57,39 @@ export default () => {
 
     },
     {
-      dataIndex: 'finaltime',
+      dataIndex: 'endTime',
       title: '结束时间',
       width: 100,
       ellipsis: true,
       hideInSearch:true,
     },
     {
-      dataIndex: 'principal',
+      dataIndex: 'mainPersonId',
       title: '负责人',
       width: 100,
       ellipsis: true,
+      valueType: 'select',
+      valueEnum: {
+        0: {text: '张三'},
+        1: {text: '李四'},
+        2: {text: '王五'},
+      },
     },
     {
-      dataIndex: 'collaborator',
+      dataIndex: 'corPersonId',
       title: '协作人',
       width: 100,
       hideInSearch: true,
       ellipsis: true,
+      valueType: 'select',
+      valueEnum: {
+        0: {text: '大傻子'},
+        1: {text: '二傻子'},
+        2:{text:  '小傻子'},
+      },
     },
     {
-      dataIndex: 'kind',
+      dataIndex: 'type',
       title: '巡视类型',
       width: 100,
       hideInSearch: true,
@@ -85,7 +97,7 @@ export default () => {
     },
     {
       title: '是否完成',
-      dataIndex: 'final',
+      dataIndex: 'isFinished',
       align: 'center',
       valueType: 'select',
       width: 60,
@@ -96,8 +108,7 @@ export default () => {
     },
     {
       title: '备注',
-      dataIndex: 'comment',
-      valueType: 'date',
+      dataIndex: 'note',
       align: 'center',
       hideInSearch: true,
       width: 100,
@@ -154,7 +165,7 @@ export default () => {
   ];
   /** 编辑巡视信息表单 */
   const resultModal = (
-    <ModalForm<API.UserItem>
+    <ModalForm<API.RecordItem>
       title='编辑巡视信息表单'
       width="680px"
       form={updateForm}
@@ -177,7 +188,7 @@ export default () => {
 
   /** 新增记录表单 */
   const createRecordModal = (
-    <ModalForm<API.UserItem>
+    <ModalForm<API.RecordItem>
       title='新建巡视信息'
       width="680px"
       form={createForm}
@@ -197,7 +208,7 @@ export default () => {
 
   /** 编辑巡视信息表单 */
   const updateRecordModal = (
-    <ModalForm<API.UserItem>
+    <ModalForm<API.RecordItem>
       title='编辑巡视记录信息'
       width="680px"
       form={updateForm}
@@ -221,13 +232,13 @@ export default () => {
 
   return (
     <React.Fragment>
-      <ProTable<API.UserItem>
+      <ProTable<API.RecordItem>
         className={styles.table}
         columns={columns}
         actionRef={actionRef}
         request={async (params: API.PageParams = {}) => {
           // 这里需要返回一个 Promise,在返回之前你可以进行数据转化
-          const res: API.PageResponseMessage<API.UserItem> = await getUserList(params);
+          const res: API.PageResponseMessage<API.RecordItem> = await getRecordList(params);
           return {
             data: res.data.records,
             // success 请返回 true，不然 table 会停止解析数据，即使有数据
