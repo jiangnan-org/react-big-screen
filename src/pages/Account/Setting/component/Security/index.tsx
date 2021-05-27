@@ -43,7 +43,7 @@ const Security: React.FC<PropField> = ({ currentUser })=> {
   const updateUserModal = (
     <ModalForm<API.UserItem>
       title='更新账户密码'
-      width="800px"
+      width="680px"
       form={updateForm}
       visible={updateModalVisible}
       onVisibleChange={setUpdateModalVisible}
