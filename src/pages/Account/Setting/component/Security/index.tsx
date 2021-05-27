@@ -1,5 +1,16 @@
-import React  from 'react';
-import { List } from 'antd';
+import React, { useRef, useState } from 'react';
+import {  Form, List, } from 'antd';
+import { ModalForm } from '@ant-design/pro-form';
+import _ from 'lodash';
+import actions from '@/pages/Config/User/redux';
+import Index from './UserForm';
+import { ActionType } from '@ant-design/pro-table';
+
+
+
+
+
+
 
 // 密码强度
 const passwordStrength = {
@@ -20,8 +31,39 @@ type PropField = {
   setCurrentUser: (userInfo?: API.UserItem) => void;
 };
 
-const Security: React.FC<PropField> = ({ currentUser,setCurrentUser })=> {
-  const getData = () => {
+const Security: React.FC<PropField> = ({ currentUser })=> {
+
+  /** 表单引用 */
+  const [updateForm] = Form.useForm();
+  /** 更新窗口的弹窗 */
+  const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
+  /** Table action 的引用，便于自定义触发 */
+  const actionRef = useRef<ActionType>();
+  /** 更新用户表单 */
+  const updateUserModal = (
+    <ModalForm<API.UserItem>
+      title='更新账户密码'
+      width="680px"
+      form={updateForm}
+      visible={updateModalVisible}
+      onVisibleChange={setUpdateModalVisible}
+      onFinish={async (values) => {
+        // 指定更新的用户
+        _.assign(values, currentUser);
+        const success = await actions.handleUpdateUser(values);
+        if (success) {
+          setUpdateModalVisible(false);
+          actionRef.current?.reload();
+        }
+      }}
+    >
+      <Index editable={false}/>
+    </ModalForm>
+  );
+
+
+
+  const getData =() => {
     return [
     {
       title: '账户密码',
@@ -31,7 +73,12 @@ const Security: React.FC<PropField> = ({ currentUser,setCurrentUser })=> {
         </>
       ),
       actions: [
-        <a key='Modify'>
+
+        <a key='Modify' onClick={() => {
+          // 初始化表单显示内容
+          updateForm.setFieldsValue(currentUser);
+          setUpdateModalVisible(true);
+        }}>
          修改
         </a>,
       ],
@@ -64,6 +111,7 @@ const Security: React.FC<PropField> = ({ currentUser,setCurrentUser })=> {
 
     return (
       <React.Fragment>
+
         <List
           itemLayout='horizontal'
           dataSource={getData()}
@@ -72,8 +120,15 @@ const Security: React.FC<PropField> = ({ currentUser,setCurrentUser })=> {
               <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
+
+
+
+
+
         />
+        {updateUserModal}
       </React.Fragment>
+
     )
 }
 
