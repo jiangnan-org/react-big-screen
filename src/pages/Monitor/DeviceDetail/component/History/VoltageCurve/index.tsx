@@ -6,22 +6,23 @@ import { genOption } from './option';
 
 // 属性类型
 type PropField = {
-  powerConsumptionCurve:  API.Point[] ;
+  curve:  API.Point[] ;
 };
 
-const Index: React.FC<PropField> = ({powerConsumptionCurve}) => {
+const Index: React.FC<PropField> = ({curve}) => {
+
   return (
     <React.Fragment>
       <ProCard
         className={styles.powerCurve}
         title={
           <div>
-            <span className={styles.chinese}>实时用电功率曲线</span>
-            <span className={styles.english}>Real time Power Curve</span>
+            <span className={styles.chinese}>电压曲线</span>
+            <span className={styles.english}>Real Time Voltage Curve</span>
           </div>
         }
       >
-        <ReactEcharts option={genOption(powerConsumptionCurve)} style={{ width: '100%', height: '100%' }} />
+        <ReactEcharts option={genOption(curve)} style={{ width: '100%', height: '100%' }} />
       </ProCard>
     </React.Fragment>
   );

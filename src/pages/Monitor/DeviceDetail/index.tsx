@@ -8,7 +8,7 @@ import styles from './index.less';
 import Journal from './component/Journal';
 import {RollbackOutlined} from '@ant-design/icons';
 import {history} from 'umi';
-import Pastrecord from './component/Pastrecord';
+import History from './component/history';
 const { TabPane } = Tabs;
 
 export default () => {
@@ -28,7 +28,7 @@ export default () => {
   return (
     <React.Fragment>
       <ProCard split='horizontal' bordered gutter={8}  className={styles.deviceDetail}>
-      <Tabs defaultActiveKey='1'  tabBarExtraContent={extraContext}>
+      <Tabs defaultActiveKey='3'  tabBarExtraContent={extraContext}>
         <TabPane tab='主画面' key='1'>
           <Monitor yuncangId={params.id}/>
         </TabPane>
@@ -37,7 +37,7 @@ export default () => {
         </TabPane>
         <TabPane tab='历史' key='3'>
           {/* @ts-ignore */}
-          <Pastrecord />
+          <History yuncangId={params.id}/>
         </TabPane>
         <TabPane tab='日志' key='4'>
           <Journal/>

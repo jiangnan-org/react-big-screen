@@ -43,3 +43,18 @@ export async function getLatestRealtimeDataRecord(yuncangIds: number[] ,options?
     ...(options || {}),
   });
 }
+
+/** 获取单个云仓若干个属性的实时曲线 POST /api/data/generation/curve */
+export async function getCurve(yuncangId: number,columnNames: string[] ,options?: { [key: string]: any }) {
+  return request<API.ResponseMessage<object>>('/yuncang/api/data/curve/list', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params:  {
+      yuncangId,
+      columnNames
+    },
+    ...(options || {}),
+  });
+}

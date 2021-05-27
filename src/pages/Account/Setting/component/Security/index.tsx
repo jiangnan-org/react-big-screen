@@ -6,12 +6,6 @@ import actions from '@/pages/Config/User/redux';
 import Index from './UserForm';
 import { ActionType } from '@ant-design/pro-table';
 
-
-
-
-
-
-
 // 密码强度
 const passwordStrength = {
   strong: (
@@ -61,8 +55,6 @@ const Security: React.FC<PropField> = ({ currentUser })=> {
     </ModalForm>
   );
 
-
-
   const getData =() => {
     return [
     {
@@ -108,10 +100,8 @@ const Security: React.FC<PropField> = ({ currentUser })=> {
       ]
     }
   ]};
-
     return (
       <React.Fragment>
-
         <List
           itemLayout='horizontal'
           dataSource={getData()}
@@ -120,11 +110,6 @@ const Security: React.FC<PropField> = ({ currentUser })=> {
               <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
-
-
-
-
-
         />
         {updateUserModal}
       </React.Fragment>

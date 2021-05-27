@@ -4,11 +4,12 @@
  * @Data: 2021/4/225 22:26
  */
 import _ from 'lodash';
+import { useModel } from '@@/plugin-model/useModel';
 
-export const genOption = (data: {
-  date: string,
-  value: number
-}[]) => {
+export const genOption = (data:  API.PointVO[]) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const styleConfig = useModel('styleConfig');
+
   return {
     tooltip: {
       trigger: 'axis',
@@ -20,13 +21,13 @@ export const genOption = (data: {
     legend: {
       itemHeight: '8',
       icon: 'circle',
-      data: ['功率'],
+      data: ['湿度'],
       // 图例的图形样式
       itemStyle: {
         color: '#17dea6'
       },
       textStyle: {
-        color: 'rgba(255, 255, 255, 85)'
+        color: styleConfig.textColor
       },
       left: 'center',
       top: 10,
@@ -54,7 +55,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(255, 255, 255, 85)'
+            color: styleConfig.textColor
           }
         },
         type: 'category',
@@ -69,7 +70,7 @@ export const genOption = (data: {
         axisLine: {
           show: true,
           lineStyle: {
-            color: 'rgba(255, 255, 255, 85)'
+            color: styleConfig.textColor
           }
         },
         // 水平分割线
@@ -80,13 +81,13 @@ export const genOption = (data: {
             color: '#b3aaaa'
           }
         },
-        name: 'MW',
+        name: '%rh',
         type: 'value',
       }
     ],
     series: [
       {
-        name: '功率',
+        name: '湿度',
         type: 'line',
         smooth: true,
         // 区域填充样式。设置后显示成区域面积图。
