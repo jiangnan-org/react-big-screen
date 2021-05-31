@@ -41,31 +41,31 @@ export default () => {
     {
       dataIndex: 'yuncangId',
       title: '云仓编号',
-      width: 48,
+      width: 4,
     },
     {
       dataIndex: 'device',
       title: '名称',
-      width: 100,
+      width: 10,
       ellipsis: true,
     },
     {
       dataIndex: 'name',
       title: '关联传感器',
-      width: 100,
+      width: 10,
       ellipsis: true,
     },
     {
       dataIndex: 'kind',
       title: '触发条件类型',
-      width: 150,
+      width: 15,
       hideInSearch: true,
       ellipsis: true,
     },
     {
       dataIndex: 'max',
       title: '参数',
-      width: 100,
+      width: 10,
       hideInSearch: true,
       ellipsis: true
     },
@@ -74,7 +74,7 @@ export default () => {
       dataIndex: 'notifyType',
       align: 'center',
       valueType: 'select',
-      width: 120,
+      width: 12,
       valueEnum: {
         0: {text: '控制设备'},
         1: {text: '微信通知'},
@@ -90,7 +90,7 @@ export default () => {
       onFilter: true,
       hideInSearch: true,
       valueType: 'select',
-      width: 80,
+      width: 8,
       valueEnum: {
         0: {text: '打开'},
         1: {text: '关闭'}
@@ -99,7 +99,7 @@ export default () => {
     {
       dataIndex: 'deviceAct',
       title: '检测间隔',
-      width: 100,
+      width: 10,
       hideInSearch: true,
       ellipsis: true
     },
@@ -111,7 +111,7 @@ export default () => {
       onFilter: true,
       hideInSearch: true,
       valueType: 'select',
-      width: 80,
+      width: 8,
       valueEnum: {
         0: {text: '正常', status: 'Success'},
         1: {text: '故障', status: 'Error'}
@@ -120,7 +120,7 @@ export default () => {
     {
       title: '操作',
       valueType: 'option',
-      width: 120,
+      width: 12,
       align: 'center',
       ellipsis: true,
       render: (text, record, _, action) => (
@@ -211,6 +211,7 @@ export default () => {
         dateFormatter='string'
         // headerTitle='用户信息'
         rowSelection={{
+          columnWidth:4,
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
           },

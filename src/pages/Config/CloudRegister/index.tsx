@@ -16,9 +16,6 @@ export default ()=>{
         <Col lg={4} md={6} sm={24} xs={24}>
           <Card
             bordered={false}
-            style={{
-              marginBottom: 24,
-            }}
           >
               <Tree />
           </Card>

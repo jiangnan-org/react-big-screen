@@ -42,25 +42,25 @@ export default () => {
       dataIndex: 'index',
       title: '序号',
       valueType: 'indexBorder',  // 带border的序号列
-      width: 48,
+      width: 4,
     },
     {
       dataIndex: 'yuncangName',
       title: '云仓名称',
-      width: 100,
+      width: 10,
       ellipsis: true,
     },
     {
       dataIndex: 'collectorSn',
       title: '采集器SN',
-      width: 120,
+      width: 12,
       align: 'center',
       ellipsis: true,
     },
     {
       dataIndex: 'size',
       title: '规格尺寸',
-      width: 80,
+      width: 8,
       align: 'center',
       hideInSearch: true,
       ellipsis: true,
@@ -70,7 +70,7 @@ export default () => {
       dataIndex: 'mode',
       hideInSearch: true,
       align: 'center',
-      width: 100,
+      width: 10,
       render: (mode: any,) => (
         <Space>
           <Tag color={enumUtils.YuncangModeEnum[mode]?.color || 'red'} key={enumUtils.YuncangModeEnum[mode]?.text}>
@@ -83,7 +83,7 @@ export default () => {
       title: '主要设备',
       dataIndex: 'mainDevice',
       hideInSearch: true,
-      width: 100,
+      width: 10,
       ellipsis: true,
     },
     {
@@ -92,7 +92,7 @@ export default () => {
       valueType: 'date',
       align: 'center',
       hideInSearch: true,
-      width: 100,
+      width: 10,
     },
     {
       title: '更新时间',
@@ -100,7 +100,7 @@ export default () => {
       valueType: 'date',
       align: 'center',
       hideInSearch: true,
-      width: 100,
+      width: 10,
     },
     {
       title: '状态',
@@ -109,7 +109,7 @@ export default () => {
       filters: true,
       onFilter: true,
       valueType: 'radio',
-      width: 80,
+      width: 8,
       valueEnum: enumUtils.YuncangStateEnum,
     },
     {
@@ -117,12 +117,12 @@ export default () => {
       title: '描述',
       hideInSearch: true,
       align: 'center',
-      width: 120,
+      width: 12,
       ellipsis: true,
     },
     {
       title: '操作',
-      width: 60,
+      width: 6,
       align: 'center',
       ellipsis: true,
       render: (text, record) => (
@@ -218,6 +218,7 @@ export default () => {
         dateFormatter='string'
         // headerTitle='用户信息'
         rowSelection={{
+          columnWidth:4,
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
           },
@@ -250,7 +251,7 @@ export default () => {
         editable={false}
         initialValues={yuncang}
       />
-      
+
     </React.Fragment>
   );
 };

@@ -44,31 +44,31 @@ export default () => {
       dataIndex: 'index',
       title: '序号',
       valueType: 'indexBorder',  // 带border的序号列
-      width: 48,
+      width: 4,
     },
     {
       dataIndex: 'loginName',
       title: '账号',
-      width: 100,
+      width: 10,
       ellipsis: true,
     },
     {
       dataIndex: 'realName',
       title: '姓名',
-      width: 100,
+      width: 10,
       ellipsis: true,
     },
     {
       dataIndex: 'email',
       title: '邮箱',
-      width: 150,
+      width: 15,
       hideInSearch: true,
       ellipsis: true,
     },
     {
       dataIndex: 'wechat',
       title: '微信号',
-      width: 100,
+      width: 10,
       hideInSearch: true,
       ellipsis: true
     },
@@ -77,14 +77,14 @@ export default () => {
       title: '手机号码',
       hideInSearch: true,
       align: 'center',
-      width: 100,
+      width: 10,
     },
     {
       title: '用户类型',
       dataIndex: 'type',
       hideInSearch: true,
       align: 'center',
-      width: 100,
+      width: 10,
       render: (type: any,) => (
         <Space>
           <Tag color={enumUtils.UserTypeEnum[type].color} key={enumUtils.UserTypeEnum[type].text}>
@@ -99,7 +99,7 @@ export default () => {
       align: 'center',
       valueType: 'select',
       hideInSearch: true,
-      width: 60,
+      width: 6,
       valueEnum: {
         0: {text: '男'},
         1: {text: '女'}
@@ -111,7 +111,7 @@ export default () => {
       valueType: 'date',
       align: 'center',
       hideInSearch: true,
-      width: 100,
+      width: 10,
     },
     {
       title: '更新时间',
@@ -119,7 +119,7 @@ export default () => {
       valueType: 'date',
       align: 'center',
       hideInSearch: true,
-      width: 100,
+      width: 10,
     },
     {
       title: '状态',
@@ -128,12 +128,12 @@ export default () => {
       filters: true,
       onFilter: true,
       valueType: 'select',
-      width: 80,
+      width: 8,
       valueEnum:enumUtils.GeneralStateEnum,
     },
     {
       title: '操作',
-      width: 120,
+      width: 12,
       align: 'center',
       ellipsis: true,
       render: (text, record) => (
@@ -242,6 +242,7 @@ export default () => {
         dateFormatter='string'
         // headerTitle='用户信息'
         rowSelection={{
+          columnWidth:4,
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
           },

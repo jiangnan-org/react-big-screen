@@ -68,7 +68,7 @@ const Index: React.FC<PropField> = ({yuncangState}) => {
           // @ts-ignore
           ref={echartRef}
           style={{ width: '100%', height: '100%' }}
-          option={genOption(mapStyleConfig.light.style,styleConfig.textColor,yuncangState)}
+          option={genOption(mapStyleConfig.darkBlue.style,styleConfig.textColor,yuncangState)}
         />
       </div>
     </React.Fragment>

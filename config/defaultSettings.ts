@@ -7,7 +7,7 @@ const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
 } = {
-  navTheme: 'light',             //整体风格设置 light、dark、realDark
+  navTheme: 'realDark',           //整体风格设置 light、dark、realDark
   // 拂晓蓝
   primaryColor: '#1890ff',       //主题色
   layout: 'top',                 //导航模式 side、top、mix
@@ -15,8 +15,7 @@ const Settings: LayoutSettings & {
   fixedHeader: false,            //固定header
   fixSiderbar: true,             //固定侧边测但
   colorWeak: false,              //色弱模式
-  // title: '隆玛智慧云仓',
-  title:'用户管理组件',
+  title: '隆玛智慧云仓',
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: ''
