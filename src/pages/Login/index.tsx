@@ -59,10 +59,10 @@ const Login: React.FC = () => {
       <div className={styles.content}>
         <div className={styles.top}>
           <div className={styles.header}>
-            <Link to="/">
-              <img alt="logo" className={styles.logo} src="/logo.svg" />
-              <span className={styles.title}>Ant Design</span>
-            </Link>
+            {/* <Link to="/"> */}
+              <img alt="logo" className={styles.logo}  src="/LongMax.png" />
+              {/* <span className={styles.title}>隆玛智慧云能仓</span> */}
+            {/* </Link> */}
           </div>
         </div>
 

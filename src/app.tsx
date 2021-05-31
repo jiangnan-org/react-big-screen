@@ -99,7 +99,7 @@ export const layout: RunTimeLayoutConfig = ({initialState}) => {
     // unAccessible: <div>unAccessible</div>,
     ...initialState?.settings,
     // 修改logo
-    logo: '/logo.svg'
+    logo: '/logo.png'
   };
 };
 

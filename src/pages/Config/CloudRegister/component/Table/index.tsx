@@ -4,7 +4,7 @@
  * @Data: 2021/4/9 17:34
  */
 import React, { useEffect, useRef, useState } from 'react';
-import {EditOutlined} from '@ant-design/icons';
+import {EditOutlined,PlusOutlined} from '@ant-design/icons';
 import {Button, Space,message, Tag} from 'antd';
 import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -16,10 +16,11 @@ import actions from './redux';
 import styles from './index.less';
 import { useModel } from 'umi';
 import * as enumUtils from '@/utils/enumUtils';
-
-
+import {ModalForm} from '@ant-design/pro-form';
+import Ufo from './New';
 
 export default () => {
+
   /** 当前更新 选中云仓信息 */
   const [yuncang, setYuncang] = useState<API.YuncangItem>({});
 
@@ -153,6 +154,17 @@ export default () => {
     }
   };
 
+
+  // const onCreate = async (values: API.YuncangItem) => {
+  //   // 设置id
+  //   _.assign(values,{id:yuncang.id});
+  //   const success = await actions.handleAddYuncang(values);
+  //   if (success) {
+  //     setCreateModalVisible(false);
+  //     actionRef.current?.reload();
+  //   }
+  // };
+
   /** 选中节点发生改变 重新加载 */
   useEffect(() => {
     // 刷新
@@ -238,6 +250,7 @@ export default () => {
         editable={false}
         initialValues={yuncang}
       />
+      
     </React.Fragment>
   );
 };

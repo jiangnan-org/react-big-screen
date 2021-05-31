@@ -181,7 +181,7 @@ export default () => {
   /** 更新触发器 */
   const updatePlanModal = (
     <ModalForm<API.PlanItem>
-      title='更新用户'
+      title='更新触发器'
       width="680px"
       form={updateForm}
       visible={updateModalVisible}
